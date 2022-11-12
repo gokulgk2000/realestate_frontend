@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Banner from './Component/Banner';
+import Header from './Component/Header/Header';
+
+import { Topbar } from './Component/Header/Topbar';
+import Example from './Component/property/Example';
+import Register from './Component/Register';
+import REregisterProperty from './Component/Register';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <> {/*<div>
+<Header/>
+      </div>
+      <div><Topbar/></div>
+      <div><Banner></Banner></div>
+    <div></div>*/}<Register/>
+    <Example/>
+      </> 
   );
 }
 

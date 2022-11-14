@@ -1,24 +1,18 @@
 
-import './App.css';
-import Banner from './Component/Banner';
-import Header from './Component/Header/Header';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Header from './Component/header'
 
-import { Topbar } from './Component/Header/Topbar';
-import Example from './Component/property/Example';
-import Register from './Component/Register';
-import REregisterProperty from './Component/Register';
-
-function App() {
+const App = () => {
   return (
-  <> {/*<div>
-<Header/>
-      </div>
-      <div><Topbar/></div>
-      <div><Banner></Banner></div>
-    <div></div>*/}<Register/>
-    <Example/>
-      </> 
-  );
+   <> 
+  <Routes>
+x   
+    <Route  path='/' element={<Header/>}/>
+
+  </Routes></>
+   
+  )
 }
 
-export default App;
+export default App

@@ -11,6 +11,7 @@ const App = () => {
   <Header/>
   <Routes>   
     <Route  path='/' element={<Landingpage/>}/>
+   
     <Route  path='/sell' element={<Sell/>}/>
 
   </Routes></>

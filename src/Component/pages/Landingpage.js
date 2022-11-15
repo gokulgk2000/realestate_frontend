@@ -57,15 +57,15 @@ const Landingpage = () => {
         <div
           className=" drop-shadow-xl">
             <img  className="h-96 w-full rounded-lg " src={Image} />
-            <h6 class="absolute text-xl text-gray-600 top-8 left-5"> Real Estate</h6>
-            <div class="absolute bottom-0 left-0 right-0 px-4 py-4 bg-gray-800 opacity-70">
-            <h3 class="text-l text-white font-bold">
+            <h6 className="absolute text-xl text-gray-600 top-8 left-5"> Real Estate</h6>
+            <div className="absolute bottom-0 left-0 right-0 px-4 py-4 bg-gray-800 opacity-70">
+            <h3 className="text-l text-white font-bold">
                 Hey, I Am The New Property</h3>
-            <p class="mt-2 text-sm text-gray-300">
+            <p className="mt-2 text-sm text-gray-300">
             Real estate cannot be lost or stolen, nor can it be carried away. ...
               </p>
         </div>
-            <button class="absolute bg-teal-200 w-20 h-10 text-gray-500 top-8 right-8 rounded-2xl">
+            <button className="absolute bg-teal-200 w-20 h-10 text-gray-500 top-8 right-8 rounded-2xl">
               <a href="/register" >
               For More
               </a>
@@ -73,17 +73,17 @@ const Landingpage = () => {
           </div>
 
         <div className="p-3 ">
-        <h1 class="py-5 px-4 text-2xl font-bold ">
+        <h1 className="py-5 px-4 text-2xl font-bold ">
           Featured Properties 
           </h1>
           <FeaturedProperty />
         </div>
         <div
           className=" drop-shadow-xl py-28 h bg-slate-200">
-           <h3 class="absolute text-l text-slate-800 font-bold top- left-1/2 -translate-x-1/2 -translate-y-full">
+           <h3 className="absolute text-l text-slate-800 font-bold top- left-1/2 -translate-x-1/2 -translate-y-full">
             We Have A Happy Clints
             </h3>
-            <button class="absolute w-32 h-10 rounded-2xl bg-gray-900 text-white font-bold  top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <button className="absolute w-32 h-10 rounded-2xl bg-gray-900 text-white font-bold  top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <a href="/">View More</a> 
             </button>
           </div>

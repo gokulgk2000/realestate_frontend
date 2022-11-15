@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const FeaturedProperty = () => {
   const Property = [
@@ -34,15 +35,33 @@ const FeaturedProperty = () => {
       url: "https://via.placeholder.com/600/771796",
       thumbnailUrl: "https://via.placeholder.com/150/771796",
     },
+    {
+      image: require("../assets/images/house.jpg"),
+      albumId: "seller",
+      id: 2,
+      title: "reprehenderit est deserunt velit ipsam",
+      url: "https://via.placeholder.com/600/771796",
+      thumbnailUrl: "https://via.placeholder.com/150/771796",
+    },
+    {
+      image: require("../assets/images/1.jpg"),
+      albumId: "seller",
+      id: 2,
+      title: "reprehenderit est deserunt velit ipsam",
+      url: "https://via.placeholder.com/600/771796",
+      thumbnailUrl: "https://via.placeholder.com/150/771796",
+    },
+   
   ];
 
   return (
     <div>
       <div className="grid grid-cols-1 auto-rows-fr md:grid-cols-2 xl:grid-cols-3 gap-4  row-span-3">
         {Property.map((pro, i) => (
-          <div key={i} className="bg-gray-100  rounded-md drop-shadow-lg">
+          <div key={i} className="bg-gray-50  rounded-2xl drop-shadow-lg ">
+            <Link to={`/Detailspage?uid=${Property}`}>
             <img
-              className="w-full aspect-[1] object-cover"
+              className="w-full aspect-[1] object-cover rounded-2xl transform h-64  transition duration-500 hover:scale-95  "
               alt="coimbatore realestate"
               src={pro.image}
             />
@@ -55,6 +74,7 @@ const FeaturedProperty = () => {
                 <p>Description :{pro.title}</p>
               </div>
             </div>
+            </Link>
           </div>
         ))}
       </div>

@@ -5,9 +5,19 @@ const userRegisteration = (payload) =>
   post(`${BASE_URL}/user/register`, payload);
 const userLogin = (payload) =>
   post(`${BASE_URL}/user/login`, payload);
-
-
+  const PropertyRegistration = (payload) =>
+  post(`${BASE_URL}/property/Sellproperty`, payload);
+  const getPropertybyUserId = (payload) =>
+  post(`${BASE_URL}/property/getpropertyByUserId`, payload);
+  const getPropertyCount = (payload) =>
+  post(`${BASE_URL}/user/propertyCount`, payload);
+  const getAllProperty = (payload) =>
+  post(`${BASE_URL}/property/properties`, payload);
 
   export {userRegisteration,
-    userLogin
+    PropertyRegistration,
+    userLogin,
+    getAllProperty,
+    getPropertyCount,
+    getPropertybyUserId
 }

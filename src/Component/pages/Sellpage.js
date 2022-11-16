@@ -1,43 +1,87 @@
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import Image from "../assets/images/home3.webp";
 import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
+import * as Yup from "yup"
+import { PropertyRegistration } from "../helper/backend_helpers";
+const RegisterProperty=()=>{
+  const unitsList = [
+    { value: "Cent", label: "Cent" },
+    { value: "Sq.feet", label: "Sq.feet" },
+    { value: "Acres", label: "Acres" },
+  ];
+  const [propertyregistrationError, setPropertyRegistrationError] =
+    useState("");
+  const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
+    useState("");
+  const [propertyPic, setPropertyPic] = useState([]);
+  const currentUser = JSON.parse(localStorage?.getItem("authUser"))
+  const validation = useFormik({
+    // enableReinitialize : use this flag when initial values needs to be changed
+    enableReinitialize: true,
 
-const InitialValue = {
-  location: "",
-  layoutName: "",
-  landArea: "",
-  facing: "",
-  approachRoad: "",
-  builtArea: "",
-  bedRoom: "",
-  floorDetails: "",
-  status: "",
-  nearTown: "",
-  costSq: "",
-  facilities: "",
-  askPrice: "",
-};
-const Sell = () => {
-  const [detail, setDetail] = useState(InitialValue);
-  const [PropertyPic, setPropertyPic] = useState('');
-
-  const handleChange = (e) => {
-    {
-      /**    const name=e.target.name;
-       *  const value=e.target.value */
-    }
-    const { name, value } = e.target;
-    setDetail((pre) => {
-      return { ...pre, [name]: value };
-    });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(detail);
-    setDetail(InitialValue);
-    setPropertyPic([]);
-  };
+    initialValues: {
+      email: currentUser.email,
+      Seller:"",
+      location: "",
+      layoutName: "",
+      landArea: "",
+      facing: "",
+      approachRoad: "",
+      builtArea: "",
+      bedRoom: "",
+      floorDetails: "",
+      status: "",
+      nearTown: "",
+      costSq: "",
+      facilities: "",
+      askPrice: "",
+      Description: "",
+    },
+    validationSchema: Yup.object({
+      Seller: Yup.string().required("Please Enter Your Seller"),
+      location: Yup.string().required("Please Enter location "),
+      layoutName: Yup.string().required("Please Enter Your Area"),
+      landArea: Yup.string().required("Please Enter Your Landmark"),
+      facing: Yup.string().required("Please Enter Your City"),
+      approachRoad: Yup.string().required("Please Enter approachRoad "),
+      builtArea: Yup.string().required("Please Enter Your builtArea"),
+      bedRoom: Yup.string().required("Please Enter Your bedRoom"),
+      floorDetails: Yup.string().required("Please Enter Your floorDetails"),
+      status: Yup.string().required("Please Enter Your status"),
+      nearTown: Yup.string().required("Please Enter Your nearTown"),
+      costSq: Yup.string().required("Please Enter Your costSq"),
+      facilities: Yup.string().required("Please Enter Your facilities"),
+      askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
+      Description: Yup.string().required("Please Enter Your Description"),
+    }),
+    onSubmit: (values, onSubmitProps) => {
+      handlePropertyReg({
+        Seller: values.Seller,
+        location: values.location,
+        layoutName: values.layoutName,
+        landArea: values.landArea,
+        facing: values.facing,
+        approachRoad: values.approachRoad,
+        builtArea: values.builtArea,
+        bedRoom: values.bedRoom,
+        floorDetails: values.floorDetails,
+        status: values.status,
+        nearTown: values.nearTown,
+        costSq: values.costSq,
+        facilities: values.facilities,
+        askPrice: values.askPrice,
+        Description: values.Description,
+        userID: currentUser.userID,
+        propertyPic,
+        status: "approved",
+      });
+      console.log("Data", values);
+      onSubmitProps.resetForm();
+    },
+  });
+  
   const convertBase64 = async (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -55,139 +99,397 @@ const Sell = () => {
     const allImages = await Promise?.all(
       [...target.files].map(async (files) => {
         return await convertBase64(files);
-        // const res = await convertBase64(file);
-        // setPropertyPic((preValue) => [...preValue, res]);
       })
     );
     setPropertyPic(allImages);
-    console.log("PropertyPic : ", PropertyPic);
+    console.log("PropertyPic : ", propertyPic);
   };
-  {/* const handleImageUpload=(e)=>{
-    setPropertyPic([...e.target.files]);
-    setPropertyPic('');
-    console.log("PropertyPic : ", PropertyPic);
-  }*/}
   
-
+  const handlePropertyReg = async (payload) => {
+    const res = await PropertyRegistration(payload);
+    if (res) {
+      setPropertyRegistrationSuccess(res.msg);
+      console.log("property", res);
+      localStorage.setItem("authUser", JSON.stringify(res));
+    } else {
+      setPropertyRegistrationError(res.msg);
+    }
+    console.log("reg value: ", res);
+  };
+  console.log("pic", propertyPic);
+  const nav = { backgroundColor: "#f17427d3" };
+// console.log("Curreny : ",currentUser?.userID)
   return (
     <div className="md:grid grid-cols-5 ml-5 p-1">
-      <form onSubmit={handleSubmit} className="col-span-3">
+      <form className="col-span-3"
+       onSubmit={(e) => {
+        e.preventDefault();
+        validation.handleSubmit();
+        return false;
+      }}>
         <h4 className="flex item-center justify-around font-bold text-2xl underline pb-3">
           Title:Independent House For Sale
         </h4>
         <div className="sm:grid grid-cols-2 gap-2">
+         <div> 
+          <Input
+            label="Seller"
+            type="text"
+            name="Seller"
+            placeholder="Seller Name"
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.Seller || ""}
+           invalid={
+            validation.touched.Seller &&
+            validation.errors.Seller
+              ? true
+              : false
+            }
+          />
+          {validation.touched.Seller &&
+          validation.errors.lastname ? (
+            <formFeedback type="invalid">
+              {validation.errors.Seller}
+            </formFeedback>
+          ) : null}
+          </div>
+          <div>
           <Input
             label="location"
             type="text"
             name="location"
-            value={detail.location}
             placeholder="enter the location"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.location || ""}
+            invalid={
+              validation.touched.location &&
+              validation.errors.location
+                ? true
+                : false
+            }
           />
+          {validation.touched.location &&
+          validation.errors.location ? (
+            <formFeedback type="invalid">
+              {validation.errors.location}
+            </formFeedback>
+          ) : null}
+          </div>
+          <div>
           <Input
             label="layoutName"
             type="text"
             name="layoutName"
-            value={detail.layoutName}
             placeholder="enter the layoutName"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.layoutName || ""}
+            invalid={
+              validation.touched.layoutName &&
+              validation.errors.layoutName
+                ? true
+                : false
+            }
           />
+          {validation.touched.layoutName &&
+          validation.errors.layoutName ? (
+            <formFeedback type="invalid">
+              {validation.errors.layoutName}
+            </formFeedback>
+          ) : null}
+          </div>
+          <div>
           <Input
             label="landArea"
             type="text"
             name="landArea"
-            value={detail.landArea}
             placeholder="enter the landArea"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.landArea || ""}
+            invalid={
+              validation.touched.landArea &&
+              validation.errors.landArea
+                ? true
+                : false
+            }
           />
-          <Input
+          {validation.touched.landArea &&
+          validation.errors.landArea ? (
+            <formFeedback type="invalid">
+              {validation.errors.landArea}
+            </formFeedback>
+          ) : null}
+          </div>
+          <div>          <Input
             label="facing"
             type="text"
             name="facing"
-            value={detail.facing}
             placeholder="enter the  facing"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.facing || ""}
+            invalid={
+              validation.touched.facing &&
+              validation.errors.facing
+                ? true
+                : false
+            }
           />
-          <Input
+          {validation.touched.facing &&
+          validation.errors.facing ? (
+            <formFeedback type="invalid">
+              {validation.errors.facing}
+            </formFeedback>
+          ) : null}
+          </div>
+          <div>
+            <Input
             label="approachRoad"
             type="text"
             name="approachRoad"
-            value={detail.approachRoad}
             placeholder="enter the approachRoad"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.approachRoad || ""}
+            invalid={
+              validation.touched.approachRoad &&
+              validation.errors.approachRoad
+                ? true
+                : false
+            }
           />
+          {validation.touched.approachRoad &&
+          validation.errors.approachRoad ? (
+            <formFeedback type="invalid">
+              {validation.errors.approachRoad}
+            </formFeedback>
+          ) : null}
+          </div>
+          <div>
           <Input
             label="builtArea"
             type="text"
             name="builtArea"
-            value={detail.builtArea}
             placeholder="enter the builtArea"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.builtArea || ""}
+            invalid={
+              validation.touched.builtArea &&
+              validation.errors.builtArea
+                ? true
+                : false
+            }
           />
+          {validation.touched.builtArea &&
+          validation.errors.builtArea ? (
+            <formFeedback type="invalid">
+              {validation.errors.builtArea}
+            </formFeedback>
+          ) : null}</div>
+          <div>
           <Input
             label="bedRoom"
             type="text"
             name="bedRoom"
-            value={detail.bedRoom}
             placeholder="enter the bedRoom"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.bedRoom || ""}
+            invalid={
+              validation.touched.bedRoom &&
+              validation.errors.bedRoom
+                ? true
+                : false
+            }
           />
+          {validation.touched.bedRoom &&
+          validation.errors.bedRoom ? (
+            <formFeedback type="invalid">
+              {validation.errors.bedRoom}
+            </formFeedback>
+          ) : null}</div>
+          <div>
           <Input
             label="floorDetails"
             type="text"
             name="floorDetails"
-            value={detail.floorDetails}
             placeholder="enter the floorDetails"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.floorDetails || ""}
+            invalid={
+              validation.touched.floorDetails &&
+              validation.errors.floorDetails
+                ? true
+                : false
+            }
           />
+          {validation.touched.floorDetails &&
+          validation.errors.floorDetails ? (
+            <formFeedback type="invalid">
+              {validation.errors.floorDetails}
+            </formFeedback>
+          ) : null}
+          <div>
           <Input
             label="status"
             type="text"
             name="status"
-            value={detail.status}
             placeholder="enter the status"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.status || ""}
+            invalid={
+              validation.touched.status &&
+              validation.errors.status
+                ? true
+                : false
+            }
           />
+          {validation.touched.status &&
+          validation.errors.status ? (
+            <formFeedback type="invalid">
+              {validation.errors.status}
+            </formFeedback>
+          ) : null}</div>
+          <div>
           <Input
             label="nearTown"
             type="text"
             name="nearTown"
-            value={detail.nearTown}
             placeholder="enter the nearTown"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.nearTown || ""}
+            invalid={
+              validation.touched.nearTown &&
+              validation.errors.nearTown
+                ? true
+                : false
+            }
           />
+          {validation.touched.nearTown &&
+          validation.errors.nearTown ? (
+            <formFeedback type="invalid">
+              {validation.errors.nearTown}
+            </formFeedback>
+          ) : null}</div>
+          <div>
           <Input
             label="costSq"
             type="text"
             name="costSq"
-            value={detail.costSq}
             placeholder="enter the costSq"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.costSq || ""}
+            invalid={
+              validation.touched.costSq &&
+              validation.errors.costSq
+                ? true
+                : false
+            }
           />
+          {validation.touched.costSq &&
+          validation.errors.costSq ? (
+            <formFeedback type="invalid">
+              {validation.errors.costSq}
+            </formFeedback>
+          ) : null}</div>
+          <div>
           <Input
             label="facilities"
             type="text"
             name="facilities"
-            value={detail.facilities}
             placeholder="enter the facilities"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.facilities || ""}
+            invalid={
+              validation.touched.facilities &&
+              validation.errors.facilities
+                ? true
+                : false
+            }
           />
+          {validation.touched.facilities &&
+          validation.errors.facilities ? (
+            <formFeedback type="invalid">
+              {validation.errors.facilities}
+            </formFeedback>
+          ) : null}</div>
+          <div>
           <Input
             label="askPrice"
             type="number"
             name="askPrice"
-            value={detail.askPrice}
             placeholder="enter the askPrice"
-            onChange={handleChange}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.askPrice || ""}
+            invalid={
+              validation.touched.askPrice &&
+              validation.errors.askPrice
+                ? true
+                : false
+            }
           />
+          {validation.touched.askPrice &&
+          validation.errors.askPrice ? (
+            <formFeedback type="invalid">
+              {validation.errors.askPrice}
+            </formFeedback>
+          ) : null}</div>
+          </div>
+          <div>
+           <Input
+            label="Description"
+            type="text"
+            name="Description"
+            placeholder="enter the Description"
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.Description || ""}
+            invalid={
+              validation.touched.Description &&
+              validation.errors.Description
+                ? true
+                : false
+            }
+          />
+          {validation.touched.Description &&
+          validation.errors.Description ? (
+            <formFeedback type="invalid">
+              {validation.errors.Description}
+            </formFeedback>
+          ) : null}</div>
  <FileInput
             label="Property Images"
             multiple={true}
             accept=".png, .jpg, .jpeg,.pdf,.webp"
             onChange={handleImageUpload}
           />
-        
         </div>
+        {propertyregistrationSuccess && (
+                            <alert
+                              className="text-bold text-green-500"
+                             
+                            >
+                              {propertyregistrationSuccess}
+                            </alert>
+                          )}
+
+                          {propertyregistrationError && (
+                            <alert
+                              className="text-bold text-red-500"
+                            >
+                              {propertyregistrationError}
+                            </alert>
+                          )}
         <div className="flex justify-around  mr-6 pt-10  ">
           <button
             type="submit"
@@ -195,190 +497,7 @@ const Sell = () => {
           >
             Submit
           </button>
-         
         </div>
-        {/* <div className="gird grid-cols-12 ">
-          <ul className="">
-            <li>
-              <a className="pr-5">Location:</a>
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="location"
-                value={detail.location}
-                placeholder="enter the location"
-                onChange={handleChange}
-                ></input>
-            </li>
-            <li>
-              <a className="pr-5">LayoutName:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="layoutName"
-                value={detail.layoutName}
-                placeholder="enter the layoutName"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5"> LandArea:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name=" landArea"
-                value={detail. landArea}
-                placeholder="enter the landArea"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5"> Facing:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name=" facing"
-                value={detail. facing}
-                placeholder="enter the  facing"
-                onChange={handleChange}
-
-              />
-            </li>
-            <li>
-              <a className="pr-5">ApproachRoad:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="approachRoad"
-                value={detail.approachRoad}
-                placeholder="enter the approachRoad"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">BuiltArea:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="builtArea"
-                value={detail.builtArea}
-                placeholder="enter the builtArea"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">BedRoom:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="bedRoom"
-                value={detail.bedRoom}
-                placeholder="enter the bedRoom"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">FloorDetails:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="floorDetails"
-                value={detail.floorDetails}
-                placeholder="enter the floorDetails"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">Status:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="status"
-                value={detail.status}
-                placeholder="enter the status"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">NearTown:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="nearTown"
-                value={detail.nearTown}
-                placeholder="enter the nearTown"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">CostSq:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="costSq"
-                value={detail.costSq}
-                placeholder="enter the costSq"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">Facilities:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="facilities"
-                value={detail.facilities}
-                placeholder="enter the facilities"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-            <li>
-              <a className="pr-5">AskPrice:</a>{" "}
-              <input
-                className="w-96 mt-2 border-2 border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
- "
-                type="text"
-                name="askPrice"
-                value={detail.askPrice}
-                placeholder="enter the askPrice"
-                onChange={handleChange}
-
-              ></input>
-            </li>
-          </ul>
-
-          <div className="flex justify-around mr-6  ">
-            <button
-              type="submit"
-              className="bg-blue-400 w-44 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mb-20"
-            >
-              {" "}
-              Submit
-            </button>
-          </div>
-        </div> */}
       </form>
       <div className="pr-3 hidden  md:block col-span-2">
         <img className="aspect-[2/3]" src={Image} />
@@ -387,4 +506,4 @@ const Sell = () => {
   );
 };
 
-export default Sell;
+export default RegisterProperty ;

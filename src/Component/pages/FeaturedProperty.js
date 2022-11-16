@@ -1,82 +1,84 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAllProperty, getPropertybyUserId, getPropertyCount } from "../helper/backend_helpers";
+
 
 const FeaturedProperty = () => {
-  const Property = [
-    {
-      image: require("../assets/images/house3.jpg"),
-      albumId: "seller",
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796",
-    },
-    {
-      image: require("../assets/images/house2.jpg"),
-      albumId: "seller",
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796",
-    },
-    {
-      image: require("../assets/images/house4.webp"),
-      albumId: "seller",
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796",
-    },
-    {
-      image: require("../assets/images/house5.webp"),
-      albumId: "seller",
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796",
-    },
-    {
-      image: require("../assets/images/house.jpg"),
-      albumId: "seller",
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796",
-    },
-    {
-      image: require("../assets/images/1.jpg"),
-      albumId: "seller",
-      id: 2,
-      title: "reprehenderit est deserunt velit ipsam",
-      url: "https://via.placeholder.com/600/771796",
-      thumbnailUrl: "https://via.placeholder.com/150/771796",
-    },
-   
-  ];
+  const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [propertyCount, setpropertyCount] = useState(0);
+  const [limit, setLimit] = useState(10);
+
+  const [property, setproperty] = useState([]);
+
+  const currentUser = JSON.parse(localStorage?.getItem("authUser"))
+  console.log("Current : ",currentUser?.userID)
+
+  const loadProperty = async () => {
+    const res = await getPropertybyUserId({  limit, searchText });
+    if (res.success) {
+      setproperty(res.property);
+      console.log("data",res)
+    } else {
+      console.log("Error while fetching property", res);
+    }
+  };
+
+  // const loadPropertyCount = async () => {
+  //   const res = await getPropertyCount({ searchText });
+  //   if (res.success) {
+  //     setpropertyCount(res.count);
+  //   } else {
+  //     console.log("Error while fetching propertyCount", res);
+  //   }
+  // };
+
+  useEffect(() => {
+    const handleLoad = async () => {
+      setLoading(true);
+      await loadProperty();
+      setLoading(false);
+    };
+    handleLoad();
+  }, [ limit]);
+
+
+  useEffect(() => {
+    console.log("searchText :", searchText);
+    const handleLoad = async () => {
+      setLoading(true);
+      // await loadPropertyCount();
+      await loadProperty();
+      setLoading(false);
+    };
+
+    handleLoad();
+  }, [searchText]);
 
   return (
     <div>
       <div className="grid grid-cols-1 auto-rows-fr md:grid-cols-2 xl:grid-cols-3 gap-4  px-5 py-5 row-span-3">
-        {Property.map((pro, i) => (
-          <div key={i} className="bg-gray-50  rounded-2xl drop-shadow-lg ">
-            <Link to={`/Detailspage?uid=${Property}`}>
+      
+          <div  className="bg-gray-50  rounded-2xl drop-shadow-lg ">
+            <Link to={`/Detailspage?uid=${property?._id}`}>
             <img
               className="w-full aspect-[1] object-cover rounded-2xl transform h-64  transition duration-500 hover:scale-95  "
               alt="coimbatore realestate"
-              src={pro.image}
+              src={property?.propertyPic
+                }
             />
+
             <div className=" font-semibold text-center py-5">
               {" "}
               Details
               <div className="font-sans text-sm  text-left p-5 leading-loose">
-                <h5>Title :{pro.albumId}</h5>
-                <h6>Askprice :{pro.id}</h6>
-                <p>Description :{pro.title}</p>
+                <h5>location :{property?.location}</h5>
+                <h6>Askprice :{property?.askPrice}</h6>
+                <p>Description :{property?.Description}</p>
               </div>
             </div>
             </Link>
           </div>
-        ))}
       </div>
     </div>
   );

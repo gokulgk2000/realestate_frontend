@@ -56,7 +56,7 @@ const FeaturedProperty = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 auto-rows-fr md:grid-cols-2 xl:grid-cols-3 gap-4  row-span-3">
+      <div className="grid grid-cols-1 auto-rows-fr md:grid-cols-2 xl:grid-cols-3 gap-4  px-5 py-5 row-span-3">
         {Property.map((pro, i) => (
           <div key={i} className="bg-gray-50  rounded-2xl drop-shadow-lg ">
             <Link to={`/Detailspage?uid=${Property}`}>

@@ -22,6 +22,9 @@ function Navbar(){
                 <li>
                     <a href="/featuredproperty" className="text-gray-900 dark:text-white hover:underline font-semibold">Featured Property</a>
                 </li>
+                <li>
+                    <a href="/feedback" className="text-gray-900 dark:text-white hover:underline font-semibold">Feedback</a>
+                </li>
             </ul>
         </div>
     </div>

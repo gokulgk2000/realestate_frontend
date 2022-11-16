@@ -8,6 +8,7 @@ import Login from "./Component/pages/auth/Login";
 import Register from "./Component/pages/auth/Register";
 import Detailspage from "./Component/pages/Detailspage";
 import FeaturedProperty from "./Component/pages/FeaturedProperty";
+import Feedbackpage from "./Component/pages/Feedbackpage";
 import Landingpage from "./Component/pages/Landingpage";
 import Sell from "./Component/pages/Sellpage";
 
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/featuredproperty" element={<FeaturedProperty />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/feedback" element={<Feedbackpage />} />
       </Routes>
       <Footer />
     </>

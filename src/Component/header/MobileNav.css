@@ -1,0 +1,54 @@
+
+  
+.ul{
+   position: absolute;
+    display:inline-block;
+    list-style: none;
+  
+    left: 0;
+    top: 75px;
+    transition: all 0.5s ease-out;
+    width: 100%;
+    height:100%;
+    z-index: 50;
+    text-align: center;
+    ;
+
+    }
+ 
+
+.burger-bar,
+.burger-bar::before,
+.burger-bar::after{
+
+    display: block;
+    width: 30px;
+    height: 3px;
+    position: relative;
+    border-radius: 3px;
+    background-color:black;
+    transition: all .5s ease-in-out;
+   
+} 
+.burger-bar::before,
+.burger-bar::after{
+    content: "";
+    position: absolute;
+    left: 0;
+
+}
+.burger-bar::before{
+    transform: translateY(-12px);
+}
+.burger-bar::after{
+    transform: translateY(12px);
+}
+.show.burger-bar::before{
+    transform: rotate(45deg);
+}
+.show.burger-bar::after{
+    transform: rotate(-45deg);
+}
+.show.burger-bar{
+    background: transparent;
+}

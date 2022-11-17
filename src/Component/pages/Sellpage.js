@@ -22,7 +22,7 @@ const RegisterProperty=()=>{
     enableReinitialize: true,
 
     initialValues: {
-      email: currentUser.email,
+      email: currentUser?.email,
       Seller:"",
       location: "",
       layoutName: "",
@@ -73,7 +73,7 @@ const RegisterProperty=()=>{
         facilities: values.facilities,
         askPrice: values.askPrice,
         Description: values.Description,
-        userID: currentUser.userID,
+        userID: currentUser?.userID,
         propertyPic,
         status: "approved",
       });
@@ -115,8 +115,9 @@ const RegisterProperty=()=>{
       setPropertyRegistrationError(res.msg);
     }
     console.log("reg value: ", res);
+    console.log("pic", propertyPic);
   };
-  console.log("pic", propertyPic);
+ 
   const nav = { backgroundColor: "#f17427d3" };
 // console.log("Curreny : ",currentUser?.userID)
   return (
@@ -149,9 +150,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.Seller &&
           validation.errors.lastname ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.Seller}
-            </formFeedback>
+            </span>
           ) : null}
           </div>
           <div>
@@ -172,9 +173,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.location &&
           validation.errors.location ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.location}
-            </formFeedback>
+            </span>
           ) : null}
           </div>
           <div>
@@ -195,9 +196,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.layoutName &&
           validation.errors.layoutName ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.layoutName}
-            </formFeedback>
+            </span>
           ) : null}
           </div>
           <div>
@@ -218,9 +219,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.landArea &&
           validation.errors.landArea ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.landArea}
-            </formFeedback>
+            </span>
           ) : null}
           </div>
           <div>          <Input
@@ -240,9 +241,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.facing &&
           validation.errors.facing ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.facing}
-            </formFeedback>
+            </span>
           ) : null}
           </div>
           <div>
@@ -263,9 +264,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.approachRoad &&
           validation.errors.approachRoad ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.approachRoad}
-            </formFeedback>
+            </span>
           ) : null}
           </div>
           <div>
@@ -286,9 +287,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.builtArea &&
           validation.errors.builtArea ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.builtArea}
-            </formFeedback>
+            </span>
           ) : null}</div>
           <div>
           <Input
@@ -308,9 +309,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.bedRoom &&
           validation.errors.bedRoom ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.bedRoom}
-            </formFeedback>
+            </span>
           ) : null}</div>
           <div>
           <Input
@@ -330,9 +331,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.floorDetails &&
           validation.errors.floorDetails ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.floorDetails}
-            </formFeedback>
+            </span>
           ) : null}
           <div>
           <Input
@@ -352,9 +353,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.status &&
           validation.errors.status ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.status}
-            </formFeedback>
+            </span>
           ) : null}</div>
           <div>
           <Input
@@ -374,9 +375,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.nearTown &&
           validation.errors.nearTown ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.nearTown}
-            </formFeedback>
+            </span>
           ) : null}</div>
           <div>
           <Input
@@ -396,9 +397,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.costSq &&
           validation.errors.costSq ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.costSq}
-            </formFeedback>
+            </span>
           ) : null}</div>
           <div>
           <Input
@@ -418,9 +419,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.facilities &&
           validation.errors.facilities ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.facilities}
-            </formFeedback>
+            </span>
           ) : null}</div>
           <div>
           <Input
@@ -440,9 +441,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.askPrice &&
           validation.errors.askPrice ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.askPrice}
-            </formFeedback>
+            </span>
           ) : null}</div>
           </div>
           <div>
@@ -463,9 +464,9 @@ const RegisterProperty=()=>{
           />
           {validation.touched.Description &&
           validation.errors.Description ? (
-            <formFeedback type="invalid">
+            <span type="invalid">
               {validation.errors.Description}
-            </formFeedback>
+            </span>
           ) : null}</div>
  <FileInput
             label="Property Images"

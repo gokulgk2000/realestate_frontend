@@ -12,7 +12,7 @@ const userLogin = (payload) =>
   const getPropertyCount = (payload) =>
   post(`${BASE_URL}/user/propertyCount`, payload);
   const getAllProperty = (payload) =>
-  post(`${BASE_URL}/property/properties`, payload);
+  get(`${BASE_URL}/property/properties`, payload);
 
   export {userRegisteration,
     PropertyRegistration,

@@ -69,7 +69,7 @@ const FeaturedProperty = () => {
             />
 
             <div className=" font-semibold text-center py-5">
-              {" "}
+            
               Details
               <div className="font-sans text-sm  text-left p-5 leading-loose">
                 <h5>location :{property?.location}</h5>

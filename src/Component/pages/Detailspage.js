@@ -50,6 +50,7 @@ const Detailspage = () => {
             <li>Description</li>
            
          </ul>
+         
         </div>
         <div className='mr-2 py-10'>
           <div className='w-full select-none relative'>

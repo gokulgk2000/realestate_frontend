@@ -1,23 +1,31 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../header/MobileNav.css";
+import { NavLink } from "react-router-dom";
+
+const Mobile = [
+  { name: "Home", link: "/" },
+  { name: "Sell", link: "/sell" },
+  { name: "PropertyAgents", link: "/" },
+];
 
 const Mobilenav = (navItem) => {
   const [isMobile, setIsMobile] = useState(false);
+
   return (
     <div>
       {isMobile && (
-        <ul className="ul  py-5 space-y-4 font-semibold bg-teal-100 ">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            
-            <a href="/sell">Sell</a>
-          </li>
-          <li>
-            
-            <a href="/propertyAgents">propertyAgents</a>
-          </li>
+        <ul className="ul  py-5 space-y-4 font-semibold bg-slate-500 ">
+          {Mobile.map((Mob, l) => (
+            <NavLink
+              key={l}
+              to={Mob.link || "#"}
+              className="hover:text-green-800"
+              onClick={() => setIsMobile(false)}
+            >
+              <li> {Mob.name}</li>
+            </NavLink>
+          ))}
         </ul>
       )}
 
@@ -25,7 +33,7 @@ const Mobilenav = (navItem) => {
         {isMobile ? (
           <div className="burger-bar show "></div>
         ) : (
-          <div className="burger-bar z-50"></div>
+          <div className="burger-bar z-50 "></div>
         )}
       </button>
     </div>

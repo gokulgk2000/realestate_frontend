@@ -110,7 +110,7 @@ const RegisterProperty=()=>{
     if (res) {
       setPropertyRegistrationSuccess(res.msg);
       console.log("property", res);
-      localStorage.setItem("authUser", JSON.stringify(res));
+      // localStorage.setItem("authUser", JSON.stringify(res));
     } else {
       setPropertyRegistrationError(res.msg);
     }

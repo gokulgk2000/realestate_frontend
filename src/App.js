@@ -7,9 +7,10 @@ import About from "./Component/pages/About";
 import Login from "./Component/pages/auth/Login";
 import Register from "./Component/pages/auth/Register";
 import Detailspage from "./Component/pages/Detailspage";
-import FeaturedProperty from "./Component/pages/FeaturedProperty";
 import Feedbackpage from "./Component/pages/Feedbackpage";
 import Landingpage from "./Component/pages/Landingpage";
+import Property from "./Component/pages/Property";
+
 import Sell from "./Component/pages/Sellpage";
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/sell" element={<Sell />} />
         <Route path="/about" element={<About />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
-        <Route path="/featuredproperty" element={<FeaturedProperty />} />
+        <Route path="/property" element={<Property />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />

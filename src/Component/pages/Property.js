@@ -12,9 +12,6 @@ const Property = () => {
 
   const [property, setproperty] = useState([]);
 
-  const currentUser = JSON.parse(localStorage?.getItem("authUser"))
-  console.log("Current : ",currentUser.userID)
-
   const loadProperty = async () => {
     const res = await getAllProperty({  limit, searchText });
     if (res.success) {

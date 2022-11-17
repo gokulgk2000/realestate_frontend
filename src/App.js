@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,Router } from "react-router-dom";
 import Footer from "./Component/footer/Footer";
 import Header from "./Component/header";
 import Navbar from "./Component/header/Navbar";
@@ -10,7 +10,7 @@ import Detailspage from "./Component/pages/Detailspage";
 import Feedbackpage from "./Component/pages/Feedbackpage";
 import Landingpage from "./Component/pages/Landingpage";
 import Property from "./Component/pages/Property";
-
+import ProtectedRoutes from "./routers/ProtectedRoutes";
 import Sell from "./Component/pages/Sellpage";
 
 const App = () => {
@@ -18,9 +18,12 @@ const App = () => {
     <>
       <Header />
       <Navbar />
+    
       <Routes>
+        <Route element={<ProtectedRoutes />}>
+        <Route path="/sell" element={<Sell />}   />
+        </Route>
         <Route path="/" element={<Landingpage />} />
-        <Route path="/sell" element={<Sell />} />
         <Route path="/about" element={<About />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/property" element={<Property />} />
@@ -28,6 +31,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />
       </Routes>
+  
       <Footer />
     </>
   );

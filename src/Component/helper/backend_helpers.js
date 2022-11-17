@@ -12,12 +12,15 @@ const userLogin = (payload) =>
   const getPropertyCount = (payload) =>
   post(`${BASE_URL}/user/propertyCount`, payload);
   const getAllProperty = (payload) =>
-  get(`${BASE_URL}/property/properties`, payload);
+  get(`${BASE_URL}/user/properties`, payload);
+  const getPropertyById = (payload) =>
+  post(`${BASE_URL}/property/getpropertyById`, payload);
 
   export {userRegisteration,
     PropertyRegistration,
     userLogin,
     getAllProperty,
     getPropertyCount,
+    getPropertyById,
     getPropertybyUserId
 }

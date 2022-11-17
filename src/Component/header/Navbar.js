@@ -10,7 +10,7 @@ function Navbar(){
     <div className="py-3 px-1  mx-auto  ">
         <div className="flex justify-between items-center px-5">
        
-            <ul className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
+            <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
                 <li>
                     <a href="/about" className="text-gray-900 dark:text-white hover:underline font-semibold" aria-current="page">About us</a>
                 </li>
@@ -21,7 +21,7 @@ function Navbar(){
                     <a href="#" className="text-gray-900 dark:text-white hover:underline font-semibold">Recent</a>
                 </li> */}
                 <li>
-                    <a href="/featuredproperty" className="text-gray-900 dark:text-white hover:underline font-semibold">Featured Property</a>
+                    <a href="/property" className="text-gray-900 dark:text-white hover:underline font-semibold">Property</a>
                 </li>
                 <li>
                     <a href="/feedback" className="text-gray-900 dark:text-white hover:underline font-semibold">Feedback</a>

@@ -1,6 +1,6 @@
 import React from "react";
-import FeaturedProperty from "./FeaturedProperty";
 import Image from "../assets/images/2.jpg";
+import Property from "./Property";
 const Landingpage = () => {
   return (
     <div>
@@ -44,10 +44,10 @@ const Landingpage = () => {
           </button>
         </div>
 
-        <div className="p-3 ">
+        {/* <div className="p-3 ">
           <h1 className="py-5 px-4 text-2xl font-bold ">Featured Properties</h1>
-          <FeaturedProperty />
-        </div>
+          <Property />
+        </div> */}
         <div className=" drop-shadow-xl py-28 h bg-slate-200">
           <h3 className="absolute text-l text-slate-800 font-bold top- left-1/2 -translate-x-1/2 -translate-y-full">
             We Have A Happy Clints

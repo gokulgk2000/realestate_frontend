@@ -1,9 +1,10 @@
+import { map } from "lodash";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllProperty, getPropertybyUserId, getPropertyCount } from "../helper/backend_helpers";
 
 
-const FeaturedProperty = () => {
+const Property = () => {
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(true);
   const [propertyCount, setpropertyCount] = useState(0);
@@ -12,10 +13,10 @@ const FeaturedProperty = () => {
   const [property, setproperty] = useState([]);
 
   const currentUser = JSON.parse(localStorage?.getItem("authUser"))
-  console.log("Current : ",currentUser?.userID)
+  console.log("Current : ",currentUser.userID)
 
   const loadProperty = async () => {
-    const res = await getPropertybyUserId({  limit, searchText });
+    const res = await getAllProperty({  limit, searchText });
     if (res.success) {
       setproperty(res.property);
       console.log("data",res)
@@ -56,32 +57,33 @@ const FeaturedProperty = () => {
   }, [searchText]);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 auto-rows-fr md:grid-cols-2 xl:grid-cols-3 gap-4  px-5 py-5 row-span-3">
-      
+    <div className="grid  auto-rows-fr md:grid-cols-2 xl:grid-cols-3 gap-4  px-5 py-5 row-span-3">
+     {map(property, (pro, i) => (
+      <div  user={pro} key={"pro" + i} >
           <div  className="bg-gray-50  rounded-2xl drop-shadow-lg ">
-            <Link to={`/Detailspage?uid=${property?._id}`}>
+            <Link to={`/Detailspage?uid=${pro?._id}`}>
             <img
               className="w-full aspect-[1] object-cover rounded-2xl transform h-64  transition duration-500 hover:scale-95  "
               alt="coimbatore realestate"
-              src={property?.propertyPic
-                }
+              src={pro?. propertyPic[0] }
             />
 
-            <div className=" font-semibold text-center py-5">
-            
+            <div className=" font-semibold text-center py-5 aspect-[1]" >
+              {" "}
               Details
               <div className="font-sans text-sm  text-left p-5 leading-loose">
-                <h5>location :{property?.location}</h5>
-                <h6>Askprice :{property?.askPrice}</h6>
-                <p>Description :{property?.Description}</p>
+                <h5>Seller :{pro?.Seller}</h5>
+                <h5>location :{pro?.location}</h5>
+                <h6>Askprice :{pro?.askPrice}</h6>
+                <p>Description :{pro?.Description}</p>
               </div>
             </div>
             </Link>
           </div>
       </div>
+      ))}
     </div>
   );
 };
 
-export default FeaturedProperty;
+export default Property;

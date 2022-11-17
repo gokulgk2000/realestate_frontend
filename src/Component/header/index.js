@@ -7,9 +7,10 @@ import { mobile } from "../helper/constatnt/ScreenSize";
 import Logo from "../assets/images/logo.png";
 
 const NavItem = [
-  { name: "Home", link: "/" },
+  //{ name: "Home", link: "/" },
   { name: "Sell", link: "/sell" },
-  { name: "Property Agents", link: "#" },
+  { name: "Property", link: "/property" },
+  { name: "Contactus", link: "/about" },
   
   // { name: "About", link: "#" },
   // { name: "Contactus", link: "#" },

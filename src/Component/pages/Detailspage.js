@@ -48,22 +48,22 @@ console.log("property",property)
   return (
     <div className='sm:grid grid-cols-2 bg-emerald-50 px-10  sm:px-5'>
         <div className='pt-11'>
-         <ul className='grid grid-cols-2'>
-            <li>Seller:{property?.Seller}</li>
-            <li>Location:{property?.location}</li>
-            <li>Layoutname:{property?.layoutName}</li>
-            <li>Landarea:{property?.landArea}</li>
-            <li>Facing:{property?.facing}</li>
-            <li>Approchroad:{property?.approachRoad}</li>
-            <li>Builtarea:{property?.builtArea}</li>
-            <li>Bedroom:{property?.bedRoom}</li>
-            <li>Floordetails:{property?.floorDetails}</li>
-            <li>Status:{property?.status}</li>
-            <li>Neartown:{property?.nearTown}</li>
-            <li>Costsq:{property?.costSq}</li>
-            <li>Facilties:{property?.facilities}</li>
-            <li>Askprice:{property?.askPrice}</li>
-            <li>Description:{property?.Description}</li>
+         <ul className='grid leading-loose'>
+            <li className='grid grid-cols-2'><div>Seller:</div><div>{property?.Seller}</div></li>
+            <li className='grid grid-cols-2'><div>Location:</div><div>{property?.location}</div></li>
+            <li className='grid grid-cols-2'><div>Layoutname:</div><div>{property?.layoutName}</div></li>
+            <li className='grid grid-cols-2'><div>Landarea:</div><div>{property?.landArea}</div></li>
+            <li className='grid grid-cols-2'><div>Facing:</div><div>{property?.facing}</div></li>
+            <li className='grid grid-cols-2'><div>Approchroad:</div><div>{property?.approachRoad}</div></li>
+            <li className='grid grid-cols-2'><div>Builtarea:</div><div>{property?.builtArea}</div></li>
+            <li className='grid grid-cols-2'><div>Bedroom:</div><div>{property?.bedRoom}</div></li>
+            <li className='grid grid-cols-2'><div>Floordetails:</div><div>{property?.floorDetails}</div></li>
+            <li className='grid grid-cols-2'><div>Status:</div><div>{property?.status}</div></li>
+            <li className='grid grid-cols-2'><div>Neartown:</div><div>{property?.nearTown}</div></li>
+            <li className='grid grid-cols-2'><div>Costsq:</div><div>{property?.costSq}</div></li>
+            <li className='grid grid-cols-2'><div>Facilties:</div><div>{property?.facilities}</div></li>
+            <li className='grid grid-cols-2'><div>Askprice:</div><div>{property?.askPrice}</div></li>            
+            <li className='grid grid-cols-2'><div>Description:</div><div>{property?.Description}</div></li>
            
          </ul>
          <div className="flex justify-around pt-8">

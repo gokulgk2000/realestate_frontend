@@ -1,7 +1,7 @@
 import React from "react";
 const FileInput = ({ label, name, value,placeholder, multiple="false",accept ="*",onChange }) => {
   return (
-    <div className="m-2 grid grid-rows-2 gap-2">
+    <div className="pr-2 grid grid-rows-2 gap-2">
       <label className="capitalize">{label}</label>
       <input
         type="file"

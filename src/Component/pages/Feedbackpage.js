@@ -23,7 +23,7 @@ const Feedbackpage = () => {
       setFeedback(initialFormValues);
     };
     return (
-      <div className="grid justify-items-center py-5 bg-emerald-50 px-2">
+      <div className="grid justify-items-center py-5  px-2">
         <div className="font-bold text-2xl">Your Feedback</div>
         <form className="w-full max-w-lg mt-5 " onSubmit={handleSubmit}>
           <div className="flex flex-wrap -mx-3 mb-2">
@@ -158,7 +158,7 @@ const Feedbackpage = () => {
           <div className="md:flex md:items-center">
             <div className="md:w-1/3">
               <button
-                className="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                className="shadow bg-blue-600 hover:bg-teal-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                 type="submit"
               >
                 Send

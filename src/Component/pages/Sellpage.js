@@ -309,144 +309,142 @@ const RegisterProperty = () => {
             validation.errors.floorDetails ? (
               <span type="invalid">{validation.errors.floorDetails}</span>
             ) : null}
-            </div>
-            <div>
-              <Input
-                label="status"
-                type="text"
-                name="status"
-                placeholder="enter the status"
-                onChange={validation.handleChange}
-                onBlur={validation.handleBlur}
-                value={validation.values.status || ""}
-                invalid={
-                  validation.touched.status && validation.errors.status
-                    ? true
-                    : false
-                }
-              />
-              {validation.touched.status && validation.errors.status ? (
-                <span type="invalid">{validation.errors.status}</span>
-              ) : null}
-            </div>
-            <div>
-              <Input
-                label="nearTown"
-                type="text"
-                name="nearTown"
-                placeholder="enter the nearTown"
-                onChange={validation.handleChange}
-                onBlur={validation.handleBlur}
-                value={validation.values.nearTown || ""}
-                invalid={
-                  validation.touched.nearTown && validation.errors.nearTown
-                    ? true
-                    : false
-                }
-              />
-              {validation.touched.nearTown && validation.errors.nearTown ? (
-                <span type="invalid">{validation.errors.nearTown}</span>
-              ) : null}
-            </div>
-            <div>
-              <Input
-                label="costSq"
-                type="text"
-                name="costSq"
-                placeholder="enter the costSq"
-                onChange={validation.handleChange}
-                onBlur={validation.handleBlur}
-                value={validation.values.costSq || ""}
-                invalid={
-                  validation.touched.costSq && validation.errors.costSq
-                    ? true
-                    : false
-                }
-              />
-              {validation.touched.costSq && validation.errors.costSq ? (
-                <span type="invalid">{validation.errors.costSq}</span>
-              ) : null}
-            </div>
-            <div>
-              <Input
-                label="facilities"
-                type="text"
-                name="facilities"
-                placeholder="enter the facilities"
-                onChange={validation.handleChange}
-                onBlur={validation.handleBlur}
-                value={validation.values.facilities || ""}
-                invalid={
-                  validation.touched.facilities && validation.errors.facilities
-                    ? true
-                    : false
-                }
-              />
-              {validation.touched.facilities && validation.errors.facilities ? (
-                <span type="invalid">{validation.errors.facilities}</span>
-              ) : null}
-            </div>
-            <div>
-              <Input
-                label="askPrice"
-                type="number"
-                name="askPrice"
-                placeholder="enter the askPrice"
-                onChange={validation.handleChange}
-                onBlur={validation.handleBlur}
-                value={validation.values.askPrice || ""}
-                invalid={
-                  validation.touched.askPrice && validation.errors.askPrice
-                    ? true
-                    : false
-                }
-              />
-              {validation.touched.askPrice && validation.errors.askPrice ? (
-                <span type="invalid">{validation.errors.askPrice}</span>
-              ) : null}
-            </div>
-
-            <div>
-              <Input
-                label="Description"
-                type="text"
-                name="Description"
-                placeholder="enter the Description"
-                onChange={validation.handleChange}
-                onBlur={validation.handleBlur}
-                value={validation.values.Description || ""}
-                invalid={
-                  validation.touched.Description &&
-                  validation.errors.Description
-                    ? true
-                    : false
-                }
-              />
-              {validation.touched.Description &&
-              validation.errors.Description ? (
-                <span type="invalid">{validation.errors.Description}</span>
-              ) : null}
-            </div>
-            <div>
-              <FileInput
-                label="Property Images"
-                multiple={true}
-                accept=".png, .jpg, .jpeg,.pdf,.webp"
-                onChange={handleImageUpload}
-              />
-            </div>
-            {propertyregistrationSuccess && (
-              <alert className="text-bold text-green-500">
-                {propertyregistrationSuccess}
-              </alert>
-            )}
-            {propertyregistrationError && (
-              <alert className="text-bold text-red-500">
-                {propertyregistrationError}
-              </alert>
-            )}
           </div>
-        
+          <div>
+            <Input
+              label="status"
+              type="text"
+              name="status"
+              placeholder="enter the status"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.status || ""}
+              invalid={
+                validation.touched.status && validation.errors.status
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.status && validation.errors.status ? (
+              <span type="invalid">{validation.errors.status}</span>
+            ) : null}
+          </div>
+          <div>
+            <Input
+              label="nearTown"
+              type="text"
+              name="nearTown"
+              placeholder="enter the nearTown"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.nearTown || ""}
+              invalid={
+                validation.touched.nearTown && validation.errors.nearTown
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.nearTown && validation.errors.nearTown ? (
+              <span type="invalid">{validation.errors.nearTown}</span>
+            ) : null}
+          </div>
+          <div>
+            <Input
+              label="costSq"
+              type="number"
+              name="costSq"
+              placeholder="enter the costSq"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.costSq || ""}
+              invalid={
+                validation.touched.costSq && validation.errors.costSq
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.costSq && validation.errors.costSq ? (
+              <span type="invalid">{validation.errors.costSq}</span>
+            ) : null}
+          </div>
+          <div>
+            <Input
+              label="facilities"
+              type="text"
+              name="facilities"
+              placeholder="enter the facilities"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.facilities || ""}
+              invalid={
+                validation.touched.facilities && validation.errors.facilities
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.facilities && validation.errors.facilities ? (
+              <span type="invalid">{validation.errors.facilities}</span>
+            ) : null}
+          </div>
+          <div>
+            <Input
+              label="askPrice"
+              type="number"
+              name="askPrice"
+              placeholder="enter the askPrice"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.askPrice || ""}
+              invalid={
+                validation.touched.askPrice && validation.errors.askPrice
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.askPrice && validation.errors.askPrice ? (
+              <span type="invalid">{validation.errors.askPrice}</span>
+            ) : null}
+          </div>
+
+          <div>
+            <Input
+              label="Description"
+              type="text"
+              name="Description"
+              placeholder="enter the Description"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.Description || ""}
+              invalid={
+                validation.touched.Description && validation.errors.Description
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.Description && validation.errors.Description ? (
+              <span type="invalid">{validation.errors.Description}</span>
+            ) : null}
+          </div>
+          <div>
+            <FileInput
+              label="Property Images"
+              multiple={true}
+              accept=".png, .jpg, .jpeg,.pdf,.webp"
+              onChange={handleImageUpload}
+            />
+          </div>
+          {propertyregistrationSuccess && (
+            <alert className="text-bold text-green-500">
+              {propertyregistrationSuccess}
+            </alert>
+          )}
+          {propertyregistrationError && (
+            <alert className="text-bold text-red-500">
+              {propertyregistrationError}
+            </alert>
+          )}
+        </div>
+
         <div className="flex justify-around  mr-6 pt-10  ">
           <button
             type="submit"

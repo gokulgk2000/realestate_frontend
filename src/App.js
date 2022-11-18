@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes,Router } from "react-router-dom";
+import { Route, Routes,Router, Navigate } from "react-router-dom";
 import Footer from "./Component/footer/Footer";
 import Header from "./Component/header";
 import Navbar from "./Component/header/Navbar";
@@ -12,26 +12,33 @@ import Landingpage from "./Component/pages/Landingpage";
 import Property from "./Component/pages/Property";
 import ProtectedRoutes from "./routers/ProtectedRoutes";
 import Sell from "./Component/pages/Sellpage";
+import Admin from "./Component/pages/admin/Admin";
+import UserList from "./Component/pages/admin/UserList";
+import PropertyList from "./Component/pages/admin/PropertyList";
 
 const App = () => {
   return (
     <> 
       <Header />
-      <Navbar />
-    
+      <Navbar /> 
       <Routes>
-        <Route element={<ProtectedRoutes />}>
-        <Route path="/sell" element={<Sell />}   />
-        </Route>
-        <Route path="/" element={<Landingpage />} />
+      <Route path="/" element={<Landingpage />} />
         <Route path="/about" element={<About />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/property" element={<Property />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />
+        <Route element={<ProtectedRoutes />}>
+        <Route path="/sell" element={<Sell />}   />
+        </Route>
+        <Route path="admin" element={<Admin />} >
+        <Route index  element={<UserList />} />
+        <Route  path="userlist" element={<UserList />} />
+        <Route path="propertylist" element={<PropertyList />} />
+        </Route >
+        
       </Routes>
-  
       <Footer />
     </>
   );

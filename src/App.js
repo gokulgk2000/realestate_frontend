@@ -15,7 +15,7 @@ import Sell from "./Component/pages/Sellpage";
 
 const App = () => {
   return (
-    <>
+    <> 
       <Header />
       <Navbar />
     

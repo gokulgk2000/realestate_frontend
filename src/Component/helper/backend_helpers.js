@@ -10,9 +10,9 @@ const userLogin = (payload) =>
   const getPropertybyUserId = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
   const getPropertyCount = (payload) =>
-  post(`${BASE_URL}/user/propertyCount`, payload);
+  post(`${BASE_URL}/property/propertyCount`, payload);
   const getAllProperty = (payload) =>
-  get(`${BASE_URL}/user/properties`, payload);
+  post(`${BASE_URL}/property/properties`, payload);
   const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
 

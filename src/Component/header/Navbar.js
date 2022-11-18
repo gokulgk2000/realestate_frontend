@@ -1,14 +1,40 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { mobile } from '../helper/constatnt/ScreenSize';
+import useMediaQuery from '../helper/hook/useMediaQuery';
+import Mobilenav from './Mobilenav';
 
 
+const NavItem = [
+    { name: "Home", link: "/" },
+    { name: "Sell", link: "/sell" },
+    { name: "Property", link: "/property" },
+    { name: "Contactus", link: "/about" },
+    
+    // { name: "About", link: "#" },
+    // { name: "Contactus", link: "#" },
+  ];
 
 function Navbar(){
+    
 
+  const [isMobileview] = useMediaQuery(mobile);
  return(
     <div className='Navbar'>
 <nav className="bg-gray-50 dark:bg-gray-700">
     <div className="py-3 px-1  mx-auto  ">
-        <div className="flex justify-end items-center px-5">
+        <div className="flex justify-between items-center px-5">
+        {isMobileview ? (
+        <div className="flex items-center gap-4 lg:mt-0 text-blue-500 font-semibold">        
+          {NavItem.map((Nav, k) => (
+            <NavLink key={k} to={Nav.link || "#"} className="hover:text-green-800">
+              {Nav.name}
+            </NavLink>
+          ))}
+        </div>
+      ) : (
+        <Mobilenav navItem={NavItem} />
+      )}
        
             {/* <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
                 <li>

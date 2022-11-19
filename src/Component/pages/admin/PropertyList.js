@@ -62,7 +62,7 @@ const PropertyList = () => {
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                    <a href={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                 </td>
             </tr>
             ))}

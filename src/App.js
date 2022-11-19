@@ -15,6 +15,8 @@ import Sell from "./Component/pages/Sellpage";
 import Admin from "./Component/pages/admin/Admin";
 import UserList from "./Component/pages/admin/UserList";
 import PropertyList from "./Component/pages/admin/PropertyList";
+import PropertyDetails from "./Component/pages/admin/PropertyDetails";
+import UserDetails from "./Component/pages/admin/UserDetails";
 
 const App = () => {
   return (
@@ -36,6 +38,8 @@ const App = () => {
         <Route index  element={<UserList />} />
         <Route  path="userlist" element={<UserList />} />
         <Route path="propertylist" element={<PropertyList />} />
+        <Route path="propertydetails" element={<PropertyDetails />} />
+        <Route path="userdetails" element={<UserDetails />} />
         </Route >
         
       </Routes>

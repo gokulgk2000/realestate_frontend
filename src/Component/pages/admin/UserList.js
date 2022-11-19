@@ -24,7 +24,7 @@ const UserList = () => {
       useEffect(() => {
         getAllUsers();
       }, []);
-      console.log("dsp112:",userData);
+    //   console.log("dsp112:",userData);
   return (
     <div>
             
@@ -75,7 +75,7 @@ const UserList = () => {
                 {Data?.email}
                 </td>
                 <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                    <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                 </td>
             </tr>
             ))}

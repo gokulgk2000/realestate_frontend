@@ -26,10 +26,10 @@ const UserList = () => {
       }, []);
     //   console.log("dsp112:",userData);
   return (
-    <div>
+    <div >
             
-<div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+<div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
+ <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
                 <th scope="col" className="py-3 px-6">
@@ -66,7 +66,7 @@ const UserList = () => {
                     {i+1}
                 </th>
                 <td className="py-4 px-6">
-                    {Data?.firstname}
+                    {Data?.firstname} 
                 </td>
                 <td className="py-4 px-6">
                 {Data?.lastname}
@@ -219,7 +219,7 @@ const UserList = () => {
     </table>
     
 </div>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page flex navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <li>
           <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -249,7 +249,7 @@ const UserList = () => {
           </a>
         </li>
       </ul>
-    </nav>
+    </nav></div> 
     </div>
   )
 }

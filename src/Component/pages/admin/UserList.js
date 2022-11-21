@@ -219,7 +219,7 @@ const UserList = () => {
     </table>
     
 </div>
-    <nav aria-label="Page flex navigation example">
+    {/* <nav aria-label="Page flex navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <li>
           <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -249,7 +249,8 @@ const UserList = () => {
           </a>
         </li>
       </ul>
-    </nav></div> 
+    </nav> 
+    */}</div>  
     </div>
   )
 }

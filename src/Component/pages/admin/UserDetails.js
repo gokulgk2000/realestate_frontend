@@ -43,11 +43,11 @@ const UserDetails = () => {
     <div>   
        <div class="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
     {/* {getProperty?.map((prode,i)=>( */}
-    <div class="flex flex-col items-left pb-10"  >
-        <h5 class="mx-1 text-xl font-medium text-gray-900 dark:text-white">Firstname : {getUser?.firstname }</h5>
-        <h5 class="mx-1 text-xl font-medium text-gray-900 dark:text-white">Lastname :  {getUser?. lastname}</h5>
-        <h5 class="mx-1 text-xl font-medium text-gray-900 dark:text-white">Email :{getUser?.email}</h5>
-        <h5 class="mx-1 text-xl font-medium text-gray-900 dark:text-white">Password :{getUser?. password}</h5>
+    <div class="flex  justify-start  pb-10"  >
+      <div > <div className='flex items-center md:gap-2'> <h5 class="mx- text-xl font-medium text-gray-900 dark:text-white">Firstname :</h5><p className='font-sm'>{getUser?.firstname }</p></div>
+       <div className='flex items-center md:gap-2'> <h5 class="mx- text-xl font-medium text-gray-900 dark:text-white">Lastname :</h5><p className='font-sm'>{getUser?. lastname}</p></div>  
+      <div className='flex items-center md:gap-2'>   <h5 class="mx- text-xl font-medium text-gray-900 dark:text-white">Email :</h5><p className='font-sm'>{getUser?.email}</p> </div></div>
+        {/* <h5 class="mx-1 text-xl font-medium text-gray-900 dark:text-white">Password :{getUser?. password}</h5> */}
         <span class="text-sm text-gray-500 dark:text-gray-400"> </span>
         </div>
         {/* ))}  */}

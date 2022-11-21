@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getPropertyDetailsById } from '../../helper/backend_helpers';
 import { useQuery } from '../../helper/hook/useQuery';
 import { useModel } from "../../helper/hook/useModel"
+import { map } from 'lodash';
 const PropertyDetails = () => {
   const query = useQuery();
 
@@ -37,6 +38,7 @@ const PropertyDetails = () => {
   //   }
   //   setModalOpen(false);
   // };
+ 
   return (
   <div>
             
@@ -63,11 +65,17 @@ const PropertyDetails = () => {
         </div>
     </div> */}
     {/* {getProperty?.map((prode,i)=>( */}
+   
     <div class="flex  ml-5 flex-col items-left pb-10"  >
+    {/* {map(getProperty,(pro,k)=>(
+     <div propertyId={pro} key={"pro" + k} > <>{pro?.location} {pro?.Seller}</> </div> 
+    
+    ))} */}
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Seller : {getProperty?.Seller }</h5>
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">AskPrice :  {getProperty?.askPrice }</h5>
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">costSq :{getProperty?.costSq}</h5>
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">location :{getProperty?.location }</h5>  
+        
         <span class="text-sm text-gray-500 dark:text-gray-400"> </span>
         </div>
         {/* ))}  */}

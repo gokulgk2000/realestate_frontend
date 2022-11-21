@@ -1,13 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import userEvent from '@testing-library/user-event';
+import React, { useEffect, useMemo, useState } from 'react'
 import { allPropertiesList } from '../../helper/backend_helpers';
+import Pagination from '../../pagination/Pagination';
+
+let PageSize = 10;
 
 const PropertyList = () => {
+    const [currentPage, setCurrentPage] = useState(1);
     const [allProperties, setAllProperties] = useState([]);
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return allProperties.slice(firstPageIndex, lastPageIndex);
+      }, [currentPage]);
 
     useEffect(() => {
         const getAllProperties = async () => {
           const res = await allPropertiesList({});
-          // console.log("getAllProperties" ,res);
+          console.log("getAllProperties" ,res);
           if (res.success) {
             setAllProperties(res.properties);
           }
@@ -66,177 +77,18 @@ const PropertyList = () => {
                 </td>
             </tr>
             ))}
-            {/* <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td className="py-4 px-6">
-                    White
-                </td>
-                <td className="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td className="py-4 px-6">
-                    $1999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td className="py-4 px-6">
-                    Black
-                </td>
-                <td className="py-4 px-6">
-                    Accessories
-                </td>
-                <td className="py-4 px-6">
-                    $99
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td className="py-4 px-6">
-                    Sliver
-                </td>
-                <td className="py-4 px-6">
-                    Laptop
-                </td>
-                <td className="py-4 px-6">
-                    $2999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td className="py-4 px-6">
-                    White
-                </td>
-                <td className="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td className="py-4 px-6">
-                    $1999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td className="py-4 px-6">
-                    Black
-                </td>
-                <td className="py-4 px-6">
-                    Accessories
-                </td>
-                <td className="py-4 px-6">
-                    $99
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td className="py-4 px-6">
-                    Sliver
-                </td>
-                <td className="py-4 px-6">
-                    Laptop
-                </td>
-                <td className="py-4 px-6">
-                    $2999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td className="py-4 px-6">
-                    White
-                </td>
-                <td className="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td className="py-4 px-6">
-                    $1999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td className="py-4 px-6">
-                    Black
-                </td>
-                <td className="py-4 px-6">
-                    Accessories
-                </td>
-                <td className="py-4 px-6">
-                    $99
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr> */}
         </tbody>
+        <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={currentTableData.length}
+        pageSize={PageSize}
+        onPageChange={page => setCurrentPage(page)}
+      />
     </table>
-    
+   
 </div>
-    <nav aria-label="Page navigation example">
-      <ul className="inline-flex items-center -space-x-px">
-        <li>
-          <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span className="sr-only">Previous</span>
-            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-        </li>
-        <li>
-          <a href="#" className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span className="sr-only">Next</span>
-            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
+
     </div>
   )
 }

@@ -32,12 +32,13 @@ const RegisterProperty = () => {
       builtArea: "",
       bedRoom: "",
       floorDetails: "",
-      status: "",
+      propertyStatus: "",
       nearTown: "",
       costSq: "",
       facilities: "",
       askPrice: "",
       Description: "",
+      status:"",
     },
     validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Your Seller"),
@@ -49,7 +50,7 @@ const RegisterProperty = () => {
       builtArea: Yup.string().required("Please Enter Your builtArea"),
       bedRoom: Yup.string().required("Please Enter Your bedRoom"),
       floorDetails: Yup.string().required("Please Enter Your floorDetails"),
-      status: Yup.string().required("Please Enter Your status"),
+      propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
       nearTown: Yup.string().required("Please Enter Your nearTown"),
       costSq: Yup.string().required("Please Enter Your costSq"),
       facilities: Yup.string().required("Please Enter Your facilities"),
@@ -67,7 +68,7 @@ const RegisterProperty = () => {
         builtArea: values.builtArea,
         bedRoom: values.bedRoom,
         floorDetails: values.floorDetails,
-        status: values.status,
+        propertyStatus: values.propertyStatus,
         nearTown: values.nearTown,
         costSq: values.costSq,
         facilities: values.facilities,
@@ -75,7 +76,7 @@ const RegisterProperty = () => {
         Description: values.Description,
         userID: currentUser?.userID,
         propertyPic,
-        status: "approved",
+        status:"approved"
       });
       console.log("Data", values);
       onSubmitProps.resetForm();
@@ -118,8 +119,7 @@ const RegisterProperty = () => {
     console.log("pic", propertyPic);
   };
 
-  const nav = { backgroundColor: "#f17427d3" };
-  // console.log("Curreny : ",currentUser?.userID)
+  
   return (
     <div className="md:grid grid-cols-5 ml-5 p-1">
       <form
@@ -312,21 +312,21 @@ const RegisterProperty = () => {
           </div>
           <div>
             <Input
-              label="status"
+              label="propertyStatus"
               type="text"
-              name="status"
-              placeholder="enter the status"
+              name="propertyStatus"
+              placeholder="enter the propertyStatus"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
-              value={validation.values.status || ""}
+              value={validation.values.propertyStatus || ""}
               invalid={
-                validation.touched.status && validation.errors.status
+                validation.touched.propertyStatus && validation.errors.propertyStatus
                   ? true
                   : false
               }
             />
-            {validation.touched.status && validation.errors.status ? (
-              <span type="invalid">{validation.errors.status}</span>
+            {validation.touched.propertyStatus && validation.errors.propertyStatus ? (
+              <span type="invalid">{validation.errors.propertyStatus}</span>
             ) : null}
           </div>
           <div>

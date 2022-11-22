@@ -18,17 +18,17 @@ const NavItem = [
 function Navbar() {
   const [isMobileview] = useMediaQuery(mobile);
   return (
-    <div className="Navbar">
-      <nav className="bg-gray-50 dark:bg-gray-700">
+    <div className="Navbar font-serif">
+      <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
-              <div className="flex items-center gap-4 lg:mt-0 text-blue-500 font-semibold">
+              <div className="flex items-center gap-4 lg:mt-0 text-rose-700  font-semibold">
                 {NavItem.map((Nav, k) => (
                   <NavLink
                     key={k}
                     to={Nav.link || "#"}
-                    className="hover:text-green-800"
+                    className="hover:bg-green-800 hover:text-slate-50"
                   >
                     {Nav.name}
                   </NavLink>

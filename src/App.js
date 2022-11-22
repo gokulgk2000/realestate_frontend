@@ -17,6 +17,7 @@ import UserList from "./Component/pages/admin/UserList";
 import PropertyList from "./Component/pages/admin/PropertyList";
 import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
+import Category from "./Component/pages/Category";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
       <Navbar /> 
       <Routes>
       <Route path="/" element={<Landingpage />} />
+      <Route path="/category" element={<Category />} />
         <Route path="/about" element={<About />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/property" element={<Property />} />

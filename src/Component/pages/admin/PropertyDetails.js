@@ -5,9 +5,12 @@ import { useModal } from '../../helper/hook/useModal';
 import toastr from "toastr"
 import "toastr/build/toastr.min.css";
 import RemoveModel from '../../models/RemoveModel';
+import { Navigate, useNavigate } from 'react-router-dom'
+
 
 const PropertyDetails = () => {
   const query = useQuery();
+  const navigate = useNavigate()
 
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [getProperty, setGetProperty] = useState([null]);
@@ -40,8 +43,10 @@ const PropertyDetails = () => {
     };
     const res = await removeProperty(payload);
     if (res.success) {
+      
       console.log(res);
       toastr.success(`Property has been Deactivated successfully`, "Success");
+      navigate("/admin/PropertyList")
     } else {
       console.log("Error : ", res?.msg || "error");
     }

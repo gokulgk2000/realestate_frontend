@@ -6,9 +6,12 @@ import toastr from "toastr"
 import "toastr/build/toastr.min.css";
 import { confirmAlert } from 'react-confirm-alert';
 import RemoveModel from '../../models/RemoveModel';
+import { useNavigate } from 'react-router-dom';
   
 const UserDetails = () => {
   const query = useQuery();
+  const navigate = useNavigate()
+
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [getUser, setGetUser] = useState(null);
   // const [getPayment, setGetPayment] = useState(null);
@@ -36,6 +39,7 @@ const UserDetails = () => {
     if (res.success) {
       console.log("res",res);
       toastr.success(`User has been Deactivated successfully`, "Success");
+      navigate("/admin/UserList")
 
       // await getAllUsers();
     } else {

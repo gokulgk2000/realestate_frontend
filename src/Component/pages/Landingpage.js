@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "../assets/images/2.jpg";
+import Category from "./Category";
 const Landingpage = () => {
   return (
     <div>
@@ -36,7 +37,7 @@ const Landingpage = () => {
             <a href="/register">For More</a>
           </button>
         </div>
-
+<Category/>
         {/* <div className="p-3 ">
           <h1 className="py-5 px-4 text-2xl font-bold ">Featured Properties</h1>
           <Property />

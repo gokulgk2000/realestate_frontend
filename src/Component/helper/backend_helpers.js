@@ -15,6 +15,8 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/property/properties`, payload);
   const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
+  const categoryId = (payload) =>
+  post(`${BASE_URL}/category/CategoryId `, payload);
   const getCategory = (payload) =>
   post(`${BASE_URL}/category/getcategory`, payload);
   const findCategory = (payload) =>
@@ -43,8 +45,13 @@ const userLogin = (payload) =>
     removeUser,
     removeProperty,
     getPropertybyUserId,
+
+
     GETALLUSERSBYLIMIT,
+   
+
     getCategory,
-    findCategory
+    findCategory,
+    categoryId
 
 }

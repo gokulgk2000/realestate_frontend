@@ -1,56 +1,35 @@
-import React, { useState } from 'react'
-import CategoryData from '../helper/constatnt/CategoryData';
-
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { findCategory } from "../helper/backend_helpers";
 
 const Category = () => {
-    const [data,setData]=useState(CategoryData)
+  const [categorylist, setCategorylist] = useState([]);
 
+  useEffect(() => {
+    const getAllCategory = async () => {
+      const res = await findCategory({});
+      console.log("getAllCategory", res);
+      if (res.success) {
+        setCategorylist(res.category);
+      }
+    };
+    getAllCategory();
+  }, []);
 
-    const FilterResult = (item) => {
-        const Result = CategoryData.filter((look) => {
-          return look.name === item;
-        });
-        setData(Result);
-
-      };
-    
   return (
-    <div> <div><button
- 
-    onClick={() => FilterResult("villas")}
-  >
-    Residential
-  </button><br/>
-  <button
-   
-    onClick={() => FilterResult("land")}
-  >
-   Land
-  </button><br/>
-  <button
-   
-    onClick={() =>setData(CategoryData)}
-  >
-full data
-  </button><br/></div><div>
-  {data.map((user,i) => {const { id,name } = user;
- return(
-<div key={i}>
-    <div className='grid grid-cols-2' >
-        <div></div>
-        <div>name={name}</div>
-        <div>number={id}</div>
-</div>
-</div>
+     <div className="grid grid-cols-5 gap-3 px-5">
+      {categorylist?.map((cat, i) => (
+        <div key={i}> <Link to={`/property?id=${cat?._id}`}> 
+        
+          <div>
+          
+           <div className="font-extrabold">  {cat?.name} </div>
+            <img src={cat?.img} className="aspect-[2]" />
+          </div>
+          </Link>  </div>
+      ))}
+    </div>
+  );
+};
 
- )
-
-
-})} </div>
-
-  
-  </div>
-  )
-}
-
-export default Category
+export default Category;

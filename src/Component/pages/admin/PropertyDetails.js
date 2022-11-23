@@ -6,6 +6,7 @@ import toastr from "toastr"
 import "toastr/build/toastr.min.css";
 import RemoveModel from '../../models/RemoveModel';
 import { Navigate, useNavigate } from 'react-router-dom'
+import { Breadcrumbs } from '@material-tailwind/react';
 
 
 const PropertyDetails = () => {
@@ -63,6 +64,18 @@ const PropertyDetails = () => {
       onCloseClick={()=>setModalOpen(false)}
     />}
   <div>
+  <Breadcrumbs >
+      <a href="/admin/Dashboard" className="opacity-60">
+        Dashboard
+      </a>
+      <a href="/admin/PropertyList" className="opacity-60">
+        Properties
+      </a>
+      <a href="/admin/propertydetails" className="text-rose-700">
+        PropertyDetails
+      </a>
+     
+    </Breadcrumbs>
             <div class="min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
     <div class="flex  ml-5 flex-col items-left pb-10"  >
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Seller : {getProperty?.Seller }</h5>

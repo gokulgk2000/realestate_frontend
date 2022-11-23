@@ -17,11 +17,7 @@ import UserList from "./Component/pages/admin/UserList";
 import PropertyList from "./Component/pages/admin/PropertyList";
 import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
-
-import Dashborad from "./Component/pages/admin/Dashborad";
-
-import Category from "./Component/pages/Category";
-
+import Dashboard from "./Component/pages/admin/Dashboard";
 
 const App = () => {
   return (
@@ -30,7 +26,6 @@ const App = () => {
       <Navbar /> 
       <Routes>
       <Route path="/" element={<Landingpage />} />
-      <Route path="/category" element={<Category />} />
         <Route path="/about" element={<About />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/property" element={<Property />} />
@@ -41,7 +36,8 @@ const App = () => {
         <Route path="/sell" element={<Sell />}   />
         </Route>
         <Route path="admin" element={<Admin />} >
-        <Route path="Dashboard" element={<Dashborad />} />
+        <Route index  element={<Dashboard />} />
+        <Route path="Dashboard" element={<Dashboard />} />
         <Route  path="userlist" element={<UserList />} />
         <Route path="propertylist" element={<PropertyList />} />
         <Route path="propertydetails" element={<PropertyDetails />} />

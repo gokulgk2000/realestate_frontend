@@ -1,6 +1,8 @@
+import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { allPropertiesList, allUsersList } from "../../helper/backend_helpers";
+import Breadcrumb from "./Breadcrumbs";
 import UserList from "./UserList";
 
 const Admin = () => {
@@ -31,9 +33,10 @@ const Admin = () => {
   // console.log("userlist:",allUsers);
   return (
     <div>
+    
       <div className="md:grid grid-cols-5  py-4">
-        <div className=" font- Arial pt-5 bg-slate-200 px-6  md:text-left text-md">
-          <h3 className=" text-gray-900 font-semibold text-xl font-SFMono-Regular">
+        <div className=" font- Arial pt-5  bg-stone-200 px-6  md:text-left text-md">
+          <h3 className="  text-rose-700 font-semibold text-xl font-SFMono-Regular">
             Menu
           </h3>
           <a
@@ -51,7 +54,7 @@ const Admin = () => {
             </svg>
             Admin Dashboard
           </a>
-          <h3 className=" text-gray-700 font-semibold text-xl font- Arial leading-loose">
+          <h3 className="  text-rose-700  font-semibold text-xl font- Arial leading-loose">
             Sub-Menu
           </h3>
           <ul className="font- Arial  leading-loose">
@@ -99,7 +102,7 @@ const Admin = () => {
           </ul>
         </div>
 
-        <div className="md: col-span-4 bg-teal-100">
+        <div className="md: col-span-4 bg-stone-100">
         <Outlet />
         </div>
       </div>

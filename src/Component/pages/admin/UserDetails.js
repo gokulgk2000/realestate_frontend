@@ -7,6 +7,7 @@ import "toastr/build/toastr.min.css";
 import { confirmAlert } from 'react-confirm-alert';
 import RemoveModel from '../../models/RemoveModel';
 import { useNavigate } from 'react-router-dom';
+import { Breadcrumbs } from '@material-tailwind/react';
   
 const UserDetails = () => {
   const query = useQuery();
@@ -58,6 +59,18 @@ const UserDetails = () => {
     onCloseClick={()=>setModalOpen(false)}
   />}
     <div>   
+    <Breadcrumbs >
+      <a href="/admin/Dashboard" className="opacity-60">
+        Dashboard
+      </a>
+      <a href="/admin/userlist" className="opacity-60">
+        Users
+      </a>
+      <a href="/admin/userdetails" className="text-rose-700">
+        UsersDetails
+      </a>
+     
+    </Breadcrumbs>
        <div class="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
     {/* {getProperty?.map((prode,i)=>( */}
     <div class="flex flex-col items-left pb-10"  >

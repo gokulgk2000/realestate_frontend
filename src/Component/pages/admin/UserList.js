@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { allUsersList } from '../../helper/backend_helpers';
+import React, { useEffect, useState ,useMemo } from 'react'
+import { allUsersList, GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
 
+import axios from 'axios';
+import Pagination from '../../pagination/Pagination';
+import Posts from '../../pagination/Post';
+import { useQuery } from '../../helper/hook/useQuery';
 const UserList = () => {
-    
+  const query = useQuery();
+  
   const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
 
   const pageOptions = {
     sizePerPage: 5,
@@ -12,6 +21,7 @@ const UserList = () => {
     custom: true,
   };
     const getAllUsers = async () => {
+      
         setLoading(true);
         const res = await allUsersList({});
         console.log("dsp:",res);
@@ -24,7 +34,29 @@ const UserList = () => {
       useEffect(() => {
         getAllUsers();
       }, []);
-    //   console.log("dsp112:",userData);
+      // console.log("dsp112:",userData.length);
+      useEffect(() => {
+        const fetchPosts = async () => {
+          setLoading(true);
+          const res = await GETALLUSERSBYLIMIT ({ 
+        userId: query.get("id"),})
+          setPosts(res.data);
+          setLoading(false);
+        };
+    
+        fetchPosts();
+      }, []);
+      console.log("posts",posts.length)
+      const indexOfLastPost = currentPage * postsPerPage;
+      const indexOfFirstPost = indexOfLastPost - postsPerPage;
+      const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+    
+      // Change page
+  //     const paginateFront = () => setCurrentPage(currentPage + 1);
+  // const paginateBack = () => setCurrentPage(currentPage - 1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    
   return (
     <div >
             
@@ -38,19 +70,19 @@ const UserList = () => {
                 <th scope="col" className="py-3 px-6">
                     <div className="flex items-center">
                        Name
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6">
                     <div className="flex items-center">
                     Email
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6">
                     <div className="flex items-center">
                   status
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                        <a href="#"></a>
                     </div>
                 </th>
                
@@ -86,35 +118,13 @@ const UserList = () => {
 </div>
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
-      <ul className="inline-flex items-center -space-x-px">
-        <li>
-          <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span className="sr-only">Previous</span>
-            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-        </li>
-        <li>
-          <a href="#" className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span className="sr-only">Next</span>
-            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-          </a>
-        </li>
-      </ul>
+    <Posts posts={currentPosts} />
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={posts.length}
+        paginate={paginate.pageOptions}
+        currentPage={currentPage}
+      />
     </nav>
     </div>
     </div> 

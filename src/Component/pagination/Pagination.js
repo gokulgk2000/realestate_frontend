@@ -1,80 +1,55 @@
-import React from 'react';
-import classnames from 'classnames';
-import { usePagination, DOTS } from './UsePagination';
-const Pagination = props => {
-  const {
-    onPageChange,
-    totalCount,
-    siblingCount = 1,
-    currentPage,
-    pageSize,
-    className
-  } = props;
+import React, { useState } from "react";
 
-  const paginationRange = usePagination({
-    currentPage,
-    totalCount,
-    siblingCount,
-    pageSize
-  });
+export default function Pagination({
+  postsPerPage,
+  totalPosts,
 
-  // If there are less than 2 times in pagination range we shall not render the component
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
-  }
+}) {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const onNext = () => {
-    onPageChange(currentPage + 1);
-  };
+      const paginateFront = () => setCurrentPage(currentPage + 1);
+  const paginateBack = () => setCurrentPage(currentPage - 1);
 
-  const onPrevious = () => {
-    onPageChange(currentPage - 1);
-  };
-
-  let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul
-      className={classnames('pagination-container', { [className]: className })}
-    >
-       {/* Left navigation arrow */}
-      <li
-        className={classnames('pagination-item', {
-          disabled: currentPage === 1
-        })}
-        onClick={onPrevious}
-      >
-        <div className="arrow left" />
-      </li>
-      {paginationRange.map(pageNumber => {
-         
-        // If the pageItem is a DOT, render the DOTS unicode character
-        if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
-        }
-		
-        // Render our Page Pills
-        return (
+    <div className='py-2'>
+      <div>
+        {/* <p className='text-sm text-gray-700'>
+          Showing
+          <span className='font-medium'>{currentPage * postsPerPage - 10}</span>
+          to
+          <span className='font-medium'> {currentPage * postsPerPage} </span>
+          of
+          <span className='font-medium'> {totalPosts} </span>
+          results
+        </p> */}
+      </div>
+      <nav className='block'></nav>
+      <div>
+        <nav
+          className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px'
+          aria-label='Pagination'
+        >
           <li
-            className={classnames('pagination-item', {
-              selected: pageNumber === currentPage
-            })}
-            onClick={() => onPageChange(pageNumber)}
+            onClick={() => {
+              paginateBack();
+            }}
+            // href='#'
+            className='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
           >
-            {pageNumber}
+            <button>Previous</button>
           </li>
-        );
-      })}
-      {/*  Right Navigation arrow */}
-      <li
-        className={classnames('pagination-item', {
-          disabled: currentPage === lastPage
-        })}
-        onClick={onNext}
-      >
-        <div className="arrow right" />
-      </li>
-    </ul>
-  );
-};
 
-export default Pagination;
+          <a
+            onClick={() => {
+              paginateFront();
+            }}
+            // href='#'
+            className='relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
+          >
+            <button>Next</button>
+          </a>
+        </nav>
+      </div>
+    </div>
+  );
+}

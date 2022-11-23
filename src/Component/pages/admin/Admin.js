@@ -38,7 +38,7 @@ const Admin = () => {
           </h3>
           <a
             className="flex font-Arial pt-3 leading-loose"
-            href="/admin/userlist"
+            href="/admin/Dashboard"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

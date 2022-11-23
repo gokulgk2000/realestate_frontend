@@ -17,6 +17,7 @@ import UserList from "./Component/pages/admin/UserList";
 import PropertyList from "./Component/pages/admin/PropertyList";
 import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
+import Dashborad from "./Component/pages/admin/Dashborad";
 
 const App = () => {
   return (
@@ -35,7 +36,7 @@ const App = () => {
         <Route path="/sell" element={<Sell />}   />
         </Route>
         <Route path="admin" element={<Admin />} >
-        {/* <Route index  element={<UserList />} /> */}
+        <Route path="Dashboard" element={<Dashborad />} />
         <Route  path="userlist" element={<UserList />} />
         <Route path="propertylist" element={<PropertyList />} />
         <Route path="propertydetails" element={<PropertyDetails />} />

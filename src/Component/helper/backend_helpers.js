@@ -24,6 +24,8 @@ const userLogin = (payload) =>
   const removeUser = (payload) => put(`${BASE_URL}/admin/removeUser`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
+  const GETALLUSERSBYLIMIT = (payload) =>
+  post(`${BASE_URL}/admin/getAllUsersPage`, payload);
   export {userRegisteration,
     PropertyRegistration,
     userLogin,
@@ -36,5 +38,6 @@ const userLogin = (payload) =>
     allPropertiesList,
     removeUser,
     removeProperty,
-    getPropertybyUserId
+    getPropertybyUserId,
+    GETALLUSERSBYLIMIT
 }

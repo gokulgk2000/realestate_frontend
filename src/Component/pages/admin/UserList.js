@@ -5,6 +5,7 @@ import axios from 'axios';
 import Pagination from '../../pagination/Pagination';
 import Posts from '../../pagination/Post';
 import { useQuery } from '../../helper/hook/useQuery';
+import { Breadcrumbs } from '@material-tailwind/react';
 const UserList = () => {
   const query = useQuery();
   
@@ -47,51 +48,61 @@ const UserList = () => {
         fetchPosts();
       }, []);
       console.log("posts",posts.length)
+      
       const indexOfLastPost = currentPage * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
       const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     
       // Change page
-  //     const paginateFront = () => setCurrentPage(currentPage + 1);
-  // const paginateBack = () => setCurrentPage(currentPage - 1);
+      const paginateFront = () => setCurrentPage(currentPage + 1);
+  const paginateBack = () => setCurrentPage(currentPage - 1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     
   return (
     <div >
-            
+     <Breadcrumbs >
+      <a href="/admin/Dashboard" className="opacity-60">
+        Dashboard
+      </a>
+      <a href="/admin/userlist" className="text-rose-700">
+        Users
+      </a>
+     
+    </Breadcrumbs>
 <div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                    S.No
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
                        Name
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
                     Email
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
                   status
                         <a href="#"></a>
                     </div>
                 </th>
                
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6 ">
                     <span className="sr-only">View</span>
                 </th>
             </tr>
         </thead>
         <tbody>
+          
         {userData.map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -107,7 +118,7 @@ const UserList = () => {
                 {Data?.aflag}
                 </td>
                 <td className="py-4 px-6 text-right">
-                    <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                    <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
                 </td>
             </tr>
             ))}
@@ -116,17 +127,20 @@ const UserList = () => {
     </table>
     
 </div>
+{/* {posts.map((limit,i)=>( */}
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
     <Posts posts={currentPosts} />
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
-        paginate={paginate.pageOptions}
+        paginateBack={paginateBack}
+        paginateFront={paginateFront}
         currentPage={currentPage}
       />
     </nav>
     </div>
+     {/* ))} */}
     </div> 
     </div>
   )

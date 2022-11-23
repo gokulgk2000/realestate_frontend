@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
 import { allPropertiesList } from '../../helper/backend_helpers';
 
@@ -16,33 +17,45 @@ const PropertyList = () => {
       }, []);
   return (
     <div>
+      <Breadcrumbs >
+      <a href="/admin/Dashboard" className="opacity-60">
+        Dashboard
+      </a>
+      <a href="/admin/PropertyList" className="text-rose-700">
+        Properties
+      </a>
+      {/* <a href="/admin/propertydetails" className="opacity-60">
+        PropertyDetails
+      </a> */}
+     
+    </Breadcrumbs>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                    Seller Name
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                    askPrice
+                    AskPrice
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
                     location
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
                     status
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
-                    <span className="sr-only">View</span>
+                <th scope="col" className="py-3 px-6 ">
+                    <span className="sr-only ">View</span>
                 </th>
             </tr>
         </thead>
@@ -62,7 +75,7 @@ const PropertyList = () => {
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6 text-right">
-                    <a href={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                    <a href={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
                 </td>
             </tr>
             ))}

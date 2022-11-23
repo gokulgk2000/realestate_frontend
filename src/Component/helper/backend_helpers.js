@@ -46,7 +46,9 @@ const userLogin = (payload) =>
     removeProperty,
     getPropertybyUserId,
 
+
     GETALLUSERSBYLIMIT,
+   
 
     getCategory,
     findCategory,

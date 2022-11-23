@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
 import * as Yup from "yup";
-import {findCategory, getCategory, PropertyRegistration } from "../helper/backend_helpers";
+import {findCategory, PropertyRegistration } from "../helper/backend_helpers";
 
 
 
@@ -44,7 +44,7 @@ const RegisterProperty = () => {
     validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Your Seller"),
       location: Yup.string().required("Please Enter location "),
-      layoutName: Yup.string().required("Please Enter Your Area"),
+     // layoutName: Yup.string().required("Please Enter Your Area"),
       // landArea: Yup.string().required("Please Enter Your Landmark"),
       // facing: Yup.string().required("Please Enter Your City"),
       // approachRoad: Yup.string().required("Please Enter approachRoad "),
@@ -57,6 +57,7 @@ const RegisterProperty = () => {
       // facilities: Yup.string().required("Please Enter Your facilities"),
       // askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
       // Description: Yup.string().required("Please Enter Your Description"),
+      category: Yup.string().required("Please Enter Your category"),
     }),
     onSubmit: (values, onSubmitProps) => {
       handlePropertyReg({

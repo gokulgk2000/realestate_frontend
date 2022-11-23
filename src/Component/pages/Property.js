@@ -2,10 +2,12 @@ import { map } from "lodash";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  categoryId,
   getAllProperty,
   getPropertybyUserId,
   getPropertyCount,
 } from "../helper/backend_helpers";
+import { useQuery } from "../helper/hook/useQuery";
 const Property = () => {
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(true);
@@ -13,8 +15,29 @@ const Property = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [property, setproperty] = useState([]);
-  // const currentUser = JSON.parse(localStorage?.getItem("authUser"));
-  // console.log("Current : ", currentUser.userID);
+  const [category,setCategory]=useState([null])
+
+
+
+
+  
+  const query = useQuery();
+  const categories= async () => {
+    const res = await categoryId({  
+      propertyId: query.get("id"),
+    });
+    if (res.success) {
+      setCategory(res.category);
+       console.log("res",res);  
+    }
+   
+  };
+
+  useEffect(() => {
+    categories();
+  }, []);
+
+
   const loadProperty = async () => {
     const res = await getAllProperty({ searchText });
     if (res.success) {

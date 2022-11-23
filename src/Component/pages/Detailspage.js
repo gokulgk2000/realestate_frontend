@@ -44,7 +44,7 @@ const Detailspage = (props) => {
   }, []);
   return (
     <div>
-      <div className="grid md:grid-cols-2 bg-emerald-50 md:px-10  px-5">
+      <div className="grid md:grid-cols-2 bg-emerald-50 md:px-10  px-5 font-serif">
         <div className="mr-2 py-">
           <div className="w-full select-none relative aspect-[1]">
             {!loading && (

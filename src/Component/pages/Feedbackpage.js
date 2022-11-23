@@ -23,8 +23,8 @@ const Feedbackpage = () => {
       setFeedback(initialFormValues);
     };
     return (
-      <div className="grid justify-items-center py-5  px-2">
-        <div className="font-bold text-2xl">Your Feedback</div>
+      <div className="grid justify-items-center py-5  px-2 font-serif">
+        <div className=" text-2xl">Your Feedback</div>
         <form className="w-full max-w-lg mt-5 " onSubmit={handleSubmit}>
           <div className="flex flex-wrap -mx-3 mb-2">
             <div className="w-full md:w-1/2 px-3">

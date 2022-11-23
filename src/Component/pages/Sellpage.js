@@ -1,20 +1,20 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import Image from "../assets/images/home3.webp";
+import React, { useEffect, useState } from "react";
+//import Image from "../assets/images/home3.webp";
 import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
 import * as Yup from "yup";
-import { PropertyRegistration } from "../helper/backend_helpers";
+import {findCategory, getCategory, PropertyRegistration } from "../helper/backend_helpers";
+
+
+
 const RegisterProperty = () => {
-  const unitsList = [
-    { value: "Cent", label: "Cent" },
-    { value: "Sq.feet", label: "Sq.feet" },
-    { value: "Acres", label: "Acres" },
-  ];
+  
   const [propertyregistrationError, setPropertyRegistrationError] =
     useState("");
   const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
     useState("");
+   const[allcategory,setAllCategory]=useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const validation = useFormik({
@@ -38,24 +38,25 @@ const RegisterProperty = () => {
       facilities: "",
       askPrice: "",
       Description: "",
-      status:"",
+      status: "",
+      category:"" ,
     },
     validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Your Seller"),
       location: Yup.string().required("Please Enter location "),
       layoutName: Yup.string().required("Please Enter Your Area"),
-      landArea: Yup.string().required("Please Enter Your Landmark"),
-      facing: Yup.string().required("Please Enter Your City"),
-      approachRoad: Yup.string().required("Please Enter approachRoad "),
-      builtArea: Yup.string().required("Please Enter Your builtArea"),
-      bedRoom: Yup.string().required("Please Enter Your bedRoom"),
-      floorDetails: Yup.string().required("Please Enter Your floorDetails"),
-      propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
-      nearTown: Yup.string().required("Please Enter Your nearTown"),
-      costSq: Yup.string().required("Please Enter Your costSq"),
-      facilities: Yup.string().required("Please Enter Your facilities"),
-      askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
-      Description: Yup.string().required("Please Enter Your Description"),
+      // landArea: Yup.string().required("Please Enter Your Landmark"),
+      // facing: Yup.string().required("Please Enter Your City"),
+      // approachRoad: Yup.string().required("Please Enter approachRoad "),
+      // builtArea: Yup.string().required("Please Enter Your builtArea"),
+      // bedRoom: Yup.string().required("Please Enter Your bedRoom"),
+      // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
+      // propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
+      // nearTown: Yup.string().required("Please Enter Your nearTown"),
+      // costSq: Yup.string().required("Please Enter Your costSq"),
+      // facilities: Yup.string().required("Please Enter Your facilities"),
+      // askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
+      // Description: Yup.string().required("Please Enter Your Description"),
     }),
     onSubmit: (values, onSubmitProps) => {
       handlePropertyReg({
@@ -74,14 +75,28 @@ const RegisterProperty = () => {
         facilities: values.facilities,
         askPrice: values.askPrice,
         Description: values.Description,
+        category:values.category,
         userID: currentUser?.userID,
         propertyPic,
-        status:"approved"
+        status: "approved",
       });
       console.log("Data", values);
       onSubmitProps.resetForm();
     },
   });
+  
+ 
+ useEffect(()=>{
+
+  const allcategory= async () => {  
+  const res = await findCategory();
+   setAllCategory(res.category) ;
+  
+   return res
+   } 
+   
+  allcategory()}, []);
+
 
   const convertBase64 = async (file) => {
     return new Promise((resolve, reject) => {
@@ -119,9 +134,8 @@ const RegisterProperty = () => {
     console.log("pic", propertyPic);
   };
 
-  
   return (
-    <div className="md:grid grid-cols-5 ml-5 p-1">
+    <div className="md:grid grid-cols-5 ml-5 p-1 font-serif">
       <form
         className="col-span-3"
         onSubmit={(e) => {
@@ -320,12 +334,14 @@ const RegisterProperty = () => {
               onBlur={validation.handleBlur}
               value={validation.values.propertyStatus || ""}
               invalid={
-                validation.touched.propertyStatus && validation.errors.propertyStatus
+                validation.touched.propertyStatus &&
+                validation.errors.propertyStatus
                   ? true
                   : false
               }
             />
-            {validation.touched.propertyStatus && validation.errors.propertyStatus ? (
+            {validation.touched.propertyStatus &&
+            validation.errors.propertyStatus ? (
               <span type="invalid">{validation.errors.propertyStatus}</span>
             ) : null}
           </div>
@@ -425,6 +441,7 @@ const RegisterProperty = () => {
               <span type="invalid">{validation.errors.Description}</span>
             ) : null}
           </div>
+       
           <div>
             <FileInput
               label="Property Images"
@@ -433,17 +450,26 @@ const RegisterProperty = () => {
               onChange={handleImageUpload}
             />
           </div>
-          {propertyregistrationSuccess && (
-            <alert className="text-bold text-green-500">
-              {propertyregistrationSuccess}
-            </alert>
-          )}
-          {propertyregistrationError && (
-            <alert className="text-bold text-red-500">
-              {propertyregistrationError}
-            </alert>
-          )}
-        </div>
+          
+        </div> 
+      <div>
+
+      </div>
+        <div> < select id='category' name="category"   label="category"  value={validation.values.category || ""} onChange={validation.handleChange}   invalid={
+                validation.touched.category && validation.errors.category
+                  ? true
+                  : false
+              }>  
+
+            {allcategory.map((option,id) => (
+              <option value={option?._id} key={id} >{option?.name}</option>
+            ))}
+    
+</select>
+{validation.touched.category && validation.errors.category ? (
+              <span type="invalid">{validation.errors.category}</span>
+            ) : null}
+</div>
 
         <div className="flex justify-around  mr-6 pt-10  ">
           <button
@@ -454,8 +480,18 @@ const RegisterProperty = () => {
           </button>
         </div>
       </form>
+      {propertyregistrationSuccess && (
+            <alert className="text-bold text-green-500">
+              {propertyregistrationSuccess}
+            </alert>
+          )}
+          {propertyregistrationError && (
+            <alert className="text-bold text-red-500">
+              {propertyregistrationError}
+            </alert>
+          )}
       <div className="pr-3 hidden  md:block col-span-2">
-        <img className="aspect-[2/3]" src={Image} />
+      {/* <img className="aspect-[2/3]" src={Image} /> */}
       </div>
     </div>
   );

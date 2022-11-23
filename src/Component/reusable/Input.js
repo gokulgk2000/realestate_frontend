@@ -1,5 +1,8 @@
 import React from "react";
-const Input = ({ label, type = "text", name, value,placeholder, onChange }) => {
+
+const Input = ({ label, type = "text", name, value,placeholder, onChange }) =>
+
+ {
   return (
     <div className="m-2 grid grid-rows-2 gap-2">
       <label className="capitalize">{label}</label>

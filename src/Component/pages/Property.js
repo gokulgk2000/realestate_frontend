@@ -56,7 +56,7 @@ const Property = () => {
   console.log("searchText :", searchText);
   return (
     <div>
-      <div className="w-full flex justify-center items-center mt-2 pb-">
+      <div className="w-full flex justify-center items-center mt-2 pb- ">
         <form action="">
           <input
             type="text"
@@ -73,7 +73,7 @@ const Property = () => {
           </button>
         </form>
       </div>
-      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7">
+      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 ">
         {map(property, (pro, i) => (
           <div user={pro} key={"pro" + i} className="  ">
             <div className=" bg-emerald-100 pl- ">

@@ -4,8 +4,8 @@ import Feedbackpage from './Feedbackpage'
 
 const Aboutus = () => {
   return (
-    <div className='bg-gray-100 '>
-    <div className='bg-gray-500 flex items-center justify-center flex-wrap font-bold text-2xl py-5 px-5'>
+    <div className='bg-gray-100 font-serif'>
+    <div className='bg-gray-500 flex items-center justify-center flex-wrap font-bold text-2xl py-5 px-5 font-serif'>
       About Us
       </div>
       <div className='px-20 py-5 leading-loose'>

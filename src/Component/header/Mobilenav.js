@@ -15,7 +15,7 @@ const Mobilenav = (navItem) => {
   return (
     <div>
       {isMobile && (
-        <ul className="ul  py-5 space-y-4 font-semibold bg-slate-500 ">
+        <ul className="ul  py-5 space-y-4  bg-slate-500 font-serif">
           {Mobile.map((Mob, l) => (
             <NavLink
               key={l}

@@ -18,6 +18,7 @@ import PropertyList from "./Component/pages/admin/PropertyList";
 import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
+import Category from "./Component/pages/Category";
 
 const App = () => {
   return (

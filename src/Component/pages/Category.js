@@ -24,7 +24,7 @@ const Category = () => {
           <div>
           
            <div className="font-extrabold">  {cat?.name} </div>
-            <img src={cat?.img} className="aspect-[2]" />
+            <img src={cat?.img} className="aspect-[1]" />
           </div>
           </Link>  </div>
       ))}

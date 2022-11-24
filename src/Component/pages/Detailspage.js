@@ -172,6 +172,10 @@ const Detailspage = (props) => {
               <div className="font-semibold">Askprice:</div>
               <div>₹.{property?.askPrice}</div>
             </li>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Category:</div>
+              <div>{property?.category?.name}</div>
+            </li>
           </ul>{" "}
           <p className=" md:flex  my-4">
             <div className="font-semibold">Description:</div>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   categoryId,
   getAllProperty,
+  getPropertiescategoryId,
   getPropertybyUserId,
   getPropertyCount,
 } from "../helper/backend_helpers";
@@ -14,69 +15,54 @@ const Property = () => {
   const [propertyCount, setpropertyCount] = useState(0);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-  const [property, setproperty] = useState([]);
-  const [category,setCategory]=useState([null])
-
-
-
-
-  
+  const [property, setproperty] = useState('');
   const query = useQuery();
+
+ const id= query.get("id")
+console.log(id)
   const categories= async () => {
-    const res = await categoryId({  
-      propertyId: query.get("id"),
+    const res = await getPropertiescategoryId({  
+      id: query.get("id"),searchText
+     
     });
+  
     if (res.success) {
-      setCategory(res.category);
-       console.log("res",res);  
+      setproperty(res.category);
+       
+      
     }
+   else{
    
+   }
   };
 
   useEffect(() => {
     categories();
-  }, []);
-
-
-  const loadProperty = async () => {
-    const res = await getAllProperty({ searchText });
-    if (res.success) {
-      setproperty(res.property);
-    } else {
-    }
-    console.log(res.property);
-  };
-  const loadPropertyCount = async () => {
-    const res = await getPropertyCount({ searchText });
-    if (res.success) {
-      setpropertyCount(res.count);
-    } else {
-      console.log("getPropertyCount  ", res);
-    }
-  };
-  useEffect(() => {
-    const handleLoad = async () => {
-      setLoading(true);
-      await loadProperty();
-      setLoading(false);
-    };
-    handleLoad();
-  }, [page, limit]);
-
-  useEffect(() => {
-    setPage(1);
   }, [searchText]);
 
-  useEffect(() => {
-    const handleLoad = async () => {
-      setLoading(true);
-      // await loadPropertyCount();
-      await loadProperty();
-      setLoading(false);
-    };
-    handleLoad();
-  }, [searchText]);
-  console.log("searchText :", searchText);
+  
+
+//   const loadPropertyCount = async () => {
+//     const res = await getPropertyCount({ searchText });
+//     if (res.success) {
+//       setpropertyCount(res.count);
+//     } else {
+//      // console.log("getPropertyCount  ", res);
+//     }
+//   };
+//   useEffect(() => {
+//     const handleLoad = async () => {
+//       setLoading(true);
+//       await loadProperty();
+//       setLoading(false);
+//     };
+//     handleLoad();
+//   }, [page, limit]);
+
+//   useEffect(() => {
+//     setPage(1);
+//   }, [searchText]);
+
   return (
     <div>
       <div className="w-full flex justify-center items-center mt-2 pb- ">
@@ -98,16 +84,16 @@ const Property = () => {
       </div>
       <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 ">
         {map(property, (pro, i) => (
-          <div user={pro} key={"pro" + i} className="  ">
-            <div className=" bg-emerald-100 pl- ">
+          <div user={pro} key={"pro" + i} >
+            <div className=" bg-blue-100 pl- shadow-sm shadow-gray-500 hover:shadow-md hover:shadow-gray-900 rounded-md">
               <Link
                 to={`/Detailspage?uid=${pro?._id}`}
                 className="grid grid-cols-3  capitalize my-3 "
               >
                 <div className="flex  justify-start items-center">
-                  {" "}
+                
                   <img
-                    className=" md:object-cover md:h-52  md:w-72"
+                    className=" md:object-cover md:h-52  md:w-72 rounded-md"
                     alt="coimbatore realestate"
                     src={pro?.propertyPic[0]}
                   />
@@ -117,9 +103,9 @@ const Property = () => {
                     <h3 className="flex-wrap">{pro?.location}</h3>
                     <h6 className="pr-4">₹.{pro?.askPrice}</h6>
                   </div>
-                  <div className="flex  mr-3 justify-between  bg-amber-50">
+                  <div className="flex  mr-3 justify-between shadow-sm shadow-blue-900  bg-white hover:shadow-md  hover:shadow-blue-900 rounded-md">
                     <p>
-                      <div className="underline text-sm">plot Area</div>
+                      <div className="underline  text-sm">plot Area</div>
                       <div className="font-semibold">{pro?.costSq}.sq.ft</div>
                     </p>
                     <p>
@@ -136,7 +122,7 @@ const Property = () => {
                     <div className="grid  px-1">
                       <div className="flex  justify-end">
                         <p>
-                          <button className="bg-blue-600 hover:bg-teal-700 hover:text-white  px-1">
+                          <button className="bg-blue-500 hover:bg-teal-700 hover:text-white rounded-sm px-1">
                             contact
                           </button>
                         </p>

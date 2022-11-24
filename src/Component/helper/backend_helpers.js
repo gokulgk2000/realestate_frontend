@@ -15,8 +15,8 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/property/properties`, payload);
   const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
-  const categoryId = (payload) =>
-  post(`${BASE_URL}/category/CategoryId `, payload);
+  const getPropertiescategoryId = (payload) =>
+  post(`${BASE_URL}/category/getPropertiescategoryId `, payload);
   const getCategory = (payload) =>
   post(`${BASE_URL}/category/getcategory`, payload);
   const findCategory = (payload) =>
@@ -52,6 +52,6 @@ const userLogin = (payload) =>
 
     getCategory,
     findCategory,
-    categoryId
+    getPropertiescategoryId
 
 }

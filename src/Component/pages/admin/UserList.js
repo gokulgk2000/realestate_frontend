@@ -57,7 +57,7 @@ const UserList = () => {
       // Change page
       const paginateFront = () => setCurrentPage(currentPage + 1);
   const paginateBack = () => setCurrentPage(currentPage - 1);
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     
   return (
@@ -135,8 +135,7 @@ const UserList = () => {
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={userData.length}
-        paginateBack={paginateBack}
-        paginateFront={paginateFront}
+        paginate={paginate}
         currentPage={currentPage}
       />
     </nav>

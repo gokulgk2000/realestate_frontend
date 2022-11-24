@@ -23,6 +23,8 @@ const PropertyList = () => {
       }, []);
       const paginateFront = () => setCurrentPage(currentPage + 1);
   const paginateBack = () => setCurrentPage(currentPage - 1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <Breadcrumbs >
@@ -98,8 +100,7 @@ const PropertyList = () => {
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={allProperties.length}
-        paginateBack={paginateBack}
-        paginateFront={paginateFront}
+        paginate={paginate}
         currentPage={currentPage}
       />
     </nav>

@@ -47,6 +47,7 @@ const App = () => {
         <Route path="propertylist" element={<PropertyList />} />
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />
+
         </Route >
         
       </Routes>

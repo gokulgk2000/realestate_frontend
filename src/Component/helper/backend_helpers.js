@@ -32,7 +32,16 @@ const userLogin = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
   post(`${BASE_URL}/admin/getAllUsersPage`, payload);
+  const getuserdetails = (payload) =>
+  post(`${BASE_URL}/user/getUserById`, payload);
+  const getbuyerdetails = (payload) =>
+  post(`${BASE_URL}/buyer/getUserById`, payload);
+  const buyerReg = (payload) =>
+  post(`${BASE_URL}/buyer/buyerregister`, payload);
   export {userRegisteration,
+    getuserdetails,
+    buyerReg,
+    getbuyerdetails,
     PropertyRegistration,
     userLogin,
     getAllProperty,

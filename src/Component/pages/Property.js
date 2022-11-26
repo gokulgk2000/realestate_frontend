@@ -10,24 +10,23 @@ import {
 } from "../helper/backend_helpers";
 import { useQuery } from "../helper/hook/useQuery";
 const Property = () => {
-  const [searchText, setSearchText] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [propertyCount, setpropertyCount] = useState(0);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
-  const [property, setproperty] = useState('');
   const query = useQuery();
-
  const id= query.get("id")
-console.log(id)
+ const searchKey= query.get("search")
+
+  const [searchText, setSearchText] = useState(searchKey);
+  const [property, setproperty] = useState('');
+
+
   const categories= async () => {
     const res = await getPropertiescategoryId({  
-      id: query.get("id"),searchText
+      id,searchText
      
     });
   
     if (res.success) {
       setproperty(res.category);
+
        
       
     }
@@ -66,7 +65,7 @@ console.log(id)
   return (
     <div>
       <div className="w-full flex justify-center items-center mt-2 pb- ">
-        <form action="">
+       
           <input
             type="text"
             placeholder="search"
@@ -74,13 +73,15 @@ console.log(id)
             className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
             onChange={(e) => setSearchText(e.target.value)}
           />
+
           <button
             type="submit"
             className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
-          >
+   
+       >
             Search
           </button>
-        </form>
+   
       </div>
       <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 ">
         {map(property, (pro, i) => (

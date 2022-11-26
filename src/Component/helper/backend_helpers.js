@@ -11,8 +11,8 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
   const getPropertyCount = (payload) =>
   post(`${BASE_URL}/property/propertyCount`, payload);
-  const getAllProperty = (payload) =>
-  post(`${BASE_URL}/property/properties`, payload);
+  const getSearchAllProperty = (payload) =>
+  get(`${BASE_URL}/property/searchProperties`, payload);
   const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
   const getPropertiescategoryId = (payload) =>
@@ -35,7 +35,7 @@ const userLogin = (payload) =>
   export {userRegisteration,
     PropertyRegistration,
     userLogin,
-    getAllProperty,
+    getSearchAllProperty,
     getPropertyCount,
     getPropertyById,
     getUserById,

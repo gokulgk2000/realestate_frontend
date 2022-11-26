@@ -5,11 +5,17 @@ import {
   categoryId,
   getAllProperty,
   getPropertiescategoryId,
+  getPropertyById,
   getPropertybyUserId,
   getPropertyCount,
+  getuserdetails,
 } from "../helper/backend_helpers";
 import { useQuery } from "../helper/hook/useQuery";
+import {useModal} from "../helper/hook/useModal";
+
+import BuyerModal from "../models/BuyerModal";
 const Property = () => {
+
   const query = useQuery();
  const id= query.get("id")
  const searchKey= query.get("search")
@@ -17,6 +23,42 @@ const Property = () => {
   const [searchText, setSearchText] = useState(searchKey);
   const [property, setproperty] = useState('');
 
+
+
+
+  const [loading, setLoading] = useState(true);
+  const [propertyCount, setpropertyCount] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+
+  const [showModal, setShowModal] = useState(false);
+  const [propertyId, setPropertyId] = useState([]);
+  const currentUser = JSON.parse(localStorage?.getItem("authUser"));
+  const [user, setUser] = useState("");
+
+  const [modalOpen, setModalOpen, toggleModal] = useModal(false);
+ 
+console.log(id)
+
+
+
+
+
+const getuser = async () => {
+  const payload = {
+    userId: currentUser?.userID,
+  };
+  const res = await getuserdetails(payload);
+  if (res.success) {
+    setUser(res?.User);
+  } else {
+    console.log("errors", res);
+  }
+};
+
+useEffect(() => {
+  getuser();
+}, []);
 
   const categories= async () => {
     const res = await getPropertiescategoryId({  
@@ -39,7 +81,20 @@ const Property = () => {
     categories();
   }, [searchText]);
 
-  
+  const handleBook = async proId => {
+ 
+    const payload = {
+      propertyId  : proId,
+    }
+    const res = await getPropertyById(payload)
+    if (res.success) {
+      setPropertyId(res.Property)
+      console.log("fmsg", res)
+    } else {
+      console.log("Failed to fetch message", res)
+    }
+   
+  }
 
 //   const loadPropertyCount = async () => {
 //     const res = await getPropertyCount({ searchText });
@@ -64,6 +119,14 @@ const Property = () => {
 
   return (
     <div>
+         { modalOpen && 
+   (<BuyerModal
+                show={modalOpen}
+               
+                onCloseClick={()=>setModalOpen(false)}
+                currentProperty={propertyId?._id}
+                
+              /> )};
       <div className="w-full flex justify-center items-center mt-2 pb- ">
        
           <input
@@ -123,13 +186,16 @@ const Property = () => {
                     <div className="grid  px-1">
                       <div className="flex  justify-end">
                         <p>
-                          <button className="bg-blue-500 hover:bg-teal-700 hover:text-white rounded-sm px-1">
+                          <button className="bg-blue-500 hover:bg-teal-700 hover:text-white rounded-sm px-1"
+                          onClick={() =>  handleBook(pro?._id) && setModalOpen(true)}
+                          >
                             contact
                           </button>
                         </p>
                       </div>
                     </div>
                   </div>
+
                   {/*  <h5>Seller :{pro?.Seller}</h5>
  <p>Description :{pro?.Description}</p> */}
                 </div>

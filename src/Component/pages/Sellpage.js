@@ -22,7 +22,7 @@ const RegisterProperty = () => {
     enableReinitialize: true,
 
     initialValues: {
-      email: currentUser?.email,
+      regUser: currentUser?.userID,
       Seller: "",
       location: "",
       layoutName: "",
@@ -77,7 +77,7 @@ const RegisterProperty = () => {
         askPrice: values.askPrice,
         Description: values.Description,
         category:values.category,
-        userID: currentUser?.userID,
+        regUser: currentUser?.userID,
         propertyPic,
         status: "approved",
       });

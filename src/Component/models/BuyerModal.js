@@ -139,7 +139,7 @@ if(res.success) {
                        <div >
                          <label
                            name="first_name"
-                           className="flex justify-start block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                           className="flex justify-start  mb-2 text-sm font-medium text-gray-900 dark:text-white"
                          >
                            First Name
                          </label>
@@ -169,7 +169,7 @@ if(res.success) {
                        <div>
                          <label
                            name="lastname"
-                           className=" flex justify-start block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                           className=" flex justify-start  mb-2 text-sm font-medium text-gray-900 dark:text-white"
                          >
                            Last Name
                          </label>
@@ -199,7 +199,7 @@ if(res.success) {
                        <div>
                          <label
                            name="email"
-                           className=" flex justify-start block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                           className=" flex justify-start  mb-2 text-sm font-medium text-gray-900 dark:text-white"
                          >
                            Email
                          </label>
@@ -231,7 +231,7 @@ if(res.success) {
                        <div>
                          <label
                            name="phonenumber"
-                           className=" flex justify-start block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                           className=" flex justify-start  mb-2 text-sm font-medium text-gray-900 dark:text-white"
                          >
                            Phonenumber
                          </label>

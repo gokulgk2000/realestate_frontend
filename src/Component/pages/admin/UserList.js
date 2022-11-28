@@ -92,7 +92,7 @@ const UserList = () => {
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                  Date
+               Status
                         <a href="#"></a>
                     </div>
                 </th>
@@ -116,7 +116,7 @@ const UserList = () => {
                 {Data?.email}
                 </td>
                 <td className="py-4 px-6">
-                {Data?.date}
+                {Data?.status}
                 </td>
                 <td className="py-4 px-6 items-center">
                     <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>

@@ -425,7 +425,6 @@ const RegisterProperty = () => {
 
         
 
-         
             <div className="m-2 grid grid-rows-2 gap-2">
               <div> Category</div>
               <select
@@ -440,8 +439,8 @@ const RegisterProperty = () => {
                     ? true
                     : false
                 }
-              >  <option value="" >
-             Select Category
+              >  <option value="" > Select Category
+           
             </option>
                 {allcategory.map((option, id) => (
                   <option value={option?._id} key={id}>

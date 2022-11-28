@@ -22,6 +22,7 @@ const UserDetails = () => {
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getUser, setGetUser] = useState(null);
+  const [isAdd ,setIsAdd]=useState(false);
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
 console.log("getUser",getUser)
@@ -48,7 +49,7 @@ console.log("getUser",getUser)
     if (res.success) {
       console.log("res", res);
       toastr.success(`User has been Deactivated successfully`, "Success");
-      navigate("/admin/UserList");
+      // navigate("/admin/UserList");
 
       // await getAllUsers();
     } else {
@@ -139,17 +140,18 @@ console.log("getUser",getUser)
             <button
               href="#"
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={toggleModal}
-            >
-              Remove
-            </button>
-            <button
-              href="#"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
               onClick={toggleModal1}
             >
              Add
             </button>
+            <button
+              href="#"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              onClick={toggleModal}
+            >
+              Remove
+            </button>
+           
           </div>
         </div>
       </div>

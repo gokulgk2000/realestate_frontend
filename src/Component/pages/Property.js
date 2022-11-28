@@ -5,7 +5,7 @@ import {
   categoryId,
   getAllProperty,
   getPropertiescategoryId,
-  getPropertyById,
+  getProById,
   getPropertybyUserId,
   getPropertyCount,
   getuserdetails,
@@ -66,7 +66,7 @@ const Property = () => {
     const payload = {
       propertyId: proId,
     };
-    const res = await getPropertyById(payload);
+    const res = await getProById(payload);
     if (res.success) {
       setPropertyId(res.Property);
       console.log("fmsg", res);

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { getUserById } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
+import { useQuery } from "../helper/hook/useQuery";
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
 
@@ -17,6 +19,25 @@ const NavItem = [
 
 function Navbar() {
   const [isMobileview] = useMediaQuery(mobile);
+  const query = useQuery();
+  const [getUser, setGetUser] = useState(null);
+
+
+  console.log("getUser",getUser)
+  const getUserId = async () => {
+    const res = await getUserById({
+      userID: query.get("id"),
+    });
+    if (res.success) {
+      setGetUser(res.User);
+       console.log("res", res);
+    }
+  };
+
+  useEffect(() => {
+    getUserId();
+  }, []);
+
   return (
     <div className="Navbar font-serif">
       <nav className=" ">

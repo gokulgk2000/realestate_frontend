@@ -14,13 +14,30 @@ const UserList = () => {
   const [userData, setUserData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
+  const [searchText,setSearchText]=useState("")
+// console.log(userData,"userData")
+// console.log(searchText,"searchText")
 
-
-  const pageOptions = {
-    sizePerPage: 5,
-    totalSize: userData.length, // replace later with size(customers),
-    custom: true,
-  };
+const requestSearch = (searched)=>{
+  setSearchText(
+    userData?.filter(
+      (item) =>
+      item?.firstname
+      .toString()
+            .toLowerCase()
+            .includes(searched.toString().toLowerCase()) ||
+          item?.lastname
+          .toString()
+          .toLowerCase()
+          .includes(searched.toString().toLowerCase()) ||
+          item?.email
+          .toString()
+          .toLowerCase()
+          .includes(searched.toString().toLowerCase()) 
+         
+    )
+  )
+}
     const getAllUsers = async () => {
       
         setLoading(true);
@@ -48,18 +65,10 @@ const UserList = () => {
         fetchPosts();
       }, []);
       console.log("posts",posts.length)
-      
-      const indexOfLastPost = currentPage * postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - postsPerPage;
-      const currentPosts = posts?.slice(indexOfFirstPost, indexOfLastPost);
-      console.log("currentPosts",currentPosts.length)
-    
+ 
       // Change page
-      const paginateFront = () => setCurrentPage(currentPage + 1);
-  const paginateBack = () => setCurrentPage(currentPage - 1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    
+ 
   return (
     <div >
      <Breadcrumbs >
@@ -72,6 +81,22 @@ const UserList = () => {
      
     </Breadcrumbs>
 <div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
+<div className="w-full flex justify-center items-center mt-2 pb- ">
+        <input
+          type="text"
+          placeholder="search"
+          name="search"
+          className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          onChange={(e) => requestSearch(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+        >
+          Search
+        </button>
+      </div>
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
@@ -104,7 +129,7 @@ const UserList = () => {
         </thead>
         <tbody>
           
-        {userData.slice((currentPage -1)*10,(currentPage *10)).map((Data,i)=>(
+        {(searchText?.length> 0? searchText:userData.slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
@@ -123,24 +148,21 @@ const UserList = () => {
                 </td>
             </tr>
             ))}
-           
         </tbody>
     </table>
-    
 </div>
 
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
-    <Posts posts={currentPosts} />
+    {/* <Posts posts={currentPosts} /> */}
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={userData.length}
+        totalPosts={userData?.length || searchText?.length}
         paginate={paginate}
         currentPage={currentPage}
       />
     </nav>
     </div>
- 
     </div> 
     </div>
   )

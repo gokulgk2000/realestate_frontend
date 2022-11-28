@@ -28,7 +28,7 @@ const Property = () => {
 
   const [modalOpen, setModalOpen] = useModal(false);
 
-  console.log(id);
+  // console.log(id);
 
   const getuser = async () => {
     const payload = {
@@ -54,7 +54,9 @@ const Property = () => {
 
     if (res.success) {
       setproperty(res.category);
-      console.log("view",res)
+
+      console.log("first",res)
+
     } else {
     }
   };

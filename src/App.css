@@ -5,3 +5,11 @@
    
   
   }
+  @media (min-width: 768px){
+
+.look{
+
+  width: 620px;
+}
+
+  }

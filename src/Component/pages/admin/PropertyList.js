@@ -113,7 +113,7 @@ const PropertyList = () => {
                 <td className="py-4 px-6">
                 {PropertyData?.location}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6">

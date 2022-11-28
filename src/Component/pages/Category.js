@@ -17,14 +17,14 @@ const Category = () => {
   }, []);
 
   return (
-     <div className="grid grid-cols-5 gap-3 px-5">
+     <div className="md:grid grid-cols-5 gap-2 px-5 shadow-md shadow-black">
       {categorylist?.map((cat, i) => (
         <div key={i}> <Link to={`/property?id=${cat?._id}`}> 
         
-          <div>
+          <div className="scale-75  hover:scale-125 ease-in duration-500 ">
           
-           <div className="font-extrabold">  {cat?.name} </div>
-            <img src={cat?.img} className="aspect-[1]" />
+           <div className="capitalize font-extrabold text-2xl flex justify-center text-rose-700">  {cat?.name} </div>
+            <img src={cat?.img} className="h-60 w-96 "  />
           </div>
           </Link>  </div>
       ))}

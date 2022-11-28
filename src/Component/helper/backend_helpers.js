@@ -11,8 +11,8 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
   const getPropertyCount = (payload) =>
   post(`${BASE_URL}/property/propertyCount`, payload);
-  const getAllProperty = (payload) =>
-  post(`${BASE_URL}/property/properties`, payload);
+  const getSearchAllProperty = (payload) =>
+  get(`${BASE_URL}/property/searchProperties`, payload);
   const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
   const getPropertiescategoryId = (payload) =>
@@ -28,6 +28,7 @@ const userLogin = (payload) =>
   const allUsersList = () => get(`${BASE_URL}/admin/allUsersList`);
   const allPropertiesList = () => get(`${BASE_URL}/admin/allPropertiesList`);
   const removeUser = (payload) => put(`${BASE_URL}/admin/removeUser`, payload);
+  const addUser = (payload) => put(`${BASE_URL}/admin/addUser`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
@@ -49,7 +50,7 @@ const userLogin = (payload) =>
     getbuyerdetails,
     PropertyRegistration,
     userLogin,
-    getAllProperty,
+    getSearchAllProperty,
     getPropertyCount,
     getPropertyById,
     getUserById,
@@ -63,7 +64,7 @@ const userLogin = (payload) =>
 
     GETALLUSERSBYLIMIT,
    
-
+    addUser ,
     getCategory,
     findCategory,
     getPropertiescategoryId

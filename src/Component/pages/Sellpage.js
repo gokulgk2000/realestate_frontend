@@ -480,8 +480,7 @@ const RegisterProperty = () => {
             Submit
           </button>
         </div>
-      </form>
-      {propertyregistrationSuccess && (
+        {propertyregistrationSuccess && (
             <alert className="text-bold text-green-500">
               {propertyregistrationSuccess}
             </alert>
@@ -491,6 +490,8 @@ const RegisterProperty = () => {
               {propertyregistrationError}
             </alert>
           )}
+      </form>
+     
       <div className="pr-3 hidden  md:block col-span-2">
       {/* <img className="aspect-[2/3]" src={Image} /> */}
       </div>

@@ -7,12 +7,11 @@ const Detailspage = (props) => {
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
 
-  console.log("property", property);
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
 
     if (res.success) {
-      setproperty(res?.Property);
+      setproperty(res?.property);
       console.log("data", res);
     } else {
       console.log("Error while fetching property");

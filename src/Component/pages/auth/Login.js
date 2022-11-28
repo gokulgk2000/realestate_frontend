@@ -29,6 +29,7 @@ const Login = () => {
         setLoginSuccess(res?.msg)
         setLoginError("")
         navigate("/")
+        window.location.reload(false);
       } else {
         setLoginError(res?.msg)
         setLoginSuccess("")

@@ -55,7 +55,7 @@ const PropertyDetails = () => {
 
   const handleRemovingProperty = async () => {
     const payload = {
-      PropertyID: [getProperty?._id],
+      PropertyID: query.get("id"),
     };
     const res = await removeProperty(payload);
     if (res.success) {

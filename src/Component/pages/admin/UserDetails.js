@@ -23,7 +23,7 @@ const UserDetails = () => {
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getUser, setGetUser] = useState(null);
-  const [isAdd ,setIsAdd]=useState(false);
+  const [isAdd ,setIsAdd]=useState("authUser");
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
 
@@ -110,7 +110,6 @@ console.log("getuser",getUser)
           </a>
         </Breadcrumbs>
         <div className="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
-          {/* {getProperty?.map((prode,i)=>( */}
           <div className="flex flex-col items-left pb-10 leading-loose">
             <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
               Firstname : {getUser?.firstname}
@@ -131,7 +130,6 @@ console.log("getuser",getUser)
               Status :{getUser?.status}
             </h5>
           </div>
-          {/* ))}  */}
           <div className="flex mt-4 space-x-3 md:mt-6">
             <button
               href="#"
@@ -141,21 +139,15 @@ console.log("getuser",getUser)
             </button>
             <button
               href="#"
-
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
               onClick={toggleModal1}
-
             >
              Add
             </button>
             <button
               href="#"
-
-
-
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
               onClick={toggleModal}
-
             >
               Remove
             </button>

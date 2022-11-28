@@ -7,6 +7,7 @@ import "toastr/build/toastr.min.css";
 import RemoveModel from '../../models/RemoveModel';
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Breadcrumbs, Input } from '@material-tailwind/react';
+import FileInput from '../../reusable/FileInput';
 
 
 const PropertyDetails = () => {
@@ -50,7 +51,7 @@ const PropertyDetails = () => {
   useEffect(() => {
     getPropertyId();
   }, []);
-  console.log("getproperty", getProperty );  
+ 
 
   const handleRemovingProperty = async () => {
     const payload = {
@@ -93,6 +94,8 @@ const payload ={
   properties:updateProperties
 
 }
+const id=query.get("id")
+console.log("id",id)
 const res = await updateProperty(payload)
 console.log("first",res)
 if (res.success) {
@@ -130,10 +133,11 @@ useEffect(()=>{
     setFacilities(getProperty?.facilities)
     setAskPrice(getProperty?.askPrice)
     setDescription(getProperty?.Description)
-    setPropertyPic(getProperty?.propertyPic)
+    setPropertyPic(getProperty?.propertyPic[0])
     setGetProperty()
   }
 })
+
 // console.log("getProperty : ",getProperty)
   return (
     <React.Fragment>
@@ -295,13 +299,14 @@ useEffect(()=>{
               disabled={!isEdit}
               onChange={e =>setDescription(e.target.value)}
             />
-    {/* <Input
+    {/* <FileInput
               type="file"
               name="Property Picture"
               placeholder="Choose Your Property "
-              value={getProperty?.Description }
+              multiple={true}
+              value={getProperty?.propertyPic }
               disabled={!isEdit}
-              onChange={e =>setDescription(e.target.value)}
+              onChange={e =>setPropertyPic(e.target.value)}
             /> */}
         </div>
         <img  src={getProperty?.propertyPic}/>

@@ -24,9 +24,9 @@ console.log("currentProperty",currentProperty)
     enableReinitialize: true,
 
     initialValues:{
-      firstname: user?.firstname??"",
-      lastname:user?.lastname??"",
-      email:user?.email??"",
+      firstname: "",
+      lastname:"",
+      email:"",
       phonenumber:"",
     },
     validationSchema: Yup.object({

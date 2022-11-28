@@ -1,4 +1,4 @@
-import { del, get, post, put } from "../helper/api_helper";
+import {  get, post, put } from "../helper/api_helper";
 import { SERVER_URL } from "../helper/configuration";
 const BASE_URL = `${SERVER_URL}/api`;       
 const userRegisteration = (payload) =>
@@ -13,6 +13,8 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/property/propertyCount`, payload);
   const getSearchAllProperty = (payload) =>
   get(`${BASE_URL}/property/searchProperties`, payload);
+  const getProById = (payload) =>
+  post(`${BASE_URL}/property/getproById`, payload);
   const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
   const getPropertiescategoryId = (payload) =>
@@ -52,7 +54,7 @@ const userLogin = (payload) =>
     userLogin,
     getSearchAllProperty,
     getPropertyCount,
-    getPropertyById,
+    getProById,
     getUserById,
     getPropertyDetailsById,
     allUsersList,
@@ -61,7 +63,7 @@ const userLogin = (payload) =>
     removeProperty,
     getPropertybyUserId,
     updateProperty,
-
+    getPropertyById,
     GETALLUSERSBYLIMIT,
    
     addUser ,

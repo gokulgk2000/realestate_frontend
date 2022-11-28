@@ -4,17 +4,19 @@ import React, { useEffect, useState } from "react";
 import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
 import * as Yup from "yup";
-import {findCategory, PropertyRegistration } from "../helper/backend_helpers";
-
-
+import { findCategory, PropertyRegistration } from "../helper/backend_helpers";
+import { Select } from "@material-tailwind/react";
+import toastr from "toastr";
 
 const RegisterProperty = () => {
-  
   const [propertyregistrationError, setPropertyRegistrationError] =
     useState("");
   const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
     useState("");
-   const[allcategory,setAllCategory]=useState([]);
+    const propertystatus=[    {value: '', text: 'select property status '}, {value: 'ongoing', text: 'ongoing '},
+    {value: 'pending', text: 'pending '},
+    {value: 'complete', text: 'complete '},]
+  const [allcategory, setAllCategory] = useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const validation = useFormik({
@@ -39,19 +41,19 @@ const RegisterProperty = () => {
       askPrice: "",
       Description: "",
       status: "",
-      category:"" ,
+      category: "",
     },
     validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Your Seller"),
       location: Yup.string().required("Please Enter location "),
-     // layoutName: Yup.string().required("Please Enter Your Area"),
+      // layoutName: Yup.string().required("Please Enter Your Area"),
       // landArea: Yup.string().required("Please Enter Your Landmark"),
       // facing: Yup.string().required("Please Enter Your City"),
       // approachRoad: Yup.string().required("Please Enter approachRoad "),
       // builtArea: Yup.string().required("Please Enter Your builtArea"),
       // bedRoom: Yup.string().required("Please Enter Your bedRoom"),
       // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
-      // propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
+       propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
       // nearTown: Yup.string().required("Please Enter Your nearTown"),
       // costSq: Yup.string().required("Please Enter Your costSq"),
       // facilities: Yup.string().required("Please Enter Your facilities"),
@@ -76,7 +78,7 @@ const RegisterProperty = () => {
         facilities: values.facilities,
         askPrice: values.askPrice,
         Description: values.Description,
-        category:values.category,
+        category: values.category,
         regUser: currentUser?.userID,
         propertyPic,
         status: "approved",
@@ -85,19 +87,17 @@ const RegisterProperty = () => {
       onSubmitProps.resetForm();
     },
   });
-  
- 
- useEffect(()=>{
 
-  const allcategory= async () => {  
-  const res = await findCategory();
-   setAllCategory(res.category) ;
-  
-   return res
-   } 
-   
-  allcategory()}, []);
+  useEffect(() => {
+    const allcategory = async () => {
+      const res = await findCategory();
+      setAllCategory(res.category);
 
+      return res;
+    };
+
+    allcategory();
+  }, []);
 
   const convertBase64 = async (file) => {
     return new Promise((resolve, reject) => {
@@ -125,7 +125,7 @@ const RegisterProperty = () => {
   const handlePropertyReg = async (payload) => {
     const res = await PropertyRegistration(payload);
     if (res) {
-      setPropertyRegistrationSuccess(res.msg);
+    setPropertyRegistrationSuccess (res.msg);
       console.log("property", res);
       // localStorage.setItem("authUser", JSON.stringify(res));
     } else {
@@ -288,7 +288,7 @@ const RegisterProperty = () => {
           <div>
             <Input
               label="bedRoom"
-              type="text"
+              type="number"
               name="bedRoom"
               placeholder="enter the bedRoom"
               onChange={validation.handleChange}
@@ -325,27 +325,7 @@ const RegisterProperty = () => {
               <span type="invalid">{validation.errors.floorDetails}</span>
             ) : null}
           </div>
-          <div>
-            <Input
-              label="propertyStatus"
-              type="text"
-              name="propertyStatus"
-              placeholder="enter the propertyStatus"
-              onChange={validation.handleChange}
-              onBlur={validation.handleBlur}
-              value={validation.values.propertyStatus || ""}
-              invalid={
-                validation.touched.propertyStatus &&
-                validation.errors.propertyStatus
-                  ? true
-                  : false
-              }
-            />
-            {validation.touched.propertyStatus &&
-            validation.errors.propertyStatus ? (
-              <span type="invalid">{validation.errors.propertyStatus}</span>
-            ) : null}
-          </div>
+
           <div>
             <Input
               label="nearTown"
@@ -442,7 +422,64 @@ const RegisterProperty = () => {
               <span type="invalid">{validation.errors.Description}</span>
             ) : null}
           </div>
-       
+
+        
+
+         
+            <div className="m-2 grid grid-rows-2 gap-2">
+              <div> Category</div>
+              <select
+                id="category"
+                name="category"
+                label="category"
+                className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={validation.values.category || ""}
+                onChange={validation.handleChange}
+                invalid={
+                  validation.touched.category && validation.errors.category
+                    ? true
+                    : false
+                }
+              >  <option value="" >
+             Select Category
+            </option>
+                {allcategory.map((option, id) => (
+                  <option value={option?._id} key={id}>
+                    {option?.name}
+                  </option>
+                ))}
+            </select>  
+              {validation.touched.category && validation.errors.category ? (
+                <span type="invalid">{validation.errors.category}</span>
+              ) : null}
+            </div>
+            
+            <div className="m-2 grid grid-rows-2  gap-2">
+              <div>PropertyStatus</div>
+              <select
+                id="propertyStatus"
+                name="propertyStatus"
+                label="propertyStatus"
+                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={validation.values.propertyStatus}
+                onChange={validation.handleChange||""}
+                invalid={
+                  validation.touched.propertyStatus &&
+                  validation.errors.propertyStatus
+                    ? true
+                    : false
+                }
+              > {propertystatus.map((option, i) => (
+                <option value={option?.value} key={i}>
+                  {option?.text}
+                </option>
+    ))}
+              </select>
+              {validation.touched.propertyStatus && validation.errors.propertyStatus ? (
+                <span type="invalid">{validation.errors.propertyStatus}</span>
+              ) : null}
+            </div>
+          </div>
           <div>
             <FileInput
               label="Property Images"
@@ -451,49 +488,33 @@ const RegisterProperty = () => {
               onChange={handleImageUpload}
             />
           </div>
-          
-        </div> 
-      <div>
-
-      </div>
-        <div> < select id='category' name="category"   label="category"  value={validation.values.category || ""} onChange={validation.handleChange}   invalid={
-                validation.touched.category && validation.errors.category
-                  ? true
-                  : false
-              }>  
-
-            {allcategory.map((option,id) => (
-              <option value={option?._id} key={id} >{option?.name}</option>
-            ))}
-    
-</select>
-{validation.touched.category && validation.errors.category ? (
-              <span type="invalid">{validation.errors.category}</span>
-            ) : null}
-</div>
-
-        <div className="flex justify-around  mr-6 pt-10  ">
-          <button
-            type="submit"
-            className="bg-blue-400 w-44 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mb-20"
-          >
-            Submit
-          </button>
+        <div className="flex justify-around   mr-6 pt-10  ">
+          <div>
+            {" "}
+            <div>
+              {propertyregistrationSuccess && (
+                <alert className="text-bold text-green-500">
+                  {propertyregistrationSuccess}
+                </alert>
+              )}
+              {propertyregistrationError && (
+                <alert className="text-bold text-red-500">
+                  {propertyregistrationError}
+                </alert>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-400 w-44 my-3 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mb-20"
+            >
+              Submit
+            </button>
+          </div>
         </div>
-        {propertyregistrationSuccess && (
-            <alert className="text-bold text-green-500">
-              {propertyregistrationSuccess}
-            </alert>
-          )}
-          {propertyregistrationError && (
-            <alert className="text-bold text-red-500">
-              {propertyregistrationError}
-            </alert>
-          )}
       </form>
-     
+
       <div className="pr-3 hidden  md:block col-span-2">
-      {/* <img className="aspect-[2/3]" src={Image} /> */}
+        {/* <img className="aspect-[2/3]" src={Image} /> */}
       </div>
     </div>
   );

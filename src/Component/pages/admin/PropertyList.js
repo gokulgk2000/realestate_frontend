@@ -8,8 +8,12 @@ const PropertyList = () => {
     const [allProperties, setAllProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
+  const [searchText,setSearchText]=useState("")
 
-
+  const propertySearch = (searched)=>{
+ setSearchText(searched)
+   
+  }
 
     useEffect(() => {
         const getAllProperties = async () => {
@@ -21,8 +25,6 @@ const PropertyList = () => {
         };
         getAllProperties();
       }, []);
-      const paginateFront = () => setCurrentPage(currentPage + 1);
-  const paginateBack = () => setCurrentPage(currentPage - 1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -34,12 +36,24 @@ const PropertyList = () => {
       <a href="/admin/PropertyList" className="text-rose-700">
         Properties
       </a>
-      {/* <a href="/admin/propertydetails" className="opacity-60">
-        PropertyDetails
-      </a> */}
-     
     </Breadcrumbs>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+    <div className="w-full flex justify-center items-center mt-2 pb-4">
+        <input
+          type="text"
+          placeholder="search"
+          name="search"
+          className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          onChange={(e) => propertySearch(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+        >
+          Search
+        </button>
+      </div>
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -70,8 +84,26 @@ const PropertyList = () => {
             </tr>
         </thead>
         <tbody>
-            {allProperties.slice((currentPage -1)*10,(currentPage *10)).map((PropertyData,i)=>(
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
+            { allProperties?.filter(
+          (item) =>
+          item?.Seller
+          .toString()
+                .toLowerCase()
+                .includes(searchText.toString().toLowerCase()) ||
+              item?.location
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?.askPrice
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?.facing
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) 
+        ).slice((currentPage -1)*10,(currentPage *10)).map((PropertyData,p)=>(
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={p}>
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {PropertyData?.Seller}
                 </th>
@@ -81,7 +113,7 @@ const PropertyList = () => {
                 <td className="py-4 px-6">
                 {PropertyData?.location}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6">
@@ -92,14 +124,12 @@ const PropertyList = () => {
             ))}
         </tbody>
     </table>
-    
 </div>
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
-    {/* <Posts posts={currentPosts} /> */}
       <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={allProperties.length}
+        postsPerPage={postsPerPage }
+        totalPosts={ allProperties?.length}
         paginate={paginate}
         currentPage={currentPage}
       />

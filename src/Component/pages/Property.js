@@ -5,7 +5,7 @@ import {
   categoryId,
   getAllProperty,
   getPropertiescategoryId,
-  getPropertyById,
+  getProById,
   getPropertybyUserId,
   getPropertyCount,
   getuserdetails,
@@ -28,7 +28,7 @@ const Property = () => {
 
   const [modalOpen, setModalOpen] = useModal(false);
 
-  console.log(id);
+  // console.log(id);
 
   const getuser = async () => {
     const payload = {
@@ -54,9 +54,13 @@ const Property = () => {
 
     if (res.success) {
       setproperty(res.category);
+
+      console.log("first",res)
+
     } else {
     }
   };
+ 
 
   useEffect(() => {
     categories();
@@ -66,7 +70,7 @@ const Property = () => {
     const payload = {
       propertyId: proId,
     };
-    const res = await getPropertyById(payload);
+    const res = await getProById(payload);
     if (res.success) {
       setPropertyId(res.Property);
       console.log("fmsg", res);
@@ -109,9 +113,9 @@ const Property = () => {
       <div className="w-full flex justify-center items-center mt-2 pb- ">
         <input
           type="text"
-          placeholder="search"
+          placeholder="search your dream house"
           name="search"
-          className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
           onChange={(e) => setSearchText(e.target.value)}
         />
 

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 const Mobile = [
   { name: "Home", link: "/" },
   { name: "Sell", link: "/sell" },
+  { name: "Property", link: "/property" },
   { name: "Contactus", link: "/about" },
 ];
 
@@ -15,7 +16,7 @@ const Mobilenav = (navItem) => {
   return (
     <div>
       {isMobile && (
-        <ul className="ul  py-5 space-y-4  bg-slate-500 font-serif">
+        <ul className="ul  py-10 space-y-4 leading-10 bg-blue-300 text-rose-700 font-serif">
           {Mobile.map((Mob, l) => (
             <NavLink
               key={l}

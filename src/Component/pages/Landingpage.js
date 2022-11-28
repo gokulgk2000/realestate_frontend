@@ -14,7 +14,9 @@ const Landingpage = () => {
   return (
     <div>
       <div className="font-serif">
-        <div className="w-full flex justify-center items-center mt-2 pb-4 ">
+        <div className=" flex justify-center items-center mt-2 pb-4 ">
+
+          
           <form action="">
           
             <input
@@ -22,7 +24,8 @@ const Landingpage = () => {
               id="message"
               value={searchText}
               name="search"
-              className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+              placeholder="Search Your Property...."
+              className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0 "
               onChange = {(e)=>setSearchText(e.target.value)}
             />
             <button className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full " onClick={navigateToProperty} >
@@ -32,20 +35,21 @@ const Landingpage = () => {
         </div>
         <div className=" drop-shadow-xl px-5 -mt-2">
           <img className="md:h-96 md:w-full" src={Image} />
-          <h6 className="absolute text-xl text-gray-600 top-8 px-2 left-5">
+          <h6 className="absolute text-xl text-gray-800 top-8 px-2 left-5">
             {" "}
             Real Estate
           </h6>
           <div className="absolute bottom-0 flex left-0 right-0  py-4">
-            <h3 className="text-l text-white font-bold px-6 ">
+            <h3 className="text-l text-black font-bold px-6 ">
               Hey, I Am The New Property
             </h3>
           </div>
-          <button className="absolute bg-teal-200 w-20 h-10 text-gray-500 hover:bg-teal-700 hover:text-yellow-50 top-8 right-8 rounded-2xl">
+          <button className="absolute bg-teal-200 w-20 h-10 text-gray-600 hover:bg-teal-600 hover:text-yellow-50 top-8 right-8 rounded-2xl">
             <a href="/register">For More</a>
           </button>
         </div>
-        <div className="py-8">
+        <div className="py-8 px-4">
+          <h1 className="text-2xl font-semibold mb-3">Categories :</h1>
           <Category />
         </div>
         {/* <div className="p-3 ">

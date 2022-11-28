@@ -17,7 +17,7 @@ const Category = () => {
   }, []);
 
   return (
-     <div className="grid grid-cols-5 gap-2 px-5 shadow-md shadow-black">
+     <div className="md:grid grid-cols-5 gap-2 px-5 shadow-md shadow-black">
       {categorylist?.map((cat, i) => (
         <div key={i}> <Link to={`/property?id=${cat?._id}`}> 
         

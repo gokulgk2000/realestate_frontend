@@ -31,7 +31,7 @@ const Landingpage = () => {
           </form>
         </div>
         <div className=" drop-shadow-xl px-5 -mt-2">
-          <img className="h-96 w-full" src={Image} />
+          <img className="md:h-96 md:w-full" src={Image} />
           <h6 className="absolute text-xl text-gray-600 top-8 px-2 left-5">
             {" "}
             Real Estate

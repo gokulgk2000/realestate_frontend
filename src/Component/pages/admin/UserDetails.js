@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  addUser,
   getPropertyById,
   getUserById,
   removeUser,
@@ -12,19 +13,21 @@ import { confirmAlert } from "react-confirm-alert";
 import RemoveModel from "../../models/RemoveModel";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
+import AddModel from "../../models/AddModel";
 
 const UserDetails = () => {
   const query = useQuery();
   const navigate = useNavigate();
 
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
+  const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getUser, setGetUser] = useState(null);
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
-
+console.log("getUser",getUser)
   const getUserId = async () => {
     const res = await getUserById({
-      userId: query.get("id"),
+      userID: query.get("id"),
     });
     if (res.success) {
       setGetUser(res.User);
@@ -38,13 +41,30 @@ const UserDetails = () => {
 
   const handleRemovingUser = async () => {
     const payload = {
-      userID: [getUser?._id],
+      userID: query.get("id"),
     };
     const res = await removeUser(payload);
 
     if (res.success) {
       console.log("res", res);
       toastr.success(`User has been Deactivated successfully`, "Success");
+      navigate("/admin/UserList");
+
+      // await getAllUsers();
+    } else {
+      console.log("Error : ", res?.msg || "error");
+    }
+    setModalOpen(false);
+  };
+  const handleAddUser = async () => {
+    const payload = {
+      userID:query.get("id"),
+    };
+    const res = await addUser(payload);
+
+    if (res.success) {
+      console.log("res", res);
+      toastr.success(`User has been activated successfully`, "Success");
       navigate("/admin/UserList");
 
       // await getAllUsers();
@@ -63,6 +83,15 @@ const UserDetails = () => {
           confirmText="Yes,DeActive"
           cancelText="Cancel"
           onCloseClick={() => setModalOpen(false)}
+        />
+      )}
+       {modalOpen1 && (
+        <AddModel
+          show={modalOpen}
+          onAddClick={handleAddUser}
+          confirmText="Yes,Active"
+          cancelText="Cancel"
+          onCloseClick={() => setModalOpen1(false)}
         />
       )}
       <div>
@@ -113,6 +142,13 @@ const UserDetails = () => {
               onClick={toggleModal}
             >
               Remove
+            </button>
+            <button
+              href="#"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              onClick={toggleModal1}
+            >
+             Add
             </button>
           </div>
         </div>

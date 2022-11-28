@@ -28,6 +28,7 @@ const userLogin = (payload) =>
   const allUsersList = () => get(`${BASE_URL}/admin/allUsersList`);
   const allPropertiesList = () => get(`${BASE_URL}/admin/allPropertiesList`);
   const removeUser = (payload) => put(`${BASE_URL}/admin/removeUser`, payload);
+  const addUser = (payload) => put(`${BASE_URL}/admin/addUser`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
@@ -63,7 +64,7 @@ const userLogin = (payload) =>
 
     GETALLUSERSBYLIMIT,
    
-
+    addUser ,
     getCategory,
     findCategory,
     getPropertiescategoryId

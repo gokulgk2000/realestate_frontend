@@ -157,34 +157,6 @@ const PropertyDetails = () => {
   // console.log("getProperty : ",getProperty)
   return (
     <React.Fragment>
-      {modalOpen && (
-        <RemoveModel
-          show={modalOpen}
-          onDeleteClick={handleRemovingProperty}
-          confirmText="Yes,DeActive"
-          cancelText="Cancel"
-          onCloseClick={() => setModalOpen(false)}
-        />
-      )}
-      <div>
-        <Breadcrumbs>
-          <a href="/admin/Dashboard" className="opacity-60">
-            Dashboard
-          </a>
-          <a href="/admin/PropertyList" className="opacity-60">
-            Properties
-          </a>
-          <a className="text-rose-700 disabled">PropertyDetails</a>
-        </Breadcrumbs>
-        <div class="grid  grid-cols-2 min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-          <div class="flex ml-5 flex-col items-left pb-10">
-            <p className="text-rose-700"> Seller :</p>
-            <Input
-
-
-// console.log("getProperty : ",getProperty)
-  return (
-    <React.Fragment>
     {modalOpen && <RemoveModel
       show={modalOpen}
       onDeleteClick={handleRemovingProperty}
@@ -384,16 +356,8 @@ const PropertyDetails = () => {
                 Update Property
               </button>
             )}
-            <button
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={toggleModal}
-            >
-
-              Remove{" "}
-            </button>
+           
           </div>
-
-              Update Property</button>}
               <button
               href="#"
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
@@ -405,9 +369,6 @@ const PropertyDetails = () => {
             onClick={toggleModal}>Remove </button>
         </div>
 </div>
-
-        </div>
-      </div>
     </React.Fragment>
   );
 };

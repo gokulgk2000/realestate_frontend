@@ -54,9 +54,11 @@ const Property = () => {
 
     if (res.success) {
       setproperty(res.category);
+      console.log("view",res)
     } else {
     }
   };
+ 
 
   useEffect(() => {
     categories();
@@ -109,9 +111,9 @@ const Property = () => {
       <div className="w-full flex justify-center items-center mt-2 pb- ">
         <input
           type="text"
-          placeholder="search"
+          placeholder="search your dream house"
           name="search"
-          className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
           onChange={(e) => setSearchText(e.target.value)}
         />
 

@@ -14,7 +14,9 @@ const Landingpage = () => {
   return (
     <div>
       <div className="font-serif">
-        <div className="w-full flex justify-center items-center mt-2 pb-4 ">
+        <div className=" flex justify-center items-center mt-2 pb-4 ">
+
+          
           <form action="">
           
             <input
@@ -22,7 +24,8 @@ const Landingpage = () => {
               id="message"
               value={searchText}
               name="search"
-              className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+              placeholder="search your property"
+              className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
               onChange = {(e)=>setSearchText(e.target.value)}
             />
             <button className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full " onClick={navigateToProperty} >

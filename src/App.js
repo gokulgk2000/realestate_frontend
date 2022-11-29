@@ -20,6 +20,7 @@ import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
 import Category from "./Component/pages/Category";
 
+
 const App = () => {
   return (
     <> 
@@ -32,7 +33,7 @@ const App = () => {
       <Route path="/property" element={<Property />} />
         <Route path="/about" element={<About />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
-    
+      
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />

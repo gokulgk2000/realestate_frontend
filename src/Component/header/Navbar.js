@@ -37,7 +37,7 @@ function Navbar() {
     getUserName();
   }, []);
 
-  console.log("user by id : ", user);
+  // console.log("user by id : ", user);
 
   return (
     <div className="Navbar font-serif">

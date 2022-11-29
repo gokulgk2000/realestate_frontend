@@ -19,6 +19,8 @@ import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
 import Category from "./Component/pages/Category";
+import BuyerList from "./Component/pages/admin/BuyerList";
+import BuyerDetails from "./Component/pages/admin/BuyerDetails";
 
 
 const App = () => {
@@ -44,9 +46,11 @@ const App = () => {
         <Route index  element={<Dashboard />} />
         <Route path="Dashboard" element={<Dashboard />} />
         <Route  path="userlist" element={<UserList />} />
+        <Route  path="buyerlist" element={<BuyerList />} />
         <Route path="propertylist" element={<PropertyList />} />
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />
+        <Route path="buyerdetails" element={<BuyerDetails />} />
 
         </Route >
         

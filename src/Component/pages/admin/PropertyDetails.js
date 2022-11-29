@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getPropertyDetailsById, removeProperty,updateProperty } from '../../helper/backend_helpers';
+import { addProperty, getPropertyDetailsById, removeProperty,updateProperty } from '../../helper/backend_helpers';
 import { useQuery } from '../../helper/hook/useQuery';
 import { useModal } from '../../helper/hook/useModal';
 import toastr from "toastr"
@@ -8,6 +8,7 @@ import RemoveModel from '../../models/RemoveModel';
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Breadcrumbs, Input } from '@material-tailwind/react';
 import FileInput from '../../reusable/FileInput';
+import AddModel from '../../models/AddModel';
 
 
 const PropertyDetails = () => {
@@ -15,6 +16,7 @@ const PropertyDetails = () => {
   const navigate = useNavigate()
 
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
+  const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getProperty, setGetProperty] = useState("");
   const [propertyId,setPropertyId] =useState("");
   const [seller,setSeller] =useState("");
@@ -52,6 +54,20 @@ const PropertyDetails = () => {
     getPropertyId();
   }, []);
  
+  const handleAddProperty = async () => {
+    const payload = {
+      PropertyID:query.get("id"),
+    };
+    const res = await addProperty(payload);
+
+    if (res.success) {
+      console.log("res", res);
+      toastr.success(`Property has been activated successfully`, "Success");
+    } else {
+      console.log("Error : ", res?.msg || "error");
+    }
+    setModalOpen1(false);
+  };
 
   const handleRemovingProperty = async () => {
     const payload = {
@@ -138,6 +154,7 @@ useEffect(()=>{
   }
 })
 
+
 // console.log("getProperty : ",getProperty)
   return (
     <React.Fragment>
@@ -148,6 +165,15 @@ useEffect(()=>{
       cancelText="Cancel"
       onCloseClick={()=>setModalOpen(false)}
     />}
+     {modalOpen1 && (
+        <AddModel
+          show={modalOpen}
+          onAddClick={handleAddProperty}
+          confirmText="Yes,Active"
+          cancelText="Cancel"
+          onCloseClick={() => setModalOpen1(false)}
+        />
+      )}
   <div>
   <Breadcrumbs >
       <a href="/admin/Dashboard" className="opacity-60">
@@ -329,6 +355,13 @@ useEffect(()=>{
             onClick={() => handleUpdatingProperty()}
             >
               Update Property</button>}
+              <button
+              href="#"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              onClick={toggleModal1}
+            >
+             Add
+            </button>
             <button  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
             onClick={toggleModal}>Remove </button>
         </div>

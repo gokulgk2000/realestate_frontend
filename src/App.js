@@ -19,8 +19,12 @@ import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
 import Category from "./Component/pages/Category";
+
+import ProfileUpdate from "./Component/pages/auth/ProfileUpdate";
+
 import BuyerList from "./Component/pages/admin/BuyerList";
 import BuyerDetails from "./Component/pages/admin/BuyerDetails";
+
 
 
 const App = () => {
@@ -30,6 +34,7 @@ const App = () => {
       <Navbar /> 
       <Routes>
       <Route path="/" element={<Landingpage />} />
+      <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
 
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />

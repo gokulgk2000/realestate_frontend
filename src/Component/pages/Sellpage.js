@@ -81,7 +81,7 @@ const RegisterProperty = () => {
         category: values.category,
         regUser: currentUser?.userID,
         propertyPic,
-        status: "approved",
+        status: "pending",
       });
       console.log("Data", values);
       onSubmitProps.resetForm();

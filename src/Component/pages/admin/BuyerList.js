@@ -1,17 +1,17 @@
 import React, { useEffect, useState ,useMemo } from 'react'
-import { allUsersList, GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
+import { allBuyerList, allUsersList, GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
 
 import axios from 'axios';
 import Pagination from '../../pagination/Pagination';
 import Posts from '../../pagination/Post';
 import { useQuery } from '../../helper/hook/useQuery';
 import { Breadcrumbs } from '@material-tailwind/react';
-const UserList = () => {
+const BuyerList = () => {
   const query = useQuery();
   
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [buyerData, setBuyerData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText,setSearchText]=useState("")
@@ -20,21 +20,22 @@ const UserList = () => {
 
 const requestSearch = (searched)=>{
   setSearchText(searched)}
-    const getAllUsers = async () => {
+  const getAllBuyers= async () => {
       
-        setLoading(true);
-        const res = await allUsersList({});
-        // console.log("dsp:",res);
-        if (res.success) {
-          setUserData(res.users);
-        }
-        setLoading(false);
-      };
-    
-      useEffect(() => {
-        getAllUsers();
-      }, []);
-      console.log("dsp112:",userData.length);
+    setLoading(true);
+    const res = await allBuyerList({});
+    console.log("dsp:",res);
+    if (res.success) {
+        setBuyerData(res.users);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getAllBuyers();
+  }, []);
+
+      console.log("dsp112:",buyerData.length);
       useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
@@ -52,13 +53,13 @@ const requestSearch = (searched)=>{
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
  
   return (
-    <div  >
+    <div >
      <Breadcrumbs >
       <a href="/admin/Dashboard" className="opacity-60">
         Dashboard
       </a>
-      <a href="/admin/userlist" className="text-rose-700">
-       Sellers
+      <a href="/admin/buyerlist" className="text-rose-700">
+        Buyers
       </a>
      
     </Breadcrumbs>
@@ -111,11 +112,7 @@ const requestSearch = (searched)=>{
         </thead>
         <tbody>
           
-
-        {(searchText?.length> 0? searchText:userData.slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 " key={i}>
-
-        {( userData?.filter(
+        {( buyerData?.filter(
       (item) =>
       item?.firstname
       .toString()
@@ -132,21 +129,20 @@ const requestSearch = (searched)=>{
          
     ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
-
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>
                 <td className="py-4 px-6 capitalize">
                     {Data?.firstname} {Data?.lastname}
                 </td>
-                <td className="py-4 px-6 ">
+                <td className="py-4 px-6">
                 {Data?.email}
                 </td>
                 <td className="py-4 px-6 capitalize">
                 {Data?.status}
                 </td>
                 <td className="py-4 px-6 items-center">
-                    <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
+                    <a href={`/admin/buyerdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
                 </td>
             </tr>
             ))}
@@ -159,7 +155,7 @@ const requestSearch = (searched)=>{
     {/* <Posts posts={currentPosts} /> */}
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={userData?.length}
+        totalPosts={buyerData?.length}
         paginate={paginate}
         currentPage={currentPage}
       />
@@ -170,4 +166,4 @@ const requestSearch = (searched)=>{
   )
 }
 
-export default UserList
+export default BuyerList

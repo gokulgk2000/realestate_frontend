@@ -101,16 +101,28 @@ const PropertyList = () => {
               item?.facing
               .toString()
               .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?. category
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?. landArea
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?.layoutName
+              .toString()
+              .toLowerCase()
               .includes(searchText.toString().toLowerCase()) 
         ).slice((currentPage -1)*10,(currentPage *10)).map((PropertyData,p)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={p}>
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
                 {PropertyData?.Seller}
                 </th>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {PropertyData?.askPrice}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {PropertyData?.location}
                 </td>
                 <td className="py-4 px-6 capitalize">

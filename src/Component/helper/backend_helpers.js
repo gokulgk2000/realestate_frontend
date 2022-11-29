@@ -28,9 +28,13 @@ const userLogin = (payload) =>
   const getPropertyDetailsById = (payload) =>
   post(`${BASE_URL}/admin/getPropertyDetailsById`, payload);
   const allUsersList = () => get(`${BASE_URL}/admin/allUsersList`);
+  const allBuyerList = () => get(`${BASE_URL}/buyer/allBuyerList`);
   const allPropertiesList = () => get(`${BASE_URL}/admin/allPropertiesList`);
   const removeUser = (payload) => put(`${BASE_URL}/admin/removeUser`, payload);
+  const removeBuyer = (payload) => put(`${BASE_URL}/admin/removeBuyer`, payload);
   const addUser = (payload) => put(`${BASE_URL}/admin/addUser`, payload);
+  const addBuyer = (payload) => put(`${BASE_URL}/admin/addBuyer`, payload);
+  const addProperty = (payload) => put(`${BASE_URL}/admin/addProperty`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
@@ -39,7 +43,7 @@ const userLogin = (payload) =>
   const getuserdetails = (payload) =>
   post(`${BASE_URL}/user/getUserById`, payload);
   const getbuyerdetails = (payload) =>
-  post(`${BASE_URL}/buyer/getUserById`, payload);
+  post(`${BASE_URL}/buyer/getBuyerById`, payload);
   const buyerReg = (payload) =>
   post(`${BASE_URL}/buyer/buyerregister`, payload);
 const updateProperty = (payload) =>
@@ -59,14 +63,21 @@ const updateProperty = (payload) =>
     getUserById,
     getPropertyDetailsById,
     allUsersList,
+    allBuyerList,
     allPropertiesList,
     removeUser,
+    removeBuyer,
     removeProperty,
     getPropertybyUserId,
     updateProperty,
     getPropertyById,
     GETALLUSERSBYLIMIT,
+
     updateProfileById,
+
+    addBuyer,
+    addProperty,
+
     addUser ,
     getCategory,
     findCategory,

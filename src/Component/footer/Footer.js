@@ -63,11 +63,7 @@ const Footer = () => {
                     Sell
                   </a>
                 </p>
-                <p className="mb-4">
-                  <a href="#!" className="text-gray-600">
-                    Rent
-                  </a>
-                </p>
+                
               </div>
               <div className="">
                 <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">

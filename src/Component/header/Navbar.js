@@ -38,12 +38,16 @@ function Navbar() {
     getUserName();
   }, []);
 
-  console.log("user by id : ", user);
+
+ 
   
   const navigateToProperty = (e) => {
     e.preventDefault()
     navigate(`/ProfileUpdate`);
   };
+
+  // console.log("user by id : ", user);
+
 
   return (
     <div className="Navbar font-serif">

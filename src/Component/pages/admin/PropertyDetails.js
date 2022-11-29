@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
-import {
-  getPropertyDetailsById,
-  removeProperty,
-  updateProperty,
-} from "../../helper/backend_helpers";
-import { useQuery } from "../../helper/hook/useQuery";
-import { useModal } from "../../helper/hook/useModal";
-import toastr from "toastr";
+
+
+import React, { useEffect, useState } from 'react'
+import { addProperty, getPropertyDetailsById, removeProperty,updateProperty } from '../../helper/backend_helpers';
+import { useQuery } from '../../helper/hook/useQuery';
+import { useModal } from '../../helper/hook/useModal';
+import toastr from "toastr"
 import "toastr/build/toastr.min.css";
-import RemoveModel from "../../models/RemoveModel";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Input } from "@material-tailwind/react";
-import FileInput from "../../reusable/FileInput";
+import RemoveModel from '../../models/RemoveModel';
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Breadcrumbs, Input } from '@material-tailwind/react';
+import FileInput from '../../reusable/FileInput';
+import AddModel from '../../models/AddModel';
+
+
 
 const PropertyDetails = () => {
   const query = useQuery();
   const navigate = useNavigate();
 
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
+  const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getProperty, setGetProperty] = useState("");
   const [propertyId, setPropertyId] = useState("");
   const [seller, setSeller] = useState("");
@@ -54,6 +56,24 @@ const PropertyDetails = () => {
   useEffect(() => {
     getPropertyId();
   }, []);
+
+
+ 
+  const handleAddProperty = async () => {
+    const payload = {
+      PropertyID:query.get("id"),
+    };
+    const res = await addProperty(payload);
+
+    if (res.success) {
+      console.log("res", res);
+      toastr.success(`Property has been activated successfully`, "Success");
+    } else {
+      console.log("Error : ", res?.msg || "error");
+    }
+    setModalOpen1(false);
+  };
+
 
   const handleRemovingProperty = async () => {
     const payload = {
@@ -133,6 +153,7 @@ const PropertyDetails = () => {
     }
   });
 
+
   // console.log("getProperty : ",getProperty)
   return (
     <React.Fragment>
@@ -159,6 +180,45 @@ const PropertyDetails = () => {
           <div class="flex ml-5 flex-col items-left pb-10">
             <p className="text-rose-700"> Seller :</p>
             <Input
+
+
+// console.log("getProperty : ",getProperty)
+  return (
+    <React.Fragment>
+    {modalOpen && <RemoveModel
+      show={modalOpen}
+      onDeleteClick={handleRemovingProperty}
+      confirmText="Yes,DeActive"
+      cancelText="Cancel"
+      onCloseClick={()=>setModalOpen(false)}
+    />}
+     {modalOpen1 && (
+        <AddModel
+          show={modalOpen}
+          onAddClick={handleAddProperty}
+          confirmText="Yes,Active"
+          cancelText="Cancel"
+          onCloseClick={() => setModalOpen1(false)}
+        />
+      )}
+  <div>
+  <Breadcrumbs >
+      <a href="/admin/Dashboard" className="opacity-60">
+        Dashboard
+      </a>
+      <a href="/admin/PropertyList" className="opacity-60">
+        Properties
+      </a>
+      <a className="text-rose-700 disabled">
+        PropertyDetails
+      </a>
+     
+    </Breadcrumbs>
+            <div class="grid  grid-cols-2 min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex ml-5 flex-col items-left pb-10"  >
+  <p className='text-rose-700'> Seller :</p> 
+    <Input
+
               type="text"
               name="Seller"
               placeholder="Enter the Seller "
@@ -328,9 +388,24 @@ const PropertyDetails = () => {
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
               onClick={toggleModal}
             >
+
               Remove{" "}
             </button>
           </div>
+
+              Update Property</button>}
+              <button
+              href="#"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              onClick={toggleModal1}
+            >
+             Add
+            </button>
+            <button  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+            onClick={toggleModal}>Remove </button>
+        </div>
+</div>
+
         </div>
       </div>
     </React.Fragment>

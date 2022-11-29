@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  addUser,
-  getPropertyById,
-  getUserById,
-  removeUser,
-} from "../../helper/backend_helpers";
 import { useModal } from "../../helper/hook/useModal";
 import { useQuery } from "../../helper/hook/useQuery";
 import toastr from "toastr";
@@ -14,61 +8,59 @@ import RemoveModel from "../../models/RemoveModel";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
+import { addBuyer, getbuyerdetails, removeBuyer } from "../../helper/backend_helpers";
 
-const UserDetails = () => {
+const BuyerDetails = () => {
   const query = useQuery();
   const navigate = useNavigate();
 
 
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
-  const [getUser, setGetUser] = useState(null);
-  const [isAdd ,setIsAdd]=useState("authUser");
+  const [getBuyer, setGetBuyer] = useState(null);
+  const[isAdd, setIsAdd] = useState("authUser")
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
 
-console.log("getuser",getUser)
-  const getUserId = async () => {
-    const res = await getUserById({
-      userID: query.get("id"),
+console.log("getBuyer",getBuyer)
+  const getBuyerById = async () => {
+    const res = await getbuyerdetails({
+      userId: query.get("id"),
     });
     if (res.success) {
-      setGetUser(res.User);
-      console.log("res", res);
+      setGetBuyer(res.Buyer);
+      console.log("buyerres", res);
     }
   };
 
   useEffect(() => {
-    getUserId();
+    getBuyerById();
   }, []);
 
-  const handleRemovingUser = async () => {
+  const handleRemovingBuyer = async () => {
     const payload = {
       userID: query.get("id"),
     };
-    const res = await removeUser(payload);
+    const res = await removeBuyer(payload);
 
     if (res.success) {
       console.log("res", res);
-      toastr.success(`User has been Deactivated successfully`, "Success");
-      // navigate("/admin/UserList");
+      toastr.success(`Buyer has been Deactivated successfully`, "Success");
 
-      // await getAllUsers();
     } else {
       console.log("Error : ", res?.msg || "error");
     }
     setModalOpen(false);
   };
-  const handleAddUser = async () => {
+  const handleAddBuyer = async () => {
     const payload = {
-      userID:query.get("id"),
+        userID:query.get("id"),
     };
-    const res = await addUser(payload);
+    const res = await addBuyer(payload);
 
     if (res.success) {
       console.log("res", res);
       toastr.success(`User has been activated successfully`, "Success");
-      // navigate("/admin/UserList"); 
 
       // await getAllUsers();
     } else {
@@ -82,7 +74,7 @@ console.log("getuser",getUser)
       {modalOpen && (
         <RemoveModel
           show={modalOpen}
-          onDeleteClick={handleRemovingUser}
+          onDeleteClick={handleRemovingBuyer}
           confirmText="Yes,DeActive"
           cancelText="Cancel"
           onCloseClick={() => setModalOpen(false)}
@@ -91,7 +83,7 @@ console.log("getuser",getUser)
        {modalOpen1 && (
         <AddModel
           show={modalOpen}
-          onAddClick={handleAddUser}
+          onAddClick={handleAddBuyer}
           confirmText="Yes,Active"
           cancelText="Cancel"
           onCloseClick={() => setModalOpen1(false)}
@@ -102,32 +94,36 @@ console.log("getuser",getUser)
           <a href="/admin/Dashboard" className="opacity-60">
             Dashboard
           </a>
-          <a href="/admin/userlist" className="opacity-60">
-          Sellers
+          <a href="/admin/buyerlist" className="opacity-60">
+            Buyers
           </a>
-          <a href="/admin/userdetails" className="text-rose-700">
-          SellersDetails
+          <a href="/admin/buyerdetails" className="text-rose-700">
+            BuyerDetails
           </a>
         </Breadcrumbs>
         <div className="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
           <div className="flex flex-col items-left pb-10 leading-loose">
             <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
-              Firstname : {getUser?.firstname}
+              Firstname : {getBuyer?.firstname}
             </h5>
             <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
-              Lastname : {getUser?.lastname}
-            </h5>
-            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
-              {" "}
-              Email :{getUser?.email}
+              Lastname : {getBuyer?.lastname}
             </h5>
             <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
               {" "}
-              Date :{getUser?.date}
+              Email :{getBuyer?.email}
             </h5>
             <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
               {" "}
-              Status :{getUser?.status}
+              Property Details :{getBuyer?.propertyId?.layoutName}
+            </h5>
+            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+              {" "}
+              Phone Number :{getBuyer?. phonenumber}
+            </h5>
+            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+              {" "}
+              Status :{getBuyer?.status}
             </h5>
           </div>
           <div className="flex mt-4 space-x-3 md:mt-6">
@@ -159,4 +155,4 @@ console.log("getuser",getUser)
   );
 };
 
-export default UserDetails;
+export default BuyerDetails;

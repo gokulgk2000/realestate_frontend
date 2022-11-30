@@ -7,6 +7,7 @@ const Mobile = [
   { name: "Home", link: "/" },
   { name: "Sell", link: "/sell" },
   { name: "Property", link: "/property" },
+  { name: "Requested", link: "/request" },
   { name: "Contactus", link: "/about" },
 ];
 
@@ -29,7 +30,6 @@ const Mobilenav = (navItem) => {
           ))}
         </ul>
       )}
-
       <button className="" onClick={() => setIsMobile(!isMobile)}>
         {isMobile ? (
           <div className="burger-bar show "></div>

@@ -11,15 +11,14 @@ const NavItem = [
   { name: "Home", link: "/" },
   { name: "Sell", link: "/sell" },
   { name: "Property", link: "/property" },
+  { name: "Requested", link: "/request" },
   { name: "Contactus", link: "/about" },
 
   // { name: "About", link: "#" },
   // { name: "Contactus", link: "#" },
 ];
-
 function Navbar() {
   const [isMobileview] = useMediaQuery(mobile);
-
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
@@ -37,17 +36,10 @@ function Navbar() {
   useEffect(() => {
     getUserName();
   }, []);
-
-
- 
-  
   const navigateToProperty = (e) => {
     e.preventDefault()
     navigate(`/ProfileUpdate`);
   };
-
-  // console.log("user by id : ", user);
-
 
   return (
     <div className="Navbar font-serif">
@@ -60,7 +52,7 @@ function Navbar() {
                   <NavLink
                     key={k}
                     to={Nav.link || "#"}
-                    className="hover:text-teal-500"
+                    className="hover:text-teal-500 "
                   >
                     {Nav.name}
                   </NavLink>

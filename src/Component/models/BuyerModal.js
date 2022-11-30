@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import { useQuery } from "../helper/hook/useQuery";
 import PropTypes from "prop-types"
-
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 const BuyerModal = ({   show, currentProperty,onCloseClick,
   }) => {
 console.log("currentProperty",currentProperty)
@@ -45,6 +46,7 @@ console.log("currentProperty",currentProperty)
   console.log(res)
   if(res.success) {
     setBuyerRegistrationSuccess(res.msg)
+    toastr.success(`Buyer has been Registration successfully`, "Success");
     onCloseClick()
   }
   else{
@@ -126,7 +128,7 @@ if(res.success) {
                            type="text"
                            name="firstname"
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Enter first name"
+                           placeholder="Enter First Name"
                            onChange={validation.handleChange}
                            value={validation.values.firstname  }
                            invalid={
@@ -154,7 +156,7 @@ if(res.success) {
                            type="text"
                            name="lastname"
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Enter first name"
+                           placeholder="Enter Last Name"
                            onChange={validation.handleChange}
                            value={validation.values.lastname}
                            invalid={ 
@@ -199,16 +201,16 @@ if(res.success) {
                        </div>
                        <div>
                          <label
-                           name="phonenumber"
+                           name="Phone Number"
                            className=" flex justify-start  mb-2 text-sm font-medium text-gray-900 dark:text-white"
                          >
-                           Phonenumber
+                           Phone Number
                          </label>
                          <input
                            type="number"
-                           name="phonenumber"
+                           name="Phone Number"
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Enter phonenumber"
+                           placeholder="Enter Phone Number"
                            onChange={validation.handleChange}
                            value={validation.values.phonenumber }
                            invalid={
@@ -225,19 +227,20 @@ if(res.success) {
                          ) : null}
                        </div>
                         <div className=" flex justify-between mt-4">
-                         <button
-                           type="submit"
-                           className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                           onClick={handlebuyerReg}
-                         >
-                           Submit
-                         </button>
+                        
                          <button
                            type="button"
                            className=" px-6 py-2.5  bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                            onClick={onCloseClick}
                          >
                            Close
+                         </button>
+                         <button
+                           type="submit"
+                           className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                           onClick={handlebuyerReg}
+                         >
+                           Submit
                          </button>
                        </div>
                      </div>

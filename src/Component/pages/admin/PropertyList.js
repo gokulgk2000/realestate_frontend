@@ -39,10 +39,10 @@ const PropertyList = () => {
       </a>
     </Breadcrumbs>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-    <div className="w-full flex justify-center items-center mt-2 pb-4">
+    <div className="w-full flex justify-center items-center mt-2 pb-4  scale-100  hover:scale-95 ease-in duration-500">
         <input
           type="text"
-          placeholder="search"
+          placeholder="Search Properties"
           name="search"
           className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
           onChange={(e) => propertySearch(e.target.value)}

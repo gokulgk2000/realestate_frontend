@@ -14,7 +14,7 @@ const Landingpage = () => {
   return (
     <div>
       <div className="font-serif">
-        <div className=" flex justify-center items-center mt-2 pb-4 ">
+        <div className=" flex justify-center items-center mt-2 pb-4  scale-100  hover:scale-95 ease-in duration-500">
 
           
           <form action="">
@@ -24,7 +24,7 @@ const Landingpage = () => {
               id="message"
               value={searchText}
               name="search"
-              placeholder="Search Your Property...."
+              placeholder="Search Property...."
               className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0 "
               onChange = {(e)=>setSearchText(e.target.value)}
             />
@@ -33,8 +33,8 @@ const Landingpage = () => {
             </button>
           </form>
         </div>
-        <div className=" drop-shadow-xl px-5 -mt-2">
-          <img className="md:h-96 md:w-full" src={Image} />
+        <div className=" drop-shadow-xl px-5 -mt-2 scale-100  hover:scale-95 ease-in duration-500 ">
+          <img className="md:h-96 md:w-full " src={Image} />
           <h6 className="absolute text-xl text-gray-800 top-8 px-2 left-5">
             {" "}
             Real Estate
@@ -49,15 +49,15 @@ const Landingpage = () => {
           </button>
         </div>
         <div className="py-8 px-4">
-          <h1 className="text-2xl font-semibold mb-3">Categories :</h1>
+          <h1 className="text-2xl text-gray-600 font-semibold mb-3">Categories :</h1>
           <Category />
         </div>
         {/* <div className="p-3 ">
           <h1 className="py-5 px-4 text-2xl font-bold ">Featured Properties</h1>
           <Property />
         </div> */}
-        <div className=" drop-shadow-xl py-28 h bg-slate-200">
-          <h3 className="absolute text-l text-slate-800 font-bold top- left-1/2 -translate-x-1/2 -translate-y-full">
+        <div className=" drop-shadow-xl py-28  bg-slate-200">
+          <h3 className="absolute text-lg text-slate-800 font-bold top- left-1/2 -translate-x-1/2 -translate-y-full">
             We Have A Happy Clints
           </h3>
           <button className="absolute w-32 h-10 rounded-2xl bg-gray-900 text-white hover:bg-teal-700 font-bold  top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">

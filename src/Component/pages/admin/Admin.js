@@ -1,6 +1,6 @@
 import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { allPropertiesList, allUsersList } from "../../helper/backend_helpers";
 import Breadcrumb from "./Breadcrumbs";
 import UserList from "./UserList";
@@ -39,9 +39,9 @@ const Admin = () => {
           <h3 className="  text-rose-700 font-semibold text-xl font-SFMono-Regular">
             Menu
           </h3>
-          <a
+          <Link
             className="flex font-Arial pt-3 leading-loose"
-            href="/admin/Dashboard"
+            to={`/admin/Dashboard`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -53,15 +53,15 @@ const Admin = () => {
               <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
             </svg>
             Admin Dashboard
-          </a>
+          </Link>
           <h3 className="  text-rose-700  font-semibold text-xl font- Arial leading-loose">
             Sub-Menu
           </h3>
           <ul className="font- Arial  leading-loose">
             <li className="flex ">
-              <a
+              <Link
                 className="flex font-Arial  pt-3 leading-loose"
-                href="/admin/userlist"
+               to={`/admin/userlist`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -76,12 +76,12 @@ const Admin = () => {
                   />
                 </svg>
                 Sellers{" "}
-              </a>
+              </Link>
             </li>
             <li className="flex ">
-              <a
+              <Link
                 className="flex font-Arial  pt-3 leading-loose"
-                href="/admin/buyerlist"
+                to={`/admin/buyerlist`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,12 +96,12 @@ const Admin = () => {
                   />
                 </svg>
                 Buyers{" "}
-              </a>
+              </Link>
             </li>
             <li className="flex lead">
-              <a
+              <Link
                 className="flex font-Arial  pt-3 leading-loose"
-                href="/admin/PropertyList"
+                to={`/admin/PropertyList`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ const Admin = () => {
                   />
                 </svg>
                 Properties
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

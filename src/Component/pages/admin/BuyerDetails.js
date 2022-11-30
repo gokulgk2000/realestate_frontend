@@ -9,19 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
 import { addBuyer, getbuyerdetails, removeBuyer } from "../../helper/backend_helpers";
-
 const BuyerDetails = () => {
   const query = useQuery();
   const navigate = useNavigate();
-
-
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getBuyer, setGetBuyer] = useState(null);
   const[isAdd, setIsAdd] = useState("authUser")
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
-
 console.log("getBuyer",getBuyer)
   const getBuyerById = async () => {
     const res = await getbuyerdetails({
@@ -32,43 +28,36 @@ console.log("getBuyer",getBuyer)
       console.log("buyerres", res);
     }
   };
-
   useEffect(() => {
     getBuyerById();
   }, []);
-
   const handleRemovingBuyer = async () => {
     const payload = {
       userID: query.get("id"),
     };
     const res = await removeBuyer(payload);
-
     if (res.success) {
       console.log("res", res);
       toastr.success(`Buyer has been Deactivated successfully`, "Success");
-
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen(false);
+    setModalOpen(false); window.location.reload(false);
   };
   const handleAddBuyer = async () => {
     const payload = {
         userID:query.get("id"),
     };
     const res = await addBuyer(payload);
-
     if (res.success) {
       console.log("res", res);
       toastr.success(`User has been activated successfully`, "Success");
-
       // await getAllUsers();
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen1(false);
+    setModalOpen1(false); window.location.reload(false);
   };
-
   return (
     <React.Fragment>
       {modalOpen && (
@@ -147,12 +136,10 @@ console.log("getBuyer",getBuyer)
             >
               Remove
             </button>
-           
           </div>
         </div>
       </div>
     </React.Fragment>
   );
 };
-
 export default BuyerDetails;

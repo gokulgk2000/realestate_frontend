@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { getUserById } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
@@ -21,6 +21,7 @@ function Navbar() {
   const [isMobileview] = useMediaQuery(mobile);
 
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
 
   const getUserName = async () => {
@@ -38,6 +39,11 @@ function Navbar() {
   }, []);
 
   console.log("user by id : ", user);
+  
+  const navigateToProperty = (e) => {
+    e.preventDefault()
+    navigate(`/ProfileUpdate`);
+  };
 
   return (
     <div className="Navbar font-serif">
@@ -77,9 +83,83 @@ function Navbar() {
                     <a href="/feedback" className="text-gray-900 dark:text-white hover:underline font-semibold">Feedback</a>
                 </li>
             </ul> */}
-            <div>
+            <div className=" ">
               {isAuthenticated() ? (
-                <button onClick={logout}>
+                <div>
+                  <div className=" relative group">
+                    <a>
+                      {" "}
+                      <div className="flex">
+                        {" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6 text-teal-700  hover:text-rose-700"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <div className="pl-1 text-rose-700 font-serif hover:text-teal-700 hidden md:block lg:block">
+                          {user?.firstname} {user?.lastname}
+                        </div>
+                      </div>
+                    </a>
+                    <ul className="absolute   bg-white  opcity-80 hidden  group-hover:block group-hover:right-  md:w-32">
+                      <div>
+                        <div className="flex hover:text-white hover:bg-blue-600 text-rose-700 ">
+                          {" "}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            className="w-6 h-6 hover:text-white text-teal-700"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+                            />
+                          </svg>
+                          <button className="  text-start  px-1 md:w-28" onClick={navigateToProperty}>
+                            ProfileUpdate
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex hover:text-white hover:bg-blue-600 border-t-0 border-black text-rose-700 ">
+                        {" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          class="w-6 h-6 text-teal-700"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                          />
+                        </svg>
+                        <button
+                          className=" text-start  px-1 md:w-28"
+                          onClick={logout}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </ul>
+                  </div>
+
+                  {/* <button 
                    <div className="flex">   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -95,7 +175,8 @@ function Navbar() {
                       d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg> <div  className="text-rose-700 font-serif hover:text-teal-700">{user?.firstname}{" "}{user?.lastname}</div></div> 
-                </button>
+                </button>*/}
+                </div>
               ) : (
                 <button
                   type="button"

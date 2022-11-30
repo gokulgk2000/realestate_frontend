@@ -130,7 +130,7 @@ const requestSearch = (searched)=>{
         <tbody>
           
         {(searchText?.length> 0? searchText:userData.slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 " key={i}>
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>

@@ -42,9 +42,10 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/buyer/getUserById`, payload);
   const buyerReg = (payload) =>
   post(`${BASE_URL}/buyer/buyerregister`, payload);
-
-  const updateProperty = (payload) =>
+const updateProperty = (payload) =>
   put(`${BASE_URL}/admin/adminedit`, payload);
+  const updateProfileById = (payload) =>
+  put(`${BASE_URL}/user/profileEdit`, payload);
 
   export {userRegisteration,
     getuserdetails,
@@ -65,7 +66,7 @@ const userLogin = (payload) =>
     updateProperty,
     getPropertyById,
     GETALLUSERSBYLIMIT,
-   
+    updateProfileById,
     addUser ,
     getCategory,
     findCategory,

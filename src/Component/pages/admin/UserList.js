@@ -112,8 +112,7 @@ const requestSearch = (searched)=>{
         <tbody>
           
 
-        {(searchText?.length> 0? searchText:userData.slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 " key={i}>
+       
 
         {( userData?.filter(
       (item) =>
@@ -148,7 +147,7 @@ const requestSearch = (searched)=>{
                 <td className="py-4 px-6 items-center">
                     <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
                 </td>
-            </tr>
+                </tr>   
             ))}
         </tbody>
     </table>

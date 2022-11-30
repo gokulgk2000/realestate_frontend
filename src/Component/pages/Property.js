@@ -110,12 +110,12 @@ const Property = () => {
         />
       )}
 
-      <div className="w-full flex justify-center items-center mt-2 pb- ">
+      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 ">
         <input
           type="text"
-          placeholder="search your dream house"
+          placeholder="Search Your Dream House"
           name="search"
-          className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
+          className="look px-3 py-2 bg-gray-100 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
           onChange={(e) => setSearchText(e.target.value)}
         />
 
@@ -126,10 +126,10 @@ const Property = () => {
           Search
         </button>
       </div>
-      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 ">
+      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7  ">
         {map(property, (pro, i) => (
           <div user={pro} key={"pro" + i}>
-            <div className=" bg-blue-100 pl- shadow-sm shadow-gray-500 hover:shadow-md hover:shadow-gray-900 rounded-md">
+            <div className=" bg-gray-50 pl- shadow-sm shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md">
           
               <div
             
@@ -145,10 +145,10 @@ const Property = () => {
                 <div className="col-span-2 pl-2 leading-10">
                   <Link     to={`/Detailspage?uid=${pro?._id}`} className="sm:flex justify-between  text-2xl md:font-semibold py-5 pr-">
                     
-                    <h3 className="flex-wrap">{pro?.location}</h3>
+                    <h3 className="flex-wrap text-rose-800">{pro?.location}</h3>
                        <h6 className="pr-4">₹.{pro?.askPrice}</h6>
                     </Link>
-                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="flex  mr-3 justify-between shadow-sm shadow-blue-900 px-2 bg-white hover:shadow-md  hover:shadow-blue-900 rounded-md">
+                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="flex  mr-3 justify-between shadow-sm shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md">
                     <p>
                       <div className="underline  text-sm">plot Area</div>
                       <div className="font-semibold">{pro?.costSq}.sq.ft</div>
@@ -169,12 +169,12 @@ const Property = () => {
                   <div className="flex  justify-end">
                     <p>
                       <button
-                        className="bg-blue-500 hover:bg-teal-700 hover:text-white rounded-sm px-1"
+                        className="bg-blue-300 hover:bg-teal-700 hover:text-white rounded-sm px-1"
                         onClick={() =>
                           handleBook(pro?._id) && setModalOpen(true)
                         }
                       >
-                        contact
+                        Contact
                       </button>
                     </p>
                   </div>

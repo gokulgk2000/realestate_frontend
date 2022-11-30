@@ -71,7 +71,7 @@ const PropertyDetails = () => {
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen1(false);
+    setModalOpen1(false); window.location.reload(false);
   };
 
 
@@ -87,7 +87,7 @@ const PropertyDetails = () => {
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen(false);
+    setModalOpen(false); window.location.reload(false);
   };
   const handleUpdatingProperty = async () => {
     setloading(true);
@@ -357,7 +357,7 @@ const PropertyDetails = () => {
               </button>
             )}
            
-          </div>
+       
               <button
               href="#"
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
@@ -367,7 +367,7 @@ const PropertyDetails = () => {
             </button>
             <button  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
             onClick={toggleModal}>Remove </button>
-        </div>
+        </div>   </div>
 </div>
     </React.Fragment>
   );

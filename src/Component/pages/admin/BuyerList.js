@@ -6,6 +6,7 @@ import Pagination from '../../pagination/Pagination';
 import Posts from '../../pagination/Post';
 import { useQuery } from '../../helper/hook/useQuery';
 import { Breadcrumbs } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 const BuyerList = () => {
   const query = useQuery();
   
@@ -142,7 +143,7 @@ const requestSearch = (searched)=>{
                 {Data?.status}
                 </td>
                 <td className="py-4 px-6 items-center">
-                    <a href={`/admin/buyerdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
+                    <Link to={`/admin/buyerdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</Link>
                 </td>
             </tr>
             ))}

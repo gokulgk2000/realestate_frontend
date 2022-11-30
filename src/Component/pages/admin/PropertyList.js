@@ -1,5 +1,6 @@
 import { Breadcrumbs } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { allPropertiesList } from '../../helper/backend_helpers';
 import Pagination from '../../pagination/Pagination';
 import Posts from '../../pagination/Post';
@@ -129,8 +130,8 @@ const PropertyList = () => {
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6">
-                    <a href={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">
-                      View</a>
+                    <Link to={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">
+                      View</Link>
                 </td>
             </tr>
             ))}

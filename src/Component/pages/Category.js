@@ -21,7 +21,10 @@ const Category = () => {
       {categorylist?.map((cat, i) => (
         <div key={i}> <Link to={`/property?id=${cat?._id}`}> 
         
+
+
           <div className="scale-75  hover:scale-90 ease-in duration-500 ">
+
           
            <div className="capitalize font-extrabold text-2xl flex justify-center text-rose-700 mb-3 ">  {cat?.name} </div>
             <img src={cat?.img} className="h-60 w-96 mb-3"/>

@@ -41,7 +41,6 @@ const userLogin = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
   post(`${BASE_URL}/admin/getAllUsersPage`, payload);
-
   const getuserdetails = (payload) =>
   post(`${BASE_URL}/user/getUserById`, payload);
   const getbuyerdetails = (payload) =>
@@ -78,12 +77,9 @@ const userLogin = (payload) =>
     updateProperty,
     getPropertyById,
     GETALLUSERSBYLIMIT,
-
     updateProfileById,
-
     addBuyer,
     addProperty,
-
     addUser ,
     getCategory,
     findCategory,

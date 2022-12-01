@@ -24,6 +24,7 @@ const UserDetails = () => {
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getUser, setGetUser] = useState(null);
   const [isAdd ,setIsAdd]=useState("authUser");
+  const [rerender, setRerender] = useState(true);
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
 
@@ -39,8 +40,11 @@ console.log("getuser",getUser)
   };
 
   useEffect(() => {
+  if(rerender) {
     getUserId();
-  }, []);
+    setRerender(false)
+  }  
+  }, [rerender]);
 
   const handleRemovingUser = async () => {
     const payload = {
@@ -52,12 +56,13 @@ console.log("getuser",getUser)
       console.log("res", res);
       toastr.success(`User has been Deactivated successfully`, "Success");
       // navigate("/admin/UserList");
+      setRerender(true)
 
       // await getAllUsers();
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen(false); window.location.reload(false);
+    setModalOpen(false); 
   };
   const handleAddUser = async () => {
     const payload = {
@@ -69,12 +74,12 @@ console.log("getuser",getUser)
       console.log("res", res);
       toastr.success(`User has been activated successfully`, "Success");
       // navigate("/admin/UserList"); 
-
+      setRerender(true)
       // await getAllUsers();
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen1(false); window.location.reload(false);
+    setModalOpen1(false); 
   };
 
   return (
@@ -137,20 +142,23 @@ console.log("getuser",getUser)
             >
               Edit
             </button>
-        <button
+       {!isAdd?<button
               href="#"
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={toggleModal1}
+              onClick={()=>{toggleModal1()
+               }}
+           
             >
              Add
             </button>
-            <button
+            :<button
               href="#"
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={toggleModal}
+              onClick={()=>{toggleModal()
+                setIsAdd()}}
             >
               Remove
-            </button>
+            </button>}
            
           </div>
         </div>

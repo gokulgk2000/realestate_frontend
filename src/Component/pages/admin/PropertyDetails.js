@@ -39,7 +39,8 @@ const PropertyDetails = () => {
   const [loading, setloading] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [propertyPic, setPropertyPic] = useState("");
-
+  const [isAdd ,setIsAdd]=useState("");
+  const [rerender, setRerender] = useState(true);
   // const [getPayment, setGetPayment] = useState(null);
   // const [paymentData, setPaymentData] = useState([]);
 
@@ -54,8 +55,10 @@ const PropertyDetails = () => {
   };
 
   useEffect(() => {
+    if(rerender){
     getPropertyId();
-  }, []);
+    setRerender(false)
+  }}, [rerender]);
 
 
  
@@ -68,10 +71,12 @@ const PropertyDetails = () => {
     if (res.success) {
       console.log("res", res);
       toastr.success(`Property has been activated successfully`, "Success");
+      setRerender(true)
+    
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen1(false); window.location.reload(false);
+    setModalOpen1(false);
   };
 
 
@@ -82,12 +87,14 @@ const PropertyDetails = () => {
     const res = await removeProperty(payload);
     if (res.success) {
       console.log(res);
+      
       toastr.success(`Property has been Deactivated successfully`, "Success");
-      navigate("/admin/PropertyList");
+      // navigate("/admin/PropertyList");
+      setRerender(true)
     } else {
       console.log("Error : ", res?.msg || "error");
     }
-    setModalOpen(false); window.location.reload(false);
+    setModalOpen(false); 
   };
   const handleUpdatingProperty = async () => {
     setloading(true);
@@ -358,15 +365,18 @@ const PropertyDetails = () => {
             )}
            
        
-              <button
+           {!isAdd?   <button
               href="#"
               class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={toggleModal1}
+              onClick={()=>{toggleModal1()
+                setIsAdd(true)}}
             >
              Add
             </button>
-            <button  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-            onClick={toggleModal}>Remove </button>
+           : <button  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+           onClick={()=>{toggleModal()
+            setIsAdd(false)}}
+            >Remove </button>}
         </div>   </div>
 </div>
     </React.Fragment>

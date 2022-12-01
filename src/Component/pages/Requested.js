@@ -134,8 +134,10 @@ const requestSearch = (searched)=>{
                 <td className="py-4 px-6">
                 {Data?.phonenumber}
                 </td>
-                <td className="py-4 px-6 font-semibold">
-                {Data?.propertyId?.layoutName},{Data?.propertyId?.location}
+                <td className="py-4 px-6 font-semibold capitalize">
+
+                  <tr>{Data?.propertyId?.layoutName},</tr><tr>{Data?.propertyId?.location}</tr>
+              
                 </td>
             </tr>
             ))}

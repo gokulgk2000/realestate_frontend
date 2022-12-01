@@ -8,11 +8,11 @@ import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
 
 const NavItem = [
-  { name: "Home", link: "/" },
-  { name: "Sell", link: "/sell" },
-  { name: "Property", link: "/property" },
-  { name: "Requested", link: "/request" },
-  { name: "Contactus", link: "/about" },
+  { name: "HOME", link: "/" },
+  { name: "SELL", link: "/sell" },
+  { name: "PROPERTY", link: "/property" },
+  { name: "REQUESTED", link: "/request" },
+  { name: "CONTACT US ", link: "/about" },
 
   // { name: "About", link: "#" },
   // { name: "Contactus", link: "#" },
@@ -37,31 +37,32 @@ function Navbar() {
     getUserName();
   }, []);
   const navigateToProperty = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     navigate(`/ProfileUpdate`);
   };
 
   return (
-    <div className="Navbar font-serif">
+    <div className="Navbar uppercase ">
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
-              <div className="flex items-center gap-4 lg:mt-0 text-rose-700  font-semibold">
+              <div className="flex items-center gap-4 lg:mt-0 text-black  font">
+                
                 {NavItem.map((Nav, k) => (
-                  <NavLink
+                <NavLink
                     key={k}
                     to={Nav.link || "#"}
-                    className="hover:text-teal-500 "
+                    className=""
                   >
-                    {Nav.name}
+                  <button class="text-black p-1 hover:shadow-sm rounded shadow-md flex items-center justify-center hover:text-amber-700"> {Nav.name}</button>   
                   </NavLink>
                 ))}
               </div>
             ) : (
               <Mobilenav navItem={NavItem} />
             )}
-
+           
             {/* <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
                 <li>
                     <a href="/about" className="text-gray-900 dark:text-white hover:underline font-semibold" aria-current="page">About us</a>
@@ -88,7 +89,7 @@ function Navbar() {
                       <div className="flex">
                         {" "}
                         {/* <img src={user?.profilePic} className="w-10 h-10 rounded-full"/>  */}
-                         <svg
+                        <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -102,14 +103,14 @@ function Navbar() {
                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                           />
                         </svg>
-                        <div className="pl-2 text-rose-700 font-serif hover:text-teal-700 hidden md:block lg:block">
-                            {user?.firstname} {user?.lastname}
+                        <div className="pl-2  font hover:text-amber-700 hidden md:block lg:block  hover:shadow-sm rounded shadow-md">
+                          {user?.firstname} {user?.lastname}
                         </div>
                       </div>
                     </a>
-                    <ul className="absolute   bg-white  opcity-80 hidden  group-hover:block group-hover:right-  md:w-32">
+                    <ul className="absolute   bg-white  opcity-80 hidden  group-hover:block group-hover:  md:w-32">
                       <div>
-                        <div className="flex hover:text-white hover:bg-blue-600 text-rose-700 ">
+                        <div className="flex   ">
                           {" "}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +118,7 @@ function Navbar() {
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            className="w-6 h-6 hover:text-white text-teal-700"
+                            className="w-6 h-6 pt-2 text-teal-700"
                           >
                             <path
                               stroke-linecap="round"
@@ -125,12 +126,15 @@ function Navbar() {
                               d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
                             />
                           </svg>
-                          <button className="  text-start  px-1 md:w-28" onClick={navigateToProperty}>
-                            ProfileUpdate
+                          <button
+                            className="  text-start font hover:text-amber-700 uppercase p-1 md:w-28 hover:shadow-sm rounded shadow-md"
+                            onClick={navigateToProperty}
+                          >
+                            Profile
                           </button>
                         </div>
                       </div>
-                      <div className="flex hover:text-white hover:bg-blue-600 border-t-0 border-black text-rose-700 ">
+                      <div className="flex  border-t-0 border-black  ">
                         {" "}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +142,7 @@ function Navbar() {
                           viewBox="0 0 24 24"
                           stroke-width="1.5"
                           stroke="currentColor"
-                          class="w-6 h-6 text-teal-700 hover:text-white"
+                          class="w-6 h-6 pt-2 text-teal-700"
                         >
                           <path
                             stroke-linecap="round"
@@ -147,7 +151,7 @@ function Navbar() {
                           />
                         </svg>
                         <button
-                          className=" text-start  px-1 md:w-28"
+                          className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-sm rounded shadow-md"
                           onClick={logout}
                         >
                           Logout

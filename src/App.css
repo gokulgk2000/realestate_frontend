@@ -22,3 +22,30 @@ border: 2px;
     font-family: 'Rubik',serif;
    
 }
+.grad1 {
+  
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(149, 113, 4));
+}
+.bg{
+  height: 900px;
+  
+}
+.grad-btn {
+  
+  background-image: linear-gradient(to right, rgb(149, 113, 8), rgba(208, 208, 21, 0));
+  
+}
+:hover.grad-btn{
+  background-image: linear-gradient(to right, rgb(149, 113, 4), rgb(149, 113, 4));
+
+
+}
+.grad-card {
+  
+  background-image: linear-gradient(to right, rgba(222, 226, 194, 0), rgb(228, 211, 152));
+}
+.grad-footer {
+  
+  background-image: linear-gradient(to right, rgb(149, 113, 8), rgba(208, 208, 21, 0));
+  
+}

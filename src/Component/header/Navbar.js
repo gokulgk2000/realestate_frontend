@@ -9,8 +9,8 @@ import Mobilenav from "./Mobilenav";
 
 const NavItem = [
   { name: "HOME", link: "/" },
-  { name: "SELL", link: "/sell" },
-  { name: "PROPERTY", link: "/property" },
+  { name: "SELL PROPERTY", link: "/sell" },
+  // { name: "", link: "/property" },
   { name: "REQUESTED", link: "/request" },
   { name: "CONTACT US ", link: "/about" },
 
@@ -42,7 +42,7 @@ function Navbar() {
   };
 
   return (
-    <div className="Navbar uppercase ">
+    <div className="Navbar uppercase grad1">
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
@@ -55,7 +55,7 @@ function Navbar() {
                     to={Nav.link || "#"}
                     className=""
                   >
-                  <button class="text-black p-1 hover:shadow-sm rounded shadow-md flex items-center justify-center hover:text-amber-700"> {Nav.name}</button>   
+                  <button class="text-black p-1 hover:shadow-none rounded shadow-sm flex items-center justify-center hover:text-amber-700"> {Nav.name}</button>   
                   </NavLink>
                 ))}
               </div>
@@ -83,29 +83,30 @@ function Navbar() {
             <div className=" ">
               {isAuthenticated() ? (
                 <div>
-                  <div className=" relative group">
+                  <div className=" relative  group">
                     <a>
                       {" "}
                       <div className="flex">
                         {" "}
-                        {/* <img src={user?.profilePic} className="w-10 h-10 rounded-full"/>  */}
-                        <svg
+                        <img src={user?.profilePic} className="w-10 h-10 rounded-full"/> 
+                     {/* <span>   <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke-width="1.5"
                           stroke="currentColor"
-                          className="w-6 h-6 text-teal-700  hover:text-rose-700"
+                          className="w-6 h-6 text-amber-300  hover:text-white"
                         >
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                           />
-                        </svg>
-                        <div className="pl-2  font hover:text-amber-700 hidden md:block lg:block  hover:shadow-sm rounded shadow-md">
+                        </svg></span> */}
+                        <span>
+                        <div className="px-2 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1hover:shadow-sm rounded shadow-md">
                           {user?.firstname} {user?.lastname}
-                        </div>
+                        </div></span>
                       </div>
                     </a>
                     <ul className="absolute   bg-white  opcity-80 hidden  group-hover:block group-hover:  md:w-32">
@@ -127,7 +128,7 @@ function Navbar() {
                             />
                           </svg>
                           <button
-                            className="  text-start font hover:text-amber-700 uppercase p-1 md:w-28 hover:shadow-sm rounded shadow-md"
+                            className="  text-start font hover:text-amber-700 uppercase p-1 md:w-28 hover:shadow-none rounded shadow-sm"
                             onClick={navigateToProperty}
                           >
                             Profile
@@ -151,7 +152,7 @@ function Navbar() {
                           />
                         </svg>
                         <button
-                          className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-sm rounded shadow-md"
+                          className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
                           onClick={logout}
                         >
                           Logout

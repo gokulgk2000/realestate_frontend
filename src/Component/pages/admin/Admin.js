@@ -32,7 +32,7 @@ const Admin = () => {
 
   // console.log("userlist:",allUsers);
   return (
-    <div>
+   
     
       <div className="md:grid grid-cols-5 font py-4">
         <div className=" font- Arial pt-5  bg-stone-200 px-6  md:text-left text-md">

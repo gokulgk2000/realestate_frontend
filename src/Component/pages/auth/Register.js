@@ -24,7 +24,8 @@ const Register = () => {
       firstname: Yup.string().required("Please Enter Your firstname"),
       lastname: Yup.string().required("Please Enter Your lastname"),
       email: Yup.string().required("Please Enter Your Email"),
-      password: Yup.string().required("Please Enter Your Password")
+      password: Yup.string()
+        .required("Please Enter Your Password")
 
         .matches(/^(?=.{5,})/, "Must Contain 5 Characters"),
     }),

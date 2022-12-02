@@ -1,12 +1,12 @@
 import { set } from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef  } from "react";
 import { success } from "toastr";
 import { getUserById, updateProfileById } from "../../helper/backend_helpers";
 import FileInput from "../../reusable/FileInput";
 import Input from "../../reusable/Input";
 import Image from "../../assets/images/user.jpg"
 const ProfileUpdate = () => {
-  const [user, setUser] = useState({ firstname: "", lastname: "" ,email: "",phoneno:""});
+  const [user, setUser] = useState({ firstname: "", lastname: "" ,email: "",phoneno:"",profilepic:""});
   const profileID = JSON.parse(localStorage.getItem("authUser"));
   //console.log("res", user);
   const userProfile = async () => {
@@ -15,7 +15,7 @@ const ProfileUpdate = () => {
     });
     if (res.success) {
       const { User } = res;
-      setUser({ firstname: User?.firstname, lastname: User?.lastname ,email: User?.email, phoneno: User?.phoneno});
+      setUser({ firstname: User?.firstname, lastname: User?.lastname ,email: User?.email, phoneno: User?.phoneno,profilepic: User?.profilepic});
       console.log("show", res);
       // setUser({firstname:res.user?.firstname,
       //   lastname:res.user,
@@ -39,15 +39,36 @@ const ProfileUpdate = () => {
     } else {
     }
   };
+  const convertBase64 = async (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+  const profileImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const Image =  await convertBase64(file);
+      
+  
+    setUser({...user,profilepic:Image});
+    console.log("profilepic : ", user);
+   
+  };
 
   return (
     <div> 
-      <div className="p-16">
-        <div className="p-8 bg-white shadow mt-24">
+      <div className="py-20 px-24">
+        <div className="py-8 px-8 bg-white shadow mt-24">
           {" "}
           <div className="grid grid-cols-1 md:grid-cols-2">
             {" "}
-            <div className="flex text-center capitalize justify-center order-last md:order-first mt-20 md:mt-0">
+            <div className="flex text-center pr-10 capitalize justify-center order-last md:order-first mt-20 md:mt-0">
               {" "}
               <div>
                 {" "}
@@ -87,12 +108,20 @@ const ProfileUpdate = () => {
               placeholder="Enter the phonenumber "
               value={user?.phoneno}
               onChange={(e) => setUser({...user,phoneno:e.target.value})}
-            /> </div>
+            /> 
+            
+            <FileInput
+              label="profile Image"
+              
+              accept=".png, .jpg, .jpeg,.pdf,.webp"
+              onChange={profileImageUpload}
+            />
+            </div>
               
             </div>{" "}
-            <div className="relative">
+            <div className="relative ">
               {" "}
-              <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+              <div className="w-48 h-48 bg-indigo-100 mx-70 rounded-full shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-24 w-24"
@@ -118,6 +147,7 @@ const ProfileUpdate = () => {
             </p>{" "}
         
           </div>{" "}
+         profilepic: <img src={user?.profilepic} className="w-20 h-20"/>
             </div>{" "}
             {/* <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
               <button className="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">

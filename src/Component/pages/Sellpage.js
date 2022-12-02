@@ -1,20 +1,22 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import Image from "../assets/images/home3.webp";
+import React, { useEffect, useState } from "react";
+//import Image from "../assets/images/home3.webp";
 import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
 import * as Yup from "yup";
-import { PropertyRegistration } from "../helper/backend_helpers";
+import { findCategory, PropertyRegistration } from "../helper/backend_helpers";
+import { Select } from "@material-tailwind/react";
+import toastr from "toastr";
+
 const RegisterProperty = () => {
-  const unitsList = [
-    { value: "Cent", label: "Cent" },
-    { value: "Sq.feet", label: "Sq.feet" },
-    { value: "Acres", label: "Acres" },
-  ];
   const [propertyregistrationError, setPropertyRegistrationError] =
     useState("");
   const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
     useState("");
+    const propertystatus=[    {value: '', text: 'select property status '}, {value: 'ongoing', text: 'ongoing '},
+    {value: 'pending', text: 'pending '},
+    {value: 'complete', text: 'complete '},]
+  const [allcategory, setAllCategory] = useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const validation = useFormik({
@@ -22,7 +24,7 @@ const RegisterProperty = () => {
     enableReinitialize: true,
 
     initialValues: {
-      email: currentUser?.email,
+      regUser: currentUser?.userID,
       Seller: "",
       location: "",
       layoutName: "",
@@ -32,29 +34,32 @@ const RegisterProperty = () => {
       builtArea: "",
       bedRoom: "",
       floorDetails: "",
-      status: "",
+      propertyStatus: "",
       nearTown: "",
       costSq: "",
       facilities: "",
       askPrice: "",
       Description: "",
+      status: "",
+      category: "",
     },
     validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Your Seller"),
       location: Yup.string().required("Please Enter location "),
-      layoutName: Yup.string().required("Please Enter Your Area"),
-      landArea: Yup.string().required("Please Enter Your Landmark"),
-      facing: Yup.string().required("Please Enter Your City"),
-      approachRoad: Yup.string().required("Please Enter approachRoad "),
-      builtArea: Yup.string().required("Please Enter Your builtArea"),
-      bedRoom: Yup.string().required("Please Enter Your bedRoom"),
-      floorDetails: Yup.string().required("Please Enter Your floorDetails"),
-      status: Yup.string().required("Please Enter Your status"),
-      nearTown: Yup.string().required("Please Enter Your nearTown"),
-      costSq: Yup.string().required("Please Enter Your costSq"),
-      facilities: Yup.string().required("Please Enter Your facilities"),
-      askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
-      Description: Yup.string().required("Please Enter Your Description"),
+      // layoutName: Yup.string().required("Please Enter Your Area"),
+      // landArea: Yup.string().required("Please Enter Your Landmark"),
+      // facing: Yup.string().required("Please Enter Your City"),
+      // approachRoad: Yup.string().required("Please Enter approachRoad "),
+      // builtArea: Yup.string().required("Please Enter Your builtArea"),
+      // bedRoom: Yup.string().required("Please Enter Your bedRoom"),
+      // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
+       propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
+      // nearTown: Yup.string().required("Please Enter Your nearTown"),
+      // costSq: Yup.string().required("Please Enter Your costSq"),
+      // facilities: Yup.string().required("Please Enter Your facilities"),
+      // askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
+      // Description: Yup.string().required("Please Enter Your Description"),
+      category: Yup.string().required("Please Enter Your category"),
     }),
     onSubmit: (values, onSubmitProps) => {
       handlePropertyReg({
@@ -67,20 +72,32 @@ const RegisterProperty = () => {
         builtArea: values.builtArea,
         bedRoom: values.bedRoom,
         floorDetails: values.floorDetails,
-        status: values.status,
+        propertyStatus: values.propertyStatus,
         nearTown: values.nearTown,
         costSq: values.costSq,
         facilities: values.facilities,
         askPrice: values.askPrice,
         Description: values.Description,
-        userID: currentUser?.userID,
+        category: values.category,
+        regUser: currentUser?.userID,
         propertyPic,
-        status: "approved",
+        status: "pending",
       });
       console.log("Data", values);
       onSubmitProps.resetForm();
     },
   });
+
+  useEffect(() => {
+    const allcategory = async () => {
+      const res = await findCategory();
+      setAllCategory(res.category);
+
+      return res;
+    };
+
+    allcategory();
+  }, []);
 
   const convertBase64 = async (file) => {
     return new Promise((resolve, reject) => {
@@ -108,7 +125,7 @@ const RegisterProperty = () => {
   const handlePropertyReg = async (payload) => {
     const res = await PropertyRegistration(payload);
     if (res) {
-      setPropertyRegistrationSuccess(res.msg);
+    setPropertyRegistrationSuccess (res.msg);
       console.log("property", res);
       // localStorage.setItem("authUser", JSON.stringify(res));
     } else {
@@ -118,10 +135,8 @@ const RegisterProperty = () => {
     console.log("pic", propertyPic);
   };
 
-  const nav = { backgroundColor: "#f17427d3" };
-  // console.log("Curreny : ",currentUser?.userID)
   return (
-    <div className="md:grid grid-cols-5 ml-5 p-1">
+    <div className="md:grid grid-cols-5 ml-5 p-1 font-serif">
       <form
         className="col-span-3"
         onSubmit={(e) => {
@@ -158,7 +173,7 @@ const RegisterProperty = () => {
               label="location"
               type="text"
               name="location"
-              placeholder="enter the location"
+              placeholder="Enter The Location"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.location || ""}
@@ -177,7 +192,7 @@ const RegisterProperty = () => {
               label="layoutName"
               type="text"
               name="layoutName"
-              placeholder="enter the layoutName"
+              placeholder="Enter The LayoutName"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.layoutName || ""}
@@ -196,7 +211,7 @@ const RegisterProperty = () => {
               label="landArea"
               type="text"
               name="landArea"
-              placeholder="enter the landArea"
+              placeholder="Enter The LandArea"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.landArea || ""}
@@ -216,7 +231,7 @@ const RegisterProperty = () => {
               label="facing"
               type="text"
               name="facing"
-              placeholder="enter the  facing"
+              placeholder="Enter The  Facing"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.facing || ""}
@@ -235,7 +250,7 @@ const RegisterProperty = () => {
               label="approachRoad"
               type="text"
               name="approachRoad"
-              placeholder="enter the approachRoad"
+              placeholder="Enter The ApproachRoad"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.approachRoad || ""}
@@ -256,7 +271,7 @@ const RegisterProperty = () => {
               label="builtArea"
               type="text"
               name="builtArea"
-              placeholder="enter the builtArea"
+              placeholder="Enter The BuiltArea"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.builtArea || ""}
@@ -273,9 +288,9 @@ const RegisterProperty = () => {
           <div>
             <Input
               label="bedRoom"
-              type="text"
+              type="number"
               name="bedRoom"
-              placeholder="enter the bedRoom"
+              placeholder="Enter The BedRoom"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.bedRoom || ""}
@@ -294,7 +309,7 @@ const RegisterProperty = () => {
               label="floorDetails"
               type="text"
               name="floorDetails"
-              placeholder="enter the floorDetails"
+              placeholder="Enter The FloorDetails"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.floorDetails || ""}
@@ -310,31 +325,13 @@ const RegisterProperty = () => {
               <span type="invalid">{validation.errors.floorDetails}</span>
             ) : null}
           </div>
-          <div>
-            <Input
-              label="status"
-              type="text"
-              name="status"
-              placeholder="enter the status"
-              onChange={validation.handleChange}
-              onBlur={validation.handleBlur}
-              value={validation.values.status || ""}
-              invalid={
-                validation.touched.status && validation.errors.status
-                  ? true
-                  : false
-              }
-            />
-            {validation.touched.status && validation.errors.status ? (
-              <span type="invalid">{validation.errors.status}</span>
-            ) : null}
-          </div>
+
           <div>
             <Input
               label="nearTown"
               type="text"
               name="nearTown"
-              placeholder="enter the nearTown"
+              placeholder="Enter The NearTown"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.nearTown || ""}
@@ -353,7 +350,7 @@ const RegisterProperty = () => {
               label="costSq"
               type="number"
               name="costSq"
-              placeholder="enter the costSq"
+              placeholder="Enter The CostSq"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.costSq || ""}
@@ -372,7 +369,7 @@ const RegisterProperty = () => {
               label="facilities"
               type="text"
               name="facilities"
-              placeholder="enter the facilities"
+              placeholder="Enter The Facilities"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.facilities || ""}
@@ -391,7 +388,7 @@ const RegisterProperty = () => {
               label="askPrice"
               type="number"
               name="askPrice"
-              placeholder="enter the askPrice"
+              placeholder="Enter The AskPrice"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.askPrice || ""}
@@ -411,7 +408,7 @@ const RegisterProperty = () => {
               label="Description"
               type="text"
               name="Description"
-              placeholder="enter the Description"
+              placeholder="Enter The Description"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.Description || ""}
@@ -425,6 +422,63 @@ const RegisterProperty = () => {
               <span type="invalid">{validation.errors.Description}</span>
             ) : null}
           </div>
+
+        
+
+            <div className="m-2 grid grid-rows-2 gap-2">
+              <div> Category</div>
+              <select
+                id="category"
+                name="category"
+                label="category"
+                className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={validation.values.category || ""}
+                onChange={validation.handleChange}
+                invalid={
+                  validation.touched.category && validation.errors.category
+                    ? true
+                    : false
+                }
+              >  <option value="" > Select Category
+           
+            </option>
+                {allcategory.map((option, id) => (
+                  <option value={option?._id} key={id}>
+                    {option?.name}
+                  </option>
+                ))}
+            </select>  
+              {validation.touched.category && validation.errors.category ? (
+                <span type="invalid">{validation.errors.category}</span>
+              ) : null}
+            </div>
+            
+            <div className="m-2 grid grid-rows-2  gap-2">
+              <div>PropertyStatus</div>
+              <select
+                id="propertyStatus"
+                name="propertyStatus"
+                label="propertyStatus"
+                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={validation.values.propertyStatus}
+                onChange={validation.handleChange||""}
+                invalid={
+                  validation.touched.propertyStatus &&
+                  validation.errors.propertyStatus
+                    ? true
+                    : false
+                }
+              > {propertystatus.map((option, i) => (
+                <option value={option?.value} key={i}>
+                  {option?.text}
+                </option>
+    ))}
+              </select>
+              {validation.touched.propertyStatus && validation.errors.propertyStatus ? (
+                <span type="invalid">{validation.errors.propertyStatus}</span>
+              ) : null}
+            </div>
+          </div>
           <div>
             <FileInput
               label="Property Images"
@@ -433,29 +487,33 @@ const RegisterProperty = () => {
               onChange={handleImageUpload}
             />
           </div>
-          {propertyregistrationSuccess && (
-            <alert className="text-bold text-green-500">
-              {propertyregistrationSuccess}
-            </alert>
-          )}
-          {propertyregistrationError && (
-            <alert className="text-bold text-red-500">
-              {propertyregistrationError}
-            </alert>
-          )}
-        </div>
-
-        <div className="flex justify-around  mr-6 pt-10  ">
-          <button
-            type="submit"
-            className="bg-blue-400 w-44 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mb-20"
-          >
-            Submit
-          </button>
+        <div className="flex justify-around   mr-6 pt-10  ">
+          <div>
+            {" "}
+            <div>
+              {propertyregistrationSuccess && (
+                <alert className="text-bold text-green-600">
+                  {propertyregistrationSuccess}
+                </alert>
+              )}
+              {propertyregistrationError && (
+                <alert className="text-bold text-red-600">
+                  {propertyregistrationError}
+                </alert>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-400 w-44 my-3 hover:bg-teal-700 text-white font-bold py-1 px-1 rounded mb-20"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </form>
+
       <div className="pr-3 hidden  md:block col-span-2">
-        <img className="aspect-[2/3]" src={Image} />
+        {/* <img className="aspect-[2/3]" src={Image} /> */}
       </div>
     </div>
   );

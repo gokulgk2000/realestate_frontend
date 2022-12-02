@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { allUsersList } from '../../helper/backend_helpers';
+import React, { useEffect, useState ,useMemo } from 'react'
+import { allUsersList, GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
 
+import axios from 'axios';
+import Pagination from '../../pagination/Pagination';
+import Posts from '../../pagination/Post';
+import { useQuery } from '../../helper/hook/useQuery';
+import { Breadcrumbs } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 const UserList = () => {
-    
+  const query = useQuery();
+  
   const [loading, setLoading] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+  const [searchText,setSearchText]=useState("")
+// console.log(userData,"userData")
+// console.log(searchText,"searchText")
 
-  const pageOptions = {
-    sizePerPage: 5,
-    totalSize: userData.length, // replace later with size(customers),
-    custom: true,
-  };
+const requestSearch = (searched)=>{
+  setSearchText(searched)}
     const getAllUsers = async () => {
+      
         setLoading(true);
         const res = await allUsersList({});
-        console.log("dsp:",res);
+        // console.log("dsp:",res);
         if (res.success) {
           setUserData(res.users);
         }
@@ -24,201 +35,139 @@ const UserList = () => {
       useEffect(() => {
         getAllUsers();
       }, []);
-    //   console.log("dsp112:",userData);
+      console.log("dsp112:",userData.length);
+      useEffect(() => {
+        const fetchPosts = async () => {
+          setLoading(true);
+          const res = await GETALLUSERSBYLIMIT ({ 
+        userId: query.get("id"),})
+          setPosts(res.data);
+          setLoading(false);
+        };
+    
+        fetchPosts();
+      }, []);
+      console.log("posts",posts.length)
+ 
+      // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+ 
   return (
-    <div >
-            
+    <div  >
+     <Breadcrumbs >
+      <a href="/admin/Dashboard" className="opacity-60">
+        Dashboard
+      </a>
+      <a href="/admin/userlist" className="text-rose-700">
+       Sellers
+      </a>
+     
+    </Breadcrumbs>
 <div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
+<div className="w-full flex justify-center items-center mt-2 pb-4  scale-100  hover:scale-95 ease-in duration-500">
+        <input
+          type="text"
+          placeholder="Search Sellers"
+          name="search"
+          className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          onChange={(e) => requestSearch(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+        >
+          Search
+        </button>
+      </div>
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                    S.No
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                      Frist Name
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                       Name
+                        <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                       Last Name
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+                    Email
+                        <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                   Email
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" className="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></a>
+               Status
+                        <a href="#"></a>
                     </div>
                 </th>
                
-                <th scope="col" className="py-3 px-6">
-                    <span className="sr-only">View</span>
+                <th scope="col" className="py-3 px-6  text-rose-700">
+                    <span className="">User Details</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-        {userData.map((Data,i)=>(
+          
+
+       
+
+        {( userData?.filter(
+      (item) =>
+      item?.firstname
+      .toString()
+            .toLowerCase()
+            .includes(searchText.toString().toLowerCase()) ||
+          item?.lastname
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toString().toLowerCase()) ||
+          item?.email
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toString().toLowerCase()) 
+         
+    ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
+
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>
-                <td className="py-4 px-6">
-                    {Data?.firstname} 
+                <td className="py-4 px-6 capitalize">
+                    {Data?.firstname} {Data?.lastname}
                 </td>
-                <td className="py-4 px-6">
-                {Data?.lastname}
-                </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 ">
                 {Data?.email}
                 </td>
-                <td className="py-4 px-6 text-right">
-                    <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                <td className="py-4 px-6 capitalize">
+                {Data?.status}
                 </td>
-            </tr>
+                <td className="py-4 px-6 items-center">
+                    <Link to={`/admin/userdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</Link>
+                </td>
+                </tr>   
             ))}
-            {/* <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td className="py-4 px-6">
-                    White
-                </td>
-                <td className="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td className="py-4 px-6">
-                    $1999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td className="py-4 px-6">
-                    Black
-                </td>
-                <td className="py-4 px-6">
-                    Accessories
-                </td>
-                <td className="py-4 px-6">
-                    $99
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td className="py-4 px-6">
-                    Sliver
-                </td>
-                <td className="py-4 px-6">
-                    Laptop
-                </td>
-                <td className="py-4 px-6">
-                    $2999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td className="py-4 px-6">
-                    White
-                </td>
-                <td className="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td className="py-4 px-6">
-                    $1999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td className="py-4 px-6">
-                    Black
-                </td>
-                <td className="py-4 px-6">
-                    Accessories
-                </td>
-                <td className="py-4 px-6">
-                    $99
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
-                </th>
-                <td className="py-4 px-6">
-                    Sliver
-                </td>
-                <td className="py-4 px-6">
-                    Laptop
-                </td>
-                <td className="py-4 px-6">
-                    $2999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
-                </th>
-                <td className="py-4 px-6">
-                    White
-                </td>
-                <td className="py-4 px-6">
-                    Laptop PC
-                </td>
-                <td className="py-4 px-6">
-                    $1999
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr>
-            <tr className="bg-white dark:bg-gray-800">
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Magic Mouse 2
-                </th>
-                <td className="py-4 px-6">
-                    Black
-                </td>
-                <td className="py-4 px-6">
-                    Accessories
-                </td>
-                <td className="py-4 px-6">
-                    $99
-                </td>
-                <td className="py-4 px-6 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                </td>
-            </tr> */}
         </tbody>
     </table>
-    
 </div>
+
+
+<div className='justify-content px-96 mt-2'>
+    <nav aria-label="Page navigation example justify-center">
+    {/* <Posts posts={currentPosts} /> */}
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={userData?.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
+    </nav>
+    </div>
+    </div> 
+
     {/* <nav aria-label="Page flex navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <li>
@@ -251,6 +200,7 @@ const UserList = () => {
       </ul>
     </nav> 
     */}</div>  
+
     </div>
   )
 }

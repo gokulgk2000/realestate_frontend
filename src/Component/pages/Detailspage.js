@@ -7,12 +7,11 @@ const Detailspage = (props) => {
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
 
-  console.log("property", property);
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
 
     if (res.success) {
-      setproperty(res?.Property);
+      setproperty(res?.property);
       console.log("data", res);
     } else {
       console.log("Error while fetching property");
@@ -44,7 +43,7 @@ const Detailspage = (props) => {
   }, []);
   return (
     <div>
-      <div className="grid md:grid-cols-2 bg-emerald-50 md:px-10  px-5">
+      <div className="grid md:grid-cols-2 bg-emerald-50 md:px-10  px-5 font-serif">
         <div className="mr-2 py-">
           <div className="w-full select-none relative aspect-[1]">
             {!loading && (
@@ -171,6 +170,10 @@ const Detailspage = (props) => {
             <li className="flex justify-start gap-2">
               <div className="font-semibold">Askprice:</div>
               <div>₹.{property?.askPrice}</div>
+            </li>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Category:</div>
+              <div>{property?.category?.name}</div>
             </li>
           </ul>{" "}
           <p className=" md:flex  my-4">

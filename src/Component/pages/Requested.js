@@ -32,8 +32,8 @@ const requestSearch = (searched)=>{
  
   return (
     <div >
-<div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
-<div className="w-full flex justify-center items-center mt-2 pb-4  scale-100  hover:scale-95 ease-in duration-500">
+<div className=" overflow-x-auto  shadow-md sm:rounded-lg">
+<div className="w- flex justify-center items-center mt-2 pb-4  ">
         <input
           type="text"
           placeholder="search"

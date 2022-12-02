@@ -26,7 +26,10 @@ const PropertyList = () => {
         };
         getAllProperties();
       }, []);
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+      
 
   return (
     <div>
@@ -147,6 +150,9 @@ const PropertyList = () => {
         currentPage={currentPage}
       />
     </nav>
+
+  
+
     </div>
     </div>
   )

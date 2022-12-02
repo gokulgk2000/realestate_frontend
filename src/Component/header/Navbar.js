@@ -10,14 +10,14 @@ import Mobilenav from "./Mobilenav";
 const NavItem = [
   { name: "HOME", link: "/" },
   { name: "SELL PROPERTY", link: "/sell" },
-  { name: "CONTACT US ", link: "/about" },
   // { name: "", link: "/property" },
-  // { name: "REQUESTED", link: "/request" },
+  { name: "REQUESTED", link: "/request" },
+  { name: "CONTACT US ", link: "/about" },
+
   // { name: "About", link: "#" },
   // { name: "Contactus", link: "#" },
 ];
 function Navbar() {
-  const [searchText, setSearchText] = useState("");
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
@@ -36,23 +36,9 @@ function Navbar() {
   useEffect(() => {
     getUserName();
   }, []);
-  const navigateToProfile = (e) => {
-    e.preventDefault();
-    navigate(`/ProfileUpdate`);
-  };
-
   const navigateToProperty = (e) => {
     e.preventDefault();
-    navigate(`/property?search=${searchText}`);
-  };
-  
-  const navigateToRequested = (e) => {
-    e.preventDefault();
-    navigate(`/requested`);
-  };
-  const navigateToInterested = (e) => {
-    e.preventDefault();
-    navigate(`/request`);
+    navigate(`/ProfileUpdate`);
   };
 
   return (
@@ -62,88 +48,21 @@ function Navbar() {
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
+                
                 {NavItem.map((Nav, k) => (
-                  <NavLink key={k} to={Nav.link || "#"} className="">
-                    <button class="text-black p-1 hover:shadow-none rounded shadow-sm flex items-center justify-center hover:text-amber-700">
-                      {" "}
-                      {Nav.name}
-                    </button>
+                <NavLink
+                    key={k}
+                    to={Nav.link || "#"}
+                    className=""
+                  >
+                  <button class="text-black p-1 hover:shadow-none rounded shadow-sm flex items-center justify-center hover:text-amber-700"> {Nav.name}</button>   
                   </NavLink>
                 ))}
               </div>
             ) : (
               <Mobilenav navItem={NavItem} />
             )}
-
-            <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
-              <div className="flex justify-center rounded-lg  ">
-                <select className="px-4 border  ">
-                  <option>
-                    {" "}
-                    <button class="  py-1 px-4 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  md:w-32 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center">
-                      {" "}
-                      category
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 ml-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        {" "}
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>{" "}
-                    </button>{" "}
-                  </option>
-                  <option value="" className=" border-0   ">
-                    Residential
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Villa
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Land
-                  </option>
-                  <option value="" className=" border-0">
-                    Appartment
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Commercial
-                  </option>
-                </select>
-                <div className="  p-4 border-2 bg-slate-200">
-                  <form action="">
-                    <input
-                      type="text"
-                      id="message"
-                      value={searchText}
-                      name="search"
-                      placeholder="Search Property...."
-                      className=" px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0 "
-                      onChange={(e) => setSearchText(e.target.value)}
-                    />
-                  </form>
-                </div>
-                <div className="  p-4 border-2  bg-white  ">
-                  {" "}
-                  <button
-                    className="px-3 py-2 -ml-1.5 grad-card text-black rounded hover:text-white"
-                    onClick={navigateToProperty}
-                  >
-                    Search Properties
-                  </button>
-                </div>
-              </div>
-            </div>
-
+           
             {/* <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
                 <li>
                     <a href="/about" className="text-gray-900 dark:text-white hover:underline font-semibold" aria-current="page">About us</a>
@@ -169,11 +88,8 @@ function Navbar() {
                       {" "}
                       <div className="flex">
                         {" "}
-                        <img
-                          src={user?.profilePic}
-                          className="w-10 h-10 rounded-full"
-                        />
-                        {/* <span>   <svg
+                        <img src={user?.profilePic} className="w-10 h-10 rounded-full"/> 
+                     {/* <span>   <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -188,13 +104,12 @@ function Navbar() {
                           />
                         </svg></span> */}
                         <span>
-                          <div className="px-2 pt-1 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1 hover:shadow-sm  rounded shadow-md">
-                            {user?.firstname} {user?.lastname}
-                          </div>
-                        </span>
+                        <div className="px-2 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1hover:shadow-sm rounded shadow-md">
+                          {user?.firstname} {user?.lastname}
+                        </div></span>
                       </div>
                     </a>
-                    <ul className="absolute   bg-white rounded-tr-3xl  rounded-bl-3xl pl-2  opcity-80 hidden  group-hover:block group-hover:right-2 group-hover:shadow-md md:w-32">
+                    <ul className="absolute   bg-white  opcity-80 hidden  group-hover:block group-hover:  md:w-32">
                       <div>
                         <div className="flex   ">
                           {" "}
@@ -214,69 +129,11 @@ function Navbar() {
                           </svg>
                           <button
                             className="  text-start font hover:text-amber-700 uppercase p-1 md:w-28 hover:shadow-none rounded shadow-sm"
-                            onClick={navigateToProfile}
+                            onClick={navigateToProperty}
                           >
                             Profile
                           </button>
                         </div>
-                      </div>
-                      <div>
-                        <div className="flex  border-t-0 border-black  ">
-                          {" "}
-                          <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              className="w-6 h-6 pt-2  text-teal-700 "
-                            >
-                              <g data-name="Layer ">
-                                <g data-name="activity">
-                                  <rect
-                                    width="6"
-                                    height="6"
-                                    opacity="0"
-                                    transform="rotate(90 12 12)"
-                                  />
-                                  <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
-                                </g>
-                              </g>
-                            </svg>
-                          <button className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm" onClick={navigateToRequested} >
-                           
-                            Requested
-                          </button>
-                        </div>{" "}
-                      </div>
-                      <div className="flex  border-t-0 border-black  ">
-                        {" "}
-                        <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              className="w-6 h-6 pt-2  text-teal-700 "
-                            >
-                              <g data-name="Layer ">
-                                <g data-name="activity">
-                                  <rect
-                                    width="6"
-                                    height="6"
-                                    opacity="0"
-                                    transform="rotate(90 12 12)"
-                                  />
-                                  <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
-                                </g>
-                              </g>
-                            </svg>
-                        <button
-                          className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
-                          onClick={navigateToInterested}
-                        >
-                         Interested
-                        </button>
                       </div>
                       <div className="flex  border-t-0 border-black  ">
                         {" "}

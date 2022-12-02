@@ -43,108 +43,7 @@ const Detailspage = (props) => {
   }, []);
   return (
     <div>
-      {" "}
-      <div className="pt-20 pr-52 pl-20">
-        <div className="py-4 px-8 bg-white shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 py-8 pr-8 ">
-            {" "}
-            <img
-              className="w-full mt-2 md:aspect-[3/2]"
-              src={property?.propertyPic}
-            />
-          </div>
-        </div>
-      </div>
-
-<div className="flex">
-<div className="pl-96 py-4">
-
-  <div className=" grid py-4 px-8  bg-white shadow-lg gap ">
-<div className="grid  grid-rows-4 grid-flow-col gap-5">
-<div className="font  flex  text-xl ">Seller: <p className=" ">{property?.Seller}</p></div>
-            <div className="font flex  text-lg ">Location:<p className="  ">{property?.location}</p></div>
-            <div className="font flex  text-lg">
-              Layoutname:<p className=" text-base pt-1 ">{property?.layoutName}</p>
-            </div>
-            <div className="font flex  text-lg">Landarea:<p className="  ">{property?.landArea}</p></div>
-            <div className="font flex  text-lg">Facing:<p className=" text-base pt-1 ">{property?.facing}</p></div>
-
-<div className="font flex  text-lg">
-  Approchroad:<p className=" text-base pt-1 ">{property?.approachRoad}</p>
-</div>
-
-<div className="font flex  text-lg">Builtarea:<p className=" text-base pt-1 ">{property?.builtArea}</p></div>
-
-<div className="font flex  text-lg">Bedroom:<p className=" text-base pt-1 ">{property?.bedRoom}</p></div>
-<div className="font flex  text-lg">
-              Floordetails:<p className=" text-base pt-1 "> {property?.floorDetails}</p>
-            </div>
-
-            <div className="font flex  text-lg">Status:<p className=" text-base pt-1 ">{property?.status}</p></div>
-
-            <div className="font flex  text-lg">Neartown:<p className=" text-base pt-1 ">{property?.nearTown}</p></div>
-
-            <div className="font flex  text-lg">Costsq:<p className=" text-base pt-1 ">₹.{property?.costSq}sft</p></div>
-
-</div>
-<div>
-
-</div>
-  </div>
-</div>
-</div>
-
-
-
-      <div className="py-2 pr-52 pl-20"> 
-        <div className="py-4 px-8 bg-white shadow-lg">
-         
-          <div className="grid grid-rows-4 grid-flow-col capitalize gap-4 pb-8  ">
-            <div className="font  flex  text-xl ">Seller: <p className=" text-base pt-1 ">{property?.Seller}</p></div>
-            <div className="font flex  text-lg ">Location:<p className=" text-base pt-1 ">{property?.location}</p></div>
-            <div className="font flex  text-lg">
-              Layoutname:<p className=" text-base pt-1 ">{property?.layoutName}</p>
-            </div>
-            <div className="font flex  text-lg">Landarea:<p className=" text-base pt-1 ">{property?.landArea}</p></div>
-            <div className="font flex  text-lg">Facing:<p className=" text-base pt-1 ">{property?.facing}</p></div>
-
-            <div className="font flex  text-lg">
-              Approchroad:<p className=" text-base pt-1 ">{property?.approachRoad}</p>
-            </div>
-
-            <div className="font flex  text-lg">Builtarea:<p className=" text-base pt-1 ">{property?.builtArea}</p></div>
-
-            <div className="font flex  text-lg">Bedroom:<p className=" text-base pt-1 ">{property?.bedRoom}</p></div>
-
-            <div className="font flex  text-lg">
-              Floordetails:<p className=" text-base pt-1 "> {property?.floorDetails}</p>
-            </div>
-
-            <div className="font flex  text-lg">Status:<p className=" text-base pt-1 ">{property?.status}</p></div>
-
-            <div className="font flex  text-lg">Neartown:<p className=" text-base pt-1 ">{property?.nearTown}</p></div>
-
-            <div className="font flex  text-lg">Costsq:<p className=" text-base pt-1 ">₹.{property?.costSq}sft</p></div>
-
-            <div className="font flex  text-lg">
-              Facilties:<p className=" text-base pt-1 ">{property?.facilities}</p>
-            </div>
-
-            <div className="font flex  text-lg">Askprice:<p className=" text-base pt-1 ">₹.{property?.askPrice}</p></div>
-
-            <div className="font flex  text-lg">
-              Category:<p className=" text-base pt-1 ">{property?.category?.name}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Detailspage;
-{
-  /* <div className="grid md:grid-cols-2 bg-emerald-50 md:px-10  px-5 font flex  text-lg-serif">
+      <div className="grid md:grid-cols-2 bg-emerald-50 md:px-10  px-5 font-serif">
         <div className="mr-2 py-">
           <div className="w-full select-none relative aspect-[1]">
             {!loading && (
@@ -155,16 +54,16 @@ export default Detailspage;
             )}
             <div
               id="default-carousel"
-              className="absolute w-full   top-1/2 transform-translate-y-1/2 px-3 flex  text-lg justify-between items-center"
+              className="absolute w-full   top-1/2 transform-translate-y-1/2 px-3 flex justify-between items-center"
               data-bs-ride="static"
             >
               <button
                 type="button"
-                className="flex  text-lg absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+                className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
                 data-carousel-prev
               >
                 <span
-                  className="inline-flex  text-lg justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-blue-500 dark:bg-gray-800 group-hover:bg-emerald-500 dark:group-hover:bg-blue-800 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+                  className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-blue-500 dark:bg-gray-800 group-hover:bg-emerald-500 dark:group-hover:bg-blue-800 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
                   onClick={() => handlePrevClick()}
                 >
                   <svg
@@ -186,11 +85,11 @@ export default Detailspage;
               </button>
               <button
                 type="button"
-                className="flex  text-lg absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+                className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
                 data-carousel-next
               >
                 <span
-                  className="inline-flex  text-lg justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-blue-500 dark:bg-gray-800 group-hover:bg-emerald-500 dark:group-hover:bg-blue-800 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+                  className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-blue-500 dark:bg-gray-800 group-hover:bg-emerald-500 dark:group-hover:bg-blue-800 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
                   onClick={() => handleNextClick()}
                 >
                   <svg
@@ -216,76 +115,80 @@ export default Detailspage;
 
         <div className="">
           <ul className="grid md:grid-cols-2 md:gap-7 capitalize text-xl leading-loose pl-1">
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Seller:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Seller:</div>
               <div>{property?.Seller}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Location:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Location:</div>
               <div>{property?.location}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Layoutname:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Layoutname:</div>
               <div>{property?.layoutName}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Landarea:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Landarea:</div>
               <div>{property?.landArea}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Facing:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Facing:</div>
               <div>{property?.facing}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Approchroad:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Approchroad:</div>
               <div>{property?.approachRoad}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Builtarea:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Builtarea:</div>
               <div>{property?.builtArea}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Bedroom:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Bedroom:</div>
               <div>{property?.bedRoom}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Floordetails:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Floordetails:</div>
               <div>{property?.floorDetails}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Status:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Status:</div>
               <div>{property?.status}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Neartown:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Neartown:</div>
               <div>{property?.nearTown}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Costsq:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Costsq:</div>
               <div>₹.{property?.costSq}sft</div>
             </li>
-            <li className="flex  text-lg justify-start truncate gap-2">
-              <div className="font flex  text-lg">Facilties:</div>
+            <li className="flex justify-start truncate gap-2">
+              <div className="font-semibold">Facilties:</div>
               <div>{property?.facilities}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Askprice:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Askprice:</div>
               <div>₹.{property?.askPrice}</div>
             </li>
-            <li className="flex  text-lg justify-start gap-2">
-              <div className="font flex  text-lg">Category:</div>
+            <li className="flex justify-start gap-2">
+              <div className="font-semibold">Category:</div>
               <div>{property?.category?.name}</div>
             </li>
           </ul>{" "}
-          <p className=" md:flex  text-lg  my-4">
-            <div className="font flex  text-lg">Description:</div>
+          <p className=" md:flex  my-4">
+            <div className="font-semibold">Description:</div>
             <div className=" ">{property?.Description}</div>
           </p>
-          <div className="flex  text-lg justify-around pt-">
-            <button className="bg-blue-500 hover:bg-teal-700 text-white font flex  text-lg-sans py-2 px-4 rounded ">
+          <div className="flex justify-around pt-">
+            <button className="bg-blue-500 hover:bg-teal-700 text-white font-sans py-2 px-4 rounded ">
               Seller Contact
             </button>{" "}
           </div>
         </div>
-      </div> */
-}
+      </div>
+    </div>
+  );
+};
+
+export default Detailspage;

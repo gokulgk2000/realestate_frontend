@@ -201,7 +201,6 @@ const requestSearch = (searched)=>{
     </nav> 
     */}</div>  
 
-    </div>
   )
 }
 

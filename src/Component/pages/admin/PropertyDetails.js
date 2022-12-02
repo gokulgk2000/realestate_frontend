@@ -12,7 +12,14 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Breadcrumbs, Input } from '@material-tailwind/react';
 import FileInput from '../../reusable/FileInput';
 import AddModel from '../../models/AddModel';
- 
+
+
+
+
+
+
+import { useModel } from "../../helper/hook/useModel"
+import { map } from 'lodash';
 
 const PropertyDetails = () => {
   const query = useQuery();
@@ -83,6 +90,21 @@ console.log("getProperty",getProperty)
     setRerender(false)
   }}, [rerender]);
   
+  const handleUpdatingProperty = async (e) => {
+    e.preventDefault();
+    toastr.success(`Property has been pdated successfully`, "Success");
+
+    // window.location.reload(false);
+
+    const property = { ...getProperty, _id: query.get("id"), };
+
+    const res = await updateProperty(property);
+    if (res.success) {
+   
+      console.log(property);
+    } else {
+    }
+  };
 
   // useEffect(() => {
   //   if(rerender){
@@ -189,9 +211,12 @@ console.log("getProperty",getProperty)
       setPropertyPic(getProperty?.propertyPic[0]);
       setGetProperty();
     }
-  },[]);
+  });
 
 
+  // console.log("getProperty : ",getProperty)
+
+  }, []);
   console.log("getproperty", getProperty );  
   // const handleRemovingProperty = async () => {
   //   const payload = {
@@ -227,7 +252,7 @@ console.log("getProperty",getProperty)
           onCloseClick={() => setModalOpen1(false)}
         />
       )}
-  
+  <div>
 
   <Breadcrumbs >
       <a href="/admin/Dashboard" className="opacity-60 font">
@@ -435,8 +460,7 @@ console.log("getProperty",getProperty)
           </svg>
           Remove 
           </button>}
-        </div>   
-        </div>
+        </div>   </div>
 
             
 

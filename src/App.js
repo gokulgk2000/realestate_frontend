@@ -20,6 +20,13 @@ import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
 import Category from "./Component/pages/Category";
 
+import ProfileUpdate from "./Component/pages/auth/ProfileUpdate";
+
+import BuyerList from "./Component/pages/admin/BuyerList";
+import BuyerDetails from "./Component/pages/admin/BuyerDetails";
+import Requested from "./Component/pages/Requested";
+
+
 
 const App = () => {
   return (
@@ -28,10 +35,12 @@ const App = () => {
       <Navbar /> 
       <Routes>
       <Route path="/" element={<Landingpage />} />
+      <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
 
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
         <Route path="/about" element={<About />} />
+        <Route path="/request" element={<Requested />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
       
         <Route path="/login" element={<Login />} />
@@ -44,9 +53,11 @@ const App = () => {
         <Route index  element={<Dashboard />} />
         <Route path="Dashboard" element={<Dashboard />} />
         <Route  path="userlist" element={<UserList />} />
+        <Route  path="buyerlist" element={<BuyerList />} />
         <Route path="propertylist" element={<PropertyList />} />
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />
+        <Route path="buyerdetails" element={<BuyerDetails />} />
 
         </Route >
         

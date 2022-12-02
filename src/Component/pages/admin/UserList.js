@@ -6,6 +6,7 @@ import Pagination from '../../pagination/Pagination';
 import Posts from '../../pagination/Post';
 import { useQuery } from '../../helper/hook/useQuery';
 import { Breadcrumbs } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 const UserList = () => {
   const query = useQuery();
   
@@ -19,25 +20,7 @@ const UserList = () => {
 // console.log(searchText,"searchText")
 
 const requestSearch = (searched)=>{
-  setSearchText(
-    userData?.filter(
-      (item) =>
-      item?.firstname
-      .toString()
-            .toLowerCase()
-            .includes(searched.toString().toLowerCase()) ||
-          item?.lastname
-          .toString()
-          .toLowerCase()
-          .includes(searched.toString().toLowerCase()) ||
-          item?.email
-          .toString()
-          .toLowerCase()
-          .includes(searched.toString().toLowerCase()) 
-         
-    )
-  )
-}
+  setSearchText(searched)}
     const getAllUsers = async () => {
       
         setLoading(true);
@@ -70,29 +53,29 @@ const requestSearch = (searched)=>{
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
  
   return (
-    <div >
+    <div  >
      <Breadcrumbs >
-      <a href="/admin/Dashboard" className="opacity-60">
+      <a href="/admin/Dashboard" className="opacity-60 font">
         Dashboard
       </a>
-      <a href="/admin/userlist" className="text-rose-700">
-        Users
+      <a href="/admin/userlist" className=" text-amber-700 font">
+       Sellers
       </a>
      
     </Breadcrumbs>
 <div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
-<div className="w-full flex justify-center items-center mt-2 pb- ">
+<div className="w-full flex justify-center items-center mt-2 pb-4 ">
         <input
           type="text"
-          placeholder="search"
+          placeholder="Search Sellers"
           name="search"
-          className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
           onChange={(e) => requestSearch(e.target.value)}
         />
 
         <button
           type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+          className=" grad1 px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
         >
           Search
         </button>
@@ -100,71 +83,125 @@ const requestSearch = (searched)=>{
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                    S.No
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                        Name
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     Email
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                Status
                         <a href="#"></a>
                     </div>
                 </th>
                
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <span className="">User Details</span>
                 </th>
             </tr>
         </thead>
         <tbody>
           
-        {(searchText?.length> 0? searchText:userData.slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
+
+       
+
+        {( userData?.filter(
+      (item) =>
+      item?.firstname
+      .toString()
+            .toLowerCase()
+            .includes(searchText.toString().toLowerCase()) ||
+          item?.lastname
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toString().toLowerCase()) ||
+          item?.email
+          .toString()
+          .toLowerCase()
+          .includes(searchText.toString().toLowerCase()) 
+         
+    ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
+
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                     {Data?.firstname} {Data?.lastname}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 ">
                 {Data?.email}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {Data?.status}
                 </td>
                 <td className="py-4 px-6 items-center">
-                    <a href={`/admin/userdetails?id=${Data?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">View</a>
+                    <Link to={`/admin/userdetails?id=${Data?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">View</Link>
                 </td>
-            </tr>
+                </tr>   
             ))}
         </tbody>
     </table>
 </div>
+
 
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
     {/* <Posts posts={currentPosts} /> */}
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={userData?.length || searchText?.length}
+        totalPosts={userData?.length}
         paginate={paginate}
         currentPage={currentPage}
       />
     </nav>
     </div>
     </div> 
-    </div>
+
+    {/* <nav aria-label="Page flex navigation example">
+      <ul className="inline-flex items-center -space-x-px">
+        <li>
+          <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span className="sr-only">Previous</span>
+            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+        </li>
+        <li>
+          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+        </li>
+        <li>
+          <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+        </li>
+        <li>
+          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+        </li>
+        <li>
+          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+        </li>
+        <li>
+          <a href="#" className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <span className="sr-only">Next</span>
+            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+          </a>
+        </li>
+      </ul>
+    </nav> 
+    */}</div>  
+
+  
   )
 }
 

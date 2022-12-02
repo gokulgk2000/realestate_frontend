@@ -81,7 +81,7 @@ const RegisterProperty = () => {
         category: values.category,
         regUser: currentUser?.userID,
         propertyPic,
-        status: "approved",
+        status: "pending",
       });
       console.log("Data", values);
       onSubmitProps.resetForm();
@@ -136,7 +136,7 @@ const RegisterProperty = () => {
   };
 
   return (
-    <div className="md:grid grid-cols-5 ml-5 p-1 font-serif">
+    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font ">
       <form
         className="col-span-3"
         onSubmit={(e) => {
@@ -145,10 +145,10 @@ const RegisterProperty = () => {
           return false;
         }}
       >
-        <h4 className="flex item-center justify-around font-bold text-2xl underline pb-3">
-          Title:Independent House For Sale
+        <h4 className="flex item-center justify-around font-Light text-2xl underline pb-3 ">
+          TITLE:Independent House For Sale
         </h4>
-        <div className="sm:grid grid-cols-2 gap-2">
+        <div className="sm:grid grid-cols-4 gap-2 ">
           <div>
             <Input
               label="Seller"
@@ -173,7 +173,7 @@ const RegisterProperty = () => {
               label="location"
               type="text"
               name="location"
-              placeholder="enter the location"
+              placeholder="Enter The Location"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.location || ""}
@@ -192,7 +192,7 @@ const RegisterProperty = () => {
               label="layoutName"
               type="text"
               name="layoutName"
-              placeholder="enter the layoutName"
+              placeholder="Enter The LayoutName"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.layoutName || ""}
@@ -211,7 +211,7 @@ const RegisterProperty = () => {
               label="landArea"
               type="text"
               name="landArea"
-              placeholder="enter the landArea"
+              placeholder="Enter The LandArea"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.landArea || ""}
@@ -231,7 +231,7 @@ const RegisterProperty = () => {
               label="facing"
               type="text"
               name="facing"
-              placeholder="enter the  facing"
+              placeholder="Enter The  Facing"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.facing || ""}
@@ -250,7 +250,7 @@ const RegisterProperty = () => {
               label="approachRoad"
               type="text"
               name="approachRoad"
-              placeholder="enter the approachRoad"
+              placeholder="Enter The ApproachRoad"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.approachRoad || ""}
@@ -271,7 +271,7 @@ const RegisterProperty = () => {
               label="builtArea"
               type="text"
               name="builtArea"
-              placeholder="enter the builtArea"
+              placeholder="Enter The BuiltArea"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.builtArea || ""}
@@ -290,7 +290,7 @@ const RegisterProperty = () => {
               label="bedRoom"
               type="number"
               name="bedRoom"
-              placeholder="enter the bedRoom"
+              placeholder="Enter The BedRoom"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.bedRoom || ""}
@@ -309,7 +309,7 @@ const RegisterProperty = () => {
               label="floorDetails"
               type="text"
               name="floorDetails"
-              placeholder="enter the floorDetails"
+              placeholder="Enter The FloorDetails"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.floorDetails || ""}
@@ -331,7 +331,7 @@ const RegisterProperty = () => {
               label="nearTown"
               type="text"
               name="nearTown"
-              placeholder="enter the nearTown"
+              placeholder="Enter The NearTown"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.nearTown || ""}
@@ -350,7 +350,7 @@ const RegisterProperty = () => {
               label="costSq"
               type="number"
               name="costSq"
-              placeholder="enter the costSq"
+              placeholder="Enter The CostSq"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.costSq || ""}
@@ -369,7 +369,7 @@ const RegisterProperty = () => {
               label="facilities"
               type="text"
               name="facilities"
-              placeholder="enter the facilities"
+              placeholder="Enter The Facilities"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.facilities || ""}
@@ -388,7 +388,7 @@ const RegisterProperty = () => {
               label="askPrice"
               type="number"
               name="askPrice"
-              placeholder="enter the askPrice"
+              placeholder="Enter The Price"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.askPrice || ""}
@@ -408,7 +408,7 @@ const RegisterProperty = () => {
               label="Description"
               type="text"
               name="Description"
-              placeholder="enter the Description"
+              placeholder="Enter The Description"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.Description || ""}
@@ -425,14 +425,13 @@ const RegisterProperty = () => {
 
         
 
-         
-            <div className="m-2 grid grid-rows-2 gap-2">
+            <div className="m-2 grid grid-rows-2 font gap-2">
               <div> Category</div>
               <select
                 id="category"
                 name="category"
                 label="category"
-                className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 value={validation.values.category || ""}
                 onChange={validation.handleChange}
                 invalid={
@@ -440,27 +439,27 @@ const RegisterProperty = () => {
                     ? true
                     : false
                 }
-              >  <option value="" >
-             Select Category
+              >  <option value="" > Select Category
+           
             </option>
                 {allcategory.map((option, id) => (
                   <option value={option?._id} key={id}>
                     {option?.name}
                   </option>
                 ))}
-            </select>  
+            </select>   
               {validation.touched.category && validation.errors.category ? (
                 <span type="invalid">{validation.errors.category}</span>
               ) : null}
             </div>
             
-            <div className="m-2 grid grid-rows-2  gap-2">
-              <div>PropertyStatus</div>
+            <div className="m-2 grid grid-rows-2 font gap-2">
+              <div>Property Status</div>
               <select
                 id="propertyStatus"
                 name="propertyStatus"
                 label="propertyStatus"
-                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md shadow-2xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 value={validation.values.propertyStatus}
                 onChange={validation.handleChange||""}
                 invalid={
@@ -479,33 +478,32 @@ const RegisterProperty = () => {
                 <span type="invalid">{validation.errors.propertyStatus}</span>
               ) : null}
             </div>
-          </div>
-          <div>
+          <div className="font">
             <FileInput
               label="Property Images"
               multiple={true}
               accept=".png, .jpg, .jpeg,.pdf,.webp"
               onChange={handleImageUpload}
             />
-          </div>
+          </div></div>
         <div className="flex justify-around   mr-6 pt-10  ">
           <div>
             {" "}
             <div>
               {propertyregistrationSuccess && (
-                <alert className="text-bold text-green-500">
+                <alert className="text-bold text-green-600">
                   {propertyregistrationSuccess}
                 </alert>
               )}
               {propertyregistrationError && (
-                <alert className="text-bold text-red-500">
+                <alert className="text-bold text-red-600">
                   {propertyregistrationError}
                 </alert>
               )}
             </div>
             <button
               type="submit"
-              className="bg-blue-400 w-44 my-3 hover:bg-blue-700 text-white font-bold py-1 px-1 border border-blue-700 rounded mb-20"
+              className="w-44 my-3 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
             >
               Submit
             </button>

@@ -110,12 +110,12 @@ const Property = () => {
         />
       )}
 
-      <div className="w-full flex justify-center items-center mt-2 pb- ">
-        <input
+      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
+        {/* <input
           type="text"
-          placeholder="search your dream house"
+          placeholder="Search Your Dream House"
           name="search"
-          className="look px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
+          className="look px-3 py-2 bg-gray-100 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
           onChange={(e) => setSearchText(e.target.value)}
         />
 
@@ -124,17 +124,17 @@ const Property = () => {
           className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
         >
           Search
-        </button>
+        </button> */}
       </div>
-      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 ">
+      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 font uppercase ">
         {map(property, (pro, i) => (
           <div user={pro} key={"pro" + i}>
-            <div className=" bg-blue-100 pl- shadow-sm shadow-gray-500 hover:shadow-md hover:shadow-gray-900 rounded-md">
+            <div className=" grad-card pl- shadow-sm shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md">
           
               <div
             
                
-                className="grid grid-cols-3  capitalize my-3 "  >
+                className="grid grid-cols-3   my-3 "  >
                 <div className="flex  justify-start items-center"><Link     to={`/Detailspage?uid=${pro?._id}`}>
                   <img
                     className=" md:object-cover md:h-52  md:w-72 rounded-md"
@@ -143,12 +143,16 @@ const Property = () => {
                   /></Link>
                 </div>
                 <div className="col-span-2 pl-2 leading-10">
-                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="sm:flex justify-between  text-2xl md:font-semibold py-5 pr-">
+                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="sm:flex justify-between  text-xl  py-5 pr-">
                     
-                    <h3 className="flex-wrap">{pro?.location}</h3>
+              <div className="flex"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-red-500">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+</svg> <h3 className="flex-wrap text-black">
+{pro?.location}</h3></div>     
                        <h6 className="pr-4">₹.{pro?.askPrice}</h6>
                     </Link>
-                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="flex  mr-3 justify-between shadow-sm shadow-blue-900 px-2 bg-white hover:shadow-md  hover:shadow-blue-900 rounded-md">
+                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="flex  mr-3 justify-between shadow-sm shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md">
                     <p>
                       <div className="underline  text-sm">plot Area</div>
                       <div className="font-semibold">{pro?.costSq}.sq.ft</div>
@@ -169,12 +173,12 @@ const Property = () => {
                   <div className="flex  justify-end">
                     <p>
                       <button
-                        className="bg-blue-500 hover:bg-teal-700 hover:text-white rounded-sm px-1"
+                        className="grad-btn hover:grad1 hover:text-white rounded-sm px-1"
                         onClick={() =>
                           handleBook(pro?._id) && setModalOpen(true)
                         }
                       >
-                        contact
+                        Contact
                       </button>
                     </p>
                   </div>

@@ -3,9 +3,9 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <div className="bg-gray-100  w-full m-0 font-serif">
-        <footer className="text-center lg:text-left bg-teal-50 text-gray-600">
-          <div className="flex justify-center items-center lg:justify-between px-5 border-b border-gray-300 ">
+      <div className="  w-full m-0 font-serif">
+        <footer className="text-center lg:text-left grad-footer text-gray-600">
+          <div className="flex justify-center items-center lg:justify-between px-5 border-b text-gray-400 border-gray-300 ">
             <div className="mr-12 hidden lg:block px-1">
               <span>Get connected with us on social networks:</span>
             </div>
@@ -63,11 +63,7 @@ const Footer = () => {
                     Sell
                   </a>
                 </p>
-                <p className="mb-4">
-                  <a href="#!" className="text-gray-600">
-                    Rent
-                  </a>
-                </p>
+                
               </div>
               <div className="">
                 <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">

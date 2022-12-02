@@ -26,9 +26,18 @@ border: 2px;
   
   background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(149, 113, 4));
 }
+.grad-mob {
+  
+  background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(149, 113, 4));
+}
 .bg{
   height: 900px;
   
+}
+.bg-res{
+
+ height: 900px;
+ width: 100px;
 }
 .grad-btn {
   

@@ -31,15 +31,15 @@ const PropertyList = () => {
   return (
     <div>
       <Breadcrumbs >
-      <a href="/admin/Dashboard" className="opacity-60">
+      <a href="/admin/Dashboard" className="opacity-60 font">
         Dashboard
       </a>
-      <a href="/admin/PropertyList" className="text-rose-700">
+      <a href="/admin/PropertyList" className=" text-amber-700 font">
         Properties
       </a>
     </Breadcrumbs>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-    <div className="w-full flex justify-center items-center mt-2 pb-4  scale-100  hover:scale-95 ease-in duration-500">
+    <div className="w-full flex justify-center items-center mt-2 pb-4  ">
         <input
           type="text"
           placeholder="Search Properties"
@@ -50,7 +50,7 @@ const PropertyList = () => {
 
         <button
           type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+          className=" grad1 px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
         >
           Search
         </button>
@@ -58,28 +58,28 @@ const PropertyList = () => {
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                    Seller Name
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     AskPrice
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     location
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     status
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700 ">
+                <th scope="col" className="py-3 px-6   text-amber-700 ">
                     <span className="flex items-center">PropertyDetails</span>
                 </th>
             </tr>
@@ -130,7 +130,7 @@ const PropertyList = () => {
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6">
-                    <Link to={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">
+                    <Link to={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">
                       View</Link>
                 </td>
             </tr>

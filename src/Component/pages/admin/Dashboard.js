@@ -26,7 +26,7 @@ const Dashborad = () => {
   return (
     <div >
      <Breadcrumbs >
-      <a href="/admin/Dashboard" className="text-rose-700">
+      <a href="/admin/Dashboard" className="text-amber-700 font">
         Dashboard
       </a>
          </Breadcrumbs>
@@ -39,10 +39,10 @@ const Dashborad = () => {
 </svg></div>
 
     <div className="px-6 py-4">
-      <div className=" font-bold  text-rose-700  text-xl mb-2">Sellers</div>
+      <div className=" font-light  text-amber-700  text-xl mb-2">Sellers</div>
       <p>All Sellers</p>
      
-      <Link to = "/admin/userlist"><button  className='bg-blue-500 w-14 rounded-md text-white hover:hover:bg-teal-600'>View</button></Link>
+      <Link to = "/admin/userlist"><button  className=' grad1 w-14 rounded-md text-white bg-amber-700 hover:bg-amber-900'>View</button></Link>
     </div>
    
   </div>
@@ -54,10 +54,10 @@ const Dashborad = () => {
 </svg></div>
 
     <div className="px-6 py-4">
-      <div className=" font-bold  text-rose-700  text-xl mb-2">Buyers</div>
+      <div className=" font-light  text-amber-700  text-xl mb-2">Buyers</div>
       <p>All Buyers</p>
      
-      <Link to = "/admin/buyerlist"><button  className='bg-blue-500 w-14 rounded-md text-white hover:hover:bg-teal-600'>View</button></Link>
+      <Link to = "/admin/buyerlist"><button  className='grad1 w-14 rounded-md text-white bg-amber-700 hover:bg-amber-900'>View</button></Link>
     </div>
    
   </div>
@@ -69,10 +69,10 @@ const Dashborad = () => {
 
 
     <div className="px-6 py-4">
-      <div className="  font-bold  text-rose-700  text-xl mb-2 ">Properties</div>
+      <div className="  font-light text-amber-700  text-xl mb-2 ">Properties</div>
       <p>All Registered Properties</p>
       {/* {userData.map((lenght,i)=>())} */}
-      <Link to = "/admin/propertylist"><button  className='bg-blue-500 w-14 rounded-md text-white hover:hover:bg-teal-600'>View</button></Link>
+      <Link to = "/admin/propertylist"><button  className=' grad1 w-14 rounded-md text-white  bg-amber-700 hover:bg-amber-900'>View</button></Link>
  
     </div>
    

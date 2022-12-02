@@ -104,59 +104,67 @@ console.log("getuser",getUser)
       )}
       <div>
         <Breadcrumbs>
-          <a href="/admin/Dashboard" className="opacity-60">
+          <a href="/admin/Dashboard" className="opacity-60 font">
             Dashboard
           </a>
-          <a href="/admin/userlist" className="opacity-60">
+          <a href="/admin/userlist" className="opacity-60 font">
           Sellers
           </a>
-          <a href="/admin/userdetails" className="text-rose-700">
+          <a href="/admin/userdetails" className="text-amber-700 font">
           SellersDetails
           </a>
         </Breadcrumbs>
         <div className="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
           <div className="flex flex-col items-left pb-10 leading-loose">
-            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               Firstname : {getUser?.firstname}
             </h5>
-            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               Lastname : {getUser?.lastname}
             </h5>
-            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               {" "}
               Email :{getUser?.email}
             </h5>
-            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               {" "}
               Date :{getUser?.date}
             </h5>
-            <h5 className="mx-1 text-xl font-medium text-gray-900 dark:text-white leading-loose">
+            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               {" "}
               Status :{getUser?.status}
             </h5>
           </div>
           <div className="flex mt-4 space-x-3 md:mt-6">
-            <button
+            {/* <button
               href="#"
-              className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="inline-flex items-center px-4 py-2 text-smfont-light text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Edit
-            </button>
-       {!isAdd?<button
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+</svg>Edit
+
+            </button> */}
+       {getUser?.status !=="approved"? <button
               href="#"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={()=>{toggleModal1()
-               }}
+              class="inline-flex items-center px-4 py-2 text-smfont-light text-center  text-white  bg-amber-700 rounded-lg hover:bg-amber-900  focus:ring-4 focus:outline-none  dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              onClick={()=>toggleModal1() }
            
-            >
+            ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          
+          
              Add
             </button>
             :<button
               href="#"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-              onClick={()=>{toggleModal()
-                setIsAdd()}}
-            >
+              class="inline-flex items-center px-4 py-2 text-smfont-light text-center  text-white  bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+              onClick={()=>toggleModal()}
+            ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+          </svg>
+          
               Remove
             </button>}
            

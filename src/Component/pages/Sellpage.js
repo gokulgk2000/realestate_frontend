@@ -136,7 +136,7 @@ const RegisterProperty = () => {
   };
 
   return (
-    <div className="md:grid grid-cols-5 ml-5 p-1 font-serif">
+    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font ">
       <form
         className="col-span-3"
         onSubmit={(e) => {
@@ -145,10 +145,10 @@ const RegisterProperty = () => {
           return false;
         }}
       >
-        <h4 className="flex item-center justify-around font-bold text-2xl underline pb-3">
-          Title:Independent House For Sale
+        <h4 className="flex item-center justify-around font-Light text-2xl underline pb-3 ">
+          TITLE:Independent House For Sale
         </h4>
-        <div className="sm:grid grid-cols-2 gap-2">
+        <div className="sm:grid grid-cols-4 gap-2 ">
           <div>
             <Input
               label="Seller"
@@ -388,7 +388,7 @@ const RegisterProperty = () => {
               label="askPrice"
               type="number"
               name="askPrice"
-              placeholder="Enter The AskPrice"
+              placeholder="Enter The Price"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.askPrice || ""}
@@ -425,7 +425,7 @@ const RegisterProperty = () => {
 
         
 
-            <div className="m-2 grid grid-rows-2 gap-2">
+            <div className="m-2 grid grid-rows-2 font gap-2">
               <div> Category</div>
               <select
                 id="category"
@@ -447,14 +447,14 @@ const RegisterProperty = () => {
                     {option?.name}
                   </option>
                 ))}
-            </select>  
+            </select>   
               {validation.touched.category && validation.errors.category ? (
                 <span type="invalid">{validation.errors.category}</span>
               ) : null}
             </div>
             
-            <div className="m-2 grid grid-rows-2  gap-2">
-              <div>PropertyStatus</div>
+            <div className="m-2 grid grid-rows-2 font gap-2">
+              <div>Property Status</div>
               <select
                 id="propertyStatus"
                 name="propertyStatus"
@@ -478,15 +478,14 @@ const RegisterProperty = () => {
                 <span type="invalid">{validation.errors.propertyStatus}</span>
               ) : null}
             </div>
-          </div>
-          <div>
+          <div className="font">
             <FileInput
               label="Property Images"
               multiple={true}
               accept=".png, .jpg, .jpeg,.pdf,.webp"
               onChange={handleImageUpload}
             />
-          </div>
+          </div></div>
         <div className="flex justify-around   mr-6 pt-10  ">
           <div>
             {" "}
@@ -504,7 +503,7 @@ const RegisterProperty = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-400 w-44 my-3 hover:bg-teal-700 text-white font-bold py-1 px-1 rounded mb-20"
+              className="w-44 my-3 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
             >
               Submit
             </button>

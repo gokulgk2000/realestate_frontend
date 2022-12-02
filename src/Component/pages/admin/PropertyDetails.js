@@ -16,7 +16,6 @@ import { Breadcrumbs, Input } from "@material-tailwind/react";
 import FileInput from "../../reusable/FileInput";
 import AddModel from "../../models/AddModel";
 
-
 const PropertyDetails = () => {
   const query = useQuery();
   const navigate = useNavigate();
@@ -79,6 +78,20 @@ const PropertyDetails = () => {
     }
   };
 
+  const handleUpdatingProperty = async (e) => {
+    e.preventDefault();
+    toastr.success(`Property has been pdated successfully`, "Success");
+
+    // window.location.reload(false);
+
+    const property = { ...getProperty, _id: query.get("id") };
+
+    const res = await updateProperty(property);
+    if (res.success) {
+      console.log(property);
+    } else {
+    }
+  };
   useEffect(() => {
     if (rerender) {
       getPropertyId();
@@ -119,70 +132,6 @@ const PropertyDetails = () => {
     }
     setModalOpen(false);
   };
-
-  const handleUpdatingProperty = async () => {
-    setloading(true);
-    const updateProperties = getProperty?.map((pro) => pro?.id);
-    const payload = {
-      id: query.get("id"),
-      Seller: seller,
-      location,
-      layoutName,
-      landArea,
-      location,
-      layoutName,
-      landArea,
-      facing,
-      approachRoad,
-      builtArea,
-      bedRoom,
-      floorDetails,
-      nearTown,
-      costSq,
-      facilities,
-      askPrice,
-      Description: description,
-      propertyPic,
-      properties: updateProperties,
-    };
-    const id = query.get("id");
-    console.log("id", id);
-    const res = await updateProperty(payload);
-    console.log("first", res);
-    if (res.success) {
-      toastr.success(`Property has been updated successfully`, "Success");
-
-      await getPropertyDetailsById({
-        id: query.get("id"),
-      });
-    } else {
-      toastr.error(`Failed to update Property due to`, "Failed!!!");
-    }
-    setloading(false);
-  };
-  useEffect(() => {
-    if (getProperty) {
-      setPropertyId(getProperty?.id);
-      setLocation(getProperty?.location);
-      setSeller(getProperty?.Seller);
-      setLocation(getProperty?.location);
-      setSeller(getProperty?.Seller);
-      setLayoutName(getProperty?.layoutName);
-      setLandArea(getProperty?.landArea);
-      setFacing(getProperty?.facing);
-      setApproachRoad(getProperty?.approachRoad);
-      setBuiltArea(getProperty?.builtArea);
-      setBedRoom(getProperty?.bedRoom);
-      setFloorDetails(getProperty?.floorDetails);
-      setNearTown(getProperty?.nearTown);
-      setCostSq(getProperty?.costSq);
-      setFacilities(getProperty?.facilities);
-      setAskPrice(getProperty?.askPrice);
-      setDescription(getProperty?.Description);
-      setPropertyPic(getProperty?.propertyPic[0]);
-      setGetProperty();
-    }
-  }, []);
 
   return (
     <>
@@ -483,40 +432,6 @@ const PropertyDetails = () => {
               Remove
             </button>
           )}
-        </div>
-      </div>
-
-      <div class="min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex  ml-5 flex-col items-left pb-10">
-          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            Seller : {getProperty?.Seller}
-          </h5>
-          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            AskPrice : {getProperty?.askPrice}
-          </h5>
-          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            costSq :{getProperty?.costSq}
-          </h5>
-          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            location :{getProperty?.location}
-          </h5>
-
-          <span class="text-sm text-gray-500 dark:text-gray-400"> </span>
-        </div>
-
-        <div class="flex ml-5 mt-4 space-x-3 md:mt-6">
-          <a
-            href="#"
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Edit
-          </a>
-          <a
-            href="#"
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
-          >
-            Remove{" "}
-          </a>
         </div>
       </div>
     </>

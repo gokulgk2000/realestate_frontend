@@ -58,6 +58,7 @@ const Admin = () => {
             Sub-Menu
           </h3>
           <ul className="font- Arial  leading-loose">
+            <li>page</li>
             <li className="flex ">
               <Link
                 className="flex font-Arial opacity-90  pt-3 leading-loose"
@@ -122,6 +123,7 @@ const Admin = () => {
           </ul>
         </div>
 
+
         <div className="md: col-span-4 bg-stone-100">
         {/* <div className="w-full flex justify-center items-center mt-2 pb-4 ">
           <form action="">
@@ -140,6 +142,10 @@ const Admin = () => {
           </form>
         </div> */}
         <Outlet />
+
+        <div className="md: col-span-4 bg-teal-100">
+       <Outlet />
+
         </div>
       </div>
     </div>

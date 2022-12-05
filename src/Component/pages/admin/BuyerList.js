@@ -1,23 +1,19 @@
-import React, { useEffect, useState ,useMemo } from 'react'
-import { allBuyerList, allUsersList, GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
+import React, { useEffect, useState , } from 'react'
+import { allBuyerList,  GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
 
-import axios from 'axios';
 import Pagination from '../../pagination/Pagination';
-import Posts from '../../pagination/Post';
 import { useQuery } from '../../helper/hook/useQuery';
 import { Breadcrumbs } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 const BuyerList = () => {
   const query = useQuery();
   
-  const [loading, setLoading] = useState(false);
+  const [ loading,setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [buyerData, setBuyerData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText,setSearchText]=useState("")
-// console.log(userData,"userData")
-// console.log(searchText,"searchText")
 
 const requestSearch = (searched)=>{
   setSearchText(searched)}
@@ -36,7 +32,6 @@ const requestSearch = (searched)=>{
     getAllBuyers();
   }, []);
 
-      console.log("dsp112:",buyerData.length);
       useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
@@ -89,23 +84,19 @@ const requestSearch = (searched)=>{
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
-                       Name
-                        <a href="#"></a>
+                       Name   
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     Email
-                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                Status
-                        <a href="#"></a>
                     </div>
                 </th>
-               
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <span className="">User Details</span>
                 </th>
@@ -153,7 +144,6 @@ const requestSearch = (searched)=>{
 
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
-    {/* <Posts posts={currentPosts} /> */}
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={buyerData?.length}

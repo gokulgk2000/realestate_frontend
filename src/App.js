@@ -25,6 +25,8 @@ import ProfileUpdate from "./Component/pages/auth/ProfileUpdate";
 import BuyerList from "./Component/pages/admin/BuyerList";
 import BuyerDetails from "./Component/pages/admin/BuyerDetails";
 import Requested from "./Component/pages/Requested";
+import RequestedModel from "./Component/models/RequestedModel";
+import Requestedpage from "./Component/pages/Requestedpage";
 
 
 
@@ -41,6 +43,7 @@ const App = () => {
       <Route path="/property" element={<Property />} />
         <Route path="/about" element={<About />} />
         <Route path="/request" element={<Requested />} />
+        <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
       
         <Route path="/login" element={<Login />} />
@@ -58,6 +61,7 @@ const App = () => {
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />
         <Route path="buyerdetails" element={<BuyerDetails />} />
+
 
         </Route >
         

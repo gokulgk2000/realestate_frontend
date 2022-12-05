@@ -35,6 +35,8 @@ const userLogin = (payload) =>
   const addUser = (payload) => put(`${BASE_URL}/admin/addUser`, payload);
   const addBuyer = (payload) => put(`${BASE_URL}/admin/addBuyer`, payload);
   const addProperty = (payload) => put(`${BASE_URL}/admin/addProperty`, payload);
+  const getrequestedByUserId = (payload) => post(`${BASE_URL}/requested/getrequestedByUserId`, payload);
+  const getrequested = (payload) => post(`${BASE_URL}/requested/requested`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
@@ -74,6 +76,8 @@ const updateProperty = (payload) =>
     addBuyer,
     addProperty,
     addUser ,
+    getrequested,
+    getrequestedByUserId,
     getCategory,
     findCategory,
     getPropertiescategoryId

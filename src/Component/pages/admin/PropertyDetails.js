@@ -11,16 +11,11 @@ import { useModal } from "../../helper/hook/useModal";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import RemoveModel from "../../models/RemoveModel";
-import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Breadcrumbs, Input } from "@material-tailwind/react";
-import FileInput from "../../reusable/FileInput";
 import AddModel from "../../models/AddModel";
 
 const PropertyDetails = () => {
   const query = useQuery();
-  const navigate = useNavigate();
-  // const id= query.get("id")
-  // console.log("id",id)
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -45,9 +40,8 @@ const PropertyDetails = () => {
     Description: "",
   });
   const [rerender, setRerender] = useState(true);
-  // const [getPayment, setGetPayment] = useState(null);
-  // const [paymentData, setPaymentData] = useState([]);
   console.log("getProperty", getProperty);
+
   const getPropertyId = async () => {
     const res = await getPropertyDetailsById({
       propertyId: query.get("id"),
@@ -81,8 +75,6 @@ const PropertyDetails = () => {
   const handleUpdatingProperty = async (e) => {
     e.preventDefault();
     toastr.success(`Property has been pdated successfully`, "Success");
-
-    // window.location.reload(false);
 
     const property = { ...getProperty, _id: query.get("id") };
 
@@ -125,7 +117,6 @@ const PropertyDetails = () => {
       console.log(res);
 
       toastr.success(`Property has been Deactivated successfully`, "Success");
-      // navigate("/admin/PropertyList");
       setRerender(true);
     } else {
       console.log("Error : ", res?.msg || "error");
@@ -161,7 +152,7 @@ const PropertyDetails = () => {
         <a href="/admin/PropertyList" className="opacity-60 font">
           Properties
         </a>
-        <a className=" text-amber-700 disabled font">PropertyDetails</a>
+        <a href="/admin/PropertyDetails" className=" text-amber-700 disabled font">PropertyDetails</a>
       </Breadcrumbs>
       <div class="grid  grid-cols-2 min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
         <div class="flex ml-5 flex-col items-left pb-10">
@@ -339,7 +330,7 @@ const PropertyDetails = () => {
               onChange={e =>setPropertyPic(e.target.value)}
             /> */}
         </div>
-        <img src={getProperty?.propertyPic} />
+        <img alt="property image" src={getProperty?.propertyPic} />
 
         <div class="flex ml-5 mt-4 space-x-3 md:mt-6">
           {!isEdit ? (

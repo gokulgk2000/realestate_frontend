@@ -5,8 +5,6 @@ import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
 import * as Yup from "yup";
 import { findCategory, PropertyRegistration } from "../helper/backend_helpers";
-import { Select } from "@material-tailwind/react";
-import toastr from "toastr";
 
 const RegisterProperty = () => {
   const [propertyregistrationError, setPropertyRegistrationError] =

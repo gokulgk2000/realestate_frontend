@@ -3,6 +3,7 @@ import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { getUserById } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
+import { useModal } from "../helper/hook/useModal";
 import { useQuery } from "../helper/hook/useQuery";
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
@@ -20,9 +21,10 @@ function Navbar() {
   const [searchText, setSearchText] = useState("");
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
+
   const navigate = useNavigate();
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
-
+console.log("user",user)
   const getUserName = async () => {
     const res = await getUserById({
       userID: userFromStorage?.userID,
@@ -47,9 +49,11 @@ function Navbar() {
   };
   
   const navigateToRequested = (e) => {
-    e.preventDefault();
-    navigate(`/requested`);
+    // e.preventDefault();
+    navigate(`/requestedpage?`);
+    
   };
+  
   const navigateToInterested = (e) => {
     e.preventDefault();
     navigate(`/request`);
@@ -57,6 +61,7 @@ function Navbar() {
 
   return (
     <div className="Navbar uppercase grad1">
+       
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
@@ -243,7 +248,11 @@ function Navbar() {
                                 </g>
                               </g>
                             </svg>
-                          <button className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm" onClick={navigateToRequested} >
+                            
+                          <button className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm" 
+                          onClick={(e)=>
+                            navigateToRequested(e)}
+                          >
                            
                             Requested
                           </button>

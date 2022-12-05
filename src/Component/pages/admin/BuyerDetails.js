@@ -3,23 +3,17 @@ import { useModal } from "../../helper/hook/useModal";
 import { useQuery } from "../../helper/hook/useQuery";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-import { confirmAlert } from "react-confirm-alert";
 import RemoveModel from "../../models/RemoveModel";
-import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
 import { addBuyer, getbuyerdetails, removeBuyer } from "../../helper/backend_helpers";
 const BuyerDetails = () => {
   const query = useQuery();
-  const navigate = useNavigate();
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getBuyer, setGetBuyer] = useState(null);
-  const[isAdd, setIsAdd] = useState("authUser")
   const [rerender, setRerender] = useState(true);
-  // const [getPayment, setGetPayment] = useState(null);
-  // const [paymentData, setPaymentData] = useState([]);
-console.log("getBuyer",getBuyer)
+
   const getBuyerById = async () => {
     const res = await getbuyerdetails({
       userId: query.get("id"),

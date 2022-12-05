@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   addUser,
-  getPropertyById,
   getUserById,
   removeUser,
 } from "../../helper/backend_helpers";
@@ -9,24 +8,16 @@ import { useModal } from "../../helper/hook/useModal";
 import { useQuery } from "../../helper/hook/useQuery";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-import { confirmAlert } from "react-confirm-alert";
 import RemoveModel from "../../models/RemoveModel";
-import { useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
 
 const UserDetails = () => {
   const query = useQuery();
-  const navigate = useNavigate();
-
-
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [getUser, setGetUser] = useState(null);
-  const [isAdd ,setIsAdd]=useState("authUser");
   const [rerender, setRerender] = useState(true);
-  // const [getPayment, setGetPayment] = useState(null);
-  // const [paymentData, setPaymentData] = useState([]);
 
 console.log("getuser",getUser)
   const getUserId = async () => {
@@ -55,10 +46,7 @@ console.log("getuser",getUser)
     if (res.success) {
       console.log("res", res);
       toastr.success(`User has been Deactivated successfully`, "Success");
-      // navigate("/admin/UserList");
       setRerender(true)
-
-      // await getAllUsers();
     } else {
       console.log("Error : ", res?.msg || "error");
     }
@@ -73,9 +61,7 @@ console.log("getuser",getUser)
     if (res.success) {
       console.log("res", res);
       toastr.success(`User has been activated successfully`, "Success");
-      // navigate("/admin/UserList"); 
       setRerender(true)
-      // await getAllUsers();
     } else {
       console.log("Error : ", res?.msg || "error");
     }

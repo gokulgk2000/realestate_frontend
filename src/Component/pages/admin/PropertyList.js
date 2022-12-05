@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { allPropertiesList } from '../../helper/backend_helpers';
 import Pagination from '../../pagination/Pagination';
-import Posts from '../../pagination/Post';
-
 const PropertyList = () => {
     const [allProperties, setAllProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,9 +10,7 @@ const PropertyList = () => {
   const [searchText,setSearchText]=useState("")
 
   const propertySearch = (searched)=>{
- setSearchText(searched)
-   
-  }
+ setSearchText(searched)}
 
     useEffect(() => {
         const getAllProperties = async () => {
@@ -27,9 +23,7 @@ const PropertyList = () => {
         getAllProperties();
       }, []);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-      
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);  
 
   return (
     <div>
@@ -67,19 +61,16 @@ const PropertyList = () => {
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     AskPrice
-                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     location
-                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     status
-                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700 ">

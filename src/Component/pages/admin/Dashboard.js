@@ -1,11 +1,11 @@
 import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { allBuyerList, allUsersList } from "../../helper/backend_helpers";
+import {  allUsersList } from "../../helper/backend_helpers";
 
 const Dashborad = () => {
-  const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState([]);
+  const [ setLoading] = useState(false);
+  const [ setUserData] = useState([]);
 
   const getAllUsers = async () => {
     setLoading(true);

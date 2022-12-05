@@ -1,28 +1,22 @@
-import React, { useEffect, useState ,useMemo } from 'react'
+import React, { useEffect, useState  } from 'react'
 import { allUsersList, GETALLUSERSBYLIMIT } from '../../helper/backend_helpers';
-
-import axios from 'axios';
 import Pagination from '../../pagination/Pagination';
-import Posts from '../../pagination/Post';
 import { useQuery } from '../../helper/hook/useQuery';
 import { Breadcrumbs } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 const UserList = () => {
   const query = useQuery();
-  
   const [loading, setLoading] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [ setPosts] = useState([]);
   const [userData, setUserData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText,setSearchText]=useState("")
-// console.log(userData,"userData")
-// console.log(searchText,"searchText")
 
 const requestSearch = (searched)=>{
   setSearchText(searched)}
+
     const getAllUsers = async () => {
-      
         setLoading(true);
         const res = await allUsersList({});
         // console.log("dsp:",res);
@@ -35,7 +29,7 @@ const requestSearch = (searched)=>{
       useEffect(() => {
         getAllUsers();
       }, []);
-      console.log("dsp112:",userData.length);
+
       useEffect(() => {
         const fetchPosts = async () => {
           setLoading(true);
@@ -44,10 +38,8 @@ const requestSearch = (searched)=>{
           setPosts(res.data);
           setLoading(false);
         };
-    
         fetchPosts();
       }, []);
-      console.log("posts",posts.length)
  
       // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -89,32 +81,24 @@ const requestSearch = (searched)=>{
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                        Name
-                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     Email
-                        <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
-               Status
-                        <a href="#"></a>
+               Status    
                     </div>
                 </th>
-               
                 <th scope="col" className="py-3 px-6   text-amber-700">
                     <span className="">User Details</span>
                 </th>
             </tr>
         </thead>
         <tbody>
-          
-
-       
-
         {( userData?.filter(
       (item) =>
       item?.firstname
@@ -129,10 +113,8 @@ const requestSearch = (searched)=>{
           .toString()
           .toLowerCase()
           .includes(searchText.toString().toLowerCase()) 
-         
     ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
-
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>
@@ -153,11 +135,9 @@ const requestSearch = (searched)=>{
         </tbody>
     </table>
 </div>
-
-
 <div className='justify-content px-96 mt-2'>
     <nav aria-label="Page navigation example justify-center">
-    {/* <Posts posts={currentPosts} /> */}
+
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={userData?.length}

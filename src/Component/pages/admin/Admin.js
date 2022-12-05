@@ -1,18 +1,13 @@
-import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { allPropertiesList, allUsersList } from "../../helper/backend_helpers";
-import Breadcrumb from "./Breadcrumbs";
-import UserList from "./UserList";
 
 const Admin = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [allProperties, setAllProperties] = useState([]);
-
   useEffect(() => {
     const getAllUsers = async () => {
       const res = await allUsersList({});
-      // console.log("dsp" ,res);
       if (res.success) {
         setAllUsers(res.users);
       }
@@ -22,7 +17,6 @@ const Admin = () => {
   useEffect(() => {
     const getAllProperties = async () => {
       const res = await allPropertiesList({});
-      // console.log("getAllProperties" ,res);
       if (res.success) {
         setAllProperties(res.properties);
       }
@@ -30,7 +24,6 @@ const Admin = () => {
     getAllProperties();
   }, []);
 
-  // console.log("userlist:",allUsers);
   return (
    
     
@@ -122,27 +115,7 @@ const Admin = () => {
             </li>
           </ul>
         </div>
-
-
         <div className="md: col-span-4 bg-stone-100">
-        {/* <div className="w-full flex justify-center items-center mt-2 pb-4 ">
-          <form action="">
-          
-            <input
-              type="text"
-              id="message"
-              value={searchText}
-              name="search"
-              className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
-              // onChange = {(e)=>setSearchText(e.target.value)}
-            />
-            <button className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full " >
-              Search 
-            </button>
-          </form>
-        </div> */}
-     
-
         <div className="md: col-span-4">
        <Outlet />
 

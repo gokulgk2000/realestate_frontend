@@ -49,9 +49,9 @@ console.log("user",user)
     navigate(`/property?search=${searchText}`);
   };
   
-  const navigateToRequested = (e) => {
+  const navigateToUserActivities = (e) => {
     // e.preventDefault();
-    navigate(`/requestedpage?`);
+    navigate(`/UserActivties?`);
     
   };
   
@@ -133,7 +133,7 @@ console.log("user",user)
                       value={searchText}
                       name="search"
                       placeholder="Search Property...."
-                      className=" px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0 "
+                      className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
                       onChange={(e) => setSearchText(e.target.value)}
                     />
                   </form>
@@ -252,14 +252,14 @@ console.log("user",user)
                             
                           <button className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm" 
                           onClick={(e)=>
-                            navigateToRequested(e)}
+                            navigateToUserActivities(e)}
                           >
                            
-                            Requested
+                            Activities
                           </button>
                         </div>{" "}
                       </div>
-                      <div className="flex  border-t-0 border-black  ">
+                      {/* <div className="flex  border-t-0 border-black  ">
                         {" "}
                         <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +287,7 @@ console.log("user",user)
                         >
                          Interested
                         </button>
-                      </div>
+                      </div> */}
                       <div className="flex  border-t-0 border-black  ">
                         {" "}
                         <svg
@@ -335,7 +335,7 @@ console.log("user",user)
               ) : (
                 <button
                   type="button"
-                  className="inline-block px-1 py-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-500 hover:shadow-lg focus:bg-teal-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="inline-block px-1 py-2 bg-amber-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-amber-500 hover:shadow-lg focus:bg-amber-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   <Link to="/login">Login</Link>
                 </button>

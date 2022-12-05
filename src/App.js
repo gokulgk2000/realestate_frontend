@@ -27,6 +27,7 @@ import BuyerDetails from "./Component/pages/admin/BuyerDetails";
 import Requested from "./Component/pages/Requested";
 import RequestedModel from "./Component/models/RequestedModel";
 import Requestedpage from "./Component/pages/Requestedpage";
+import UserActivities from "./Component/pages/UserActivities";
 
 
 
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/request" element={<Requested />} />
         <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
+        <Route path="/UserActivties" element={<UserActivities/>} />
       
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

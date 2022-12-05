@@ -12,7 +12,7 @@ const Input = ({ label, type = "text", name, value,placeholder, onChange,...prop
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
-        className="border-2 px-2 py-1 text-gray-700 border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        className="border-2 px-2 py-1 text-gray-700  border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       props
       />
     </div>

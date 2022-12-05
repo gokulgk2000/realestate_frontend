@@ -51,12 +51,12 @@ console.log("requestData",requestData)
         />
       )}
 <div className=" overflow-x-auto  shadow-md sm:rounded-lg">
-<div className="w- flex justify-around items-center mt-2 pb-4  ">
+<div className="md:flex md:justify-around items-center mt-2 pb-4 pl-14">
      <div>   <input
           type="text"
           placeholder="search"
           name="search"
-          className="look md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+          className="look  px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
           onChange={(e) => requestSearch(e.target.value)}
         />
         <button
@@ -65,21 +65,21 @@ console.log("requestData",requestData)
         >
           Search
         </button></div>
-      <div className=' font grad-btn '>
-       
-        <button className='md:p-2'
+      <div className='felx justify-center flex-wrap pl-16 pt-3'>
+        <button className='md:p-2 font grad-btn '
         onClick={()=>setModalOpen(true)}>New Request</button>
-        
+        <p className='text-xs '>Click to Sent a New Request</p>
         </div>
+        
       </div>
-      {/* <Breadcrumbs >
+      <Breadcrumbs >
       <a href="/" className="opacity-60">
         Home
       </a>
-      <a href="/request" className="text-rose-700">
-        Requested
+      <a href="/UserActivties" className="text-rose-700">
+        Activities
       </a>
-    </Breadcrumbs> */}
+    </Breadcrumbs>
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
@@ -110,12 +110,7 @@ console.log("requestData",requestData)
                         <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
-                    <div className="flex items-center">
-               Property Details
-                        <a href="#"></a>
-                    </div>
-                </th>
+               
             </tr>
         </thead>
         <tbody>

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../assets/images/loan.jpeg";
+import { useModal } from "../helper/hook/useModal";
+import RequestedModel from "../models/RequestedModel";
 import Category from "./Category";
 import Property from "./Property";
 const Landingpage = () => {
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useModal(false);
+  const currentUser = JSON.parse(localStorage?.getItem("authUser"));
 
   const navigateToProperty = (e) => {
     e.preventDefault();
@@ -14,6 +18,13 @@ const Landingpage = () => {
 
   return (
     <div>
+       {modalOpen && (
+        <RequestedModel
+          show={modalOpen}
+          onCloseClick={()=>setModalOpen(false)}
+          // currentUser={requestData?._id}
+        />
+      )}
       <div className="font ">
       <div className="flex   md:hidden ">
               <div className="flex justify-center rounded-lg  ">
@@ -87,8 +98,13 @@ const Landingpage = () => {
           <div
             className="md:w-screen "
             style={{ backgroundImage: `url(${Image})` }}
-          >
-        
+          > 
+          {currentUser &&
+           <div className='felx justify-center pl-96 pt-3'>
+         <button className='md:p-2 font text-gray-300 grad-btn '
+        onClick={()=>setModalOpen(true)}>New Request</button>
+        <p className='text-xs text-gray-300'>Click to Sent a New Request</p>
+          </div>}
           </div>{" "}
         </div>
 

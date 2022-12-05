@@ -48,14 +48,14 @@ const requestSearch = (searched)=>{
           Search
         </button>
       </div>
-      {/* <Breadcrumbs >
+      <Breadcrumbs >
       <a href="/" className="opacity-60">
         Home
       </a>
-      <a href="/request" className="text-rose-700">
-        Requested
+      <a href="/UserActivties" className="text-rose-700">
+        Activities
       </a>
-    </Breadcrumbs> */}
+    </Breadcrumbs>
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >

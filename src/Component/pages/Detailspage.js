@@ -6,7 +6,7 @@ const Detailspage = (props) => {
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
-const [curentImage,setcurentImage]=useState(0)
+  const [curentImage, setcurentImage] = useState(0);
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
 
@@ -17,7 +17,6 @@ const [curentImage,setcurentImage]=useState(0)
       console.log("Error while fetching property");
     }
   };
- 
 
   useEffect(() => {
     const handleProperty = async () => {
@@ -28,134 +27,146 @@ const [curentImage,setcurentImage]=useState(0)
     handleProperty();
   }, []);
   return (
-    <>{loading ? <>Loadimgggggg....</> :
- <div>
-
-      <div className="md:pt-20 md:pr-32 md:pl-20  ">
-        <div className="py-4 px-8 bg-white shadow-lg hover:shadow-sm">
-          <div className="md:grid  md:grid-cols-2 py-8 md:pr-8 ">
-            {" "}
-            <img
-              className=" aspect-[3/2] pr-5"
-              src={property?.propertyPic[curentImage]}
-            />
-            <div className="grid grid-cols-3 gap-y-10 gap-x-10  bg-white border-none">
-
-<button className="shadow-md hover:shadow-lg bg-slate-50 object-cover shadow-gray-800  " onClick={()=>setcurentImage(0)}> <img
-              className="   w-48 aspect-[1]"
-              src={property?.propertyPic[0]}
-            /></button>
-<button className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 " onClick={()=>setcurentImage(1)}> <img
-              className="w-48   aspect-[1]"
-              src={property?.propertyPic[1]}
-            /></button>
-           
-<div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 " onClick={()=>setcurentImage(2)}> <img
-              className="w-48  aspect-[1]"
-              src={property?.propertyPic[2]}
-            /></div>
-           
-<div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(3)}> <img
-              className="w-48  aspect-[1]"
-              src={property?.propertyPic[3]}
-            /></div>
-<div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(4)}> <img
-              className=" w-48 aspect-[1]"
-              src={property?.propertyPic[4]}
-            /></div>
-<div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(5)}> <img
-              className=" w-48 aspect-[1]"
-              src={property?.propertyPic[5]}
-            /></div>
-<div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(6)}> <img
-              className="w-48  aspect-[1]"
-              src={property?.propertyPic[6]}
-            /></div>
-            <div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(7)}> <img
-              className=" w-48 aspect-[1]"
-              src={property?.propertyPic[7]}
-            /></div>
-            <div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(8)}> <img
-              className="w-48  aspect-[1]"
-              src={property?.propertyPic[8]}
-            /></div>
-              <div className="shadow-md hover:shadow-lg bg-slate-50 object-cover h-44 shadow-gray-800 "onClick={()=>setcurentImage(9)}> <img
-              className="w-48  aspect-[1]"
-              src={property?.propertyPic[9]}
-            /></div>
-
+    <>
+      {loading ? (
+        <>Loadimgggggg....</>
+      ) : (
+        <div>
+          <div className="md:pt-20 md:pr-32 md:pl-20  ">
+            <div className="py-4 px-8 bg-white shadow-lg hover:shadow-sm">
+              <div className="md:grid  md:grid-cols-2 py-8 md:pr-8 ">
+                {" "}
+                <img
+                  className=" aspect-[3/2] pr-5 h-96 "
+                  src={property?.propertyPic[curentImage]}
+                />
+                <div className="grid grid-cols-3 gap-y-10 gap-x-10 h-44 bg-white border-none">
+                  {property?.propertyPic.map((image, i) => (
+                    <button
+                      className="shadow-md hover:shadow-lg bg-slate-50 object-cover shadow-gray-800  "
+                      onClick={() => setcurentImage(i)}
+                    >
+                      {" "}
+                      <img className="   w-48 aspect-[1]" src={image} />
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
+          <div className="">
+            <div className="md:pl-20 md:pr-32 py-5 pb-5 ">
+              <details
+                class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"
+                open
+              >
+                <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
+                  Property Details
+                </summary>
+                <div class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                  <div className="relative  rounded-2xl hover:shadow-sm  capitalize ">
+                    <div className="flex justify-between gap-12 px-4 py-2">
+                      <div className="p-5 bg-white">
+                        <div className="text-lg font py-3 ">
+                          Seller: <span className="  ">{property?.Seller}</span>
+                        </div>
+                        <div className="text-lg  font py-3">
+                          Location:
+                          <span className="   ">
+                            {property?.location},
+                            <span className="text-sm">
+                              {property?.streetName}
+                            </span>
+                          </span>
+                        </div>
+                        <div className="text-lg font py-3">
+                          Layoutname:
+                          <span className="   ">{property?.layoutName}</span>
+                        </div>
+                        <div className="text-lg  font py-3">
+                          Landarea:
+                          <span className="  ">{property?.landArea}</span>
+                        </div>{" "}
+                        <div className="text-lg font py-3">
+                          Property Type:
+                          <span className="   ">
+                            {property?.category?.name}
+                          </span>
+                        </div>{" "}
+                      </div>
+                      <div className="p-5  bg-white">
+                        {" "}
+                        <div className="text-lg font  py-3">
+                          Facing:<span className="   ">{property?.facing}</span>
+                        </div>
+                        <div className="text-lg font  py-3">
+                          Approchroad:
+                          <span className="   ">{property?.approachRoad}</span>
+                        </div>
+                        <div className="text-lg  font py-3">
+                          Builtarea:
+                          <span className="   ">{property?.builtArea}</span>
+                        </div>
+                        <div className="text-lg py-3  font">
+                          Bedroom:
+                          <span className="   ">{property?.bedRoom}</span>
+                        </div>{" "}
+                        <div className="text-lg font py-3 ">
+                          Floordetails:
+                          <span className="   "> {property?.floorDetails}</span>
+                        </div>
+                      </div>
+                      <div className="  p-5 ">
+                        <div className="text-lg py-3 font">
+                          Askprice:
+                          <span className="   ">₹.{property?.askPrice}</span>
+                        </div>
+                        <div className="text-lg  py-3 font">
+                          Neartown:
+                          <span className="   ">{property?.nearTown}</span>
+                        </div>
+                        <div className="text-lg font py-3 ">
+                          Costsq:
+                          <span className="   ">₹.{property?.costSq}sft</span>
+                        </div>{" "}
+                        <div className="text-lg font py-3">
+                          Facilities:
+                          <span className=" ">{property?.facilities}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+           
+          </div>
+          <div className="md:pl-20 md:pr-32  pb-5 ">
+            <details
+              class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"
+              open
+            >
+              <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
+                Description
+              </summary>
+              <div class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                <p> {property?.Description}</p>
+              </div>
+            </details>
+          </div>
+          {/* <div className="md:pl-20 md:pr-32  pb-5 ">
+            <div className=" md:grid p-8  bg-white shadow-lg  gap   hover:shadow-sm  gap-y-7 gap-x-5 capitalize  hover:overflow-visible  ">
+              <p className="text-lg font ">description</p>
+              <p className="font text-sm hover:text-left
+              ">
+                {" "}
+                {property?.Description}
+              </p>
+            </div>
+          </div> */}
         </div>
-      </div>
-      <div className="">
-        <div className="md:pl-20 md:pr-32  py-4">
-          <h3 className="pl-8 font text-xl">Property Details</h3>
-          <div className="relative md:grid p-8 grid-rows-4 bg-white shadow-lg gap grid-cols-4 rounded-2xl truncate hover:shadow-sm  gap-y-7 gap-x- capitalize px-">
-            <div className="text-lg font ">
-              Seller: <span className="  ">{property?.Seller}</span>
-            </div>
-            <div className="text-lg  font truncate ">
-              Location:<span className="   ">{property?.location}</span>
-            </div>
-            <div className="text-lg font ">
-              Layoutname:
-              <span className="   ">{property?.layoutName}</span>
-            </div>
-            <div className="text-lg  font ">
-              Landarea:<span className="  ">{property?.landArea}</span>
-            </div>
-            <div className="text-lg font  ">
-              Facing:<span className="   ">{property?.facing}</span>
-            </div>
-            <div className="text-lg font  ">
-              Approchroad:
-              <span className="   ">{property?.approachRoad}</span>
-            </div>
-            <div className="text-lg  font ">
-              Builtarea:<span className="   ">{property?.builtArea}</span>
-            </div>
-            <div className="text-lg   font">
-              Bedroom:<span className="   ">{property?.bedRoom}</span>
-            </div>
-            <div className="text-lg font  ">
-              Floordetails:
-              <span className="   "> {property?.floorDetails}</span>
-            </div>
-          
-            <div className="text-lg   font">
-              Neartown:<span className="   ">{property?.nearTown}</span>
-            </div>
-            <div className="text-lg font  ">
-              Costsq:<span className="   ">₹.{property?.costSq}sft</span>
-            </div>
-            <div className="text-lg  font">
-              Askprice:<span className="   ">₹.{property?.askPrice}</span>
-            </div>
-            <div className="text-lg font ">
-              Property Type:
-              <span className="   ">{property?.category?.name}</span>
-            </div>{" "}
-            <div className="text-lg font ">
-              Facilities:
-              <span className="  ">
-                {property?.facilities}
-              </span>
-            </div>
-          
-    </div>
-       
-        </div>
-      </div>
-      <div className="md:pl-20 md:pr-32  pb-5 ">
-            <div className=" md:grid p-8  bg-white shadow-lg  gap   hover:shadow-sm  gap-y-7 gap-x-5 capitalize ">
-         
-       <p className="text-lg font ">description</p>
-       <p className="font text-sm hover:text-left">  {property?.Description}</p>
-       </div>   
-       </div>
-    </div>
-    }</>
+      )}
+    </>
   );
 };
 

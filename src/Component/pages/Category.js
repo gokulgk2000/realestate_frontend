@@ -23,7 +23,7 @@ const Category = () => {
         
 
 
-          <div className="scale-75  hover:scale-90 ease-in duration-500 hover:text-yellow-700 ">
+          <div className="scale-75  hover:scale-90 ease-in duration-500 hover:text-yellow-700 hover:bg-amber-100">
 
           
            <div className=" font-extrabold text-2xl flex justify-center  mb-3 uppercase">  {cat?.name} </div>

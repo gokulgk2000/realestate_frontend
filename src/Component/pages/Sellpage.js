@@ -39,6 +39,7 @@ const RegisterProperty = () => {
       askPrice: "",
       Description: "",
       status: "",
+      streetName:"",
       category: "",
     },
     validationSchema: Yup.object({
@@ -57,6 +58,7 @@ const RegisterProperty = () => {
       // facilities: Yup.string().required("Please Enter Your facilities"),
       // askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
       // Description: Yup.string().required("Please Enter Your Description"),
+           // streetName: Yup.string().required("Please Enter Your streetName"),
       category: Yup.string().required("Please Enter Your category"),
     }),
     onSubmit: (values, onSubmitProps) => {
@@ -77,6 +79,7 @@ const RegisterProperty = () => {
         askPrice: values.askPrice,
         Description: values.Description,
         category: values.category,
+        streetName: values.streetName,
         regUser: currentUser?.userID,
         propertyPic,
         status: "pending",
@@ -182,6 +185,25 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.location && validation.errors.location ? (
+              <span type="invalid">{validation.errors.location}</span>
+            ) : null}
+          </div>
+          <div>
+            <Input
+              label="streetName"
+              type="text"
+              name="streetName"
+              placeholder="Enter The streetName"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.streetName || ""}
+              invalid={
+                validation.touched.streetName && validation.errors.streetName
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.streetName && validation.errors.streetName ? (
               <span type="invalid">{validation.errors.location}</span>
             ) : null}
           </div>

@@ -7,6 +7,7 @@ import { useModal } from "../helper/hook/useModal";
 import { useQuery } from "../helper/hook/useQuery";
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
+import Image from "../assets/images/avadar3.webp"
 
 const NavItem = [
   { name: "HOME", link: "/" },
@@ -175,7 +176,7 @@ console.log("user",user)
                       <div className="flex">
                         {" "}
                         <img
-                          src={user?.profilePic}
+                          src={user?.profilePic||Image}
                           className="w-10 h-10 rounded-full"
                         />
                         {/* <span>   <svg

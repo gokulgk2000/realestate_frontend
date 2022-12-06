@@ -51,7 +51,10 @@ const updateProperty = (payload) =>
   put(`${BASE_URL}/admin/adminedit`, payload);
   const updateProfileById = (payload) =>
   put(`${BASE_URL}/user/profileEdit`, payload);
+  const FeedbackRegistration = (payload) =>
+  post(`${BASE_URL}/feedback/feedbackregister`, payload);
   export {userRegisteration,
+    FeedbackRegistration,
     getuserdetails,
     buyerReg,
     getbuyerdetails,

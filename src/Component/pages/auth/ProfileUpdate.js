@@ -132,7 +132,7 @@ const ProfileUpdate = () => {
             {/* {user?.profilePic !== "" ? (sd):(sds) } */}
             <div className="relative pl-14 "> 
               {" "}
-              <div className="w-48 h-48  bg-indigo-100 mx-70 rounded-full  shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+              <div className="w-48 md:h-48  bg-indigo-100 mx-70 rounded-full  shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                 <img
                   src={user?.profilePic||Image}
                   className="md:h-48 md:w-48 rounded-full"

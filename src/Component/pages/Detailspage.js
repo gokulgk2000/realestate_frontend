@@ -33,21 +33,21 @@ const Detailspage = (props) => {
       ) : (
         <div>
           <div className="md:pt-20 md:pr-32 md:pl-20  ">
-            <div className="py-4 px-8 bg-white shadow-lg hover:shadow-sm">
-              <div className="md:grid  md:grid-cols-2 py-8 md:pr-8 ">
+            <div className="py-4 px-8 bg-white shadow-lg ">
+              <div className="grid  md:grid-cols-2 py-8 md:pr-8 ">
                 {" "}
                 <img
-                  className=" aspect-[3/2] pr-5 h-96 "
+                  className=" aspect-[3/2] md:pr-5 md:h-96 "
                   src={property?.propertyPic[curentImage]}
                 />
-                <div className="grid grid-cols-3 gap-y-10 gap-x-10 h-44 bg-white border-none">
+                <div className="grid grid-cols-3 gap-y-10 gap-x-10 h-44 bg-white border-none ">
                   {property?.propertyPic.map((image, i) => (
                     <button
-                      className="shadow-md hover:shadow-lg bg-slate-50 object-cover shadow-gray-800  "
+                      className="shadow-md hover:shadow-lg bg-slate-50 object-cover shadow-gray-800  rounded-md "
                       onClick={() => setcurentImage(i)}
                     >
                       {" "}
-                      <img className="   w-48 aspect-[1]" src={image} />
+                      <img className=" w-48  rounded-md aspect-[1]" src={image} />
                     </button>
                   ))}
                 </div>
@@ -58,15 +58,15 @@ const Detailspage = (props) => {
             <div className="md:pl-20 md:pr-32 py-5 pb-5 ">
               <details
                 class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"
-                open
+       close
               >
                 <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
                   Property Details
                 </summary>
                 <div class="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                  <div className="relative  rounded-2xl hover:shadow-sm  capitalize ">
-                    <div className="flex justify-between gap-12 px-4 py-2">
-                      <div className="p-5 bg-white">
+                  <div className="relative  rounded-2xl  capitalize ">
+                    <div className="lg:flex justify-between md:gap-12 md:px-4 py-2  ">
+                      <div className="md:p-5 bg-white ">
                         <div className="text-lg font py-3 ">
                           Seller: <span className="  ">{property?.Seller}</span>
                         </div>
@@ -94,7 +94,7 @@ const Detailspage = (props) => {
                           </span>
                         </div>{" "}
                       </div>
-                      <div className="p-5  bg-white">
+                      <div className="md:p-5  bg-white">
                         {" "}
                         <div className="text-lg font  py-3">
                           Facing:<span className="   ">{property?.facing}</span>
@@ -116,7 +116,7 @@ const Detailspage = (props) => {
                           <span className="   "> {property?.floorDetails}</span>
                         </div>
                       </div>
-                      <div className="  p-5 ">
+                      <div className="  md:p-5 ">
                         <div className="text-lg py-3 font">
                           Askprice:
                           <span className="   ">₹.{property?.askPrice}</span>
@@ -129,7 +129,7 @@ const Detailspage = (props) => {
                           Costsq:
                           <span className="   ">₹.{property?.costSq}sft</span>
                         </div>{" "}
-                        <div className="text-lg font py-3">
+                        <div className="text-lg font py-3 text-ellipsis overflow-hidden w-72 ">
                           Facilities:
                           <span className=" ">{property?.facilities}</span>
                         </div>
@@ -144,7 +144,7 @@ const Detailspage = (props) => {
           <div className="md:pl-20 md:pr-32  pb-5 ">
             <details
               class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"
-              open
+              close
             >
               <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
                 Description

@@ -28,6 +28,8 @@ import Requested from "./Component/pages/Requested";
 import RequestedModel from "./Component/models/RequestedModel";
 import Requestedpage from "./Component/pages/Requestedpage";
 import UserActivities from "./Component/pages/UserActivities";
+import RequestedList from "./Component/pages/admin/RequestedList";
+import Intrested from "./Component/pages/admin/Intrested";
 
 
 
@@ -59,6 +61,8 @@ const App = () => {
         <Route path="Dashboard" element={<Dashboard />} />
         <Route  path="userlist" element={<UserList />} />
         <Route  path="buyerlist" element={<BuyerList />} />
+        <Route  path="requestedlist" element={<RequestedList />} />
+        <Route  path="intrestedlist" element={<Intrested />} />
         <Route path="propertylist" element={<PropertyList />} />
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />

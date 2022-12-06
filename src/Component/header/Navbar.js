@@ -25,7 +25,7 @@ function Navbar() {
 
   const navigate = useNavigate();
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
-console.log("user",user)
+// console.log("user",user)
   const getUserName = async () => {
     const res = await getUserById({
       userID: userFromStorage?.userID,

@@ -36,13 +36,13 @@ const userLogin = (payload) =>
   const addBuyer = (payload) => put(`${BASE_URL}/admin/addBuyer`, payload);
   const addProperty = (payload) => put(`${BASE_URL}/admin/addProperty`, payload);
   const getrequestedByUserId = (payload) => post(`${BASE_URL}/requested/getrequestedByUserId`, payload);
-  const getrequested = (payload) => post(`${BASE_URL}/requested/requested`, payload);
+  const getrequested = (payload) => get(`${BASE_URL}/requested/getAllrequested`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
   post(`${BASE_URL}/admin/getAllUsersPage`, payload);
   const getuserdetails = (payload) =>
-  post(`${BASE_URL}/user/getUserById`, payload);
+  post(`${BASE_URL}/admin/getUserById`, payload);
   const getbuyerdetails = (payload) =>
   post(`${BASE_URL}/buyer/getBuyerById`, payload);
   const buyerReg = (payload) =>

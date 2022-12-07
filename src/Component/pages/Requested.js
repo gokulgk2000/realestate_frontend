@@ -1,44 +1,40 @@
 import React, { useEffect, useState ,useMemo } from 'react'
 import { Breadcrumbs } from '@material-tailwind/react'
 import Pagination from '../pagination/Pagination';
-import { allBuyerList,getrequestedByUserId,getbuyerdetails } from '../helper/backend_helpers';
 import { useQuery } from '../helper/hook/useQuery';
+import { getIntrestedPropertyById } from '../helper/backend_helpers';
 
 
 const Requested = () => { 
   const query = useQuery();
 
   const [loading, setLoading] = useState(false);
-    const [buyerData, setBuyerData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [requestData, setRequestData] = useState([]);
+  const [intrestedData, setIntrestedData] = useState([]);
   const [postsPerPage] = useState(10);
   const [searchText,setSearchText]=useState("")
+  const currentUser = JSON.parse(localStorage?.getItem("authUser"));
 
-console.log("requestData",requestData)
+console.log("intrestedData",intrestedData)
 
 const requestSearch = (searched)=>{
   setSearchText(searched)}
 
-  const requestedByuserId = async () => {
-    const res = await getbuyerdetails ({ userId: query.get("id") });
-
-    if (res.success) {
-      setRequestData(res?.Buyer);
-      console.log("data", res);
-    } else {
-      console.log("Error while fetching property");
-    }
-  };
-
-  useEffect(() => {
-    const handleRequested = async () => {
-      setLoading(true);
-      await requestedByuserId();
-      setLoading(false);
-    };
-    handleRequested();
-  }, []);
+   useEffect(() => {
+        const handleFetchingIntrestedProperty = async () => {
+          setLoading(true);
+          const res = await getIntrestedPropertyById ({ 
+        userId: currentUser?.userID})
+        if(res.success){
+          setIntrestedData(res?.Intrested);
+          setLoading(false);
+        }else{
+          console.log("Error in fetching IntrestedData: ", res)
+        }
+        };
+        handleFetchingIntrestedProperty()
+        // return () => {}
+      }, []);
 
       // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -103,7 +99,7 @@ const requestSearch = (searched)=>{
             </tr>
         </thead>
         <tbody>
-        {( requestData?.filter(
+        {( intrestedData?.filter(
       (item) =>
       item?.facing
       .toString()
@@ -151,7 +147,7 @@ const requestSearch = (searched)=>{
     {/* <Posts posts={currentPosts} /> */}
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={requestData?.length}
+        totalPosts={intrestedData?.length}
         paginate={paginate}
         currentPage={currentPage}
       />

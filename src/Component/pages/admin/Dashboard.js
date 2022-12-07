@@ -116,7 +116,7 @@ const Dashborad = () => {
         </div>
       
       </div>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg text-center p-3 hover:bg-stone-100 bg-stone-200">
+      {/* <div className="max-w-sm rounded overflow-hidden shadow-lg text-center p-3 hover:bg-stone-100 bg-stone-200">
         <div className="flex justify-center">
           <svg
             className="w-6 h-6 flex justify-center  text-teal-700"
@@ -134,7 +134,6 @@ const Dashborad = () => {
             Intrested
           </div>
           <p>All Buyer Intrested</p>
-          {/* {userData.map((lenght,i)=>())} */}
           <Link to="/admin/intrestedlist">
             <button className=" grad1 w-14 rounded-md text-white  bg-amber-700 hover:bg-amber-900">
               View
@@ -142,7 +141,7 @@ const Dashborad = () => {
           </Link>
         </div>
       
-      </div>
+      </div> */}
       <div className="max-w-sm rounded overflow-hidden shadow-lg text-center p-3 hover:bg-stone-100 bg-stone-200">
         <div className="flex justify-center">
           <svg

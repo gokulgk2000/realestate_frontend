@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-*{
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&family=Rubik:wght@500&display=swap');*{
     padding: 0;
     box-sizing: border-box;
 }
@@ -10,6 +9,7 @@ body{
     max-width: 1900px;
     margin: 0 auto;
 }
-*{
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
+/* *{
+    font-family: 'Rubik',serif;
+} */
+

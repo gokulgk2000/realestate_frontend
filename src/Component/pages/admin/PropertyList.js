@@ -1,9 +1,8 @@
 import { Breadcrumbs } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { allPropertiesList } from '../../helper/backend_helpers';
 import Pagination from '../../pagination/Pagination';
-import Posts from '../../pagination/Post';
-
 const PropertyList = () => {
     const [allProperties, setAllProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -11,9 +10,7 @@ const PropertyList = () => {
   const [searchText,setSearchText]=useState("")
 
   const propertySearch = (searched)=>{
- setSearchText(searched)
-   
-  }
+ setSearchText(searched)}
 
     useEffect(() => {
         const getAllProperties = async () => {
@@ -25,23 +22,24 @@ const PropertyList = () => {
         };
         getAllProperties();
       }, []);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);  
 
   return (
     <div>
       <Breadcrumbs >
-      <a href="/admin/Dashboard" className="opacity-60">
+      <a href="/admin/Dashboard" className="opacity-60 font">
         Dashboard
       </a>
-      <a href="/admin/PropertyList" className="text-rose-700">
+      <a href="/admin/PropertyList" className=" text-amber-700 font">
         Properties
       </a>
     </Breadcrumbs>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-    <div className="w-full flex justify-center items-center mt-2 pb-4">
+    <div className="w-full flex justify-center items-center mt-2 pb-4  ">
         <input
           type="text"
-          placeholder="search"
+          placeholder="Search Properties"
           name="search"
           className="md:w-96 px-3 py-2 bg-slate-200 rounded-tl-full rounded-bl-full border-0 focus:outline-0"
           onChange={(e) => propertySearch(e.target.value)}
@@ -49,7 +47,7 @@ const PropertyList = () => {
 
         <button
           type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+          className=" grad1 px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
         >
           Search
         </button>
@@ -57,28 +55,25 @@ const PropertyList = () => {
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                    Seller Name
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     AskPrice
-                        <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     location
-                        <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6   text-amber-700">
                     <div className="flex items-center">
                     status
-                        <a href="#"></a>
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700 ">
+                <th scope="col" className="py-3 px-6   text-amber-700 ">
                     <span className="flex items-center">PropertyDetails</span>
                 </th>
             </tr>
@@ -101,24 +96,36 @@ const PropertyList = () => {
               item?.facing
               .toString()
               .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?. category
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?. landArea
+              .toString()
+              .toLowerCase()
+              .includes(searchText.toString().toLowerCase()) ||
+              item?.layoutName
+              .toString()
+              .toLowerCase()
               .includes(searchText.toString().toLowerCase()) 
         ).slice((currentPage -1)*10,(currentPage *10)).map((PropertyData,p)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={p}>
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
                 {PropertyData?.Seller}
                 </th>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {PropertyData?.askPrice}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 capitalize">
                 {PropertyData?.location}
                 </td>
                 <td className="py-4 px-6 capitalize">
                 {PropertyData?.status}
                 </td>
                 <td className="py-4 px-6">
-                    <a href={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium  text-rose-700  dark:text-blue-500 hover:underline">
-                      View</a>
+                    <Link to={`/admin/propertydetails?id=${PropertyData?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">
+                      View</Link>
                 </td>
             </tr>
             ))}
@@ -134,6 +141,9 @@ const PropertyList = () => {
         currentPage={currentPage}
       />
     </nav>
+
+  
+
     </div>
     </div>
   )

@@ -120,7 +120,7 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 placeholder="Email address"
                 onChange={validation.handleChange}
                 onBlur={validation.handleBlur}
@@ -144,7 +144,7 @@ const Login = () => {
               <input
                 name="password"
                 type="password"
-                className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 placeholder="Password"
                 onChange={validation.handleChange}
                 onBlur={validation.handleBlur}
@@ -180,7 +180,7 @@ const Login = () => {
             <div className="text-center lg:text-left">
               <button
                 type="submit"
-                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                className="inline-block px-7 py-3 grad-btn text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
               >
                 Login
               </button>

@@ -4,10 +4,9 @@ import "../header/MobileNav.css";
 import { NavLink } from "react-router-dom";
 
 const Mobile = [
-  { name: "Home", link: "/" },
-  { name: "Sell", link: "/sell" },
-  { name: "Property", link: "/property" },
-  { name: "Contactus", link: "/about" },
+  { name: "HOME", link: "/" },
+  { name: "SELL PROPERTY", link: "/sell" },
+  { name: "CONTACT US ", link: "/about" },
 ];
 
 const Mobilenav = (navItem) => {
@@ -16,12 +15,12 @@ const Mobilenav = (navItem) => {
   return (
     <div>
       {isMobile && (
-        <ul className="ul  py-10 space-y-4 leading-10 bg-blue-300 text-rose-700 font-serif">
+        <ul className="ul py-9 space-y-2 text-white leading-10 grad-mob font-serif">
           {Mobile.map((Mob, l) => (
             <NavLink
               key={l}
               to={Mob.link || "#"}
-              className="hover:text-green-800"
+              className=""
               onClick={() => setIsMobile(false)}
             >
               <li> {Mob.name}</li>
@@ -29,7 +28,6 @@ const Mobilenav = (navItem) => {
           ))}
         </ul>
       )}
-
       <button className="" onClick={() => setIsMobile(!isMobile)}>
         {isMobile ? (
           <div className="burger-bar show "></div>

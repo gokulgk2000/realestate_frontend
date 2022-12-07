@@ -18,6 +18,7 @@
     "react-paginate": "^8.1.4",
     "react-router-dom": "^6.0.2",
     "react-scripts": "5.0.1",
+    "react-slideshow-image": "^4.0.5",
     "toastr": "^2.1.4",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

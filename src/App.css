@@ -13,3 +13,73 @@
 }
 
   }
+  .in{
+
+border: 2px;
+
+  }
+  .font {
+    font-family: 'Rubik',serif;
+   
+}
+.grad1 {
+  
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(149, 113, 4));
+}
+.grad-mob {
+  
+  background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(149, 113, 4));
+}
+.bg{
+  height: 900px;
+  
+}
+.bg-res{
+
+ height: 900px;
+ width: 100px;
+}
+.grad-btn {
+  
+  background-image: linear-gradient(to right, rgb(149, 113, 8), rgba(208, 208, 21, 0));
+  
+}
+.grad-btn-x {
+  
+  background-image: linear-gradient(to left, rgb(149, 113, 8), rgba(208, 208, 21, 0));
+  
+}
+:hover.grad-btn-x{
+  background-image: linear-gradient(to right, rgb(149, 113, 4), rgb(149, 113, 4));
+
+
+}
+:hover.grad-btn{
+  background-image: linear-gradient(to right, rgb(149, 113, 4), rgb(149, 113, 4));
+
+
+}
+.grad-card {
+  
+  background-image: linear-gradient(to right, rgba(222, 226, 194, 0), rgb(228, 211, 152));
+}
+.grad-footer {
+  
+  background-image: linear-gradient(to right, rgb(149, 113, 8), rgba(208, 208, 21, 0));
+  
+}
+
+.each-slide-effect > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 350px;
+}
+
+.each-slide-effect span {
+  padding: 20px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
+}

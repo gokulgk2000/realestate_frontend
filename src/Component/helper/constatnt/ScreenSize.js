@@ -1,8 +1,9 @@
 const screenSize =
 {
 
-mobile:640
+mobile:640,
+tab:1024
 
 }
 
-export const{ mobile}=screenSize;
+export const{ mobile,tab}=screenSize;

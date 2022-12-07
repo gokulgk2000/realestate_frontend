@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getPropertyById } from "../helper/backend_helpers";
+import { tab } from "../helper/constatnt/ScreenSize";
+import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useQuery } from "../helper/hook/useQuery";
 
 const Detailspage = (props) => {
+  const [isBiggerthanTab] = useMediaQuery(tab);
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
@@ -32,33 +35,211 @@ const Detailspage = (props) => {
         <>Loadimgggggg....</>
       ) : (
         <div>
-          <div className="md:pt-20 md:pr-32 md:pl-20  ">
+          <div className="md:pt-20 md:pr-10 md:pl-10  ">
             <div className="py-4 px-8 bg-white shadow-lg ">
-              <div className="grid  md:grid-cols-2 py-8 md:pr-8 ">
+              <div className="relative grid  md:grid-cols-3 py- md:pr-">
                 {" "}
-                <img
-                  className=" aspect-[3/2] md:pr-5 md:h-96 "
-                  src={property?.propertyPic[curentImage]}
-                />
-                <div className="grid grid-cols-3 gap-y-10 gap-x-10 h-44 bg-white border-none ">
-                  {property?.propertyPic.map((image, i) => (
-                    <button
-                      className="shadow-md hover:shadow-lg bg-slate-50 object-cover shadow-gray-800  rounded-md "
-                      onClick={() => setcurentImage(i)}
-                    >
-                      {" "}
-                      <img className=" w-48  rounded-md aspect-[1]" src={image} />
-                    </button>
-                  ))}
+                <div className="">
+                  {" "}
+                  <img
+                    className=" aspect-[3/2] md:pr-5 md:h-96 "
+                    src={property?.propertyPic[curentImage]}
+                  />
+                  <div className="text-center">
+                    {" "}
+                    {property?.propertyPic.map((image, j) => (
+                      <span
+                        key={j}
+                        className={`${
+                          curentImage === j ? "text-red-500" : "text-gray-300"
+                        } cursor-pointer px-0.5`}
+                        onClick={() => setcurentImage(j)}
+                      >
+                        ●
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="col-span-2 bg-white border-none -mt-5 ">
+                <div className="  rounded-2xl  capitalize  ">
+                    <div className="grid grid-cols-2 md:gap-5 md:px-4  ">
+                      <div className=" md:px-5 pb-5 bg-white ">
+                        <div className="text-lg font py-3 ">
+                          Seller: <span className="  ">{property?.Seller}</span>
+                        </div>
+                        <div className="text-lg  font py-3">
+                          Location:
+                          <span className="   ">
+                            {property?.location},
+                            <p className="text-sm pl-20">
+                              {property?.streetName}
+                            </p>
+                          </span>
+                        </div>
+                        <div className="text-lg font py-3">
+                          Layoutname:
+                          <span className="   ">{property?.layoutName}</span>
+                        </div>
+                        <div className="text-lg  font py-3">
+                          Landarea:
+                          <span className="  ">{property?.landArea}</span>
+                        </div>{" "}
+                        <div className="text-lg font py-3">
+                          Property Type:
+                          <span className="   ">
+                            {property?.category?.name}
+                          </span>
+                        </div>{" "}
+                      </div>
+                      <div className=" md:px-5 pb-5 bg-white">
+                        {" "}
+                        <div className="text-lg font  py-3">
+                          Facing:<span className="   ">{property?.facing}</span>
+                        </div>
+                        <div className="text-lg font  py-3">
+                          Approchroad:
+                          <span className="   ">{property?.approachRoad}</span>
+                        </div>
+                        <div className="text-lg  font py-3">
+                          Builtarea:
+                          <span className="   ">{property?.builtArea}</span>
+                        </div>
+                        <div className="text-lg py-3  font">
+                          Bedroom:
+                          <span className="   ">{property?.bedRoom}</span>
+                        </div>{" "}
+                        <div className="text-lg font py-3 ">
+                          Floordetails:
+                          <span className="   "> {property?.floorDetails}</span>
+                        </div>
+                      </div>
+                      <div className="  md:px-5 pb-5 ">
+                        <div className="text-lg py-3 font">
+                          Askprice:
+                          <span className="   ">₹.{property?.askPrice}</span>
+                        </div>
+                        <div className="text-lg  py-3 font">
+                          Neartown:
+                          <span className="   ">{property?.nearTown}</span>
+                        </div>
+                        <div className="text-lg font py-3 ">
+                          Costsq:
+                          <span className="   ">₹.{property?.costSq}sft</span>
+                        </div>{" "}
+                        <div className="text-lg font py-3 text-ellipsis overflow-hidden w-72 ">
+                          Facilities:
+                          <span className=" ">{property?.facilities}</span>
+                        </div>
+                      </div>
+                    </div></div>
+
+                  {/* <details
+                    class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
+                    open
+                  >
+                    <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
+                      Property Details
+                    </summary>
+                    <div class="mt-3 text-sm leading-6  dark:text-slate-400">
+                      <div className="relative  rounded-2xl  capitalize ">
+                        <div className="lg:grid grid-cols-2 grid-rows-  md:gap-y-5 md:px-4 py-2  ">
+                          <div className="col-span-2 md:p-5 bg-white ">
+                            <div className="text-lg font py-3 ">
+                              Seller:{" "}
+                              <span className="  ">{property?.Seller}</span>
+                            </div>
+                            <div className="text-lg  font py-3">
+                              Location:
+                              <span className="   ">
+                                {property?.location},
+                                <span className="text-sm">
+                                  {property?.streetName}
+                                </span>
+                              </span>
+                            </div>
+                            <div className="text-lg font py-3">
+                              Layoutname:
+                              <span className="   ">
+                                {property?.layoutName}
+                              </span>
+                            </div>
+                            <div className="text-lg  font py-3">
+                              Landarea:
+                              <span className="  ">{property?.landArea}</span>
+                            </div>{" "}
+                          </div>
+                          <div className="md:p-5 col-span-2">
+                            {" "}
+                            <div className="text-lg font py-3">
+                              Property Type:
+                              <span className="   ">
+                                {property?.category?.name}
+                              </span>
+                            </div>{" "}
+                            <div className="text-lg font  py-3">
+                              Approchroad:
+                              <span className="   ">
+                                {property?.approachRoad}
+                              </span>
+                            </div>{" "}
+                            <div className="text-lg font py-3 ">
+                              Floordetails:
+                              <span className="   ">
+                                {" "}
+                                {property?.floorDetails}
+                              </span>
+                            </div>{" "}
+                            <div className="text-lg font  py-3">
+                              Facing:
+                              <span className="   ">{property?.facing}</span>
+                            </div>
+                          </div>
+                          <div className="  md:p-5 col-span-2">
+                            <div className="text-lg  font py-3">
+                              Builtarea:
+                              <span className="   ">{property?.builtArea}</span>
+                            </div>
+                            <div className="text-lg py-3  font">
+                              Bedroom:
+                              <span className="   ">{property?.bedRoom}</span>
+                            </div>{" "}
+                            <div className="text-lg py-3 font">
+                              Askprice:
+                              <span className="   ">
+                                ₹.{property?.askPrice}
+                              </span>
+                            </div>
+                            <div className="text-lg  py-3 font">
+                              Neartown:
+                              <span className="   ">{property?.nearTown}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </details> */}
+                  {/* {property?.propertyPic.map((image, i) => (
+                      <button
+                        className="shadow:md border-neutral-900 hover:shadow-lg scale-100  bg-slate-50 object-cover  rounded-md "
+                        onClick={() => setcurentImage(i)}
+                      >
+                        {" "}
+                        <img
+                          className=" w-48  rounded-md aspect-[1]"
+                          src={image}
+                        />
+                      </button>
+                    ))} */}
                 </div>
               </div>
             </div>
           </div>
           <div className="">
-            <div className="md:pl-20 md:pr-32 py-5 pb-5 ">
-              <details
+            <div className="md:pl-20 md:pr-32 py-5 pb-5  ">
+              {/* <details
                 class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"
-       close
+                close
               >
                 <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
                   Property Details
@@ -137,9 +318,8 @@ const Detailspage = (props) => {
                     </div>
                   </div>
                 </div>
-              </details>
+              </details> */}
             </div>
-           
           </div>
           <div className="md:pl-20 md:pr-32  pb-5 ">
             <details

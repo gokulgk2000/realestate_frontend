@@ -13,8 +13,8 @@ console.log("currentProperty",currentProperty)
   const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
   const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
   const[user,setUser] = useState("");
-  const currentUser = JSON.parse(localStorage?.getItem("authUser"));
-  console.log("Current : ", currentUser.userID);
+  // const currentUser = JSON.parse(localStorage?.getItem("authUser"));
+  // console.log("Current : ", currentUser.userID);
    const validation = useFormik({
     enableReinitialize: true,
     initialValues:{
@@ -53,19 +53,19 @@ console.log("currentProperty",currentProperty)
     setBuyerRegistrationError(res.msg)
   }
 }
- const getuser = async () => {
-  const payload = {
-   userId:currentUser?.userID,
-  }
-   const res = await getuserdetails(payload);
-if(res.success) {
-   setUser(res?.User)
- }else{
-   console.log("errors",res)
- } }
- useEffect(()=>{
-  getuser()
- },[])
+//  const getuser = async () => {
+//   const payload = {
+//    userId:currentUser?.userID,
+//   }
+//    const res = await getuserdetails(payload);
+// if(res.success) {
+//    setUser(res?.User)
+//  }else{
+//    console.log("errors",res)
+//  } }
+//  useEffect(()=>{
+//   getuser()
+//  },[])
    
   return (
     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

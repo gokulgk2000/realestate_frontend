@@ -26,7 +26,7 @@ const Property = () => {
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const [user, setUser] = useState("");
 
-  const [modalOpen, setModalOpen] = useModal(false);
+  const [modalOpen, setModalOpen] = useModal();
 
   // console.log(id);
 
@@ -137,53 +137,53 @@ const Property = () => {
                 className="grid grid-cols-3   my-3 "  >
                 <div className="flex  justify-start items-center"><Link     to={`/Detailspage?uid=${pro?._id}`}>
                   <img
-                    className=" md:object-cover md:h-52  md:w-72 rounded-md"
+                    className=" md:object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
                     alt="coimbatore realestate"
                     src={pro?.propertyPic[0]}
                   /></Link>
                 </div>
                 <div className="col-span-2 pl-2 leading-10">
-                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="sm:flex justify-between  text-xl  py-5 pr-">
+                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="sm:flex justify-between  md:text-xl  py-5 pr-">
                     
-              <div className="flex"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-red-500">
+              <div className="flex"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 :h-6 text-red-500">
   <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-</svg> <h3 className="flex-wrap text-black">
-{pro?.location}</h3></div>     
+</svg> <h3 className=" text-black">
+{pro?.location},<div className="text-sm">{pro?.streetName}</div></h3> </div>     
                        <h6 className="pr-4">₹.{pro?.askPrice}</h6>
                     </Link>
-                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="flex  mr-3 justify-between shadow-sm shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md">
+                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="md:flex  mr-3 justify-between shadow-sm hidden  shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md">
                     <p>
                       <div className="underline  text-sm">plot Area</div>
-                      <div className="font-semibold">{pro?.costSq}.sq.ft</div>
+                      <div className="font-semibold">₹.{pro?.costSq}.sq.ft</div>
                     </p>
                     <p>
-                      <div className="underline text-sm">Possession</div>
-                      <div className="font-semibold">{pro?.status}</div>
-                    </p>
-                    <p className="hidden sm:block">
-                      <div className="underline text-sm ">Direction Facing</div>
+                      <div className="underline text-sm">Facing</div>
                       <div className="font-semibold">{pro?.facing}</div>
                     </p>
+                    <p className="hidden sm:block">
+                      <div className="underline text-sm ">BuiltArea</div>
+                      <div className="font-semibold">{pro?.builtArea}</div>
+                    </p>
                   </Link>
-              
-              <div className="flex justify-between items-center   pt-5 mr-3 mx-1">
-                <p className=" text-sm  ">Agent:{pro?.Seller}</p>
-                <div className="grid  px-1">
-                  <div className="flex  justify-end">
-                    <p>
-                      <button
+         
+              <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 ">
+              <Link     to={`/Detailspage?uid=${pro?._id}`} className="col-span-6" >     <p className=" text-sm  md:pb-2 ">Agent:{pro?.Seller}</p></Link>
+                         <div className=" pr-5 md:pt-2"><button
                         className="grad-btn hover:grad1 hover:text-white rounded-sm px-1"
                         onClick={() =>
                           handleBook(pro?._id) && setModalOpen(true)
                         }
                       >
                         Contact
-                      </button>
-                    </p>
-                  </div>
-                </div>
-              </div>
+                      </button></div>  </p> 
+          
+                
+                
+                  
+              
+               
+       
               {/*  <h5>Seller :{pro?.Seller}</h5>
  <p>Description :{pro?.Description}</p> */}
    </div>

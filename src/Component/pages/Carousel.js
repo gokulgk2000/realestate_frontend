@@ -2,10 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import image from "../assets/dummy/DummyData";
+import { tab } from "../helper/constatnt/ScreenSize";
+import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useModal } from "../helper/hook/useModal";
 import RequestedModel from "../models/RequestedModel";
 
 export const Carousel = () => {
+  const [isBiggerthanTab] = useMediaQuery(tab);
   const [modalOpen, setModalOpen] = useModal(false);
 
   const [selectImage, setSelectImage] = useState(0);
@@ -41,7 +44,8 @@ export const Carousel = () => {
           onCloseClick={() => setModalOpen(false)}
           // currentUser={requestData?._id}
         />
-      )}{currentUser && (
+      )}
+      {currentUser && (
         <div className="pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
           <button
             className="md:p-2 font text-gray-300 grad-btn "
@@ -52,13 +56,27 @@ export const Carousel = () => {
           <p className="text-xs text-gray-300">Click to Sent a New Request</p>
         </div>
       )}
-      <img
-        className="h-[90%] w-full"
+      {/* <img
+        className="aspect-[2] w-full"
         // src={`https://${images[selectedImageIndex].image.defaultHost}/i/${images[selectedImageIndex].image.endpoint}/${images[selectedImageIndex].image.name}`}
         src={image[selectImage]}
-      />
-    
-      <div className="flex ">
+      /> */}
+
+      {isBiggerthanTab ? (
+        <img
+          className="aspect-[2] w-full"
+          // src={`https://${images[selectedImageIndex].image.defaultHost}/i/${images[selectedImageIndex].image.endpoint}/${images[selectedImageIndex].image.name}`}
+          src={image[selectImage]}
+        />
+      ) : (
+        <img
+          className="aspect-[2] w-full"
+          src={image[selectImage]}
+          // src={`https://${images[selectedImageIndex].mimage.defaultHost}/i/${images[selectedImageIndex].mimage.endpoint}/${images[selectedImageIndex].mimage.name}`}
+        />
+      )}
+
+{isBiggerthanTab &&   <div className="flex ">
         <button
           className="absolute  right-10 inset-y-2/3 h-8 w-8 text-white "
           onClick={(e) => {
@@ -104,7 +122,7 @@ export const Carousel = () => {
             />
           </svg>
         </button>
-      </div>  
+      </div>}
 
       <div className="text-center">
         {image.map((i, j) => (

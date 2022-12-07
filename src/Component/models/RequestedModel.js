@@ -53,14 +53,14 @@ const RequestedModel =( {show,onCloseClick,}) => {
      const res = await getrequested(payload);
   if(res.success) {
     setRequestSuccess(res.msg)
-    toastr.success(`Sent Request successfully`, "Success");
+    toastr.success(` Request Sent successfully ` );
     onCloseClick()
    }else{
 
      console.log("errors",res)
    } }
    useEffect(()=>{
-    requested()
+   
    },[])
 // console.log("Request",request)
   return (

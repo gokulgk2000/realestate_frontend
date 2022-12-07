@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
-import { getUserById } from "../helper/backend_helpers";
+import { getPropertiescategoryId, getUserById } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useModal } from "../helper/hook/useModal";
@@ -22,7 +22,10 @@ function Navbar() {
   const [searchText, setSearchText] = useState("");
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
+  const [property, setproperty] = useState("");   
 
+  const query = useQuery();
+  const id = query.get("id");
   const navigate = useNavigate();
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
 // console.log("user",user)
@@ -39,6 +42,27 @@ function Navbar() {
   useEffect(() => {
     getUserName();
   }, []);
+
+  const categories = async () => {
+    const res = await getPropertiescategoryId({
+      id,
+      searchText,
+    });
+
+    if (res.success) {
+      setproperty(res.category);
+
+      console.log("first",res)
+
+    } else {
+    }
+  };
+ 
+
+  useEffect(() => {
+    categories();
+  }, [searchText]);
+
   const navigateToProfile = (e) => {
     e.preventDefault();
     navigate(`/ProfileUpdate`);
@@ -82,7 +106,7 @@ function Navbar() {
             )}
 
             <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
-              <div className="flex justify-center rounded-lg  ">
+              <form className="flex justify-center rounded-lg  ">
                 <select className="px-4 border  ">
                   <option>
                     {" "}
@@ -126,7 +150,7 @@ function Navbar() {
                   </option>
                 </select>
                 <div className="  p-4 border-2 bg-slate-200">
-                  <form action="">
+               
                     <input
                       type="text"
                       id="message"
@@ -136,7 +160,7 @@ function Navbar() {
                       className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
                       onChange={(e) => setSearchText(e.target.value)}
                     />
-                  </form>
+                  
                 </div>
                 <div className="  p-4 border-2  bg-white  ">
                   {" "}
@@ -147,7 +171,7 @@ function Navbar() {
                     Search Properties
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
 
             {/* <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">

@@ -105,7 +105,7 @@ const Admin = () => {
                 Requested{" "}
               </Link>
             </li>
-            <li className="flex ">
+            {/* <li className="flex ">
               <Link
                 className="flex font-Arial opacity-90  pt-3 leading-loose"
                 to={`/admin/intrestedlist`}
@@ -116,7 +116,7 @@ const Admin = () => {
 
                 Intrested{" "}
               </Link>
-            </li>
+            </li> */}
             <li className="flex lead">
               <Link
                 className="flex font-Arial opacity-90 pt-3 leading-loose"

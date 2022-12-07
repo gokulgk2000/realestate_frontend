@@ -13,12 +13,15 @@ import "toastr/build/toastr.min.css";
 import RemoveModel from "../../models/RemoveModel";
 import { Breadcrumbs, Input } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
+import FileInput from "../../reusable/FileInput";
 
 const PropertyDetails = () => {
   const query = useQuery();
   const [modalOpen, setModalOpen, toggleModal] = useModal(false);
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
   const [getProperty, setGetProperty] = useState({
     _id: "",
     category: "",
@@ -68,26 +71,24 @@ const PropertyDetails = () => {
         propertyPic: Property?.propertyPic,
         Description: Property?.Description,
       });
-      console.log("res", res);
     }
   };
 
   const handleUpdatingProperty = async (e) => {
     e.preventDefault();
-    toastr.success(`Property has been pdated successfully`, "Success");
+    toastr.success(`Property has been updated successfully`, "Success");
 
     const property = { ...getProperty, _id: query.get("id") };
 
     const res = await updateProperty(property);
     if (res.success) {
-      console.log(property);
+      console.log(res.property);
     } else {
     }
   };
   useEffect(() => {
     if (rerender) {
       getPropertyId();
-
       setRerender(false);
     }
   }, [rerender]);
@@ -123,7 +124,25 @@ const PropertyDetails = () => {
     }
     setModalOpen(false);
   };
+  const convertBase64 = async (files) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(files);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+  const propertyImageUpload = async (e) => {
+    const files = e.target.files[0];
+    const Image = await convertBase64(files);
 
+    setGetProperty({ ...getProperty, propertyPic: Image });
+    console.log("propertyPic : ", getProperty);
+  };
   return (
     <>
       {modalOpen && (
@@ -320,18 +339,36 @@ const PropertyDetails = () => {
               setGetProperty({ ...getProperty, Description: e.target.value })
             }
           />
-          {/* <FileInput
-              type="file"
-              name="Property Picture"
-              placeholder="Choose Your Property "
-              multiple={true}
-              value={getProperty?.propertyPic }
-              disabled={!isEdit}
-              onChange={e =>setPropertyPic(e.target.value)}
-            /> */}
-        </div>
-        <img alt="property image" src={getProperty?.propertyPic} />
+          <p className=" text-amber-700">Property Picture :</p>
 
+        <input
+                 type="file"
+                 accept=".png, .jpg, .jpeg,.pdf,.webp"
+                 name="propertyPic"
+                 placeholder=" Choose the propertyPic"
+                multiple={true}
+                 disabled={!isEdit}
+                 className="border-2 px-2 py-1  border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={(e)=>propertyImageUpload (e)}
+                />
+        </div>
+        <div className="grid grid-cols-1 h-52 px-3">
+         {isEdit && <div className="flex text-amber-700">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-amber-700">
+        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+        <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+      </svg>Edit</div>}
+        <img className=" aspect-[2] h-60" 
+        src={getProperty?.propertyPic[0]}/>
+        <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
+      {getProperty?.propertyPic?.length > 0 && getProperty?.propertyPic?.map((image,j)=>(
+       <button >   
+         <img src={image} className="aspect-[2]" onClick={()=>setCurrentImage(j)}/>
+        </button>
+        ))}
+        </div>
+
+        </div>
         <div class="flex ml-5 mt-4 space-x-3 md:mt-6">
           {!isEdit ? (
             <button
@@ -399,7 +436,7 @@ const PropertyDetails = () => {
                   d="M12 4.5v15m7.5-7.5h-15"
                 />
               </svg>
-              Add
+              Approved
             </button>
           ) : (
             <button
@@ -420,7 +457,7 @@ const PropertyDetails = () => {
                   d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                 />
               </svg>
-              Remove
+              Rejected
             </button>
           )}
         </div>

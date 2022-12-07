@@ -1,5 +1,5 @@
 import React from "react";
-const FileInput = ({ label, name, value,placeholder, multiple="false",accept ="*",onChange,...props }) => {
+const FileInput = ({ label, name, value,placeholder, multiple="false",accept ="png,jpg,jpeg,webp,gif",onChange,...props }) => {
   return (
     <div className="pr-2 grid grid-rows-2 gap-2">
       <label className="capitalize">{label}</label>

@@ -35,7 +35,7 @@ const PropertyList = () => {
         Properties
       </a>
     </Breadcrumbs>
-    <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+    <div className="md:overflow-x-auto relative shadow-md sm:rounded-lg">
     <div className="w-full flex justify-center items-center mt-2 pb-4  ">
         <input
           type="text"
@@ -54,11 +54,13 @@ const PropertyList = () => {
       </div>
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
+            <tr> <th scope="col" className="py-3 md:px-6 px-1  text-amber-700">
+                   S.No
+                </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                    Seller Name
                 </th>
-                <th scope="col" className="py-3 px-6   text-amber-700">
+                <th scope="col" className="py-3 px-6  hidden md:block text-amber-700">
                     <div className="flex items-center">
                     AskPrice
                     </div>
@@ -74,7 +76,7 @@ const PropertyList = () => {
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700 ">
-                    <span className="flex items-center">PropertyDetails</span>
+                    <span className="flex items-center">Details</span>
                 </th>
             </tr>
         </thead>
@@ -111,13 +113,15 @@ const PropertyList = () => {
               .includes(searchText.toString().toLowerCase()) 
         ).slice((currentPage -1)*10,(currentPage *10)).map((PropertyData,p)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={p}>
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize">
+     <th scope="row" className="py-4 md:px-6 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {p+1}
+                </th> <th scope="row" className="py-4 px-6 font-medium  whitespace-nowrap dark:text-white capitalize">
                 {PropertyData?.Seller}
                 </th>
                 <td className="py-4 px-6 capitalize">
                 {PropertyData?.askPrice}
                 </td>
-                <td className="py-4 px-6 capitalize">
+                <td className="py-4 px-6 capitalize  hidden md:block">
                 {PropertyData?.location}
                 </td>
                 <td className="py-4 px-6 capitalize">
@@ -132,8 +136,8 @@ const PropertyList = () => {
         </tbody>
     </table>
 </div>
-<div className='justify-content px-96 mt-2'>
-    <nav aria-label="Page navigation example justify-center">
+<div className=''>
+    <nav aria-label="">
       <Pagination
         postsPerPage={postsPerPage }
         totalPosts={ allProperties?.length}

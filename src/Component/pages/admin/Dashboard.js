@@ -22,13 +22,13 @@ const Dashborad = () => {
   }, []);
 
   return(
-  <div>
+  <div className="hidden md:block">
     <Breadcrumbs>
       <a href="/admin/Dashboard" className="text-amber-700 font">
         Dashboard
       </a>
     </Breadcrumbs>
-    <div className=" grid grid-cols-3 px-3 mt-4 text-center gap-y-3 pb-3 ">
+    <div className="grid grid-cols-3 px-3 mt-4 text-center gap-y-3 pb-3 ">
       <div className=" rounded overflow-hidden shadow-lg hover:bg-stone-100 bg-stone-200 p-3">
         <div className="flex justify-center ">
           <svg

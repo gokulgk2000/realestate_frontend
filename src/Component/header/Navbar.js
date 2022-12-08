@@ -240,7 +240,7 @@ function Navbar() {
                             stroke-width="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 pt-2 text-teal-700"
-                          >
+                         onClick={navigateToProfile} >
                             <path
                               stroke-linecap="round"
                               stroke-linejoin="round"
@@ -259,6 +259,25 @@ function Navbar() {
                         <div className="flex  border-t-0 border-black  ">
                           {" "}
                           <svg
+
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              className="w-6 h-6 pt-2  text-teal-700 "
+                              onClick={navigateToUserActivities} >
+                              <g data-name="Layer ">
+                                <g data-name="activity">
+                                  <rect
+                                    width="6"
+                                    height="6"
+                                    opacity="0"
+                                    transform="rotate(90 12 12)"
+                                  />
+                                  <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
+                                </g>
+
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -275,6 +294,7 @@ function Navbar() {
                                   transform="rotate(90 12 12)"
                                 />
                                 <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
+
                               </g>
                             </g>
                           </svg>
@@ -324,7 +344,7 @@ function Navbar() {
                           stroke-width="1.5"
                           stroke="currentColor"
                           class="w-6 h-6 pt-2 text-teal-700"
-                        >
+                          onClick={logout} >
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"

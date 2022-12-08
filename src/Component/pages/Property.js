@@ -152,7 +152,7 @@ const Property = () => {
 {pro?.location},<div className="text-sm">{pro?.streetName}</div></h3> </div>     
                        <h6 className="pr-4">₹.{pro?.askPrice}</h6>
                     </Link>
-                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="md:flex  mr-3 justify-between shadow-sm hidden  shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md">
+                  <Link     to={`/Detailspage?uid=${pro?._id}`} className="md:flex  mr-3 justify-between shadow-sm  hidden  shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md">
                     <p>
                       <div className="underline  text-sm">plot Area</div>
                       <div className="font-semibold">₹.{pro?.costSq}.sq.ft</div>
@@ -161,14 +161,14 @@ const Property = () => {
                       <div className="underline text-sm">Facing</div>
                       <div className="font-semibold">{pro?.facing}</div>
                     </p>
-                    <p className="hidden sm:block">
+                    <p className="hidden sm:block ">
                       <div className="underline text-sm ">BuiltArea</div>
                       <div className="font-semibold">{pro?.builtArea}</div>
                     </p>
                   </Link>
          
               <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 ">
-              <Link     to={`/Detailspage?uid=${pro?._id}`} className="col-span-6" >     <p className=" text-sm  md:pb-2 ">Agent:{pro?.Seller}</p></Link>
+              <Link     to={`/Detailspage?uid=${pro?._id}`} className="col-span-6" >     <p className=" text-sm  md:py-2">Agent:{pro?.Seller}</p></Link>
                          <div className=" pr-5 md:pt-2"><button
                         className="grad-btn hover:grad1 hover:text-white rounded-sm px-1"
                         onClick={() =>

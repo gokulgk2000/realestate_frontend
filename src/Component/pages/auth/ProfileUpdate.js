@@ -4,7 +4,7 @@ import { getUserById, updateProfileById } from "../../helper/backend_helpers";
 import FileInput from "../../reusable/FileInput";
 import Input from "../../reusable/Input";
 
-import Image from "../../assets/images/avadar3.webp"
+import Image from "../../assets/images/avadar3.webp";
 const ProfileUpdate = () => {
   const [user, setUser] = useState({
     firstname: "",
@@ -74,7 +74,7 @@ const ProfileUpdate = () => {
 
   return (
     <div>
-      <div className="md:py-20 md:px-24">
+      <div className="md:py-20 md:px-24 bg-slate-100">
         <div className="py-8 px-8 bg-white shadow mt-24">
           {" "}
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -130,14 +130,13 @@ const ProfileUpdate = () => {
               </div>
             </div>{" "}
             {/* {user?.profilePic !== "" ? (sd):(sds) } */}
-            <div className="md:relative pl-14 "> 
+            <div className="md:relative pl-14 ">
               {" "}
               <div className="w-48 md:h-48  bg-indigo-100 mx-70 rounded-full  shadow-2xl inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                 <img
-                  src={user?.profilePic||Image}
+                  src={user?.profilePic || Image}
                   className="md:h-48 md:w-48 rounded-full"
                 />{" "}
-               
               </div>{" "}
               <div className="border-b pb-">
                 {" "}
@@ -150,7 +149,6 @@ const ProfileUpdate = () => {
                 </p>{" "}
               </div>{" "}
             </div>{" "}
-         
           </div>{" "}
           <div className="mt-12 flex  justify-center">
             <button

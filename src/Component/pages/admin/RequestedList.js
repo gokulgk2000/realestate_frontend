@@ -1,9 +1,13 @@
-import React, { useEffect, useState  } from 'react'
-import { allUsersList, GETALLUSERSBYLIMIT, getrequested } from '../../helper/backend_helpers';
-import Pagination from '../../pagination/Pagination';
-import { useQuery } from '../../helper/hook/useQuery';
-import { Breadcrumbs } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import {
+  allUsersList,
+  GETALLUSERSBYLIMIT,
+  getrequested,
+} from "../../helper/backend_helpers";
+import Pagination from "../../pagination/Pagination";
+import { useQuery } from "../../helper/hook/useQuery";
+import { Breadcrumbs } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 const RequestedList = () => {
   const query = useQuery();
   const [loading, setLoading] = useState(false);
@@ -11,164 +15,156 @@ const RequestedList = () => {
   const [requestData, setRequestData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-  const [searchText,setSearchText]=useState("")
-console.log("requestData", requestData)
+  const [searchText, setSearchText] = useState("");
 
-const requestSearch = (searched)=>{
-  setSearchText(searched)}
+  console.log("requestData", requestData);
 
-    const getAllRequested = async () => {
-        setLoading(true);
-        const res = await getrequested({});
-        console.log("dsp:",res);
-        if (res.success) {
-          setRequestData(res.requested);
-        }
-        setLoading(false);
-      };
-    
-      useEffect(() => {
-        getAllRequested();
-      }, []);
+  const requestSearch = (searched) => {
+    setSearchText(searched);
+  };
 
-      useEffect(() => {
-        const fetchPosts = async () => {
-          setLoading(true);
-          const res = await GETALLUSERSBYLIMIT ({ 
-        userId: query.get("id"),})
-          setPosts(res.data);
-          setLoading(false);
-        };
-        fetchPosts();
-      }, []);
- 
-      // Change page
+  const getAllRequested = async () => {
+    setLoading(true);
+    const res = await getrequested({});
+    console.log("dsp:", res);
+    if (res.success) {
+      setRequestData(res.requested);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getAllRequested();
+  }, []);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await GETALLUSERSBYLIMIT({
+        userId: query.get("id"),
+      });
+      setPosts(res.data);
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+
+  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
- 
-  return (
-    <div  >
-     <Breadcrumbs >
-      <a href="/admin/Dashboard" className="opacity-60 font">
-        Dashboard
-      </a>
-      <a href="/admin/userlist" className=" text-amber-700 font">
-       Sellers
-      </a>
-     
-    </Breadcrumbs>
-<div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
-<div className="w-full flex justify-center items-center mt-2 pb-4 ">
-        <input
-          type="text"
-          placeholder="Search Sellers"
-          name="search"
-          className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
-          onChange={(e) => requestSearch(e.target.value)}
-        />
 
-        <button
-          type="submit"
-          className=" grad1 px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
-        >
-          Search
-        </button>
-      </div>
- <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr >
+  return (
+    <div>
+      <Breadcrumbs>
+        <a href="/admin/Dashboard" className="opacity-60 font">
+          Dashboard
+        </a>
+        <a href="/admin/userlist" className=" text-amber-700 font">
+          Sellers
+        </a>
+      </Breadcrumbs>
+      <div className=" overflow-x-auto  shadow-md sm:rounded-lg">
+        <div className="w-full flex justify-center items-center mt-2 pb-4 ">
+          <input
+            type="text"
+            placeholder="Search Sellers"
+            name="search"
+            className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+            onChange={(e) => requestSearch(e.target.value)}
+          />
+
+          <button
+            type="submit"
+            className=" grad1 px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
+          >
+            Search
+          </button>
+        </div>
+        <div className="md:grid  ">
+          {" "}
+          <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                   S.No
+                  S.No
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                    <div className="flex items-center">
-                       User Nmae
-                    </div>
+                  <div className="flex items-center">User Nmae</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                    <div className="flex items-center">
-                    Facing
-                    </div>
+                  <div className="flex items-center">Facing</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                    <div className="flex items-center">
-               Location    
-                    </div>
+                  <div className="flex items-center">Location</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                    <div className="flex items-center">
-               Price    
-                    </div>
+                  <div className="flex items-center">Price</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                    <div className="flex items-center">
-               Near town    
-                    </div>
+                  <div className="flex items-center">Near town</div>
                 </th>
-                
-            </tr>
-        </thead>
-        <tbody>
-        {( requestData?.filter(
-      (item) =>
-      item?.facing
-      .toString()
-            .toLowerCase()
-            .includes(searchText.toString().toLowerCase()) ||
-          item?.location
-          .toString()
-          .toLowerCase()
-          .includes(searchText.toString().toLowerCase()) ||
-          item?.askPrice
-          .toString()
-          .toLowerCase()
-          .includes(searchText.toString().toLowerCase()) ||
-          item?.nearTown
-          .toString()
-          .toLowerCase()
-          .includes(searchText.toString().toLowerCase()) 
-    ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {i+1}
-                </th>
-                <td className="py-4 px-6 capitalize">
-                {Data?.regUser?.firstname}{" "}
-                {Data?.regUser?.lastname}
-                </td>
-                <td className="py-4 px-6 capitalize">
-                {Data?.facing}
-                </td>
-                <td className="py-4 px-6 ">
-                {Data?.location}
-                </td>
-                <td className="py-4 px-6 capitalize">
-                {Data?.askPrice}
-                </td>
-                <td className="py-4 px-6 capitalize">
-                {Data?.nearTown}
-                </td>
-                {/* <td className="py-4 px-6 items-center">
+              </tr>
+            </thead>
+            <tbody>
+              {requestData
+                ?.filter(
+                  (item) =>
+                    item?.facing
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase()) ||
+                    item?.location
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase()) ||
+                    item?.askPrice
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase()) ||
+                    item?.nearTown
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase())
+                )
+                .slice((currentPage - 1) * 10, currentPage * 10)
+                .map((Data, i) => (
+                  <tr
+                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    key={i}
+                  >
+                    <th
+                      scope="row"
+                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      {i + 1}
+                    </th>
+                    <td className="py-4 px-6 capitalize">
+                      {Data?.regUser?.firstname} {Data?.regUser?.lastname}
+                    </td>
+                    <td className="py-4 px-6 capitalize">{Data?.facing}</td>
+                    <td className="py-4 px-6 ">{Data?.location}</td>
+                    <td className="py-4 px-6 capitalize">{Data?.askPrice}</td>
+                    <td className="py-4 px-6 capitalize">{Data?.nearTown}</td>
+                    {/* <td className="py-4 px-6 items-center">
                     <Link to={`/admin/userdetails?id=${Data?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">View</Link>
                 </td> */}
-                </tr>   
-            ))}
-        </tbody>
-    </table>
-</div>
-<div className='justify-content px-96 mt-2'>
-    <nav aria-label="Page navigation example justify-center">
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="justify-content px-96 mt-2">
+          <nav aria-label="Page navigation example justify-center">
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={requestData?.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </nav>
+        </div>
+      </div>
 
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={requestData?.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
-    </nav>
-    </div>
-    </div> 
-
-    {/* <nav aria-label="Page flex navigation example">
+      {/* <nav aria-label="Page flex navigation example">
       <ul className="inline-flex items-center -space-x-px">
         <li>
           <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -199,10 +195,9 @@ const requestSearch = (searched)=>{
         </li>
       </ul>
     </nav> 
-    */}</div>  
+    */}
+    </div>
+  );
+};
 
-  
-  )
-}
-
-export default RequestedList
+export default RequestedList;

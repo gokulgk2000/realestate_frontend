@@ -46,7 +46,7 @@ export const Carousel = () => {
         />
       )}
       {currentUser && (
-        <div className="pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
+        <div className="   pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
           <button
             className="md:p-2 font text-gray-300 grad-btn "
             onClick={() => setModalOpen(true)}
@@ -70,7 +70,7 @@ export const Carousel = () => {
         />
       ) : (
         <img
-          className="aspect-[2] w-full"
+          className="aspect-[2] "
           src={image[selectImage]}
           // src={`https://${images[selectedImageIndex].mimage.defaultHost}/i/${images[selectedImageIndex].mimage.endpoint}/${images[selectedImageIndex].mimage.name}`}
         />

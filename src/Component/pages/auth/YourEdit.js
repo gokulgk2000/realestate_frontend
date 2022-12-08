@@ -310,7 +310,7 @@ const YourEdit = () => {
     </div>
     <div className="grid grid-cols-1 h-52 px-3">
       <img
-        className=" aspect-[2] h-60"
+        className=" aspect-[2] h-60 w-full"
         src={
           getProperty?.propertyPic
             ? getProperty?.propertyPic[currentImage]

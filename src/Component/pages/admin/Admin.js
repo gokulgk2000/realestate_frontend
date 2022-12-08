@@ -26,7 +26,7 @@ const Admin = () => {
 
   return (
    
-    
+    <div className="bg-white px-3" >
       <div className="md:grid grid-cols-5 font py-4">
         <div className=" font- Arial pt-5  bg-stone-200 px-6  md:text-left text-md">
           <h3 className=" font-light text-amber-700 text-xl font-SFMono-Regular">
@@ -117,7 +117,7 @@ const Admin = () => {
                 Intrested{" "}
               </Link>
             </li> */}
-            <li className="flex lead">
+            <li className="flex lead pb-3">
               <Link
                 className="flex font-Arial opacity-90 pt-3 leading-loose"
                 to={`/admin/PropertyList`}
@@ -146,7 +146,7 @@ const Admin = () => {
 
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 

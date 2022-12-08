@@ -14,7 +14,7 @@ const Landingpage = () => {
        
 
       
-        {/* <Carousel/> */}
+        <Carousel/>
           {/* <div
             className="md:w-screen "
             style={{ backgroundImage: `url(${Image})` }}
@@ -23,13 +23,13 @@ const Landingpage = () => {
   
 
         <div className=" px-4">
-          {/* <Category /> */}
+          <Category />
         </div>
 
         <div className=" drop-shadow-xl py-10 ">
           <Property />
         </div>
-        <Category />
+        {/* <Category /> */}
       </div>
     </div>
   );

@@ -59,7 +59,7 @@ const requestSearch = (searched)=>{
       </a>
      
     </Breadcrumbs>
-<div className=" overflow-x-auto relative shadow-md sm:rounded-lg">
+<div className=" md:overflow-x-auto relative shadow-md sm:rounded-lg">
 <div className="w-full flex justify-center items-center mt-2 pb-4 ">
         <input
           type="text"
@@ -79,7 +79,7 @@ const requestSearch = (searched)=>{
  <div className='md:grid  '>  <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr >
-                <th scope="col" className="py-3 px-6   text-amber-700">
+                <th scope="col" className="py-3 md:px-6 px-1   text-amber-700">
                    S.No
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
@@ -87,7 +87,7 @@ const requestSearch = (searched)=>{
                        Name   
                     </div>
                 </th>
-                <th scope="col" className="py-3 px-6   text-amber-700">
+                <th scope="col" className="py-3 px-6  hidden md:block text-amber-700">
                     <div className="flex items-center">
                     Email
                     </div>
@@ -121,13 +121,13 @@ const requestSearch = (searched)=>{
          
     ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
-                <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="py-4 md:px-6 px-2  font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>
                 <td className="py-4 px-6 capitalize">
                     {Data?.firstname} {Data?.lastname}
                 </td>
-                <td className="py-4 px-6">
+                <td className="py-4 px-6 hidden md:block">
                 {Data?.email}
                 </td>
                 <td className="py-4 px-6 capitalize">
@@ -142,8 +142,8 @@ const requestSearch = (searched)=>{
     </table>
 </div>
 
-<div className='justify-content px-96 mt-2'>
-    <nav aria-label="Page navigation example justify-center">
+<div className='text-center'>
+    <nav aria-label="text-center">
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={buyerData?.length}

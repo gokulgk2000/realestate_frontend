@@ -13,9 +13,9 @@ export default function Pagination({
   }
 
   return (
-    <div className='py-2'>
+    <div className='py-2 text-center'>
       <div>
-        <p className='text-sm text-gray-700'>
+        <p className='text-sm text-gray-700 '>
           Showing
           <span className='font-medium'>
             {" "}
@@ -29,7 +29,7 @@ export default function Pagination({
         </p>
       </div>
       <nav className='block'>
-        <ul className='flex pl-0 rounded list-none flex-wrap'>
+        <ul className='flex pl- rounded list-none flex-wrap justify-center'>
           <li>
             {pageNumbers.map((number) => (
               <button

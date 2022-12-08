@@ -235,7 +235,7 @@ function Navbar() {
                             stroke-width="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 pt-2 text-teal-700"
-                          >
+                         onClick={navigateToProfile} >
                             <path
                               stroke-linecap="round"
                               stroke-linejoin="round"
@@ -260,7 +260,7 @@ function Navbar() {
                               stroke="currentColor"
                               stroke-width="1.5"
                               className="w-6 h-6 pt-2  text-teal-700 "
-                            >
+                              onClick={navigateToUserActivities} >
                               <g data-name="Layer ">
                                 <g data-name="activity">
                                   <rect
@@ -321,7 +321,7 @@ function Navbar() {
                           stroke-width="1.5"
                           stroke="currentColor"
                           class="w-6 h-6 pt-2 text-teal-700"
-                        >
+                          onClick={logout} >
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"

@@ -30,8 +30,12 @@ import Requestedpage from "./Component/pages/Requestedpage";
 import UserActivities from "./Component/pages/UserActivities";
 import RequestedList from "./Component/pages/admin/RequestedList";
 import Intrested from "./Component/pages/admin/Intrested";
+
 import Activities from "./Component/pages/YourActivities";
 import YourEdit from "./Component/pages/auth/YourEdit";
+
+import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
+
 
 
 
@@ -60,6 +64,7 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
         <Route path="/sellproperty" element={<Sell />}   />
         </Route>
+        <Route path="admin-page" element={<AdminLogin />} />
         <Route path="admin" element={<Admin />} >
         <Route index  element={<Dashboard />} />
         <Route path="Dashboard" element={<Dashboard />} />

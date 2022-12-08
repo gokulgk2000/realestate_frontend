@@ -79,6 +79,10 @@ function Navbar() {
     // e.preventDefault();
     navigate(`/UserActivties?`);
   };
+  const navigateToYourActivities = (e) => {
+    // e.preventDefault();
+    navigate(`/yourActivities?`);
+  };
 
   const navigateToInterested = (e) => {
     e.preventDefault();
@@ -92,22 +96,21 @@ function Navbar() {
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
-                <button class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center ">
+                <button class="text-black p-1 hover:shadow-none rounded shadow-sm flex items-center gap-4 justify-center ">
                   <Link className="hover:text-amber-700" to="/">
                     HOME
-                  </Link>   </button>
-              
+                  </Link>
+                  <Link className="hover:text-amber-700" to="/about">
+                    CONTACT US
+                  </Link>
                   {userFromStorage ? (
-                    <button class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center ">  <Link className="hover:text-amber-700" to="/sellproperty">
+                    <Link className="hover:text-amber-700" to="/sellproperty">
                       SELL PROPERTY
-                    </Link></button>
+                    </Link>
                   ) : (
                     <Link to="/property"></Link>
-                  )} <button class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center ">
-                    <Link className="hover:text-amber-700" to="/about">
-                    CONTACT US
-                  </Link></button>
-             
+                  )}
+                </button>
               </div>
             ) : (
               <Mobilenav />
@@ -241,7 +244,7 @@ function Navbar() {
                             stroke-width="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 pt-2 text-teal-700"
-                         onClick={navigateToProfile} >
+                          >
                             <path
                               stroke-linecap="round"
                               stroke-linejoin="round"
@@ -260,31 +263,44 @@ function Navbar() {
                         <div className="flex  border-t-0 border-black  ">
                           {" "}
                           <svg
-
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              className="w-6 h-6 pt-2  text-teal-700 "
-                              onClick={navigateToUserActivities} >
-                              <g data-name="Layer ">
-                                <g data-name="activity">
-                                  <rect
-                                    width="6"
-                                    height="6"
-                                    opacity="0"
-                                    transform="rotate(90 12 12)"
-                                  />
-                                  <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
-                                </g>
-                                </g></svg>
-                               
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            className="w-6 h-6 pt-2  text-teal-700 "
+                          >
+                            <g data-name="Layer ">
+                              <g data-name="activity">
+                                <rect
+                                  width="6"
+                                  height="6"
+                                  opacity="0"
+                                  transform="rotate(90 12 12)"
+                                />
+                                <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
+                              </g>
+                            </g>
+                          </svg>
                           <button
                             className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
                             onClick={(e) => navigateToUserActivities(e)}
                           >
                             Activities
+                          </button>
+                        </div>{" "}
+                        <div className="flex  border-t-0 border-black  ">
+                          {" "}
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"                             className="w-6 h-6 pt-2  text-teal-700 "
+>
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+</svg>
+
+                          <button
+                            className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                            onClick={(e) => navigateToYourActivities(e)}
+                          >
+                           your Activities
                           </button>
                         </div>{" "}
                       </div>
@@ -326,7 +342,7 @@ function Navbar() {
                           stroke-width="1.5"
                           stroke="currentColor"
                           class="w-6 h-6 pt-2 text-teal-700"
-                          onClick={logout} >
+                        >
                           <path
                             stroke-linecap="round"
                             stroke-linejoin="round"

@@ -30,7 +30,12 @@ import Requestedpage from "./Component/pages/Requestedpage";
 import UserActivities from "./Component/pages/UserActivities";
 import RequestedList from "./Component/pages/admin/RequestedList";
 import Intrested from "./Component/pages/admin/Intrested";
+
+import Activities from "./Component/pages/YourActivities";
+import YourEdit from "./Component/pages/auth/YourEdit";
+
 import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
+
 
 
 
@@ -50,7 +55,9 @@ const App = () => {
         <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/UserActivties" element={<UserActivities/>} />
-      
+        <Route path="/yourActivities" element={<Activities/>} />
+        <Route path="/yourEdit" element={<YourEdit/>} />
+        
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />

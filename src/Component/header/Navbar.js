@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
-import { getPropertiescategoryId, getUserById } from "../helper/backend_helpers";
+import {
+  getPropertiescategoryId,
+  getUserById,
+} from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useModal } from "../helper/hook/useModal";
 import { useQuery } from "../helper/hook/useQuery";
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
-import Image from "../assets/images/avadar3.webp"
+import Image from "../assets/images/avadar3.webp";
 
 const NavItem = [
   { name: "HOME", link: "/" },
@@ -22,13 +25,14 @@ function Navbar() {
   const [searchText, setSearchText] = useState("");
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
-  const [property, setproperty] = useState("");   
-
+  const [property, setproperty] = useState("");
+  const [currentUser, setCurrentUser] = useState();
   const query = useQuery();
   const id = query.get("id");
   const navigate = useNavigate();
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
-// console.log("user",user)
+
+  // console.log("user",user)
   const getUserName = async () => {
     const res = await getUserById({
       userID: userFromStorage?.userID,
@@ -52,12 +56,10 @@ function Navbar() {
     if (res.success) {
       setproperty(res.category);
 
-      console.log("first",res)
-
+      console.log("first", res);
     } else {
     }
   };
- 
 
   useEffect(() => {
     categories();
@@ -72,13 +74,12 @@ function Navbar() {
     e.preventDefault();
     navigate(`/property?search=${searchText}`);
   };
-  
+
   const navigateToUserActivities = (e) => {
     // e.preventDefault();
     navigate(`/UserActivties?`);
-    
   };
-  
+
   const navigateToInterested = (e) => {
     e.preventDefault();
     navigate(`/request`);
@@ -86,23 +87,29 @@ function Navbar() {
 
   return (
     <div className="Navbar uppercase grad1">
-       
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
-                {NavItem.map((Nav, k) => (
-                  <NavLink key={k} to={Nav.link || "#"} className="">
-                    <button class="text-black p-1 hover:shadow-none rounded shadow-sm flex items-center justify-center hover:text-amber-700">
-                      {" "}
-                      {Nav.name}
-                    </button>
-                  </NavLink>
-                ))}
+                <button class="text-black p-1 hover:shadow-none rounded shadow-sm flex items-center gap-4 justify-center ">
+                  <Link className="hover:text-amber-700" to="/">
+                    HOME
+                  </Link>
+                  <Link className="hover:text-amber-700" to="/about">
+                    CONTACT US
+                  </Link>
+                  {userFromStorage ? (
+                    <Link className="hover:text-amber-700" to="/sellproperty">
+                      SELL PROPERTY
+                    </Link>
+                  ) : (
+                    <Link to="/property"></Link>
+                  )}
+                </button>
               </div>
             ) : (
-              <Mobilenav navItem={NavItem} />
+              <Mobilenav />
             )}
 
             <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
@@ -150,17 +157,15 @@ function Navbar() {
                   </option>
                 </select>
                 <div className="  p-4 border-2 bg-slate-200">
-               
-                    <input
-                      type="text"
-                      id="message"
-                      value={searchText}
-                      name="search"
-                      placeholder="Search Property...."
-                      className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
-                      onChange={(e) => setSearchText(e.target.value)}
-                    />
-                  
+                  <input
+                    type="text"
+                    id="message"
+                    value={searchText}
+                    name="search"
+                    placeholder="Search Property...."
+                    className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
+                    onChange={(e) => setSearchText(e.target.value)}
+                  />
                 </div>
                 <div className="  p-4 border-2  bg-white  ">
                   {" "}
@@ -200,7 +205,7 @@ function Navbar() {
                       <div className="flex">
                         {" "}
                         <img
-                          src={user?.profilePic||Image}
+                          src={user?.profilePic || Image}
                           className="w-10 h-10 rounded-full"
                         />
                         {/* <span>   <svg
@@ -254,6 +259,7 @@ function Navbar() {
                         <div className="flex  border-t-0 border-black  ">
                           {" "}
                           <svg
+
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
                               viewBox="0 0 24 24"
@@ -271,14 +277,31 @@ function Navbar() {
                                   />
                                   <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
                                 </g>
-                              </g>
-                            </svg>
-                            
-                          <button className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm" 
-                          onClick={(e)=>
-                            navigateToUserActivities(e)}
+
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            className="w-6 h-6 pt-2  text-teal-700 "
                           >
-                           
+                            <g data-name="Layer ">
+                              <g data-name="activity">
+                                <rect
+                                  width="6"
+                                  height="6"
+                                  opacity="0"
+                                  transform="rotate(90 12 12)"
+                                />
+                                <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
+
+                              </g>
+                            </g>
+                          </svg>
+                          <button
+                            className=" text-start  p-1 md:w-28 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                            onClick={(e) => navigateToUserActivities(e)}
+                          >
                             Activities
                           </button>
                         </div>{" "}

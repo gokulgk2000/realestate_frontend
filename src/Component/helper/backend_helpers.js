@@ -24,6 +24,7 @@ const userLogin = (payload) =>
   const findCategory = (payload) =>
   get(`${BASE_URL}/category/findCategory`, payload);
   //admin
+  const adminLogin = (payload) => post(`${BASE_URL}/admin/adminLogin`, payload);
   const getUserById = (payload) => post(`${BASE_URL}/admin/getUserById`, payload);
   const getPropertyDetailsById = (payload) =>
   post(`${BASE_URL}/admin/getPropertyDetailsById`, payload);
@@ -36,7 +37,7 @@ const userLogin = (payload) =>
   const addBuyer = (payload) => put(`${BASE_URL}/admin/addBuyer`, payload);
   const addProperty = (payload) => put(`${BASE_URL}/admin/addProperty`, payload);
   const getrequestedByUserId = (payload) => post(`${BASE_URL}/requested/getrequestedByUserId`, payload);
-  const getrequested = (payload) => get(`${BASE_URL}/requested/getAllrequested`, payload);
+  const getrequested = (payload) => post(`${BASE_URL}/requested/requested`, payload);
   const getIntrestedPropertyById = (payload) => post(`${BASE_URL}/intrested/getIntrestedByUserId`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
@@ -55,6 +56,7 @@ const updateProperty = (payload) =>
   const FeedbackRegistration = (payload) =>
   post(`${BASE_URL}/feedback/feedbackregister`, payload);
   export {userRegisteration,
+    adminLogin,
     FeedbackRegistration,
     getuserdetails,
     buyerReg,

@@ -88,7 +88,8 @@ const PropertyDetails = () => {
       setGetProperty(res.propertyPic)
       console.log(res.propertyPic);
     } else {
-    }window.location.reload()
+    }
+    // window.location.reload()
 
   };
   useEffect(() => {
@@ -141,37 +142,28 @@ const PropertyDetails = () => {
       };
     });
   };
-
-
-  // const propertyImageUpload = async (e) => {
-  // const  length=getProperty?.propertyPic.length
-  //   const files = e.target.files[length];
-  //   const Image = await convertBase64(files);
-
-  //   setCurrentImage({ ...currentImage, propertyPic: [Image] });
-  //   console.log("propertyPic : ", getProperty);
-  // };
-  // const propertyImageUpload = async (e) => {
-  //   const files = [e.target.files];
-  //   files.push(...e.target.files);
-  //     files.push(convertBase64(...e.target.files));
-  //     setCurrentImage({ files });
-  // }
-//  
 const propertyImageUpload = async (e) => {
 
   const target = e.target;
   const allImages = await Promise?.all(
-    [...target.files].map(async (files) => {
+    [...target.file].map(async (files) => {
       return await convertBase64(files);
     })
   );  
-
-setGetProperty({...getProperty,propertyPic:allImages});
-
+  setGetProperty({...getProperty,propertyPic:[...getProperty?.propertyPic,...allImages]});
 };
+const propertyImageRemove = async (e) => {
 
-console.log("getProperty",getProperty)
+  const target = e.target;
+  const imagesRemove = await Promise?.all(
+    [target.file].map(async (files) => {
+      return await convertBase64(files);
+    })
+  );  
+  imagesRemove.filter(img=>img!==imagesRemove)
+  setGetProperty([getProperty?.propertyPic,imagesRemove]);
+console.log("allImages,",imagesRemove)
+};
 
   return (
     <>
@@ -342,13 +334,21 @@ console.log("getProperty",getProperty)
                   onChange={(e) => propertyImageUpload(e)} />
               </div>
               <div className="grid grid-cols-1 h-52 px-3">
-               
+                
                   <img className=" aspect-[2] h-60"
                   src={getProperty?.propertyPic ? getProperty?.propertyPic[currentImage] : null} />
                 <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
                   {getProperty?.propertyPic?.length > 1 && getProperty?.propertyPic?.map((image, j) => (
                     <button key={j}>
+                      <div className="relative group">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                        className="w-6 h-6 absolute right-0 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
+                        onClick={(e)=>propertyImageRemove(e)} >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  
                       <img src={image} className="aspect-[2] h-28" onClick={() => setCurrentImage(j)} />
+                      </div>
                     </button>
                   ))}
                 </div>

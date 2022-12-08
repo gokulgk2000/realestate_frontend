@@ -54,7 +54,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />
         <Route element={<ProtectedRoutes />}>
-        <Route path="/sell" element={<Sell />}   />
+        <Route path="/sellproperty" element={<Sell />}   />
         </Route>
         <Route path="admin" element={<Admin />} >
         <Route index  element={<Dashboard />} />

@@ -1,7 +1,9 @@
-import { queryAllByAltText } from "@testing-library/react";
 import React, { useState } from "react";
 import { FeedbackRegistration } from "../helper/backend_helpers";
 import { useQuery } from "../helper/hook/useQuery";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
+
 
 const Feedbackpage = () => {
   const initialFormValues = {
@@ -30,6 +32,8 @@ const Feedbackpage = () => {
 
     if (res.success) {
       setFeedback(res.initialFormValues);
+      toastr.success(`Feedback Sent Sucessfully`, "Success");
+
       setFeedbackSuccess(res.msg)
     } else {
       setFeedbackError(res.msg);
@@ -40,8 +44,8 @@ const Feedbackpage = () => {
       <div className=" text-2xl">Your Feedback</div>
       <form
         className="w-full max-w-lg mt-5 "
-        onSubmit={(e) => {
-          e.preventDefault();
+        onSubmit={() => {
+      
           handleSubmit();
         }}
       >

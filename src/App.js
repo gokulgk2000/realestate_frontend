@@ -45,7 +45,7 @@ const App = () => {
       <Header />
       <Navbar /> 
       <Routes>
-      <Route path="/" element={<Landingpage />} />
+      <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
 
       <Route path="/category" element={<Category />} />

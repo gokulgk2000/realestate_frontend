@@ -90,32 +90,32 @@ function Navbar() {
     navigate(`/yourActivities?`);
   };
   return (
-    <div className="Navbar uppercase grad1">
+    <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">  
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
-                <button class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center ">
-                  <Link className="hover:text-amber-700" to="/">
+                <Link to="/" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
+                  <div className="hover:text-amber-700" >
                     HOME
-                  </Link>{" "}
-                </button>
+                  </div>{" "}
+                </Link>
                 {userFromStorage ? (
-                  <button class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center ">
+                  <Link to="/sellproperty" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
                     {" "}
-                    <Link className="hover:text-amber-700" to="/sellproperty">
+                    <div className="hover:text-amber-700" >
                       SELL PROPERTY
-                    </Link>
-                  </button>
+                    </div>
+                  </Link>
                 ) : (
                   <Link to="/property"></Link>
                 )}{" "}
-                <button class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center ">
-                  <Link className="hover:text-amber-700" to="/about">
+                <Link to="/about" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
+                  <div className="hover:text-amber-700" >
                     CONTACT US
-                  </Link>
-                </button>
+                  </div>
+                </Link>
               </div>
             ) : (
               <Mobilenav />

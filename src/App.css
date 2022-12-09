@@ -28,7 +28,7 @@ border: 2px;
 }
 .grad-mob {
   
-  background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(149, 113, 4));
+  background-image: linear-gradient(to top, rgba(204, 255, 0, 0), rgb(149, 113, 4));
 }
 .bg{
   height: 900px;

@@ -30,7 +30,7 @@ export const Carousel = () => {
   useEffect(() => {
     const autoPlayFunction = setTimeout(() => {
       nextImageOnClick();
-    }, 7000);
+    }, 2000);
     return () => {
       clearTimeout(autoPlayFunction);
     };
@@ -46,7 +46,7 @@ export const Carousel = () => {
         />
       )}
       {currentUser && (
-        <div className="   pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
+        <div className=" hover:free  pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
           <button
             className="md:p-2 font text-gray-300 grad-btn "
             onClick={() => setModalOpen(true)}

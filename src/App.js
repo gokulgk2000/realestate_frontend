@@ -31,7 +31,7 @@ import UserActivities from "./Component/pages/UserActivities";
 import RequestedList from "./Component/pages/admin/RequestedList";
 import Intrested from "./Component/pages/admin/Intrested";
 
-import Activities from "./Component/pages/YourActivities";
+import Activities from "./Component/pages/YourProperties";
 import YourEdit from "./Component/pages/auth/YourEdit";
 
 import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";

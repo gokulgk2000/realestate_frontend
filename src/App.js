@@ -35,6 +35,7 @@ import Activities from "./Component/pages/YourProperties";
 import YourEdit from "./Component/pages/auth/YourEdit";
 
 import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
+import Contact from "./Component/pages/Contact";
 
 
 
@@ -51,6 +52,7 @@ const App = () => {
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/request" element={<Requested />} />
         <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />

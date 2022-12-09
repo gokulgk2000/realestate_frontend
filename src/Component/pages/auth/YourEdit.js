@@ -310,7 +310,7 @@ const YourEdit = () => {
     </div>
     <div className="grid grid-cols-1 h-52 px-3">
       <img
-        className=" aspect-[2] h-60 w-full"
+        className=" aspect-[2] h-96 w-full"
         src={
           getProperty?.propertyPic
             ? getProperty?.propertyPic[currentImage]
@@ -321,11 +321,19 @@ const YourEdit = () => {
         {getProperty?.propertyPic?.length > 1 &&
           getProperty?.propertyPic?.map((image, j) => (
             <button key={j}>
+                <div className="relative group">
+                        {isEdit && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+                        className="w-6 h-6 absolute right-0 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
+                         >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>}
+                  
               <img
                 src={image}
                 className="aspect-[2] h-28"
                 onClick={() => setCurrentImage(j)}
               />
+              </div>
             </button>
           ))}
       </div>

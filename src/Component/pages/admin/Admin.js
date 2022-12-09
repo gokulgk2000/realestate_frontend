@@ -32,7 +32,7 @@ const Admin = () => {
             Menu
           </h3>
           <Link
-            className="flex font-Arial opacity-90 pt-3 leading-loose"
+            className="flex font-Arial opacity-90 pt-3 leading-loose  focus-within:shadow-md px-1 "
             to={`/admin/Dashboard`}
           >
             <svg
@@ -50,7 +50,7 @@ const Admin = () => {
             Sub-Menu
           </h3>
           <ul className="font- Arial  leading-loose">
-            <li className="flex ">
+            <li className="flex   focus-within:shadow-md px-1 ">
               <Link
                 className="flex font-Arial opacity-90  pt-3 leading-loose"
                 to={`/admin/userlist`}
@@ -70,7 +70,7 @@ const Admin = () => {
                 Sellers{" "}
               </Link>
             </li>
-            <li className="flex ">
+            <li className="flex focus-within:shadow-md px-1">
               <Link
                 className="flex font-Arial opacity-90  pt-3 leading-loose"
                 to={`/admin/buyerlist`}
@@ -90,7 +90,7 @@ const Admin = () => {
                 Buyers{" "}
               </Link>
             </li>
-            <li className="flex ">
+            <li className="flex focus-within:shadow-md px-1">
               <Link
                 className="flex font-Arial opacity-90  pt-3 leading-loose"
                 to={`/admin/requestedlist`}
@@ -122,7 +122,7 @@ const Admin = () => {
                 Intrested{" "}
               </Link>
             </li> */}
-            <li className="flex lead pb-3">
+            <li className="flex lead pb-3  focus-within:shadow-md px-1">
               <Link
                 className="flex font-Arial opacity-90 pt-3 leading-loose"
                 to={`/admin/PropertyList`}

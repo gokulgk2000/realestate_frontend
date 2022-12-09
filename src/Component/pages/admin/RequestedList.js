@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   allUsersList,
+  getAllrequested,
   GETALLUSERSBYLIMIT,
   getrequested,
 } from "../../helper/backend_helpers";
@@ -25,7 +26,7 @@ const RequestedList = () => {
 
   const getAllRequested = async () => {
     setLoading(true);
-    const res = await getrequested({});
+    const res = await getAllrequested({});
     console.log("dsp:", res);
     if (res.success) {
       setRequestData(res.requested);

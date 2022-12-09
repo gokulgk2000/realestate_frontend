@@ -78,12 +78,7 @@ const PropertyList = () => {
               >
                 <div className="flex items-center">AskPrice</div>
               </th>
-              <th
-                scope="col"
-                className="py-3 px-6   text-amber-700 hidden md:visible"
-              >
-                <div className="flex items-center">location</div>
-              </th>
+           
               <th scope="col" className="py-3 px-6   text-amber-700">
                 <div className="flex items-center">status</div>
               </th>
@@ -145,9 +140,7 @@ const PropertyList = () => {
                   <td className="py-4 px-6 capitalize hidden md:block">
                     {PropertyData?.askPrice}
                   </td>
-                  <td className="py-4 px-6 capitalize  hidden md:visible">
-                    {PropertyData?.location}
-                  </td>
+                 
                   <td
                     className="py-4 px-6 capitalize"
                     style={{ color: statusColor[PropertyData?.status] }}

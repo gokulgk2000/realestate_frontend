@@ -36,7 +36,7 @@ const Aboutus = () => {
 
 
       </div>
-     <Feedbackpage/>
+    
     </div>
   )
 }

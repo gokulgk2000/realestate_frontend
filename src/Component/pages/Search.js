@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { getProById, getPropertiescategoryId, getuserdetails } from '../helper/backend_helpers';
 import { useQuery } from '../helper/hook/useQuery';
 
@@ -66,11 +66,14 @@ const Search = () => {
     }
   };
   
-  
+  const navigateToProperty = (e) => {
+    e.preventDefault();
+    Navigate(`/property?search=${searchText}`);
+  };
   return (
-    <div> <div className="flex   md:hidden ">
-    <div className="flex justify-center rounded-lg  ">
-      <select className="px-2 border h-10 "id="ok" value="select">
+    <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
+    <form className="flex justify-center rounded-lg  ">
+      <select className="px-4 border  ">
         <option>
           {" "}
           <button class="  py-1 px-4 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  md:w-32 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center">
@@ -93,41 +96,47 @@ const Search = () => {
             </svg>{" "}
           </button>{" "}
         </option>
-        <option value="residential" className=" border-0   ">
+        <option value="" className=" border-0   ">
           Residential
         </option>
 
-        <option value="villa" className=" border-0">
+        <option value="" className=" border-0">
           Villa
         </option>
 
-        <option value="land" className=" border-0">
+        <option value="" className=" border-0">
           Land
         </option>
-        <option value="appartment" className=" border-0">
+        <option value="" className=" border-0">
           Appartment
         </option>
 
-        <option value="commercial" className=" border-0">
+        <option value="" className=" border-0">
           Commercial
         </option>
       </select>
-      <div className="flex  p- border-2 h-10 bg-slate-200">
-        <form action="">
-          <input
-            type="text"
-            id="message"
-            value={searchText}
-            name="search"
-            placeholder="Search Property...."
-            className=" px-2 bg-slate-200 w-36  rounded-tl-full rounded-bl-full border-0 focus:outline-0 "
-            onChange={(e) => setSearchText(e.target.value)} 
-          />
-        </form>
+      <div className="  p-4 border-2 bg-slate-200">
+        <input
+          type="text"
+          id="message"
+          value={searchText}
+          name="search"
+          placeholder="Search Property...."
+          className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
+          onChange={(e) => setSearchText(e.target.value)}
+        />
       </div>
-     
-    </div>
-  </div></div>
+      <div className="  p-4 border-2  bg-white  ">
+        {" "}
+        <button
+          className="px-3 py-2 -ml-1.5 grad-card text-black rounded hover:text-white"
+          onClick={navigateToProperty}
+        >
+          Search Properties
+        </button>
+      </div>
+    </form>
+  </div>
   )
 }
 

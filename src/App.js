@@ -55,7 +55,7 @@ const App = () => {
         <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/UserActivties" element={<UserActivities/>} />
-        <Route path="/yourActivities" element={<Activities/>} />
+        <Route path="/yourProperties" element={<Activities/>} />
         <Route path="/yourEdit" element={<YourEdit/>} />
         
         <Route path="/login" element={<Login />} />

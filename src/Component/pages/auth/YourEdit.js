@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getPropertyDetailsById, updateProperty } from '../../helper/backend_helpers';
 import { useQuery } from '../../helper/hook/useQuery';
-
+import { Breadcrumbs } from "@material-tailwind/react";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 const YourEdit = () => {
@@ -114,13 +114,27 @@ const YourEdit = () => {
           })
         );  
       
-      setGetProperty({...getProperty,propertyPic:allImages});
+        setGetProperty({...getProperty,propertyPic:[...getProperty?.propertyPic,...allImages]});
       
       };
       
       console.log("getProperty",getProperty)    
+     
+      const propertyImageRemove = image => {
+          const filteredImages =getProperty?.propertyPic.filter(img=>img !==image)
+          setGetProperty({...getProperty,propertyPic:filteredImages})
+        
+      
+      }
   return (
+    <div>
+    <Breadcrumbs>
+    <a href="/yourProperties" className="opacity-60">
+   Properties
+    </a>
+  </Breadcrumbs>
     <div class="grid  grid-cols-2 min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+         
     <div class="flex ml-5 flex-col items-left pb-10">
       <p className=" text-amber-700"> Seller :</p>
       <Input
@@ -318,13 +332,13 @@ const YourEdit = () => {
         }
       />
       <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
-        {getProperty?.propertyPic?.length > 1 &&
+        {getProperty?.propertyPic?.length > 0 &&
           getProperty?.propertyPic?.map((image, j) => (
             <button key={j}>
                 <div className="relative group">
                         {isEdit && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
                         className="w-6 h-6 absolute right-0 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
-                         >
+                        onClick={()=>propertyImageRemove(image)}  >
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>}
                   
@@ -384,7 +398,7 @@ const YourEdit = () => {
         </button>
       )}
 
-     
+</div>
     </div>
   </div>
   )

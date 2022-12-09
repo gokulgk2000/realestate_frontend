@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Breadcrumbs } from "@material-tailwind/react";
 import Pagination from "../pagination/Pagination";
 import { useQuery } from "../helper/hook/useQuery";
 import { getuserProperty } from "../helper/backend_helpers";
@@ -57,14 +56,7 @@ const Activities = () => {
             Search
           </button>
         </div>
-        <Breadcrumbs>
-          <a href="/" className="opacity-60">
-            Home
-          </a>
-          <a href="/UserActivties" className="text-rose-700">
-            Activities
-          </a>
-        </Breadcrumbs>
+       
         <div className="md:grid  ">
           {" "}
           <table className=" text-sm text-left text-gray-500 dark:text-gray-400">

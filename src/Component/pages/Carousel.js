@@ -6,6 +6,7 @@ import { tab } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useModal } from "../helper/hook/useModal";
 import RequestedModel from "../models/RequestedModel";
+import Search from "./Search";
 
 export const Carousel = () => {
   const [isBiggerthanTab] = useMediaQuery(tab);
@@ -30,7 +31,7 @@ export const Carousel = () => {
   useEffect(() => {
     const autoPlayFunction = setTimeout(() => {
       nextImageOnClick();
-    }, 7000);
+    }, 90000);
     return () => {
       clearTimeout(autoPlayFunction);
     };
@@ -46,7 +47,7 @@ export const Carousel = () => {
         />
       )}
       {currentUser && (
-        <div className="pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
+        <div className=" hover:free  pt-3 leading-relaxed absolute  left-5 inset-y-2/2 ">
           <button
             className="md:p-2 font text-gray-300 grad-btn "
             onClick={() => setModalOpen(true)}
@@ -56,11 +57,9 @@ export const Carousel = () => {
           <p className="text-xs text-gray-300">Click to Sent a New Request</p>
         </div>
       )}
-      {/* <img
-        className="aspect-[2] w-full"
-        // src={`https://${images[selectedImageIndex].image.defaultHost}/i/${images[selectedImageIndex].image.endpoint}/${images[selectedImageIndex].image.name}`}
-        src={image[selectImage]}
-      /> */}
+   <div className="flex justify-center  ">
+    <div className="absolute">
+    <Search/></div></div>
 
       {isBiggerthanTab ? (
         <img
@@ -70,7 +69,7 @@ export const Carousel = () => {
         />
       ) : (
         <img
-          className="aspect-[2] w-full"
+          className="aspect-[2] "
           src={image[selectImage]}
           // src={`https://${images[selectedImageIndex].mimage.defaultHost}/i/${images[selectedImageIndex].mimage.endpoint}/${images[selectedImageIndex].mimage.name}`}
         />

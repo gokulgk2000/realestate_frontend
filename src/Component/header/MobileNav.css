@@ -20,7 +20,7 @@
 .burger-bar,
 .burger-bar::before,
 .burger-bar::after{
-
+    
     display: block;
     width: 30px;
     height: 3px;

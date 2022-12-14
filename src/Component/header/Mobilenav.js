@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const Mobile = [
   { name: "HOME", link: "/" },
-  { name: "SELL PROPERTY", link: "/sell" },
+  { name: "SELL PROPERTY", link: "/sellproperty" },
   { name: "CONTACT US ", link: "/about" },
 ];
 
@@ -15,7 +15,7 @@ const Mobilenav = (navItem) => {
   return (
     <div>
       {isMobile && (
-        <ul className="ul py-9 space-y-2 text-white leading-10 grad-mob font-serif">
+        <ul className="ul py-9 space-y-2 text-white leading-10 grad-mob  font">
           {Mobile.map((Mob, l) => (
             <NavLink
               key={l}
@@ -30,9 +30,9 @@ const Mobilenav = (navItem) => {
       )}
       <button className="" onClick={() => setIsMobile(!isMobile)}>
         {isMobile ? (
-          <div className="burger-bar show "></div>
+          <div className=" burger-bar show "></div>
         ) : (
-          <div className="burger-bar z-50 "></div>
+          <div className="burger-bar z-50  "></div>
         )}
       </button>
     </div>

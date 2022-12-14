@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet,NavLink } from "react-router-dom";
 import { allPropertiesList, allUsersList } from "../../helper/backend_helpers";
-
 const Admin = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [allProperties, setAllProperties] = useState([]);
@@ -25,16 +24,15 @@ const Admin = () => {
   }, []);
 
   return (
-   
-    
+    <div className="bg-white md:px-3 px-1 ">
       <div className="md:grid grid-cols-5 font py-4">
         <div className=" font- Arial pt-5  bg-stone-200 px-6  md:text-left text-md">
           <h3 className=" font-light text-amber-700 text-xl font-SFMono-Regular">
             Menu
           </h3>
-          <Link
-            className="flex font-Arial opacity-90 pt-3 leading-loose"
-            to={`/admin/Dashboard`}
+          <NavLink
+            className={({isActive})=>isActive?' shadow-md flex font-Arial opacity-90 pt-3 leading-loose':'flex font-Arial opacity-90 pt-3 leading-loose'}
+            to={`/admin`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,16 +44,15 @@ const Admin = () => {
               <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
             </svg>
             Admin Dashboard
-          </Link>
+          </NavLink>
           <h3 className="  font-light text-amber-700  text-xl font- Arial leading-loose">
             Sub-Menu
           </h3>
           <ul className="font- Arial  leading-loose">
-          
-            <li className="flex ">
-              <Link
-                className="flex font-Arial opacity-90  pt-3 leading-loose"
-               to={`/admin/userlist`}
+           
+              <NavLink
+            className={({isActive})=>isActive?'flex shadow-md  font-Arial opacity-90 pt-3 leading-loose':'flex font-Arial opacity-90 pt-3 shadow-none leading-loose'}
+            to={`/admin/userlist`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -70,12 +67,12 @@ const Admin = () => {
                   />
                 </svg>
                 Sellers{" "}
-              </Link>
-            </li>
-            <li className="flex ">
-              <Link
-                className="flex font-Arial opacity-90  pt-3 leading-loose"
-                to={`/admin/buyerlist`}
+              </NavLink>
+           
+          
+              <NavLink
+            className={({isActive})=>isActive?' shadow-md flex font-Arial opacity-90 pt-3 leading-loose':'flex font-Arial opacity-90 pt-3 shadow-none leading-loose'}
+            to={`/admin/buyerlist`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -90,21 +87,26 @@ const Admin = () => {
                   />
                 </svg>
                 Buyers{" "}
-              </Link>
-            </li>
-            <li className="flex ">
-              <Link
-                className="flex font-Arial opacity-90  pt-3 leading-loose"
-                to={`/admin/requestedlist`}
+              </NavLink>
+           
+              <NavLink
+            className={({isActive})=>isActive?' shadow-md flex font-Arial opacity-90 pt-3 leading-loose':'flex font-Arial opacity-90 pt-3 shadow-none leading-loose'}
+            to={`/admin/requestedlist`}
               >
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-amber-700">
-  <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
-</svg>
-
-
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6 text-amber-700"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
                 Requested{" "}
-              </Link>
-            </li>
+              </NavLink>
             {/* <li className="flex ">
               <Link
                 className="flex font-Arial opacity-90  pt-3 leading-loose"
@@ -117,10 +119,9 @@ const Admin = () => {
                 Intrested{" "}
               </Link>
             </li> */}
-            <li className="flex lead">
-              <Link
-                className="flex font-Arial opacity-90 pt-3 leading-loose"
-                to={`/admin/PropertyList`}
+              <NavLink
+            className={({isActive})=>isActive?' shadow-md flex font-Arial opacity-90 pt-3 leading-loose':'flex font-Arial opacity-90 pt-3 shadow-none leading-loose'}
+            to={`/admin/PropertyList`}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -136,14 +137,14 @@ const Admin = () => {
                   />
                 </svg>
                 Properties
-              </Link>
-            </li>
+              </NavLink>
+            
           </ul>
         </div>
         <div className="md: col-span-4 bg-stone-100">
-        <div className="md: col-span-4">
-       <Outlet />
-
+          <div className="md: col-span-4">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

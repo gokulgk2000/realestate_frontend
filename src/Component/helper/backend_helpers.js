@@ -24,6 +24,7 @@ const userLogin = (payload) =>
   const findCategory = (payload) =>
   get(`${BASE_URL}/category/findCategory`, payload);
   //admin
+  const adminLogin = (payload) => post(`${BASE_URL}/admin/adminLogin`, payload);
   const getUserById = (payload) => post(`${BASE_URL}/admin/getUserById`, payload);
   const getPropertyDetailsById = (payload) =>
   post(`${BASE_URL}/admin/getPropertyDetailsById`, payload);
@@ -36,8 +37,9 @@ const userLogin = (payload) =>
   const addBuyer = (payload) => put(`${BASE_URL}/admin/addBuyer`, payload);
   const addProperty = (payload) => put(`${BASE_URL}/admin/addProperty`, payload);
   const getrequestedByUserId = (payload) => post(`${BASE_URL}/requested/getrequestedByUserId`, payload);
-  const getrequested = (payload) => get(`${BASE_URL}/requested/getAllrequested`, payload);
-  const getIntrestedPropertyById = (payload) => post(`${BASE_URL}/intrested/getIntrestedByUserId`, payload);
+  const getrequested = (payload) => post(`${BASE_URL}/requested/requested`, payload);
+  const getAllrequested = (payload) => get(`${BASE_URL}/requested/getAllrequested`, payload);
+  const getIntrestedPropertyBybuyerId = (payload) => post(`${BASE_URL}/intrested/getIntrestedByBuyerId`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
@@ -54,8 +56,15 @@ const updateProperty = (payload) =>
   put(`${BASE_URL}/user/profileEdit`, payload);
   const FeedbackRegistration = (payload) =>
   post(`${BASE_URL}/feedback/feedbackregister`, payload);
+  const getuserProperty = (payload) =>
+  post(`${BASE_URL}/property/getpropertyByUserId`, payload);
+  const getPaymentId = (payload) =>
+  post(`${BASE_URL}/payment/getPaymentId`, payload);
   export {userRegisteration,
+    adminLogin,
     FeedbackRegistration,
+    getuserProperty,
+    getPaymentId,
     getuserdetails,
     buyerReg,
     getbuyerdetails,
@@ -75,6 +84,7 @@ const updateProperty = (payload) =>
     getPropertybyUserId,
     updateProperty,
     getPropertyById,
+    getAllrequested,
     GETALLUSERSBYLIMIT,
     updateProfileById,
     addBuyer,
@@ -83,7 +93,7 @@ const updateProperty = (payload) =>
     getrequested,
     getrequestedByUserId,
     getCategory,
-    getIntrestedPropertyById,
+    getIntrestedPropertyBybuyerId,
     findCategory,
     getPropertiescategoryId
 }

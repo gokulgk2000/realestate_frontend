@@ -28,7 +28,7 @@ border: 2px;
 }
 .grad-mob {
   
-  background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(149, 113, 4));
+  background-image: linear-gradient(to top, rgba(204, 255, 0, 0), rgb(149, 113, 4));
 }
 .bg{
   height: 900px;
@@ -83,3 +83,22 @@ border: 2px;
   background: #efefef;
   text-align: center;
 }
+
+.carousel-btn{
+
+  margin-left: 1450px;
+}
+.text-color{
+  color: #86711c;
+}
+.search{
+  padding-left: 510px;
+}
+
+.text-shadow{
+  text-shadow: 1px 2px 2px#b5a6a6;
+}
+.txt-shadow{  text-shadow: 1px 0px 0px ;
+}
+
+

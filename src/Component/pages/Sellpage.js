@@ -14,6 +14,9 @@ const RegisterProperty = () => {
     const propertystatus=[    {value: '', text: 'select property status '}, {value: 'ongoing', text: 'ongoing '},
     {value: 'pending', text: 'pending '},
     {value: 'complete', text: 'complete '},]
+    const facing=[    {value: '', text: 'select facing '},    {value: 'east', text: 'east '},{value: 'west', text: 'west '}, {value: 'south', text: 'south '},
+    {value: 'north', text: 'north '},
+{value: 'southEast', text: 'southEast '},{value: 'southWest', text: 'southWest '},{value: 'northEast', text: 'northEast '},{value: 'northWest', text: 'northWest '}]
   const [allcategory, setAllCategory] = useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
@@ -245,26 +248,26 @@ const RegisterProperty = () => {
               <span type="invalid">{validation.errors.landArea}</span>
             ) : null}
           </div>
-          <div>
-            {" "}
-            <Input
-              label="facing"
-              type="text"
-              name="facing"
-              placeholder="Enter The  Facing"
-              onChange={validation.handleChange}
-              onBlur={validation.handleBlur}
-              value={validation.values.facing || ""}
-              invalid={
-                validation.touched.facing && validation.errors.facing
-                  ? true
-                  : false
-              }
-            />
-            {validation.touched.facing && validation.errors.facing ? (
-              <span type="invalid">{validation.errors.facing}</span>
-            ) : null}
-          </div>
+          <div className="m-2 grid grid-rows-2 font gap-2 mb-">
+              <div className="">Facing</div>
+              <select
+                id="facing"
+                name="facing"
+                label="facing"
+                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={validation.values.facing}
+                onChange={validation.handleChange||""}
+                invalid={
+                  validation.touched.facing &&
+                  validation.errors.facing
+                    ? true
+                    : false
+                }
+              > {facing.map((option, i) => (
+                <option value={option?.value} key={i}>
+                  {option?.text}
+                </option>   ))}
+              </select></div>
           <div>
             <Input
               label="approachRoad"

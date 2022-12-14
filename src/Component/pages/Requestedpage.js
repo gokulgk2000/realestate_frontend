@@ -61,7 +61,7 @@ console.log("requestData",requestData)
         />
         <button
           type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+          className="px-3 py-2 -ml-1.5 grad-btn text-white rounded-tr-full rounded-br-full"
         >
           Search
         </button></div>
@@ -94,19 +94,25 @@ console.log("requestData",requestData)
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                    Email
+                    facing
                         <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-             Buyer Status
+                    location
                         <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-               Moblie Number
+                    nearTown
+                        <a href="#"></a>
+                    </div>
+                </th>
+                <th scope="col" className="py-3 px-6  text-rose-700">
+                    <div className="flex items-center">
+                    askPrice
                         <a href="#"></a>
                     </div>
                 </th>
@@ -141,16 +147,20 @@ console.log("requestData",requestData)
                     {i+1}
                 </th>
                 <td className="py-4 px-6 capitalize">
+                    {Data?.regUser?.firstname}
+                    {Data?.regUser?.lastname}
+                </td>
+                <td className="py-4 px-6 capitalize">
                     {Data?.facing}
                 </td>
                 <td className="py-4 px-6">
                 {Data?.location}
                 </td>
                 <td className="py-4 px-6 capitalize">
-                {Data?.askPrice}
+                {Data?.nearTown}
                 </td>   
                 <td className="py-4 px-6">
-                {Data?.nearTown}
+                {Data?.askPrice}
                 </td>
                 <td className="py-4 px-6 font-semibold capitalize">
 

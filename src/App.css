@@ -88,3 +88,17 @@ border: 2px;
 
   margin-left: 1450px;
 }
+.text-color{
+  color: #86711c;
+}
+.search{
+  padding-left: 510px;
+}
+
+.text-shadow{
+  text-shadow: 1px 2px 2px#b5a6a6;
+}
+.txt-shadow{  text-shadow: 1px 0px 0px ;
+}
+
+

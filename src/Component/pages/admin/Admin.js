@@ -32,7 +32,7 @@ const Admin = () => {
           </h3>
           <NavLink
             className={({isActive})=>isActive?' shadow-md flex font-Arial opacity-90 pt-3 leading-loose':'flex font-Arial opacity-90 pt-3 leading-loose'}
-            to={`/admin/Dashboard`}
+            to={`/admin`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

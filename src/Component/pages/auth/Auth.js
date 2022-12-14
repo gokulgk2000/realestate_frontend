@@ -12,5 +12,5 @@ return false
 export const logout=()=>{
 
    localStorage.removeItem('authUser')
-   window.location.reload(false);
+ 
 }

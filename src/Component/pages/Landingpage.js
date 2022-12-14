@@ -1,98 +1,135 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Carousel } from "./Carousel";
-import Category from "./Category";
+import { findCategory, getPropertiescategoryId } from "../helper/backend_helpers";
 import Property from "./Property";
-import Search from "./Search";
+import {Carousel} from "./Carousel";
+
 
 const Landingpage = () => {
-  const [searchText, setSearchText] = useState("");
+
   const navigate = useNavigate();
+  const [searchText, setSearchText] = useState();
+  const [category, setCategory] = useState();
+  const[bedRoom,setBetRoom]=('')
+  const [selectCategory, setSelectCategory] = useState([]);
+  const [betRoomCount, setBetRoomCount] = useState();
+  const [allcategory, setAllCategory] = useState([]);
+  const [property, setProperty] = useState([]);
+
+  const categories = async () => {
+    const res = await getPropertiescategoryId({
+      id: category,
+      searchText,
+      bedRoom
+    });
+
+    if (res.success) {
+      setProperty(res.category);
+
+      console.log("first", res);
+    } else {
+    }
+  };
+
+  useEffect(() => {
+    categories();
+  }, [searchText]);
+
+  useEffect(() => {
+    const allcategory = async () => {
+      const res = await findCategory();
+     
+      setAllCategory(res.category);
+
+      // setAllCategory(res.category._id);
+
+      return res;
+    };
+
+    allcategory();
+  }, [ ]);
+
   const navigateToProperty = (e) => {
-    e.preventDefault();
-    navigate(`/property?search=${searchText}`);
+    e.preventDefault(); 
+    navigate(
+      `/property?search=${searchText}&category=${selectCategory}&beds=${betRoomCount}`
+    );
+  };
+
+  const handleCategoryChange = (event) => {
+    console.log("view", event.target.value);
+    setSelectCategory(event.target.value);
+  };
+  const handleBedsChange = (event) => {
+    console.log("view", event.target.value);
+    setBetRoomCount(event.target.value);
   };
   return (
     <div>
       <div className="  items-center  md:hidden  ">
-        <form className="flex justify-center   h-11">
-          <select className="px-2 border  ">
-            <option>
-              {" "}
-              <button class="  py-1 px-2 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  md:w-32 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center">
-                {" "}
-                category
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 ml-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {" "}
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>{" "}
-              </button>{" "}
+      <form className="flex justify-center  h-10 ">
+        <select
+          id="category"
+          name="category"
+          label="category"
+          className="px-2 border  grad-btn text-black capitalize w-28"
+          onChange={handleCategoryChange}
+        >
+          <option value={""}> Category</option>
+          {allcategory.map((option, id) => (
+            <option value={option?._id} key={id}>
+              {option?.name}
             </option>
-            <option value="" className=" border-0   ">
-              Residential
-            </option>
-
-            <option value="" className=" border-0">
-              Villa
-            </option>
-
-            <option value="" className=" border-0">
-              Land
-            </option>
-            <option value="" className=" border-0">
-              Appartment
-            </option>
-
-            <option value="" className=" border-0">
-              Commercial
-            </option>
-          </select>
-          <div className=" w-28 p- border-2 bg-slate-200">
-            <input
-              type="text"
-              id="message"
-              value={searchText}
-              name="search"
-              placeholder="Search "
-              className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </div>
-          <div className="  px-4 pt-2 border-2  bg-white  ">
-            {" "}
-            <button
-              className="px-3 grad-card text-black rounded hover:text-white"
-              onClick={navigateToProperty}
-            >
-              Search
-            </button>
-          </div>
-        </form>
+          ))}{" "}
+        </select>
+        <select
+          id="bedRoom"
+          name="bedRoom"
+          label="BHK"
+          className="px-2 border w-24 text-black capitalize"
+          onChange={handleBedsChange}
+        ><option value="0" >BHK</option>
+          <option value="1" >1BHK</option>
+          <option value= "2">2BHK</option>
+          <option value= "3">3BHK</option>
+          <option value= "4">+4BHK</option>
+        </select>
+      
+        <div className=" p ">
+          <input
+            type="text"
+            id="message"
+            value={searchText} 
+            required
+            name="search"
+            placeholder="Search location"
+            className=" px-3  pt-2 pb-1 w-32 border-2"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
+        <div className=" pb-1 border-2 w-20 bg-white grad-btn-x "  onClick={navigateToProperty}>
+          {" "}
+       {searchText?(<button
+            className="pl- pb- pt-1  text-black  hover:text-white"
+            onClick={navigateToProperty}
+          >
+            Search 
+          </button>):(<button
+            className="pl- pt-1  text-black  hover:text-white"
+          
+          >
+            Search 
+          </button>)}   
+        </div>
+      </form>
       </div>
 
       <div className="font ">
         <Carousel />
-        {/* <div
-            className="md:w-screen "
-            style={{ backgroundImage: `url(${Image})` }}
-          ></div> */}
 
-        <div className=" px-4">
-          <Category />
-        </div>
-
-        <div className=" drop-shadow-xl py-10 ">
+        <div className=" drop-shadow-xl pb-4">
           <Property />
         </div>
         {/* <Category /> */}

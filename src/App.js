@@ -32,7 +32,11 @@ import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
 import Intrested from "./Component/pages/Intrested";
 
 import Contact from "./Component/pages/Contact";
+import AdminProtected from "./Component/pages/admin/adminlogin/AdminProtected";
+import { isAuthenticated } from "./Component/pages/auth/Auth";
 
+import AdminNav from "./Component/pages/admin/AdminNav";
+import AdminPath, { isAuthAdmin } from "./Component/pages/admin/AuthAdmin";
 
 
 
@@ -40,8 +44,8 @@ import Contact from "./Component/pages/Contact";
 const App = () => {
   return (
     <> 
-      <Header />
-      <Navbar /> 
+    {isAuthAdmin()||window.location.pathname==="/admin-page"?(<AdminNav/>):( <div><Header/>,<Navbar/></div>)} 
+     
       <Routes>
       <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
@@ -68,9 +72,10 @@ const App = () => {
         <Route path="/sellproperty" element={<Sell />}   />
         </Route>
         <Route path="admin-page" element={<AdminLogin />} />
-        <Route path="admin" element={<Admin />} >
-        <Route index  element={<Dashboard />} />
-        <Route path="Dashboard" element={<Dashboard />} />
+
+        <Route element={<AdminProtected />} >
+        <Route   path="admin"  element={<Admin />} >
+        <Route  index  element={<Dashboard />} />
         <Route  path="userlist" element={<UserList />} />
         <Route  path="buyerlist" element={<BuyerList />} />
         <Route  path="requestedlist" element={<RequestedList />} />
@@ -79,12 +84,11 @@ const App = () => {
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />
         <Route path="buyerdetails" element={<BuyerDetails />} />
-
-
-        </Route >
+</Route>
+        </Route>
         
       </Routes>
-      <Footer />
+   {window.location.pathname==="/admin-page"?(<div></div>):( <Footer />)}  
     </>
   );
 };

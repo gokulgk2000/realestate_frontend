@@ -24,12 +24,13 @@ const Login = () => {
     onSubmit: async values => {
       setLoading(true)
       const res = await userLogin(values)
+   
       if (res.success) {
         localStorage.setItem("authUser", JSON.stringify(res))
         setLoginSuccess(res?.msg)
         setLoginError("")
         navigate("/")
-        window.location.reload(false);
+       
       } else {
         setLoginError(res?.msg)
         setLoginSuccess("")
@@ -39,6 +40,7 @@ const Login = () => {
      
     },
   })
+
   return (
     <section className="h-100">
     <div className="px-6 h-full text-gray-800 py-5">

@@ -12,6 +12,7 @@ import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
 import Image from "../assets/images/avadar3.webp";
 import Search from "../pages/Search";
+import Login from "../pages/auth/Login";
 
 const NavItem = [
   { name: "HOME", link: "/" },
@@ -23,14 +24,14 @@ const NavItem = [
   // { name: "Contactus", link: "#" },
 ];
 function Navbar() {
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
-  const [property, setproperty] = useState("");
-  const [currentUser, setCurrentUser] = useState();
-  const query = useQuery();
-  const id = query.get("id");
+  // const [property, setproperty] = useState("");
+  // const [currentUser, setCurrentUser] = useState();
+  // const query = useQuery();
+  // const id = query.get("id");
 
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
 
@@ -49,33 +50,39 @@ function Navbar() {
     getUserName();
   }, []);
 
-  const categories = async () => {
-    const res = await getPropertiescategoryId({
-      id,
-      searchText,
-    });
+  // const categories = async () => {
+  //   const res = await getPropertiescategoryId({
+  //     id,
+  //     searchText,
+  //   });
 
-    if (res.success) {
-      setproperty(res.category);
+  //   if (res.success) {
+  //     setproperty(res.category);
 
-      console.log("first", res);
-    } else {
-    }
-  };
+  //     console.log("first", res);
+  //   } else {
+  //   }
+  // };
 
-  useEffect(() => {
-    categories();
-  }, [searchText]);
+  // useEffect(() => {
+  //   categories();
+  // }, [searchText]);
+
+const AuthLogout=()=>{
+
+  logout()
+  navigate("/")
+}
 
   const navigateToProfile = (e) => {
     e.preventDefault();
     navigate(`/ProfileUpdate`);
   };
 
-  const navigateToProperty = (e) => {
-    e.preventDefault();
-    navigate(`/property?search=${searchText}`);
-  };
+  // const navigateToProperty = (e) => {
+  //   e.preventDefault();
+  //   navigate(`/property?search=${searchText}`);
+  // };
 
   const navigateToUserActivities = (e) => {
     // e.preventDefault();
@@ -145,73 +152,7 @@ function Navbar() {
             ) : (
               <Mobilenav />
             )}
-<Search/>
-            {/* <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
-              <form className="flex justify-center rounded-lg  ">
-                <select className="px-4 border  ">
-                  <option>
-                    {" "}
-                    <button class="  py-1 px-4 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  md:w-32 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center">
-                      {" "}
-                      category
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 ml-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        {" "}
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>{" "}
-                    </button>{" "}
-                  </option>
-                  <option value="" className=" border-0   ">
-                    Residential
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Villa
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Land
-                  </option>
-                  <option value="" className=" border-0">
-                    Appartment
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Commercial
-                  </option>
-                </select>
-                <div className="  p-4 border-2 bg-slate-200">
-                  <input
-                    type="text"
-                    id="message"
-                    value={searchText}
-                    name="search"
-                    placeholder="Search Property...."
-                    className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
-                    onChange={(e) => setSearchText(e.target.value)}
-                  />
-                </div>
-                <div className="  p-4 border-2  bg-white  ">
-                  {" "}
-                  <button
-                    className="px-3 py-2 -ml-1.5 grad-card text-black rounded hover:text-white"
-                    onClick={navigateToProperty}
-                  >
-                    Search Properties
-                  </button>
-                </div>
-              </form>
-            </div> */}
+{/* <Search/> */}
 
             <div className=" ">
               {isAuthenticated() ? (
@@ -224,7 +165,7 @@ function Navbar() {
                         <img
                           src={user?.profilePic || Image}
                           className="w-10 h-10 rounded-full"
-                        />
+                          onClick={navigateToProfile} />
                         <span>
                           <div className="px-2 pt-1 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1 hover:shadow-sm  rounded shadow-md">
                             {user?.firstname} {user?.lastname}
@@ -324,7 +265,7 @@ function Navbar() {
                           stroke-width="1.5"
                           stroke="currentColor"
                           class="w-6 h-6 pt-2 text-teal-700"
-                          onClick={logout}
+                          onClick={AuthLogout }
                         >
                           <path
                             stroke-linecap="round"
@@ -334,7 +275,7 @@ function Navbar() {
                         </svg>
                         <button
                           className=" text-start  p-1  font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
-                          onClick={logout}
+                          onClick={AuthLogout}
                         >
                           Logout
                         </button>
@@ -346,7 +287,7 @@ function Navbar() {
                 <button
                   type="button"
                   className="inline-block px-1 py-2 bg-amber-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-amber-500 hover:shadow-lg focus:bg-amber-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out"
-                >
+           >
                   <Link to="/login">Login</Link>
                 </button>
               )}

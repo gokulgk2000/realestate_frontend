@@ -5,7 +5,9 @@ import FileInput from "../../reusable/FileInput";
 import Input from "../../reusable/Input";
 
 import Image from "../../assets/images/avadar3.webp";
+import { Navigate, useNavigate } from "react-router-dom";
 const ProfileUpdate = () => {
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
@@ -30,6 +32,7 @@ const ProfileUpdate = () => {
         profilePic: User?.profilePic,
       });
       console.log("show", res);
+      
       // setUser({firstname:res.user?.firstname,
       //   lastname:res.user,
       //   profilepic :res.user});
@@ -42,13 +45,14 @@ const ProfileUpdate = () => {
 
   const updateProfile = async (e) => {
     e.preventDefault();
-    window.location.reload(false);
+    navigate('/ProfileUpdate')
 
     const profile = { ...user, userID: profileID?.userID };
 
     const res = await updateProfileById(profile);
     if (res.success) {
       console.log(profile);
+   
     } else {
     }
   };

@@ -58,10 +58,13 @@ const updateProperty = (payload) =>
   post(`${BASE_URL}/feedback/feedbackregister`, payload);
   const getuserProperty = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
+  const getPaymentId = (payload) =>
+  post(`${BASE_URL}/payment/getPaymentId`, payload);
   export {userRegisteration,
     adminLogin,
     FeedbackRegistration,
     getuserProperty,
+    getPaymentId,
     getuserdetails,
     buyerReg,
     getbuyerdetails,

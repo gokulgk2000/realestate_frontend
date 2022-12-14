@@ -3,6 +3,7 @@ import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import {
   getPropertiescategoryId,
   getUserById,
+  getuserdetails,
 } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
@@ -96,6 +97,21 @@ const AuthLogout=()=>{
   const navigateToYourActivities = (e) => {
     // e.preventDefault();
     navigate(`/yourProperties?`);
+  };
+  
+  const handlepay = async () => {
+    console.log(user,"user")
+    const payload = {
+      userId: userFromStorage?.userID,
+    };
+    
+    const res = await getuserdetails(payload);
+    if (res.success) {
+      setUser(res?.User);
+    } else {
+      console.log("errors", res);
+    } 
+    navigate(`/payment?id=${user?._id}`)
   };
   return (
     <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">
@@ -253,6 +269,38 @@ const AuthLogout=()=>{
                             onClick={(e) => navigateToUserActivities(e)}
                           >
                             Activities
+                          </button>
+                        </div>{" "}
+                      </div>
+                      <div>
+                        <div className="flex  border-t-0 border-black  ">
+                          {" "}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            className="w-6 h-6 pt-2  text-teal-700 "
+                            onClick={navigateToUserActivities}
+                          >
+                            <g data-name="Layer ">
+                              <g data-name="activity">
+                                <rect
+                                  width="6"
+                                  height="6"
+                                  opacity="0"
+                                  transform="rotate(90 12 12)"
+                                />
+                                <path d="M14.33 20h-.21a2 2 0 0 1-1.76-1.58L9.68 6l-2.76 6.4A1 1 0 0 1 6 13H3a1 1 0 0 1 0-2h2.34l2.51-5.79a2 2 0 0 1 3.79.38L14.32 18l2.76-6.38A1 1 0 0 1 18 11h3a1 1 0 0 1 0 2h-2.34l-2.51 5.79A2 2 0 0 1 14.33 20z" />
+                              </g>
+                            </g>
+                          </svg>
+                          <button
+                            className=" text-start  p-1  font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                            onClick={handlepay}
+                          >
+                           Payment
                           </button>
                         </div>{" "}
                       </div>

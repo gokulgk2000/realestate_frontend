@@ -2,10 +2,10 @@ import React, { useEffect, useState ,useMemo } from 'react'
 import { Breadcrumbs } from '@material-tailwind/react'
 import Pagination from '../pagination/Pagination';
 import { useQuery } from '../helper/hook/useQuery';
-import { getIntrestedPropertyById } from '../helper/backend_helpers';
+import { getIntrestedPropertyBybuyerId, getIntrestedPropertyById, getIntrestedPropertyByuserId } from '../helper/backend_helpers';
 
 
-const Requested = () => { 
+const Intrested = () => { 
   const query = useQuery();
 
   const [loading, setLoading] = useState(false);
@@ -23,8 +23,8 @@ const requestSearch = (searched)=>{
    useEffect(() => {
         const handleFetchingIntrestedProperty = async () => {
           setLoading(true);
-          const res = await getIntrestedPropertyById ({ 
-        userId: currentUser?.userID})
+          const res = await getIntrestedPropertyBybuyerId ({ 
+        _id: currentUser?.userID})
         if(res.success){
           setIntrestedData(res?.Intrested);
           setLoading(false);
@@ -52,7 +52,7 @@ const requestSearch = (searched)=>{
         />
         <button
           type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+          className="px-3 py-2 -ml-1.5 grad-btn text-white rounded-tr-full rounded-br-full"
         >
           Search
         </button>
@@ -73,25 +73,25 @@ const requestSearch = (searched)=>{
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                      Facing
+                    Seller
                         <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                    Location
+                    landArea
                         <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                    askPrice
+                    layoutName
                         <a href="#"></a>
                     </div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                     <div className="flex items-center">
-                    nearTown
+                    location
                         <a href="#"></a>
                     </div>
                 </th>
@@ -99,41 +99,43 @@ const requestSearch = (searched)=>{
             </tr>
         </thead>
         <tbody>
-        {( intrestedData?.filter(
-      (item) =>
-      item?.facing
-      .toString()
-            .toLowerCase()
-            .includes(searchText.toString().toLowerCase()) ||
-          item?.location
-          .toString()
-          .toLowerCase()
-          .includes(searchText.toString().toLowerCase()) ||
-          item?.askPrice
-          .toString()
-          .toLowerCase()
-          .includes(searchText.toString().toLowerCase()) ||
-          item?.nearTown
-          .toString()
-          .toLowerCase()
-          .includes(searchText.toString().toLowerCase())
+        {( intrestedData
+    //     ?.filter(
+    //   (item) =>
+    //   item?.facing
+    //   .toString()
+    //         .toLowerCase()
+    //         .includes(searchText.toString().toLowerCase()) ||
+    //       item?.location
+    //       .toString()
+    //       .toLowerCase()
+    //       .includes(searchText.toString().toLowerCase()) ||
+    //       item?.askPrice
+    //       .toString()
+    //       .toLowerCase()
+    //       .includes(searchText.toString().toLowerCase()) ||
+    //       item?.nearTown
+    //       .toString()
+    //       .toLowerCase()
+    //       .includes(searchText.toString().toLowerCase())
          
-    ).slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
+    // )
+    .slice((currentPage -1)*10,(currentPage *10))).map((Data,i)=>(
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={i}>
                 <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {i+1}
                 </th>
                 <td className="py-4 px-6 capitalize">
-                    {Data?.facing} 
+                    {Data?.propertyId?.Seller} 
                 </td>
                 <td className="py-4 px-6">
-                {Data?.location}
+                {Data?.propertyId?.landArea}
                 </td>
                 <td className="py-4 px-6 capitalize">
-                {Data?.askPrice}
+                {Data?.propertyId?.layoutName}
                 </td>
                 <td className="py-4 px-6">
-                {Data?.nearTown}
+                {Data?.propertyId?.location}
                 </td>
                 
             </tr>
@@ -158,4 +160,4 @@ const requestSearch = (searched)=>{
   )
 }
 
-export default Requested
+export default Intrested

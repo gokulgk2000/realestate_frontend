@@ -34,12 +34,14 @@ const PropertyList = () => {
   return (
     <div>
       <Breadcrumbs>
-        <a href="/admin/Dashboard" className="opacity-60 font">
-          Dashboard
-        </a>
-        <a href="/admin/PropertyList" className=" text-amber-700 font">
-          Properties
-        </a>
+      <Link to="/admin/Dashboard" >
+            <button className="opacity-60 font">
+              Dashboard
+            </button></Link>
+            <Link to="/admin/PropertyList">
+            <button className="opacity-60 font">
+              Properties
+            </button></Link>
       </Breadcrumbs>
       <div className="md:overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4  ">

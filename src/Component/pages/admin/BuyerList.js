@@ -58,12 +58,14 @@ const BuyerList = () => {
   return (
     <div>
       <Breadcrumbs>
-        <a href="/admin/Dashboard" className="opacity-60 font">
-          Dashboard
-        </a>
-        <a href="/admin/buyerlist" className=" text-amber-700 font">
-          Buyers
-        </a>
+      <Link to="/admin/Dashboard">
+          <button  className="opacity-60 font">
+            Dashboard
+          </button></Link>
+          <Link to="/admin/buyerlist">
+          <button  className="opacity-60 font">
+            Buyers
+          </button></Link>
       </Breadcrumbs>
       <div className=" md:overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4 ">

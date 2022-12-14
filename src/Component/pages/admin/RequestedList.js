@@ -89,7 +89,7 @@ const RequestedList = () => {
                   S.No
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                  <div className="flex items-center">User Nmae</div>
+                  <div className="flex items-center">User Name</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
                   <div className="flex items-center">Facing</div>

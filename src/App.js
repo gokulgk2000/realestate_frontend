@@ -19,22 +19,25 @@ import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
 import Category from "./Component/pages/Category";
-
 import ProfileUpdate from "./Component/pages/auth/ProfileUpdate";
-
 import BuyerList from "./Component/pages/admin/BuyerList";
 import BuyerDetails from "./Component/pages/admin/BuyerDetails";
-import Requested from "./Component/pages/Requested";
-import RequestedModel from "./Component/models/RequestedModel";
 import Requestedpage from "./Component/pages/Requestedpage";
 import UserActivities from "./Component/pages/UserActivities";
 import RequestedList from "./Component/pages/admin/RequestedList";
-import Intrested from "./Component/pages/admin/Intrested";
-
 import Activities from "./Component/pages/YourProperties";
 import YourEdit from "./Component/pages/auth/YourEdit";
-
 import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
+
+import Intrested from "./Component/pages/Intrested";
+
+import Contact from "./Component/pages/Contact";
+import AdminProtected from "./Component/pages/admin/adminlogin/AdminProtected";
+import { isAuthenticated } from "./Component/pages/auth/Auth";
+
+import AdminNav from "./Component/pages/admin/AdminNav";
+import AdminPath, { isAuthAdmin } from "./Component/pages/admin/AuthAdmin";
+import Requested from "./Component/pages/Requestedpage";
 
 
 
@@ -42,8 +45,8 @@ import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
 const App = () => {
   return (
     <> 
-      <Header />
-      <Navbar /> 
+    {isAuthAdmin()||window.location.pathname==="/admin-page"?(<AdminNav/>):( <div><Header/>,<Navbar/></div>)} 
+     
       <Routes>
       <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
@@ -51,7 +54,12 @@ const App = () => {
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
         <Route path="/about" element={<About />} />
+
+        <Route path="/Intrested" element={<Intrested />} />
+
+        <Route path="/contact" element={<Contact />} />
         <Route path="/request" element={<Requested />} />
+
         <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/UserActivties" element={<UserActivities/>} />
@@ -65,9 +73,10 @@ const App = () => {
         <Route path="/sellproperty" element={<Sell />}   />
         </Route>
         <Route path="admin-page" element={<AdminLogin />} />
-        <Route path="admin" element={<Admin />} >
-        <Route index  element={<Dashboard />} />
-        <Route path="Dashboard" element={<Dashboard />} />
+
+        <Route element={<AdminProtected />} >
+        <Route   path="admin"  element={<Admin />} >
+        <Route  index  element={<Dashboard />} />
         <Route  path="userlist" element={<UserList />} />
         <Route  path="buyerlist" element={<BuyerList />} />
         <Route  path="requestedlist" element={<RequestedList />} />
@@ -76,12 +85,11 @@ const App = () => {
         <Route path="propertydetails" element={<PropertyDetails />} />
         <Route path="userdetails" element={<UserDetails />} />
         <Route path="buyerdetails" element={<BuyerDetails />} />
-
-
-        </Route >
+</Route>
+        </Route>
         
       </Routes>
-      <Footer />
+   {window.location.pathname==="/admin-page"?(<div></div>):( <Footer />)}  
     </>
   );
 };

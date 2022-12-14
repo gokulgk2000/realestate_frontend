@@ -11,6 +11,8 @@ import { useQuery } from "../helper/hook/useQuery";
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
 import Image from "../assets/images/avadar3.webp";
+import Search from "../pages/Search";
+import Login from "../pages/auth/Login";
 
 const NavItem = [
   { name: "HOME", link: "/" },
@@ -22,14 +24,14 @@ const NavItem = [
   // { name: "Contactus", link: "#" },
 ];
 function Navbar() {
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
-  const [property, setproperty] = useState("");
-  const [currentUser, setCurrentUser] = useState();
-  const query = useQuery();
-  const id = query.get("id");
+  // const [property, setproperty] = useState("");
+  // const [currentUser, setCurrentUser] = useState();
+  // const query = useQuery();
+  // const id = query.get("id");
 
   const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
 
@@ -48,33 +50,39 @@ function Navbar() {
     getUserName();
   }, []);
 
-  const categories = async () => {
-    const res = await getPropertiescategoryId({
-      id,
-      searchText,
-    });
+  // const categories = async () => {
+  //   const res = await getPropertiescategoryId({
+  //     id,
+  //     searchText,
+  //   });
 
-    if (res.success) {
-      setproperty(res.category);
+  //   if (res.success) {
+  //     setproperty(res.category);
 
-      console.log("first", res);
-    } else {
-    }
-  };
+  //     console.log("first", res);
+  //   } else {
+  //   }
+  // };
 
-  useEffect(() => {
-    categories();
-  }, [searchText]);
+  // useEffect(() => {
+  //   categories();
+  // }, [searchText]);
+
+const AuthLogout=()=>{
+
+  logout()
+  navigate("/")
+}
 
   const navigateToProfile = (e) => {
     e.preventDefault();
     navigate(`/ProfileUpdate`);
   };
 
-  const navigateToProperty = (e) => {
-    e.preventDefault();
-    navigate(`/property?search=${searchText}`);
-  };
+  // const navigateToProperty = (e) => {
+  //   e.preventDefault();
+  //   navigate(`/property?search=${searchText}`);
+  // };
 
   const navigateToUserActivities = (e) => {
     // e.preventDefault();
@@ -87,124 +95,65 @@ function Navbar() {
   };
   const navigateToYourActivities = (e) => {
     // e.preventDefault();
-    navigate(`/yourActivities?`);
+    navigate(`/yourProperties?`);
   };
   return (
-    <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">  
+    <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
-                <Link to="/" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
-                  <div className="hover:text-amber-700" >
-                    HOME
-                  </div>{" "}
-                </Link>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "shadow-sm "
+                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                  }
+                >
+                  <div className="hover:text-amber-700">HOME</div>{" "}
+                </NavLink>
                 {userFromStorage ? (
-                  <Link to="/sellproperty" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
+                  <NavLink
+                    to="/sellproperty"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "shadow-sm"
+                        : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                    }
+                  >
                     {" "}
-                    <div className="hover:text-amber-700" >
-                      SELL PROPERTY
-                    </div>
-                  </Link>
+                    <div className="hover:text-amber-700">SELL PROPERTY</div>
+                  </NavLink>
                 ) : (
                   <Link to="/property"></Link>
                 )}{" "}
-                <Link to="/about" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
-                  <div className="hover:text-amber-700" >
-                    CONTACT US
-                  </div>
-                </Link>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "shadow-sm"
+                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                  }
+                >
+                  <div className="hover:text-amber-700">CONTACT US</div>
+                </NavLink> <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "shadow-sm"
+                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                  }
+                >
+                  <div className="hover:text-amber-700">ABOUT US</div>
+                </NavLink>
               </div>
             ) : (
               <Mobilenav />
             )}
+{/* <Search/> */}
 
-            <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
-              <form className="flex justify-center rounded-lg  ">
-                <select className="px-4 border  ">
-                  <option>
-                    {" "}
-                    <button class="  py-1 px-4 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  md:w-32 hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center">
-                      {" "}
-                      category
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 ml-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        {" "}
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>{" "}
-                    </button>{" "}
-                  </option>
-                  <option value="" className=" border-0   ">
-                    Residential
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Villa
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Land
-                  </option>
-                  <option value="" className=" border-0">
-                    Appartment
-                  </option>
-
-                  <option value="" className=" border-0">
-                    Commercial
-                  </option>
-                </select>
-                <div className="  p-4 border-2 bg-slate-200">
-                  <input
-                    type="text"
-                    id="message"
-                    value={searchText}
-                    name="search"
-                    placeholder="Search Property...."
-                    className=" px-3 py-2 bg-slate-200 rounded-full border-0 focus:outline-0 "
-                    onChange={(e) => setSearchText(e.target.value)}
-                  />
-                </div>
-                <div className="  p-4 border-2  bg-white  ">
-                  {" "}
-                  <button
-                    className="px-3 py-2 -ml-1.5 grad-card text-black rounded hover:text-white"
-                    onClick={navigateToProperty}
-                  >
-                    Search Properties
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            {/* <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
-                <li>
-                    <a href="/about" className="text-gray-900 dark:text-white hover:underline font-semibold" aria-current="page">About us</a>
-                </li>
-                {/* <li>
-                    <a href="#" className="text-gray-900 dark:text-white hover:underline font-semibold">Company</a>
-                </li> */}
-            {/* <li>
-                    <a href="#" className="text-gray-900 dark:text-white hover:underline font-semibold">Recent</a>
-                </li> 
-                <li>
-                    <a href="/property" className="text-gray-900 dark:text-white hover:underline font-semibold">Property</a>
-                </li>
-                <li>
-                    <a href="/feedback" className="text-gray-900 dark:text-white hover:underline font-semibold">Feedback</a>
-                </li>
-            </ul> */}
             <div className=" ">
               {isAuthenticated() ? (
                 <div>
@@ -216,21 +165,7 @@ function Navbar() {
                         <img
                           src={user?.profilePic || Image}
                           className="w-10 h-10 rounded-full"
-                        />
-                        {/* <span>   <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6 text-amber-300  hover:text-white"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg></span> */}
+                          onClick={navigateToProfile} />
                         <span>
                           <div className="px-2 pt-1 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1 hover:shadow-sm  rounded shadow-md">
                             {user?.firstname} {user?.lastname}
@@ -264,19 +199,31 @@ function Navbar() {
                             Profile
                           </button>
                         </div>
-                      </div><div className="flex  border-t-0 border-black  ">
-                          {" "}
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"      onClick={(e) => navigateToYourActivities(e)}                           className="w-6 h-6 pt-2  text-teal-700 "
->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"  />
-</svg>
-                          <button
-                            className=" text-start  p-1 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
-                            onClick={(e) => navigateToYourActivities(e)}
-                          >
+                      </div>
+                      <div className="flex  border-t-0 border-black  ">
+                        {" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          onClick={(e) => navigateToYourActivities(e)}
+                          className="w-6 h-6 pt-2  text-teal-700 "
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+                          />
+                        </svg>
+                        <button
+                          className=" text-start  p-1 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                          onClick={(e) => navigateToYourActivities(e)}
+                        >
                           your properties
-                          </button>
-                        </div>{" "}
+                        </button>
+                      </div>{" "}
                       <div>
                         <div className="flex  border-t-0 border-black  ">
                           {" "}
@@ -309,7 +256,6 @@ function Navbar() {
                           </button>
                         </div>{" "}
                       </div>
-                   
                       <div className="flex  border-t-0 border-black  ">
                         {" "}
                         <svg
@@ -319,7 +265,7 @@ function Navbar() {
                           stroke-width="1.5"
                           stroke="currentColor"
                           class="w-6 h-6 pt-2 text-teal-700"
-                          onClick={logout}
+                          onClick={AuthLogout }
                         >
                           <path
                             stroke-linecap="round"
@@ -329,37 +275,19 @@ function Navbar() {
                         </svg>
                         <button
                           className=" text-start  p-1  font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
-                          onClick={logout}
+                          onClick={AuthLogout}
                         >
                           Logout
                         </button>
                       </div>
                     </ul>
                   </div>
-
-                  {/* <button 
-                   <div className="flex">   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6 text-teal-700  hover:text-rose-700"
-                   
-                  >
-               <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg> <div  className="text-rose-700 font-serif hover:text-teal-700">{user?.firstname}{" "}{user?.lastname}</div></div> 
-                </button>*/}
                 </div>
               ) : (
                 <button
                   type="button"
                   className="inline-block px-1 py-2 bg-amber-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-amber-500 hover:shadow-lg focus:bg-amber-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out"
-                >
+           >
                   <Link to="/login">Login</Link>
                 </button>
               )}

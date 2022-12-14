@@ -1,6 +1,6 @@
 import { map } from "lodash";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   categoryId,
   getAllProperty,
@@ -16,11 +16,14 @@ import BuyerModal from "../models/BuyerModal";
 
 const Property = () => {
   const query = useQuery();
-  const id = query.get("id");
+  let location = useLocation();
+  const id = query.get("category");
   const searchKey = query.get("search");
+  const bed = query.get("beds");
 
   const [searchText, setSearchText] = useState(searchKey);
   const [property, setproperty] = useState("");
+  const [bedRoom, setBedRoom] = useState(bed);
 
   const [propertyId, setPropertyId] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
@@ -46,22 +49,25 @@ const Property = () => {
     getuser();
   }, []);
 
-  const categories = async () => {
+  const searchPropertyByCategory = async () => {
     const res = await getPropertiescategoryId({
       id,
-      searchText,
+      searchText,bedRoom
     });
 
     if (res.success) {
       setproperty(res.category);
 
-      console.log("first", res);
+      console.log("show", res);
     } else {
     }
   };
 
   useEffect(() => {
-    categories();
+    
+    searchPropertyByCategory(); 
+
+    
   }, [searchText]);
 
   const handleBook = async (proId) => {
@@ -124,15 +130,15 @@ const Property = () => {
           Search
         </button> */}
       </div>
-      <div className="md:grid  gap-2  grid-cols-2  md:px-5 gap-x-7 font uppercase ">
+      <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase ">
         {map(property, (pro, i) => (
           <div user={pro} key={"pro" + i}>
-            <div className=" grad-card pl- shadow-sm shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md">
+            <div className=" grad-card shadow-sm hover:bg-amber-100 shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md scale-90 hover:scale-95 ease-in duration-300">
               <div className="grid grid-cols-3   my-3 ">
                 <div className="flex  justify-start items-center">
                   <Link to={`/Detailspage?uid=${pro?._id}`}>
                     <img
-                      className=" md:object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
+                      className=" object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
                       alt="coimbatore realestate"
                       src={pro?.propertyPic[0]}
                     />
@@ -150,7 +156,7 @@ const Property = () => {
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
-                        className="w-6 :h-6 text-red-500"
+                        className="w-4 :h-4 text-red-500 pb-5 "
                       >
                         <path
                           stroke-linecap="round"
@@ -163,28 +169,30 @@ const Property = () => {
                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                         />
                       </svg>{" "}
-                      <h3 className=" text-black">
+                      <h3 className="  text-amber-700  text-shadow drop-shadow-2xl" >
                         {pro?.location},
-                        <div className="text-sm">{pro?.streetName}</div>
+                        <div className="text-sm bt-2 text-amber-600  " >{pro?.streetName}</div>
                       </h3>{" "}
                     </div>
-                    <h6 className="pr-4">₹.{pro?.askPrice}</h6>
+                    <h6 className="pr-4 text-amber-700 shadow-black text-shadow drop-shadow-2xl">₹.{pro?.askPrice}<span className=" md:hidden pl-14">{pro?.bedRoom}BHK</span></h6>   
                   </Link>
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}
                     className="md:flex  mr-3 justify-between shadow-sm  hidden  shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md"
                   >
                     <p>
-                      <div className="underline  text-sm">plot Area</div>
+                      <div className="underline  text-sm ">plot Area</div>
                       <div className="font-semibold">₹.{pro?.costSq}.sq.ft</div>
                     </p>
+                   
+                    <p className="  ">
+                      <div className="underline text-sm ">BHK</div>
+                      <div className="font-semibold">{pro?.bedRoom}BHK</div>
+                    </p>
+
                     <p>
                       <div className="underline text-sm">Facing</div>
                       <div className="font-semibold">{pro?.facing}</div>
-                    </p>
-                    <p className="  ">
-                      <div className="underline text-sm ">BuiltArea</div>
-                      <div className="font-semibold">{pro?.builtArea}</div>
                     </p>
                   </Link>
 

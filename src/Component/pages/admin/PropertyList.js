@@ -34,12 +34,14 @@ const PropertyList = () => {
   return (
     <div>
       <Breadcrumbs>
-        <a href="/admin/Dashboard" className="opacity-60 font">
-          Dashboard
-        </a>
-        <a href="/admin/PropertyList" className=" text-amber-700 font">
-          Properties
-        </a>
+      <Link to="/admin/Dashboard" >
+            <button className="opacity-60 font">
+              Dashboard
+            </button></Link>
+            <Link to="/admin/PropertyList">
+            <button className="opacity-60 font">
+              Properties
+            </button></Link>
       </Breadcrumbs>
       <div className="md:overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4  ">
@@ -78,12 +80,7 @@ const PropertyList = () => {
               >
                 <div className="flex items-center">AskPrice</div>
               </th>
-              <th
-                scope="col"
-                className="py-3 px-6   text-amber-700 hidden md:visible"
-              >
-                <div className="flex items-center">location</div>
-              </th>
+           
               <th scope="col" className="py-3 px-6   text-amber-700">
                 <div className="flex items-center">status</div>
               </th>
@@ -145,9 +142,7 @@ const PropertyList = () => {
                   <td className="py-4 px-6 capitalize hidden md:block">
                     {PropertyData?.askPrice}
                   </td>
-                  <td className="py-4 px-6 capitalize  hidden md:visible">
-                    {PropertyData?.location}
-                  </td>
+                 
                   <td
                     className="py-4 px-6 capitalize"
                     style={{ color: statusColor[PropertyData?.status] }}

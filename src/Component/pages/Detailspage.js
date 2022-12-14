@@ -47,7 +47,7 @@ const Detailspage = (props) => {
         <>Loadimgggggg....</>
       ) : (
         <div>
-          <div className=" md:pt-28 md:pr-10 md:pl-10  ">
+          <div className=" md:pt-28 md:pr-10 md:pl-10 pb-5 ">
             <div className="py-4 px-8 bg-white shadow-lg ">
               <div className=" 2xl:grid   grid-cols-3 py- md:pr-">
                 {" "}
@@ -57,7 +57,7 @@ const Detailspage = (props) => {
                       {" "}
                       <div className="absolute  left-5 inset-y-1/3 -ml-3 mt-10 h-8">
                         <button
-                          className=" bg-orange-200 hover:bg-amber-500"
+                          className=" bg-orange-200 hover:bg-amber-500 "
                           onClick={() => prevImageOnClick()}
                         >
                           <svg
@@ -67,6 +67,7 @@ const Detailspage = (props) => {
                             stroke-width="3"
                             fill="50"
                             viewBox="0 0 32 32"
+                            className=""
                           >
                             <path
                               d="M26.89,9.13a1,1,0,0,0-1,0L17,14.27V10a1,1,0,0,0-1.5-.87l-10.39,6a1,1,0,0,0,0,1.73l10.39,6A1,1,0,0,0,17,22V17.73l8.89,5.13a1,1,0,0,0,1.5-.87V10A1,1,0,0,0,26.89,9.13ZM15,20.27,7.61,16,15,11.73Zm10.39,0L18,16l7.39-4.27Z"
@@ -120,37 +121,37 @@ const Detailspage = (props) => {
                 <br className="md:hidden " />
                 <div className=" md:col-span-2 bg-white border-none -mt-5 ">
                   <details
-                    class=" open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
+                    class="txt-shadow open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
                     open
                   >
-                    <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
+                    <summary class="text-sm text-amber-700 leading-6  dark:text-white font-semibold select-none">
                       Property Details
                     </summary>
                     <div className="  rounded-2xl  capitalize  ">
                       <div className="md:grid grid-cols-2 md:gap-5 md:px-4  ">
                         <div className=" md:px-5 pb-5 bg-white ">
                           <div className="text-md font py-3 ">
-                            Seller:{" "}
-                            <span className="  ">{property?.Seller}</span>
+                            <span className="text-amber-700 ">Seller:</span>
+                            <span className=" opacity-80 ">{property?.Seller}</span>
                           </div>
                           <div className="text-md  font py-3">
-                            Location:
-                            <span className="   ">{property?.location},</span>
+                           <span className="text-amber-700" >Location:</span> 
+                            <span className=" opacity-80 ">{property?.location},</span>
                             <span className="text-gray-800">
                               {property?.streetName}
                             </span>
                           </div>
                           <div className="text-md font py-3">
-                            Layoutname:
-                            <span className="   ">{property?.layoutName}</span>
+                           <span className="text-amber-700"> Layoutname:</span>
+                            <span className="  opacity-80  ">{property?.layoutName}</span>
                           </div>
                           <div className="text-md  font py-3">
-                            Landarea:
-                            <span className="  ">{property?.landArea}</span>
+                           <span className="text-amber-700"> Landarea:</span>
+                            <span className=" opacity-80  ">{property?.landArea}</span>
                           </div>{" "}
                           <div className="text-md font py-3">
-                            Property Type:
-                            <span className="   ">
+                           <span className="text-amber-700"> Property Type:</span>
+                            <span className="   opacity-80 ">
                               {property?.category?.name}
                             </span>
                           </div>{" "}
@@ -158,26 +159,26 @@ const Detailspage = (props) => {
                         <div className=" md:px-5 pb-5 bg-white">
                           {" "}
                           <div className="text-md font  py-3">
-                            Facing:
-                            <span className="   ">{property?.facing}</span>
+                            <span className="text-amber-700">Facing:</span>
+                            <span className="  opacity-80  ">{property?.facing}</span>
                           </div>
                           <div className="text-md font  py-3">
-                            Approchroad:
-                            <span className="   ">
+                           <span className="text-amber-700"> Approchroad:</span>
+                            <span className="   opacity-80 ">
                               {property?.approachRoad}
                             </span>
                           </div>
                           <div className="text-md  font py-3">
-                            Builtarea:
-                            <span className="   ">{property?.builtArea}</span>
+                           <span className="text-amber-700">  Builtarea:</span>
+                            <span className="   opacity-80 ">{property?.builtArea}</span>
                           </div>
                           <div className="text-md py-3  font">
-                            Bedroom:
-                            <span className="   ">{property?.bedRoom}</span>
+                           <span className="text-amber-700"> Bedroom:</span>
+                            <span className="  opacity-80  ">{property?.bedRoom}</span>
                           </div>{" "}
                           <div className="text-md font py-3 ">
-                            Floordetails:
-                            <span className="   ">
+                           <span className="text-amber-700"> Floordetails:</span>
+                            <span className="  opacity-80  ">
                               {" "}
                               {property?.floorDetails}
                             </span>
@@ -185,20 +186,21 @@ const Detailspage = (props) => {
                         </div>
                         <div className="col-span-2  md:px-5 pb-5 ">
                           <div className="text-md py-3 font">
-                            Askprice:
-                            <span className="   ">₹.{property?.askPrice}</span>
+                          <span className="text-amber-700">  Askprice:</span>
+                            <span className="  opacity-80  ">₹.{property?.askPrice}</span>
                           </div>
                           <div className="text-md  py-3 font">
-                            Neartown:
-                            <span className="   ">{property?.nearTown}</span>
+                           <span className="text-amber-700"> Neartown:</span>
+                            <span className="  opacity-80  ">{property?.nearTown}</span>
                           </div>
                           <div className="text-md font py-3 ">
-                            Costsq:
-                            <span className="   ">₹.{property?.costSq}sft</span>
+                           <span className="text-amber-700"> Costsq:</span>
+                            <span className="   opacity-80 ">₹.{property?.costSq}sft</span>
                           </div>{" "}
                           <div className="text-md font py-3 ">
-                            Facilities:
-                            <span className=" ">{property?.facilities}</span>
+                           <span className="text-amber-700"> Facilities:</span>
+                            <span className=" opacity-80">{property?.facilities}</span>
+                           
                           </div>
                         </div>
                       </div>
@@ -210,7 +212,7 @@ const Detailspage = (props) => {
                       class=" open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
                       close
                     >
-                      <summary class=" text-sm  leading-6 text-slate-900 dark:text-white font-semibold select-none">
+                      <summary class=" text-sm txt-shadow leading-6 text-amber-700 dark:text-white font-semibold select-none">
                         Description
                       </summary>
                       <div class="mt-3 text-sm leading-6 font text-slate-600 dark:text-slate-400 p-3">
@@ -218,104 +220,7 @@ const Detailspage = (props) => {
                       </div>
                     </details>
                   </div>
-                  {/* <details
-                    class="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
-                    open
-                  >
-                    <summary class="text-sm leading-6 text-slate-900 dark:text-white font-semibold select-none">
-                      Property Details
-                    </summary>
-                    <div class="mt-3 text-sm leading-6  dark:text-slate-400">
-                      <div className="relative  rounded-2xl  capitalize ">
-                        <div className="lg:grid grid-cols-2 grid-rows-  md:gap-y-5 md:px-4 py-2  ">
-                          <div className="col-span-2 md:p-5 bg-white ">
-                            <div className="text-lg font py-3 ">
-                              Seller:{" "}
-                              <span className="  ">{property?.Seller}</span>
-                            </div>
-                            <div className="text-lg  font py-3">
-                              Location:
-                              <span className="   ">
-                                {property?.location},
-                                <span className="text-sm">
-                                  {property?.streetName}
-                                </span>
-                              </span>
-                            </div>
-                            <div className="text-lg font py-3">
-                              Layoutname:
-                              <span className="   ">
-                                {property?.layoutName}
-                              </span>
-                            </div>
-                            <div className="text-lg  font py-3">
-                              Landarea:
-                              <span className="  ">{property?.landArea}</span>
-                            </div>{" "}
-                          </div>
-                          <div className="md:p-5 col-span-2">
-                            {" "}
-                            <div className="text-lg font py-3">
-                              Property Type:
-                              <span className="   ">
-                                {property?.category?.name}
-                              </span>
-                            </div>{" "}
-                            <div className="text-lg font  py-3">
-                              Approchroad:
-                              <span className="   ">
-                                {property?.approachRoad}
-                              </span>
-                            </div>{" "}
-                            <div className="text-lg font py-3 ">
-                              Floordetails:
-                              <span className="   ">
-                                {" "}
-                                {property?.floorDetails}
-                              </span>
-                            </div>{" "}
-                            <div className="text-lg font  py-3">
-                              Facing:
-                              <span className="   ">{property?.facing}</span>
-                            </div>
-                          </div>
-                          <div className="  md:p-5 col-span-2">
-                            <div className="text-lg  font py-3">
-                              Builtarea:
-                              <span className="   ">{property?.builtArea}</span>
-                            </div>
-                            <div className="text-lg py-3  font">
-                              Bedroom:
-                              <span className="   ">{property?.bedRoom}</span>
-                            </div>{" "}
-                            <div className="text-lg py-3 font">
-                              Askprice:
-                              <span className="   ">
-                                ₹.{property?.askPrice}
-                              </span>
-                            </div>
-                            <div className="text-lg  py-3 font">
-                              Neartown:
-                              <span className="   ">{property?.nearTown}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </details> */}
-                  {/* {property?.propertyPic.map((image, i) => (
-                      <button
-                        className="shadow:md border-neutral-900 hover:shadow-lg scale-100  bg-slate-50 object-cover  rounded-md "
-                        onClick={() => setcurentImage(i)}
-                      >
-                        {" "}
-                        <img
-                          className=" w-48  rounded-md aspect-[1]"
-                          src={image}
-                        />
-                      </button>
-                    ))} */}
+                  
                 </div>
               </div>
             </div>

@@ -19,22 +19,16 @@ import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
 import Dashboard from "./Component/pages/admin/Dashboard";
 import Category from "./Component/pages/Category";
-
 import ProfileUpdate from "./Component/pages/auth/ProfileUpdate";
-
 import BuyerList from "./Component/pages/admin/BuyerList";
 import BuyerDetails from "./Component/pages/admin/BuyerDetails";
-import Requested from "./Component/pages/Requested";
-import RequestedModel from "./Component/models/RequestedModel";
 import Requestedpage from "./Component/pages/Requestedpage";
 import UserActivities from "./Component/pages/UserActivities";
 import RequestedList from "./Component/pages/admin/RequestedList";
-import Intrested from "./Component/pages/admin/Intrested";
-
 import Activities from "./Component/pages/YourProperties";
 import YourEdit from "./Component/pages/auth/YourEdit";
-
 import AdminLogin from "./Component/pages/admin/adminlogin/AdminLogin";
+import Intrested from "./Component/pages/Intrested";
 
 
 
@@ -51,7 +45,7 @@ const App = () => {
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
         <Route path="/about" element={<About />} />
-        <Route path="/request" element={<Requested />} />
+        <Route path="/Intrested" element={<Intrested />} />
         <Route path="/requestedpage" element={<Requestedpage />} />
         <Route path="/Detailspage" element={<Detailspage/>} />
         <Route path="/UserActivties" element={<UserActivities/>} />

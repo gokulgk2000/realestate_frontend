@@ -7,6 +7,7 @@ import "toastr/build/toastr.min.css";
 import RemoveModel from "../../models/RemoveModel";
 import { Breadcrumbs } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
+import { Link } from "react-router-dom";
 
 const UserDetails = () => {
   const query = useQuery();
@@ -91,15 +92,18 @@ const UserDetails = () => {
       )}
 
       <Breadcrumbs>
-        <a href="/admin/Dashboard" className="opacity-60 font">
+      <Link to="/admin/Dashboard">
+        <button  className="opacity-60 font">
           Dashboard
-        </a>
-        <a href="/admin/userlist" className="opacity-60 font">
+        </button></Link>
+        <Link to="/admin/userlist">
+        <button className="opacity-60 font">
           Sellers
-        </a>
-        <a href="/admin/userdetails" className="text-amber-700 font">
+        </button></Link>
+        <Link to="/admin/userdetails">
+        <button href="" className="text-amber-700 font">
           SellersDetails
-        </a>
+        </button></Link>
       </Breadcrumbs>
       <div className="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
         <div className="flex flex-col items-left pb-10 leading-loose">

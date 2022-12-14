@@ -55,12 +55,14 @@ const UserList = () => {
   return (
     <div>
       <Breadcrumbs>
-        <a href="/admin/Dashboard" className="opacity-60 font">
+      <Link to="/admin/Dashboard">
+        <button  className="opacity-60 font">
           Dashboard
-        </a>
-        <a href="/admin/userlist" className=" text-amber-700 font">
+        </button></Link>
+        <Link to="/admin/userlist">
+        <button className="opacity-60 font">
           Sellers
-        </a>
+        </button></Link>
       </Breadcrumbs>
       <div className=" md:overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4 ">

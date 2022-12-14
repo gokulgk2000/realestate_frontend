@@ -52,7 +52,7 @@ const Activities = () => {
           />
           <button
             type="submit"
-            className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+            className="px-3 py-2 -ml-1.5 grad-btn text-white rounded-tr-full rounded-br-full"
           >
             Search
           </button>

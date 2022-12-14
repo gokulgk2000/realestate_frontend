@@ -101,4 +101,9 @@ border: 2px;
 .txt-shadow{  text-shadow: 1px 0px 0px ;
 }
 
-
+.btn-width{
+  width: 1500px;
+}
+.btn-width-1{
+  width: 439px;
+}

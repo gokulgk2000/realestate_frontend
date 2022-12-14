@@ -38,6 +38,8 @@ import { isAuthenticated } from "./Component/pages/auth/Auth";
 import AdminNav from "./Component/pages/admin/AdminNav";
 import AdminPath, { isAuthAdmin } from "./Component/pages/admin/AuthAdmin";
 import Requested from "./Component/pages/Requestedpage";
+import Payment from "./Component/pages/PaymentPage/Payment";
+import Thankyoupage from "./Component/pages/PaymentPage/Thankyoupage";
 
 
 
@@ -45,7 +47,7 @@ import Requested from "./Component/pages/Requestedpage";
 const App = () => {
   return (
     <> 
-    {isAuthAdmin()||window.location.pathname==="/admin-page"?(<AdminNav/>):( <div><Header/>,<Navbar/></div>)} 
+    {isAuthAdmin()||window.location.pathname==="/admin-page"?(<AdminNav/>):( <div><Header/><Navbar/></div>)} 
      
       <Routes>
       <Route path="/"  element={<Landingpage />} />
@@ -65,6 +67,8 @@ const App = () => {
         <Route path="/UserActivties" element={<UserActivities/>} />
         <Route path="/yourProperties" element={<Activities/>} />
         <Route path="/yourEdit" element={<YourEdit/>} />
+        <Route path="/payment" element={<Payment/>} />
+        <Route path="/thankyou" element={<Thankyoupage/>} />
         
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

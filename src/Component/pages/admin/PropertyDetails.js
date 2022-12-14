@@ -14,6 +14,7 @@ import RemoveModel from "../../models/RemoveModel";
 import { Breadcrumbs, Input } from "@material-tailwind/react";
 import AddModel from "../../models/AddModel";
 import FileInput from "../../reusable/FileInput";
+import { Link } from "react-router-dom";
 
 const PropertyDetails = () => {
   const query = useQuery();

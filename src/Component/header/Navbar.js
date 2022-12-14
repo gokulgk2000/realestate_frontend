@@ -11,6 +11,7 @@ import { useQuery } from "../helper/hook/useQuery";
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
 import Image from "../assets/images/avadar3.webp";
+import Search from "../pages/Search";
 
 const NavItem = [
   { name: "HOME", link: "/" },
@@ -87,41 +88,65 @@ function Navbar() {
   };
   const navigateToYourActivities = (e) => {
     // e.preventDefault();
-    navigate(`/yourActivities?`);
+    navigate(`/yourProperties?`);
   };
   return (
-    <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">  
+    <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">
       <nav className=" ">
         <div className="py-3 px-1  mx-auto  ">
           <div className="flex justify-between items-center px-5">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
-                <Link to="/" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
-                  <div className="hover:text-amber-700" >
-                    HOME
-                  </div>{" "}
-                </Link>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "shadow-sm "
+                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                  }
+                >
+                  <div className="hover:text-amber-700">HOME</div>{" "}
+                </NavLink>
                 {userFromStorage ? (
-                  <Link to="/sellproperty" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
+                  <NavLink
+                    to="/sellproperty"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "shadow-sm"
+                        : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                    }
+                  >
                     {" "}
-                    <div className="hover:text-amber-700" >
-                      SELL PROPERTY
-                    </div>
-                  </Link>
+                    <div className="hover:text-amber-700">SELL PROPERTY</div>
+                  </NavLink>
                 ) : (
                   <Link to="/property"></Link>
                 )}{" "}
-                <Link to="/about" class="text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center focus-within:shadow-sm">
-                  <div className="hover:text-amber-700" >
-                    CONTACT US
-                  </div>
-                </Link>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "shadow-sm"
+                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                  }
+                >
+                  <div className="hover:text-amber-700">CONTACT US</div>
+                </NavLink> <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "shadow-sm"
+                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                  }
+                >
+                  <div className="hover:text-amber-700">ABOUT US</div>
+                </NavLink>
               </div>
             ) : (
               <Mobilenav />
             )}
-
-            <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
+<Search/>
+            {/* <div className=" justify-center  items-center pr-28 -my-3 hidden lg:block">
               <form className="flex justify-center rounded-lg  ">
                 <select className="px-4 border  ">
                   <option>
@@ -186,25 +211,8 @@ function Navbar() {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
 
-            {/* <ul  className="flex flex-row  mt-0  sm:space-x-8  space-x-2 text-sm font-medium ">
-                <li>
-                    <a href="/about" className="text-gray-900 dark:text-white hover:underline font-semibold" aria-current="page">About us</a>
-                </li>
-                {/* <li>
-                    <a href="#" className="text-gray-900 dark:text-white hover:underline font-semibold">Company</a>
-                </li> */}
-            {/* <li>
-                    <a href="#" className="text-gray-900 dark:text-white hover:underline font-semibold">Recent</a>
-                </li> 
-                <li>
-                    <a href="/property" className="text-gray-900 dark:text-white hover:underline font-semibold">Property</a>
-                </li>
-                <li>
-                    <a href="/feedback" className="text-gray-900 dark:text-white hover:underline font-semibold">Feedback</a>
-                </li>
-            </ul> */}
             <div className=" ">
               {isAuthenticated() ? (
                 <div>
@@ -217,20 +225,6 @@ function Navbar() {
                           src={user?.profilePic || Image}
                           className="w-10 h-10 rounded-full"
                         />
-                        {/* <span>   <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6 text-amber-300  hover:text-white"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg></span> */}
                         <span>
                           <div className="px-2 pt-1 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1 hover:shadow-sm  rounded shadow-md">
                             {user?.firstname} {user?.lastname}
@@ -264,19 +258,31 @@ function Navbar() {
                             Profile
                           </button>
                         </div>
-                      </div><div className="flex  border-t-0 border-black  ">
-                          {" "}
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"      onClick={(e) => navigateToYourActivities(e)}                           className="w-6 h-6 pt-2  text-teal-700 "
->
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"  />
-</svg>
-                          <button
-                            className=" text-start  p-1 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
-                            onClick={(e) => navigateToYourActivities(e)}
-                          >
+                      </div>
+                      <div className="flex  border-t-0 border-black  ">
+                        {" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="currentColor"
+                          onClick={(e) => navigateToYourActivities(e)}
+                          className="w-6 h-6 pt-2  text-teal-700 "
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+                          />
+                        </svg>
+                        <button
+                          className=" text-start  p-1 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                          onClick={(e) => navigateToYourActivities(e)}
+                        >
                           your properties
-                          </button>
-                        </div>{" "}
+                        </button>
+                      </div>{" "}
                       <div>
                         <div className="flex  border-t-0 border-black  ">
                           {" "}
@@ -309,7 +315,6 @@ function Navbar() {
                           </button>
                         </div>{" "}
                       </div>
-                   
                       <div className="flex  border-t-0 border-black  ">
                         {" "}
                         <svg
@@ -336,24 +341,6 @@ function Navbar() {
                       </div>
                     </ul>
                   </div>
-
-                  {/* <button 
-                   <div className="flex">   <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6 text-teal-700  hover:text-rose-700"
-                   
-                  >
-               <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg> <div  className="text-rose-700 font-serif hover:text-teal-700">{user?.firstname}{" "}{user?.lastname}</div></div> 
-                </button>*/}
                 </div>
               ) : (
                 <button

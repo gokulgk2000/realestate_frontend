@@ -47,7 +47,7 @@ const Detailspage = (props) => {
         <>Loadimgggggg....</>
       ) : (
         <div>
-          <div className=" md:pt-28 md:pr-10 md:pl-10  ">
+          <div className=" md:pt-28 md:pr-10 md:pl-10 pb-5 ">
             <div className="py-4 px-8 bg-white shadow-lg ">
               <div className=" 2xl:grid   grid-cols-3 py- md:pr-">
                 {" "}

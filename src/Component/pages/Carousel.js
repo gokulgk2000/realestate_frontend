@@ -27,14 +27,14 @@ export const Carousel = () => {
     } else setSelectImage(carouselLength - 1);
   };
 
-  useEffect(() => {
-    const autoPlayFunction = setTimeout(() => {
-      nextImageOnClick();
-    }, 2000);
-    return () => {
-      clearTimeout(autoPlayFunction);
-    };
-  }, [selectImage]);
+  // useEffect(() => {
+  //   const autoPlayFunction = setTimeout(() => {
+  //     nextImageOnClick();
+  //   }, 2000);
+  //   return () => {
+  //     clearTimeout(autoPlayFunction);
+  //   };
+  // }, [selectImage]);
 
   return (
     <div>

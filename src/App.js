@@ -37,6 +37,7 @@ import { isAuthenticated } from "./Component/pages/auth/Auth";
 
 import AdminNav from "./Component/pages/admin/AdminNav";
 import AdminPath, { isAuthAdmin } from "./Component/pages/admin/AuthAdmin";
+import Requested from "./Component/pages/Requestedpage";
 
 
 

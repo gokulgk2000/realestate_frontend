@@ -75,7 +75,7 @@ const Search = () => {
           id="category"
           name="category"
           label="category"
-          className="px-4 border rounded-bl-full rounded-tl-full grad-btn text-black capitalize"
+          className="px-4 border rounded-bl-full rounded-tl-full  text-black capitalize"
           onChange={handleCategoryChange}
         >
           <option value={""}> Category</option>
@@ -128,23 +128,23 @@ const Search = () => {
             value={searchText} 
             required
             name="search"
-            placeholder="Search location"
+            placeholder="Search   Location"
             className=" px-3  py-1 h-14"
             onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
-        {searchText?(<button className=" pb-1 border-2  bg-white grad-btn-x rounded-br-full rounded-tr-full"   onClick={navigateToProperty} >
+        {searchText?(<button className=" pb-1 border-2  bg-white hover:bg-amber-300 rounded-br-full rounded-tr-full"   onClick={navigateToProperty} >
           {" "}
          <button
-            className="px-3  pt-1   text-white rounded-full hover:text-white"
+            className="px-3  pt-1   text-black rounded-full hover:text-black hover:bg-amber-300"
             onClick={navigateToProperty}
           >
             Search Properties
           </button>
-        </button> ):(<button className=" pb-1 border-2  bg-white grad-btn-x rounded-br-full rounded-tr-full"  >
+        </button> ):(<button className=" pb-1 border-2 bg-white hover:bg-amber-200 rounded-br-full rounded-tr-full"  >
           {" "}
          <button
-            className="px-3 pt-1  text-black rounded-full hover:text-white"
+            className="px-3 pt-1  text-black rounded-full hover:text-black "
            
           >
             Search Properties

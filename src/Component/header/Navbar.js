@@ -181,7 +181,7 @@ const AuthLogout=()=>{
                         <img
                           src={user?.profilePic || Image}
                           className="w-10 h-10 rounded-full"
-                          onClick={navigateToProfile} />
+                           />
                         <span>
                           <div className="px-2 pt-1 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1 hover:shadow-sm  rounded shadow-md">
                             {user?.firstname} {user?.lastname}
@@ -200,7 +200,7 @@ const AuthLogout=()=>{
                             stroke-width="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 pt-2 text-teal-700"
-                            onClick={navigateToProfile}
+                           
                           >
                             <path
                               stroke-linecap="round"
@@ -210,7 +210,7 @@ const AuthLogout=()=>{
                           </svg>
                           <button
                             className="  text-start font hover:text-amber-700 uppercase p-1  hover:shadow-none rounded shadow-sm"
-                            onClick={navigateToProfile}
+                          
                           >
                             Profile
                           </button>
@@ -241,7 +241,7 @@ const AuthLogout=()=>{
                         </button>
                       </div>{" "}
                       <div>
-                        <div className="flex  border-t-0 border-black  ">
+                        {/* <div className="flex  border-t-0 border-black  ">
                           {" "}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +270,7 @@ const AuthLogout=()=>{
                           >
                             Activities
                           </button>
-                        </div>{" "}
+                        </div>{" "} */}
                       </div>
                       <div>
                         <div className="flex  border-t-0 border-black  ">

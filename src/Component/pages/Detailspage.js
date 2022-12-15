@@ -118,8 +118,8 @@ const Detailspage = (props) => {
                       Property Details
                     </summary>
                     <div className="  rounded-2xl  capitalize  ">
-                      <div className="md:grid grid-cols-2 md:gap-5 md:px-4  ">
-                        <div className=" md:px-5 pb-5 bg-white ">
+                      <div className="md:grid md:grid-cols-2 md:gap-5 px-4  ">
+                        <div className=" md:px-5 md:pb-5 bg-white ">
                           <div className="text-md font py-3 ">
                             <span className="text-amber-700 ">Seller:</span>
                             <span className=" opacity-80 ">{property?.Seller}</span>
@@ -153,7 +153,7 @@ const Detailspage = (props) => {
                             </span>
                           </div>{" "}
                         </div>
-                        <div className=" md:px-5 pb-5 bg-white">
+                        <div className=" md:px-5 md:pb-5 bg-white">
                           {" "}
                           <div className="text-md font  py-3">
                             <span className="text-amber-700">Facing:</span>

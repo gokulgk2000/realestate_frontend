@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/realestate_frontend",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",

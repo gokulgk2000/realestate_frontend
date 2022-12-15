@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getPropertyById } from "../helper/backend_helpers";
-import { mobile, tab } from "../helper/constatnt/ScreenSize";
+import { mobile, monitor, pc, tab } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useQuery } from "../helper/hook/useQuery";
 
 const Detailspage = (props) => {
-  const [isBiggerthanTab] = useMediaQuery(tab);
+  const [isBiggerthanPC] = useMediaQuery(monitor);
+  const [isBiggerthanTwo] = useMediaQuery(monitor,mobile);
+
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
@@ -44,65 +46,53 @@ const Detailspage = (props) => {
   return (
     <>
       {loading ? (
-        <>Loadimgggggg....</>
+        <>Loadingggggg....</>
       ) : (
         <div>
           <div className=" md:pt-28 md:pr-10 md:pl-10 pb-5 ">
             <div className="py-4 px-8 bg-white shadow-lg ">
               <div className=" 2xl:grid   grid-cols-3 py- md:pr-">
                 {" "}
-                <div className="">
-                  <div className="relative">
-                    <div className=" hidden md:block lg:hidden 2xl:block ">
-                      {" "}
-                      <div className="absolute  left-5 inset-y-1/3 -ml-3 mt-10 h-8">
-                        <button
-                          className=" bg-orange-200 hover:bg-amber-500 "
-                          onClick={() => prevImageOnClick()}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="30"
-                            width="30"
-                            stroke-width="3"
-                            fill="50"
-                            viewBox="0 0 32 32"
-                            className=""
-                          >
-                            <path
-                              d="M26.89,9.13a1,1,0,0,0-1,0L17,14.27V10a1,1,0,0,0-1.5-.87l-10.39,6a1,1,0,0,0,0,1.73l10.39,6A1,1,0,0,0,17,22V17.73l8.89,5.13a1,1,0,0,0,1.5-.87V10A1,1,0,0,0,26.89,9.13ZM15,20.27,7.61,16,15,11.73Zm10.39,0L18,16l7.39-4.27Z"
-                              data-name="Layer 22"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                      <div className="absolute left-5 inset-y-1/3 mt-9 h-8 md:ml-96 ">
+                <div className="">     
+         {isBiggerthanTwo?(<div className="absolute grid">
+             <div className="md:flex mt-44 md:space-x-48 hidden  xl:space-x-80 md:pl-9  lg:pl-15">   <button  className=" bg-orange-200 hover:bg-amber-500 "
+                          onClick={() => prevImageOnClick()}>  
+                       prev
+                      </button>
+                 <button className=" "> <div className=" ">
                         <button
                           className="bg-orange-200 hover:bg-amber-500"
                           onClick={() => nextImageOnClick()}
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            height="31"
-                            fill="100"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            className=""
-                            viewBox="0 0 50 50"
-                          >
-                            <path
-                              fill="#231F20"
-                              d="M8.641 34.049a.988.988 0 0 0 1.006-.011l13.636-8.132v7.558a1 1 0 0 0 1.512.858l14.852-8.857a.997.997 0 0 0 0-1.717l-14.852-8.857a1 1 0 0 0-1.512.859v6.989L9.646 14.606a1 1 0 0 0-1.512.859V33.18c0 .359.194.691.507.869zm16.642-16.538 11.899 7.097-11.899 7.097V17.511zm-15.149-.285 11.899 7.097-11.899 7.096V17.226z"
-                            />
-                          </svg>
+                       next
                         </button>
-                      </div>
-                    </div>
-                    <img
+                      </div></button></div> </div>):(<div className="absolute grid">
+             <div className="md:flex mt-44 md:space-x-96 hidden pl-12">   <button>  <div className="   ">
+                        <button
+                          className=" bg-orange-200 hover:bg-amber-500 "
+                          onClick={() => prevImageOnClick()}
+                        >
+                         prev
+                        </button>
+                      </div></button>
+                 <button className=" "> <div className="">
+                        <button
+                          className="bg-orange-200 hover:bg-amber-500"
+                          onClick={() => nextImageOnClick()}
+                        >
+                        next
+                        </button>
+                      </div></button></div> </div>) }      
+               
+
+         
+ 
+               
+                  <img
                       className=" aspect-[3/2] md:pr-5 md:h-96 "
                       src={property?.propertyPic[curentImage]}
                     />
-                  </div>
+                 
                   <div className="text-center">
                     {" "}
                     {property?.propertyPic.map((image, j) => (
@@ -134,12 +124,19 @@ const Detailspage = (props) => {
                             <span className="text-amber-700 ">Seller:</span>
                             <span className=" opacity-80 ">{property?.Seller}</span>
                           </div>
-                          <div className="text-md  font py-3">
+                          <div className="text-md  font py-3 hidden md:block">
                            <span className="text-amber-700" >Location:</span> 
                             <span className=" opacity-80 ">{property?.location},</span>
                             <span className="text-gray-800">
                               {property?.streetName}
                             </span>
+                          </div>
+                          <div className="text-md  font py-3 md:hidden">
+                           <span className="text-amber-700" >Location:</span> 
+                            <span className=" opacity-80 ">{property?.location},</span>
+                            <div className="text-gray-800 pl-20 ">
+                              {property?.streetName}
+                            </div>
                           </div>
                           <div className="text-md font py-3">
                            <span className="text-amber-700"> Layoutname:</span>
@@ -197,7 +194,7 @@ const Detailspage = (props) => {
                            <span className="text-amber-700"> Costsq:</span>
                             <span className="   opacity-80 ">₹.{property?.costSq}sft</span>
                           </div>{" "}
-                          <div className="text-md font py-3 ">
+                          <div className="text-md font py-3 truncate">
                            <span className="text-amber-700"> Facilities:</span>
                             <span className=" opacity-80">{property?.facilities}</span>
                            

@@ -69,7 +69,7 @@ const Landingpage = () => {
   return (
     <div>
       <div className="  items-center  md:hidden  ">
-      <form className="flex justify-center  h-10 ">
+      <form className="flex justify-center  h-10 w-full ">
         <select
           id="category"
           name="category"
@@ -88,7 +88,7 @@ const Landingpage = () => {
           id="bedRoom"
           name="bedRoom"
           label="BHK"
-          className="px-2 border w-24 text-black capitalize"
+          className="px-2 border w-20 text-black capitalize"
           onChange={handleBedsChange}
         ><option value="0" >BHK</option>
           <option value="1" >1BHK</option>
@@ -105,22 +105,27 @@ const Landingpage = () => {
             required
             name="search"
             placeholder="Search location"
-            className=" px-3  pt-2 pb-1 w-32 border-2"
+            className=" px-3  pt- pb-1 w-32 border- py-2"
             onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
-        <div className=" pb-1 border-2 w-20 bg-white grad-btn-x "  onClick={navigateToProperty}>
+        <div className=" pb-1 border-2 w-full bg-white grad-btn-x "  onClick={navigateToProperty}>
           {" "}
        {searchText?(<button
-            className="pl- pb- pt-1  text-black  hover:text-white"
+            className="pl-4 pb- pt-1  text-black  hover:text-white flex justify-center"
             onClick={navigateToProperty}
           >
-            Search 
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+</svg>
+
           </button>):(<button
-            className="pl- pt-1  text-black  hover:text-white"
+            className="pl-4 pt-1  text-black  hover:text-white"
           
-          >
-            Search 
+          ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+        
           </button>)}   
         </div>
       </form>

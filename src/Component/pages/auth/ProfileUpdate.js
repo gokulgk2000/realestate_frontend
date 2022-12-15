@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { success } from "toastr";
 import { getUserById, updateProfileById } from "../../helper/backend_helpers";
 import FileInput from "../../reusable/FileInput";
 import Input from "../../reusable/Input";
-
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 import Image from "../../assets/images/avadar3.webp";
 import { Navigate, useNavigate } from "react-router-dom";
+import { Alert } from "@material-tailwind/react";
 const ProfileUpdate = () => {
   const navigate = useNavigate()
+  const [profileSuccess,setProfileSuccess] = useState("");
   const [user, setUser] = useState({
     firstname: "",
     lastname: "",
@@ -51,9 +53,12 @@ const ProfileUpdate = () => {
 
     const res = await updateProfileById(profile);
     if (res.success) {
+      setProfileSuccess(res.msg)
+      toastr.success(`Profile updated successfully`, "Success")
       console.log(profile);
    
     } else {
+
     }
   };
   const convertBase64 = async (file) => {
@@ -78,6 +83,7 @@ const ProfileUpdate = () => {
 
   return (
     <div>
+      <Alert></Alert>
       <div className="md:py-20 md:px-24 bg-slate-100">
         <div className="py-8 px-8 bg-white shadow mt-24">
           {" "}

@@ -31,7 +31,7 @@ export const Carousel = () => {
   useEffect(() => {
     const autoPlayFunction = setTimeout(() => {
       nextImageOnClick();
-    }, 90000);
+    }, 5000);
     return () => {
       clearTimeout(autoPlayFunction);
     };

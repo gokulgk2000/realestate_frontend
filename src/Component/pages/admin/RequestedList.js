@@ -11,7 +11,7 @@ import { Breadcrumbs } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 const RequestedList = () => {
   const query = useQuery();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [requestData, setRequestData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +54,7 @@ const RequestedList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div> 
       <Breadcrumbs>
         <a href="/admin/Dashboard" className="opacity-60 font">
           Dashboard
@@ -214,7 +214,8 @@ const RequestedList = () => {
         </div>
       </div>
 
-    
+
+
     </div>
   );
 };

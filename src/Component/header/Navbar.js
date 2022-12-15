@@ -29,6 +29,8 @@ function Navbar() {
   const navigate = useNavigate();
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
+  const [rerender, setRerender] = useState(true);
+
   // const [property, setproperty] = useState("");
   // const [currentUser, setCurrentUser] = useState();
   // const query = useQuery();
@@ -42,15 +44,18 @@ function Navbar() {
       userID: userFromStorage?.userID,
     });
     if (res.success) {
+      setRerender(true);
       setUser(res.User);
+
       // console.log("res", res);
     }
   };
-
   useEffect(() => {
-    getUserName();
-  }, []);
-
+    if (rerender) {
+      getUserName();
+      setRerender(false);
+    }
+  }, [rerender]);
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
   //     id,

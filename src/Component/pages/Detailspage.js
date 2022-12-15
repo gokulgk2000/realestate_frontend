@@ -49,9 +49,9 @@ const Detailspage = (props) => {
         <>Loadingggggg....</>
       ) : (
         <div>
-          <div className=" md:pt-28 md:pr-10 md:pl-10 pb-5 ">
+          <div className=" lg:pt-28 lg:pr-10 lg:pl-10 pb-5 ">
             <div className="py-4 px-8 bg-white shadow-lg ">
-              <div className=" 2xl:grid   grid-cols-3 py- md:pr-">
+              <div className=" md:grid   grid-cols-3 ">
                 {" "}
                 <div className="">     
          {isBiggerthanTwo?(<div className="absolute grid">

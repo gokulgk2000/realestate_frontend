@@ -11,7 +11,7 @@ import { Breadcrumbs } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 const RequestedList = () => {
   const query = useQuery();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [requestData, setRequestData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +54,16 @@ const RequestedList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div> {isLoading ?(
+      <div className="text-center p-5  "> 
+     <button type="button" class="grad1 ">
+<svg class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
+</svg>
+Loading...
+</button>
+      </div>
+      ):(
+      <>
       <Breadcrumbs>
         <a href="/admin/Dashboard" className="opacity-60 font">
           Dashboard
@@ -196,7 +205,8 @@ const RequestedList = () => {
         </li>
       </ul>
     </nav> 
-    */}
+    */}</>
+    )}
     </div>
   );
 };

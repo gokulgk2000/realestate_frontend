@@ -183,7 +183,7 @@ const propertyImageRemove = image => {
         />
       )}
   {loading ? (
-      <>Loadimgggggg....</>
+      <div className="text-center">Loading....</div>
     ) :(
       <><Breadcrumbs>
       <Link to="/admin/Dashboard" >

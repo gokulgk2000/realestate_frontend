@@ -17,8 +17,10 @@ const Landingpage = () => {
   const [betRoomCount, setBetRoomCount] = useState();
   const [allcategory, setAllCategory] = useState([]);
   const [property, setProperty] = useState([]);
+  const [isLoading, setLoading]=useState(false);
 
   const categories = async () => {
+    setLoading(true);
     const res = await getPropertiescategoryId({
       id: category,
       searchText,
@@ -27,6 +29,7 @@ const Landingpage = () => {
 
     if (res.success) {
       setProperty(res.category);
+      setLoading(false);
 
       console.log("first", res);
     } else {
@@ -68,6 +71,7 @@ const Landingpage = () => {
   };
   return (
     <div>
+
       <div className="  items-center  md:hidden  ">
       <form className="flex justify-center  h-10 w-full ">
         <select
@@ -133,10 +137,20 @@ const Landingpage = () => {
 
       <div className="font ">
         <Carousel />
-
+   {isLoading ?(
+        <div className="text-center p-5  "> 
+       <button type="button" class="grad1 ">
+  <svg class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
+  </svg>
+  Loading...
+</button>
+        </div>
+        ):(
+        <>
         <div className=" drop-shadow-xl pb-4">
           <Property />
-        </div>
+        </div></>
+        )}
         {/* <Category /> */}
       </div>
     </div>

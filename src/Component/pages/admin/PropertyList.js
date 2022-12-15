@@ -8,6 +8,7 @@ const PropertyList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
+  const [isLoading, setLoading]=useState(false);
   const statusColor = {
     approved: "green",
     pending: "#e8bf09",
@@ -20,8 +21,11 @@ const PropertyList = () => {
 
   useEffect(() => {
     const getAllProperties = async () => {
+      setLoading(true);
       const res = await allPropertiesList({});
-      // console.log("getAllProperties" ,res);
+      console.log("getAllProperties" ,res);
+      setLoading(false);
+
       if (res.success) {
         setAllProperties(res.properties);
       }
@@ -33,6 +37,16 @@ const PropertyList = () => {
 
   return (
     <div>
+       {isLoading ?(
+        <div className="text-center p-5  "> 
+       <button type="button" class="grad1 w-28"disabled>
+  <svg class="animate-spin h-5 w-5 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
+  </svg>
+  Loading...
+</button>
+        </div>
+        ):(
+        <>
       <Breadcrumbs>
       <Link to="/admin/Dashboard" >
             <button className="opacity-60 font">
@@ -60,6 +74,7 @@ const PropertyList = () => {
             Search
           </button>
         </div>
+       
         <table className="md:w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -161,6 +176,7 @@ const PropertyList = () => {
               ))}
           </tbody>
         </table>
+       
       </div>
       <div className="text-center">
         <nav aria-label="text-center">
@@ -171,7 +187,8 @@ const PropertyList = () => {
             currentPage={currentPage}
           />
         </nav>
-      </div>
+      </div> </>
+        )}
     </div>
   );
 };

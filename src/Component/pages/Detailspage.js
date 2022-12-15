@@ -55,11 +55,11 @@ const Detailspage = (props) => {
                 {" "}
                 <div className="">     
          {isBiggerthanTwo?(<div className="absolute grid">
-             <div className="md:flex mt-44 md:space-x-48 hidden  xl:space-x-72 pl-2">   <button  className=" bg-orange-200 hover:bg-amber-500 "
+             <div className="md:flex mt-44 md:space-x-48 hidden  xl:space-x-80 md:pl-9  lg:pl-15">   <button  className=" bg-orange-200 hover:bg-amber-500 "
                           onClick={() => prevImageOnClick()}>  
                        prev
                       </button>
-                 <button className=" pl-48"> <div className=" ">
+                 <button className=" "> <div className=" ">
                         <button
                           className="bg-orange-200 hover:bg-amber-500"
                           onClick={() => nextImageOnClick()}
@@ -67,7 +67,7 @@ const Detailspage = (props) => {
                        next
                         </button>
                       </div></button></div> </div>):(<div className="absolute grid">
-             <div className="md:flex mt-44 md:space-x-80 hidden ">   <button>  <div className="   ">
+             <div className="md:flex mt-44 md:space-x-96 hidden pl-12">   <button>  <div className="   ">
                         <button
                           className=" bg-orange-200 hover:bg-amber-500 "
                           onClick={() => prevImageOnClick()}
@@ -75,7 +75,7 @@ const Detailspage = (props) => {
                          prev
                         </button>
                       </div></button>
-                 <button className=" pl-44"> <div className="">
+                 <button className=" "> <div className="">
                         <button
                           className="bg-orange-200 hover:bg-amber-500"
                           onClick={() => nextImageOnClick()}
@@ -87,11 +87,7 @@ const Detailspage = (props) => {
 
          
  
-                    {/* <div className=" hidden md:block lg:hidden 2xl:block ">
-                      {" "}
-                    
-                     
-                    </div> */}
+               
                   <img
                       className=" aspect-[3/2] md:pr-5 md:h-96 "
                       src={property?.propertyPic[curentImage]}

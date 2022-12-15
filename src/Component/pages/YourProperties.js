@@ -59,13 +59,13 @@ const Activities = () => {
        
         <div className="md:grid  ">
           {" "}
-          <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className=" text-sm text-left text-gray-500 dark:text-gray-400 ">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
               <tr>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-3  text-rose-700">
                   S.No
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6  text-rose-700 hidden md:block">
                   <div className="flex items-center">
                     Facing
                     <a href="#"></a>
@@ -77,7 +77,7 @@ const Activities = () => {
                     <a href="#"></a>
                   </div>
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
+                <th scope="col" className="py-3 px-6  text-rose-700 hidden md:block">
                   <div className="flex items-center">
                     askPrice
                     <a href="#"></a>
@@ -91,7 +91,7 @@ const Activities = () => {
                 </th>
                 <th scope="col" className="py-3 px-6  text-rose-700">
                   <div className="flex items-center">
-                    My Details
+                    Property Details
                     <a href="#"></a>
                   </div>
                 </th>
@@ -130,9 +130,9 @@ const Activities = () => {
                     >
                       {i + 1}
                     </th>
-                    <td className="py-4 px-6 capitalize">{Data?.facing}</td>
+                    <td className="py-4 px-6 capitalize hidden md:block">{Data?.facing}</td>
                     <td className="py-4 px-6">{Data?.location}</td>
-                    <td className="py-4 px-6 capitalize">{Data?.askPrice}</td>
+                    <td className="py-4 px-6 capitalize hidden md:block">{Data?.askPrice}</td>
                     <td className="py-4 px-6">{Data?.nearTown}</td>
                     <td className="py-4 px-6 items-center">
                     <Link to={`/yourEdit?id=${Data?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">View</Link>
@@ -143,8 +143,8 @@ const Activities = () => {
           </table>
         </div>
 
-        <div className="justify-content px-96 mt-2">
-          <nav aria-label="Page navigation example justify-center">
+        <div className="">
+          <nav aria-label="">
             {/* <Posts posts={currentPosts} /> */}
             <Pagination
               postsPerPage={postsPerPage}

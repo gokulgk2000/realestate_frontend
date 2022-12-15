@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { Input } from 'postcss'
 const AdminLogin = () => {
     const navigate = useNavigate()
-
+    const [rerender, setRerender] = useState(true);
   const [loginError, setLoginError] = useState("")
   const [loading, setLoading] = useState(false)
   const validation = useFormik({
@@ -28,11 +28,15 @@ const AdminLogin = () => {
       if (res.success) {
         console.log("res", res)
         localStorage.setItem("authAdmin", JSON.stringify(res))
+      setRerender(true);
         navigate("/admin")
+
       } else {
         setLoginError(res?.msg)
       }
       setLoading(false)
+      setRerender(false);
+
     },
   })
   

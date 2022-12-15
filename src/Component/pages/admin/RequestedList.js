@@ -11,7 +11,7 @@ import { Breadcrumbs } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 const RequestedList = () => {
   const query = useQuery();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [requestData, setRequestData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,20 +54,20 @@ const RequestedList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div> 
       <Breadcrumbs>
         <a href="/admin/Dashboard" className="opacity-60 font">
           Dashboard
         </a>
         <a href="/admin/userlist" className=" text-amber-700 font">
-          Sellers
+          Requested
         </a>
       </Breadcrumbs>
       <div className=" overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4 ">
           <input
             type="text"
-            placeholder="Search Sellers"
+            placeholder="Search Buyers"
             name="search"
             className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
             onChange={(e) => requestSearch(e.target.value)}
@@ -80,7 +80,58 @@ const RequestedList = () => {
             Search
           </button>
         </div>
-        <div className="md:grid  ">
+        <div className="md:hidden">
+          {" "}
+          {requestData
+            ?.filter(
+              (item) =>
+                item?.regUser?.firstname
+                  .toString()
+                  .toLowerCase()
+                  .includes(searchText.toString().toLowerCase()) ||
+                item?.regUser?.lastname
+                  .toString()
+                  .toLowerCase()
+                  .includes(searchText.toString().toLowerCase()) ||
+                item?.location
+                  .toString()
+                  .toLowerCase()
+                  .includes(searchText.toString().toLowerCase()) ||
+                item?.askPrice
+                  .toString()
+                  .toLowerCase()
+                  .includes(searchText.toString().toLowerCase()) ||
+                item?.nearTown
+                  .toString()
+                  .toLowerCase()
+                  .includes(searchText.toString().toLowerCase())
+            )
+            .slice((currentPage - 1) * 10, currentPage * 10)
+            .map((Data, i) => (
+              <div key={i}>
+                <details
+                  class=" open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
+                  close
+                >
+                  <summary>
+                    <span> {i + 1} .</span>{" "}
+                    <span className="capitalize pl-2">
+                      {" "}
+                      {Data?.regUser?.firstname} {Data?.regUser?.lastname}{" "}
+                    </span>
+                  </summary>
+                  <li className="pl-5 py-4 grid  gap-3 ">
+                    <li>Location: {Data?.location}</li>
+                    <li>Price:{Data?.askPrice}</li>
+                    <li>Neartown : {Data?.nearTown}</li>
+
+                    <li>Facing: {Data?.facing}</li>
+                  </li>
+                </details>
+              </div>
+            ))}
+        </div>
+        <div className="md:grid  hidden">
           {" "}
           <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -121,6 +172,7 @@ const RequestedList = () => {
                       .toString()
                       .toLowerCase()
                       .includes(searchText.toString().toLowerCase()) ||
+                      
                     item?.nearTown
                       .toString()
                       .toLowerCase()
@@ -145,16 +197,13 @@ const RequestedList = () => {
                     <td className="py-4 px-6 ">{Data?.location}</td>
                     <td className="py-4 px-6 capitalize">{Data?.askPrice}</td>
                     <td className="py-4 px-6 capitalize">{Data?.nearTown}</td>
-                    {/* <td className="py-4 px-6 items-center">
-                    <Link to={`/admin/userdetails?id=${Data?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">View</Link>
-                </td> */}
                   </tr>
                 ))}
             </tbody>
           </table>
         </div>
-        <div className="justify-content px-96 mt-2">
-          <nav aria-label="Page navigation example justify-center">
+        <div className="">
+          <nav aria-label="">
             <Pagination
               postsPerPage={postsPerPage}
               totalPosts={requestData?.length}
@@ -165,38 +214,8 @@ const RequestedList = () => {
         </div>
       </div>
 
-      {/* <nav aria-label="Page flex navigation example">
-      <ul className="inline-flex items-center -space-x-px">
-        <li>
-          <a href="#" className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span className="sr-only">Previous</span>
-            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-        </li>
-        <li>
-          <a href="#" className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-        </li>
-        <li>
-          <a href="#" className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <span className="sr-only">Next</span>
-            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
-          </a>
-        </li>
-      </ul>
-    </nav> 
-    */}
+
+
     </div>
   );
 };

@@ -8,12 +8,13 @@ import { Link } from "react-router-dom";
 const BuyerList = () => {
   const query = useQuery();
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [buyerData, setBuyerData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
+
   const statusColor = {
     approved: "green",
     pending: "#e8bf09",
@@ -56,7 +57,16 @@ const BuyerList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div> {isLoading ?(
+      <div className="text-center p-5  "> 
+     <button type="button" class="grad1 ">
+<svg class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
+</svg>
+Loading...
+</button>
+      </div>
+      ):(
+      <>
       <Breadcrumbs>
       <Link to="/admin/Dashboard">
           <button  className="opacity-60 font">
@@ -172,7 +182,8 @@ const BuyerList = () => {
             />
           </nav>
         </div>
-      </div>
+      </div> </>
+        )}
     </div>
   );
 };

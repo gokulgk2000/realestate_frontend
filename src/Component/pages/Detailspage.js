@@ -67,7 +67,7 @@ const Detailspage = (props) => {
                        next
                         </button>
                       </div></button></div> </div>):(<div className="absolute grid">
-             <div className="md:flex mt-44 md:space-x-96 hidden pl-12">   <button>  <div className="   ">
+             <div className="md:flex mt-44 md:space-x-64 2xl:space-x-44 lg:space-x-44  hidden pl-12">   <button>  <div className="   ">
                         <button
                           className=" bg-orange-200 hover:bg-amber-500 "
                           onClick={() => prevImageOnClick()}

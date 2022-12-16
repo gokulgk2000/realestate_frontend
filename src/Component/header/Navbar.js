@@ -44,7 +44,6 @@ function Navbar() {
       userID: userFromStorage?.userID,
     });
     if (res.success) {
-      setRerender(true);
       setUser(res.User);
 
       // console.log("res", res);
@@ -52,7 +51,7 @@ function Navbar() {
   };
   useEffect(() => {
       getUserName();
-      setRerender(false);
+     
     
   }, []);
   // const categories = async () => {

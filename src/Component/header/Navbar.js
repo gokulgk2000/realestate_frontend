@@ -203,7 +203,7 @@ const AuthLogout=()=>{
                             stroke-width="1.5"
                             stroke="currentColor"
                             className="w-6 h-6 pt-2 text-teal-700"
-                            onClick={(e) => navigateToProfile(e)}
+                            onClick={navigateToProfile}
                           >
                             <path
                               stroke-linecap="round"
@@ -213,7 +213,7 @@ const AuthLogout=()=>{
                           </svg>
                           <button
                             className="  text-start font hover:text-amber-700 uppercase p-1  hover:shadow-none rounded shadow-sm"
-                           onClick={(e) => navigateToProfile(e)}
+                           onClick={navigateToProfile}
                           >
                             Profile
                           </button>

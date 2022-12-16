@@ -44,18 +44,16 @@ function Navbar() {
       userID: userFromStorage?.userID,
     });
     if (res.success) {
-      setRerender(true);
       setUser(res.User);
 
       // console.log("res", res);
     }
   };
   useEffect(() => {
-    if (rerender) {
       getUserName();
-      setRerender(false);
-    }
-  }, [rerender]);
+     
+    
+  }, []);
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
   //     id,

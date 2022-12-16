@@ -51,11 +51,10 @@ function Navbar() {
     }
   };
   useEffect(() => {
-    if (rerender) {
       getUserName();
       setRerender(false);
-    }
-  }, [rerender]);
+    
+  }, []);
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
   //     id,

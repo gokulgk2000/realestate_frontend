@@ -6,7 +6,7 @@ import { useQuery } from "../helper/hook/useQuery";
 
 const Detailspage = (props) => {
   const [isBiggerthanPC] = useMediaQuery(monitor);
-  const [isBiggerthanTwo] = useMediaQuery(monitor,mobile);
+  const [isBiggerthanTwo] = useMediaQuery(monitor, mobile);
 
   const query = useQuery();
   const [loading, setLoading] = useState(true);
@@ -53,46 +53,66 @@ const Detailspage = (props) => {
             <div className="py-4 px-8 bg-white shadow-lg ">
               <div className=" md:grid   grid-cols-3 ">
                 {" "}
-                <div className="">     
-         {isBiggerthanTwo?(<div className="absolute grid">
-             <div className="md:flex mt-44 md:space-x-48 hidden  xl:space-x-80 md:pl-9  lg:pl-15">   <button  className=" bg-orange-200 hover:bg-amber-500 "
-                          onClick={() => prevImageOnClick()}>  
-                       prev
-                      </button>
-                 <button className=" "> <div className=" ">
-                        <button
-                          className="bg-orange-200 hover:bg-amber-500"
-                          onClick={() => nextImageOnClick()}
-                        >
-                       next
-                        </button>
-                      </div></button></div> </div>):(<div className="absolute grid">
-             <div className="md:flex mt-44 md:space-x-96 hidden pl-12">   <button>  <div className="   ">
+                <div className="">
+                 {isBiggerthanTwo ? (
+                   <div className="absolute grid">
+                      <div className="md:flex mt-44 md:space-x-48 hidden  xl:space-x-80 md:pl-9  lg:pl-15">
+                        {" "}
                         <button
                           className=" bg-orange-200 hover:bg-amber-500 "
                           onClick={() => prevImageOnClick()}
                         >
-                         prev
+                          prev
                         </button>
-                      </div></button>
-                 <button className=" "> <div className="">
-                        <button
-                          className="bg-orange-200 hover:bg-amber-500"
-                          onClick={() => nextImageOnClick()}
-                        >
-                        next
+                        <button className=" ">
+                          {" "}
+                          <div className=" ">
+                            <button
+                              className="bg-orange-200 hover:bg-amber-500"
+                              onClick={() => nextImageOnClick()}
+                            >
+                              next
+                            </button>
+                          </div>
                         </button>
-                      </div></button></div> </div>) }      
-               
-
-         
- 
-               
-                  <img
-                      className=" aspect-[3/2] md:pr-5 md:h-96 "
-                      src={property?.propertyPic[curentImage]}
-                    />
+                      </div>{" "}
+                    </div>
+                  ) : (
+                    <div className="absolute grid">
+                      <div className="md:flex mt-44 md:space-x-64 2xl:space-x-44 lg:space-x-44  hidden pl-12">
+                        {" "}
+                        <button>
+                          {" "}
+                          <div className="   ">
+                            <button
+                              className=" bg-orange-200 hover:bg-amber-500 "
+                              onClick={() => prevImageOnClick()}
+                            >
+                              prev
+                            </button>
+                          </div>
+                        </button>
+                        <button className=" ">
+                          {" "}
+                          <div className="">
+                            <button
+                              className="bg-orange-200 hover:bg-amber-500"
+                              onClick={() => nextImageOnClick()}
+                            >
+                              next
+                            </button>
+                          </div>
+                        </button>
+                      </div>{" "}
+                    </div>
+                  )}
+  
                  
+                  <img
+                    className=" aspect-[3/2] md:pr-5 md:h-96 "
+                    src={property?.propertyPic[curentImage]}
+                  />
+
                   <div className="text-center">
                     {" "}
                     {property?.propertyPic.map((image, j) => (
@@ -122,32 +142,45 @@ const Detailspage = (props) => {
                         <div className=" md:px-5 md:pb-5 bg-white ">
                           <div className="text-md font py-3 ">
                             <span className="text-amber-700 ">Seller:</span>
-                            <span className=" opacity-80 ">{property?.Seller}</span>
+                            <span className=" opacity-80 ">
+                              {property?.Seller}
+                            </span>
                           </div>
                           <div className="text-md  font py-3 hidden md:block">
-                           <span className="text-amber-700" >Location:</span> 
-                            <span className=" opacity-80 ">{property?.location},</span>
+                            <span className="text-amber-700">Location:</span>
+                            <span className=" opacity-80 ">
+                              {property?.location},
+                            </span>
                             <span className="text-gray-800">
                               {property?.streetName}
                             </span>
                           </div>
                           <div className="text-md  font py-3 md:hidden">
-                           <span className="text-amber-700" >Location:</span> 
-                            <span className=" opacity-80 ">{property?.location},</span>
+                            <span className="text-amber-700">Location:</span>
+                            <span className=" opacity-80 ">
+                              {property?.location},
+                            </span>
                             <div className="text-gray-800 pl-20 ">
                               {property?.streetName}
                             </div>
                           </div>
                           <div className="text-md font py-3">
-                           <span className="text-amber-700"> Layoutname:</span>
-                            <span className="  opacity-80  ">{property?.layoutName}</span>
+                            <span className="text-amber-700"> Layoutname:</span>
+                            <span className="  opacity-80  ">
+                              {property?.layoutName}
+                            </span>
                           </div>
                           <div className="text-md  font py-3">
-                           <span className="text-amber-700"> Landarea:</span>
-                            <span className=" opacity-80  ">{property?.landArea}</span>
+                            <span className="text-amber-700"> Landarea:</span>
+                            <span className=" opacity-80  ">
+                              {property?.landArea}
+                            </span>
                           </div>{" "}
                           <div className="text-md font py-3">
-                           <span className="text-amber-700"> Property Type:</span>
+                            <span className="text-amber-700">
+                              {" "}
+                              Property Type:
+                            </span>
                             <span className="   opacity-80 ">
                               {property?.category?.name}
                             </span>
@@ -157,24 +190,36 @@ const Detailspage = (props) => {
                           {" "}
                           <div className="text-md font  py-3">
                             <span className="text-amber-700">Facing:</span>
-                            <span className="  opacity-80  ">{property?.facing}</span>
+                            <span className="  opacity-80  ">
+                              {property?.facing}
+                            </span>
                           </div>
                           <div className="text-md font  py-3">
-                           <span className="text-amber-700"> Approchroad:</span>
+                            <span className="text-amber-700">
+                              {" "}
+                              Approchroad:
+                            </span>
                             <span className="   opacity-80 ">
                               {property?.approachRoad}
                             </span>
                           </div>
                           <div className="text-md  font py-3">
-                           <span className="text-amber-700">  Builtarea:</span>
-                            <span className="   opacity-80 ">{property?.builtArea}</span>
+                            <span className="text-amber-700"> Builtarea:</span>
+                            <span className="   opacity-80 ">
+                              {property?.builtArea}
+                            </span>
                           </div>
                           <div className="text-md py-3  font">
-                           <span className="text-amber-700"> Bedroom:</span>
-                            <span className="  opacity-80  ">{property?.bedRoom}</span>
+                            <span className="text-amber-700"> Bedroom:</span>
+                            <span className="  opacity-80  ">
+                              {property?.bedRoom}
+                            </span>
                           </div>{" "}
                           <div className="text-md font py-3 ">
-                           <span className="text-amber-700"> Floordetails:</span>
+                            <span className="text-amber-700">
+                              {" "}
+                              Floordetails:
+                            </span>
                             <span className="  opacity-80  ">
                               {" "}
                               {property?.floorDetails}
@@ -183,21 +228,28 @@ const Detailspage = (props) => {
                         </div>
                         <div className="col-span-2  md:px-5 pb-5 ">
                           <div className="text-md py-3 font">
-                          <span className="text-amber-700">  Askprice:</span>
-                            <span className="  opacity-80  ">₹.{property?.askPrice}</span>
+                            <span className="text-amber-700"> Askprice:</span>
+                            <span className="  opacity-80  ">
+                              ₹.{property?.askPrice}
+                            </span>
                           </div>
                           <div className="text-md  py-3 font">
-                           <span className="text-amber-700"> Neartown:</span>
-                            <span className="  opacity-80  ">{property?.nearTown}</span>
+                            <span className="text-amber-700"> Neartown:</span>
+                            <span className="  opacity-80  ">
+                              {property?.nearTown}
+                            </span>
                           </div>
                           <div className="text-md font py-3 ">
-                           <span className="text-amber-700"> Costsq:</span>
-                            <span className="   opacity-80 ">₹.{property?.costSq}sft</span>
+                            <span className="text-amber-700"> Costsq:</span>
+                            <span className="   opacity-80 ">
+                              ₹.{property?.costSq}sft
+                            </span>
                           </div>{" "}
                           <div className="text-md font py-3 truncate">
-                           <span className="text-amber-700"> Facilities:</span>
-                            <span className=" opacity-80">{property?.facilities}</span>
-                           
+                            <span className="text-amber-700"> Facilities:</span>
+                            <span className=" opacity-80">
+                              {property?.facilities}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -217,7 +269,6 @@ const Detailspage = (props) => {
                       </div>
                     </details>
                   </div>
-                  
                 </div>
               </div>
             </div>

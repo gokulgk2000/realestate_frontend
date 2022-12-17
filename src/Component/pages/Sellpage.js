@@ -5,6 +5,8 @@ import FileInput from "../reusable/FileInput";
 import Input from "../reusable/Input";
 import * as Yup from "yup";
 import { findCategory, PropertyRegistration } from "../helper/backend_helpers";
+import { SERVER_URL } from "../helper/configuration";
+import axios from "axios";
 
 const RegisterProperty = () => {
   const [propertyregistrationError, setPropertyRegistrationError] =
@@ -45,25 +47,25 @@ const RegisterProperty = () => {
       streetName:"",
       category: "",
     },
-    validationSchema: Yup.object({
-      Seller: Yup.string().required("Please Enter Your Seller"),
-      location: Yup.string().required("Please Enter location "),
-      // layoutName: Yup.string().required("Please Enter Your Area"),
-      // landArea: Yup.string().required("Please Enter Your Landmark"),
-      facing: Yup.string().required("Please Enter Your City"),
-      // approachRoad: Yup.string().required("Please Enter approachRoad "),
-      // builtArea: Yup.string().required("Please Enter Your builtArea"),
-      bedRoom: Yup.string().required("Please Enter Your bedRoom"),
-      // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
-       propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
-      nearTown: Yup.string().required("Please Enter Your nearTown"),
-      // costSq: Yup.string().required("Please Enter Your costSq"),
-      // facilities: Yup.string().required("Please Enter Your facilities"),
-      askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
-      // Description: Yup.string().required("Please Enter Your Description"),
-           streetName: Yup.string().required("Please Enter Your streetName"),
-      category: Yup.string().required("Please Enter Your category"),
-    }),
+    // validationSchema: Yup.object({
+    //   Seller: Yup.string().required("Please Enter Your Seller"),
+    //   location: Yup.string().required("Please Enter location "),
+    //   // layoutName: Yup.string().required("Please Enter Your Area"),
+    //   // landArea: Yup.string().required("Please Enter Your Landmark"),
+    //   facing: Yup.string().required("Please Enter Your City"),
+    //   // approachRoad: Yup.string().required("Please Enter approachRoad "),
+    //   // builtArea: Yup.string().required("Please Enter Your builtArea"),
+    //   bedRoom: Yup.string().required("Please Enter Your bedRoom"),
+    //   // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
+    //    propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
+    //   nearTown: Yup.string().required("Please Enter Your nearTown"),
+    //   // costSq: Yup.string().required("Please Enter Your costSq"),
+    //   // facilities: Yup.string().required("Please Enter Your facilities"),
+    //   askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
+    //   // Description: Yup.string().required("Please Enter Your Description"),
+    //        streetName: Yup.string().required("Please Enter Your streetName"),
+    //   category: Yup.string().required("Please Enter Your category"),
+    // }),
     onSubmit: (values, onSubmitProps) => {
       handlePropertyReg({
         Seller: values.Seller,
@@ -84,10 +86,8 @@ const RegisterProperty = () => {
         category: values.category,
         streetName: values.streetName,
         regUser: currentUser?.userID,
-        propertyPic,
         status: "pending",
       });
-      console.log("Data", values);
       onSubmitProps.resetForm();
     },
   });
@@ -117,26 +117,52 @@ const RegisterProperty = () => {
   };
   const handleImageUpload = async (e) => {
     const target = e.target;
-    const allImages = await Promise?.all(
-      [...target.files].map(async (files) => {
-        return await convertBase64(files);
-      })
-    );
+    const allImages =  [...target.files].map(f => f)
     setPropertyPic(allImages);
-    console.log("PropertyPic : ", propertyPic);
   };
 
   const handlePropertyReg = async (payload) => {
-    const res = await PropertyRegistration(payload);
+    let picIds=[]
+    let payloadData = payload
+    if(propertyPic?.length>0) {
+      let formData = new FormData()
+      for (var i = 0; i < propertyPic.length; i++) {
+        formData.append("file", propertyPic[i])
+      }
+      const fileUploadRes = await axios.post(
+        `${SERVER_URL}/upload`,
+        formData,
+        { headers:{
+          'Content-Type': 'multipart/form-data',
+        }
+        }
+      )
+      const {data} = fileUploadRes
+      if(data?.success){
+        data.files?.map(file =>
+          picIds.push({
+            type: file?.contentType,
+            size: file?.size,
+            id: file?.id,
+            name: file?.originalname,
+            dbName: file?.filename,
+            aflag: true,
+          })
+        )
+
+      }
+      console.log("fileUploadRes : ",fileUploadRes,)
+
+    }
+    payloadData.propertyPic=picIds
+
+    const res = await PropertyRegistration(payloadData);
     if (res) {
     setPropertyRegistrationSuccess (res.msg);
-      console.log("property", res);
       // localStorage.setItem("authUser", JSON.stringify(res));
     } else {
       setPropertyRegistrationError(res.msg);
     }
-    console.log("reg value: ", res);
-    console.log("pic", propertyPic);
   };
 
   return (

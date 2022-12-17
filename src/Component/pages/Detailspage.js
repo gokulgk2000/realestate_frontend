@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getPropertyById } from "../helper/backend_helpers";
+import { getProById, getPropertyById } from "../helper/backend_helpers";
+import { SERVER_URL } from "../helper/configuration";
 import { mobile, monitor, pc, tab } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
+import { useModal } from "../helper/hook/useModal";
 import { useQuery } from "../helper/hook/useQuery";
+import BuyerModal from "../models/BuyerModal";
 
 const Detailspage = (props) => {
   const [isBiggerthanPC] = useMediaQuery(monitor);
@@ -12,6 +15,9 @@ const Detailspage = (props) => {
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
   const [curentImage, setcurentImage] = useState(0);
+  const [propertyId, setPropertyId] = useState([]);
+
+  const [modalOpen, setModalOpen] = useModal();
   const propertyPicLength = property?.propertyPic?.length;
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
@@ -43,12 +49,31 @@ const Detailspage = (props) => {
     };
     handleProperty();
   }, []);
+  const handleBook = async (proId) => {
+    const payload = {
+      propertyId: proId,
+    };
+    const res = await getProById(payload);
+    if (res.success) {
+      setPropertyId(res.Property);
+      console.log("fmsg", res);
+    } else {
+      console.log("Failed to fetch message", res);
+    }
+  };
   return (
     <>
       {loading ? (
         <>Loadingggggg....</>
       ) : (
         <div>
+           {modalOpen && (
+        <BuyerModal
+          show={modalOpen}
+          onCloseClick={() => setModalOpen(false)}
+          currentProperty={propertyId?._id}
+        />
+      )}
           <div className=" lg:pt-28 lg:pr-10 lg:pl-10 pb-5 ">
             <div className="py-4 px-8 bg-white shadow-lg ">
               <div className=" md:grid   grid-cols-3 ">
@@ -107,11 +132,11 @@ const Detailspage = (props) => {
                     </div>
                   )}
   
-                 
+                 <div>
                   <img
                     className=" aspect-[3/2] md:pr-5 md:h-96 "
-                    src={property?.propertyPic[curentImage]}
-                  />
+                    src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
+                  /></div>
 
                   <div className="text-center">
                     {" "}
@@ -126,7 +151,15 @@ const Detailspage = (props) => {
                         ●
                       </span>
                     ))}
-                  </div>
+                  </div><div className=" pt-10 flex justify-center">
+                  <button
+                        className="border-2 border-amber-800 hover:text-white rounded-sm px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                        onClick={() =>
+                          handleBook(property?._id) && setModalOpen(true)
+                        }
+                      >
+                        Contact
+                      </button></div>
                 </div>
                 <br className="md:hidden " />
                 <div className=" md:col-span-2 bg-white border-none -mt-5 ">

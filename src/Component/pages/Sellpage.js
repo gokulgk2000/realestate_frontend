@@ -40,6 +40,7 @@ const RegisterProperty = () => {
     initialValues: {
       regUser: currentUser?.userID,
       Seller: "",
+      Title: "",
       location: "",
       layoutName: "",
       landArea: "",
@@ -59,27 +60,29 @@ const RegisterProperty = () => {
       category: "",
     },
     // validationSchema: Yup.object({
-    //   Seller: Yup.string().required("Please Enter Your Seller"),
-    //   location: Yup.string().required("Please Enter location "),
+      Seller: Yup.string().required("Please Enter Your Seller"),
+      Title: Yup.string().required("Please Enter Your Title"),
+      location: Yup.string().required("Please Enter location "),
     //   // layoutName: Yup.string().required("Please Enter Your Area"),
     //   // landArea: Yup.string().required("Please Enter Your Landmark"),
-    //   facing: Yup.string().required("Please Enter Your City"),
+      facing: Yup.string().required("Please Enter Your City"),
     //   // approachRoad: Yup.string().required("Please Enter approachRoad "),
     //   // builtArea: Yup.string().required("Please Enter Your builtArea"),
-    //   bedRoom: Yup.string().required("Please Enter Your bedRoom"),
+      bedRoom: Yup.string().required("Please Enter Your bedRoom"),
     //   // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
-    //    propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
-    //   nearTown: Yup.string().required("Please Enter Your nearTown"),
-    //   // costSq: Yup.string().required("Please Enter Your costSq"),
+       propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
+      nearTown: Yup.string().required("Please Enter Your nearTown"),
+      costSq: Yup.string().required("Please Enter Your costSq"),
     //   // facilities: Yup.string().required("Please Enter Your facilities"),
-    //   askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
+      askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
     //   // Description: Yup.string().required("Please Enter Your Description"),
-    //        streetName: Yup.string().required("Please Enter Your streetName"),
-    //   category: Yup.string().required("Please Enter Your category"),
+           streetName: Yup.string().required("Please Enter Your streetName"),
+      category: Yup.string().required("Please Enter Your category"),
     // }),
     onSubmit: (values, onSubmitProps) => {
       handlePropertyReg({
         Seller: values.Seller,
+        Title: values.Title,
         location: values.location,
         layoutName: values.layoutName,
         landArea: values.landArea,
@@ -113,19 +116,6 @@ const RegisterProperty = () => {
 
     allcategory();
   }, []);
-
-  // const convertBase64 = async (file) => {
-  //   return new Promise((resolve, reject) => {
-  //     const fileReader = new FileReader();
-  //     fileReader.readAsDataURL(file);
-  //     fileReader.onload = () => {
-  //       resolve(fileReader.result);
-  //     };
-  //     fileReader.onerror = (error) => {
-  //       reject(error);
-  //     };
-  //   });
-  // };
   const handleImageUpload = async (e) => {
     const target = e.target;
     const allImages = [...target.files].map((f) => f);
@@ -158,14 +148,12 @@ const RegisterProperty = () => {
           })
         );
       }
-      console.log("fileUploadRes : ", fileUploadRes);
     }
     payloadData.propertyPic = picIds;
 
     const res = await PropertyRegistration(payloadData);
     if (res) {
       setPropertyRegistrationSuccess(res.msg);
-      // localStorage.setItem("authUser", JSON.stringify(res));
     } else {
       setPropertyRegistrationError(res.msg);
     }
@@ -200,8 +188,27 @@ const RegisterProperty = () => {
                   : false
               }
             />
-            {validation.touched.Seller && validation.errors.lastname ? (
+            {validation.touched.Seller && validation.errors.Seller ? (
               <span type="invalid">{validation.errors.Seller}</span>
+            ) : null}
+          </div>
+          <div>
+            <Input
+              label="Title"
+              type="text"
+              name="Title"
+              placeholder="Title"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.Title || ""}
+              invalid={
+                validation.touched.Title && validation.errors.Title
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.Title && validation.errors.Title ? (
+              <span type="invalid">{validation.errors.Title}</span>
             ) : null}
           </div>
           <div>

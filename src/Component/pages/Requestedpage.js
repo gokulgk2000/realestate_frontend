@@ -37,7 +37,6 @@ const requestSearch = (searched)=>{
   useEffect(() => {
     getAllRequested();
   }, []);
-console.log("requestData",requestData)
       // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
  

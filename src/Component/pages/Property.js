@@ -25,7 +25,6 @@ const Property = () => {
   const [searchText, setSearchText] = useState(searchKey);
   const [property, setproperty] = useState("");
   const [bedRoom, setBedRoom] = useState(bed);
-  console.log("property",property);
 
   const [propertyId, setPropertyId] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
@@ -43,7 +42,6 @@ const Property = () => {
     if (res.success) {
       setUser(res?.User);
     } else {
-      console.log("errors", res);
     }
   };
 
@@ -79,9 +77,7 @@ const Property = () => {
     const res = await getProById(payload);
     if (res.success) {
       setPropertyId(res.Property);
-      console.log("fmsg", res);
     } else {
-      console.log("Failed to fetch message", res);
     }
   };
 
@@ -116,6 +112,7 @@ const Property = () => {
         />
       )}
 
+
       <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1 ">
         {/* <input
           type="text"
@@ -131,6 +128,9 @@ const Property = () => {
         >
           Search
         </button> */}
+
+      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
+
       </div>
       <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase ">
         {map(property, (pro, i) => (
@@ -140,20 +140,23 @@ const Property = () => {
                 <div className="flex  justify-start items-center">
                   <Link to={`/Detailspage?uid=${pro?._id}`}>
                     <img
-                      className=" object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
+                      className=" object-cover md:h-58 md:w-72 rounded-md aspect-[1]"
                       alt="coimbatore realestate"
                       src={`${SERVER_URL}/file/${pro?.propertyPic[0]?.id}`}
                     />
                   </Link>
                 </div>
                 <div className="col-span-2 pl-2 leading-10">
+                <div className="flex justify-start text-xl text-amber-700  text-shadow drop-shadow-2xl pt-4 pl-1">
+                   {pro?.Title}...</div>
+
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}
-                    className="sm:flex justify-between  md:text-xl  py-5 pr-"
+                    className="sm:flex justify-between  md:text-xl  py-5 "
                   >
                     <div className="flex">
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg"  
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
@@ -171,7 +174,7 @@ const Property = () => {
                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                         />
                       </svg>{" "}
-                      <h3 className="  text-amber-700  text-shadow drop-shadow-2xl" >
+                      <h3 className="  text-amber-700 text-lg  text-shadow drop-shadow-2xl" >
                         {pro?.location},
                         <div className="text-sm bt-2 text-amber-600  " >{pro?.streetName}</div>
                       </h3>{" "}
@@ -197,16 +200,15 @@ const Property = () => {
                       <div className="font-semibold">{pro?.facing}</div>
                     </p>
                   </Link>
-
                   <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 ">
                     <Link
                       to={`/Detailspage?uid=${pro?._id}`}
                       className="col-span-6"
                     >
                       {" "}
-                      <p className=" text-sm  md:py-2">Agent:{pro?.Seller}</p>
+                      <p className=" text-sm  md:py-2 ">Agent:{pro?.Seller}</p>
                     </Link>
-                    <div className=" pr-5 md:pt-2">
+                    <div className=" pr-5 md:pt-2 ">
                       <button
                         className="grad-btn hover:grad1 hover:text-white rounded-sm px-1"
                         onClick={() =>
@@ -217,9 +219,6 @@ const Property = () => {
                       </button>
                     </div>{" "}
                   </p>
-
-                  {/*  <h5>Seller :{pro?.Seller}</h5>
- <p>Description :{pro?.Description}</p> */}
                 </div>
               </div>
             </div>

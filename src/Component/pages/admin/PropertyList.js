@@ -23,7 +23,6 @@ const PropertyList = () => {
     const getAllProperties = async () => {
       setLoading(true);
       const res = await allPropertiesList({});
-      console.log("getAllProperties" ,res);
       setLoading(false);
 
       if (res.success) {

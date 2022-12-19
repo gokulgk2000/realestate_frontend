@@ -28,7 +28,6 @@ const BuyerList = () => {
   const getAllBuyers = async () => {
     setLoading(true);
     const res = await allBuyerList({});
-    console.log("dsp:", res);
     if (res.success) {
       setBuyerData(res.users);
     }

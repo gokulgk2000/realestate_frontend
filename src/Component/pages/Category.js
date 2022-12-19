@@ -8,7 +8,6 @@ const Category = () => {
   useEffect(() => {
     const getAllCategory = async () => {
       const res = await findCategory({});
-      console.log("getAllCategory", res);
       if (res.success) {
         setCategorylist(res.category);
       }

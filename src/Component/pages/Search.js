@@ -15,7 +15,7 @@ const Search = () => {
   const [category, setCategory] = useState();
   const[bedRoom,setBetRoom]=('')
   const [selectCategory, setSelectCategory] = useState([]);
-  const [betRoomCount, setBetRoomCount] = useState();
+  const [betRoomCount, setBetRoomCount] = useState("0");
   const [allcategory, setAllCategory] = useState([]);
   const [property, setProperty] = useState([]);
 
@@ -61,6 +61,7 @@ const Search = () => {
 
   const handleCategoryChange = (event) => {
     console.log("view", event.target.value);
+  
     setSelectCategory(event.target.value);
   };
   const handleBedsChange = (event) => {

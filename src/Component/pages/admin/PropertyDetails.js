@@ -27,8 +27,7 @@ const PropertyDetails = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [PropertyUpdatedSuccess, setPropertyUpdatedSuccess] = useState("");
-  const [propertyregistrationError, setpropertyregistrationError] =
-    useState("");
+  const [propertyUpdatedError, setpropertyUpdatedError] =useState("");
   const [removeImages, setRemoveImages] = useState([]);
   const [addImages, setAddImages] = useState([]);
   const [getProperty, setGetProperty] = useState({
@@ -53,7 +52,6 @@ const PropertyDetails = () => {
     status: "",
   });
   const [rerender, setRerender] = useState(true);
-  console.log("getProperty", getProperty?.propertyPic);
 
   const getPropertyId = async () => {
     const res = await getPropertyDetailsById({
@@ -116,14 +114,16 @@ const PropertyDetails = () => {
       }
     }
     payloadData.propertyPic = [...property.propertyPic,...picIds];
-    console.log("payloadData : ", payloadData);
 
 
     const res = await updateProperty(payloadData);
     if (res.success) {
       setGetProperty(res.propertyPic)
-      console.log(res.propertyPic);
+      setPropertyUpdatedSuccess(res.msg)
+
     toastr.success(`Property has been updated successfully`, "Success");
+    }else{
+      setpropertyUpdatedError(res.msg)
     }
   };
   useEffect(() => {
@@ -140,7 +140,6 @@ const PropertyDetails = () => {
     const res = await addProperty(payload);
 
     if (res.success) {
-      console.log("res", res);
       toastr.success(`Property has been activated successfully`, "Success");
       setRerender(true);
     } else {
@@ -155,7 +154,6 @@ const PropertyDetails = () => {
     };
     const res = await removeProperty(payload);
     if (res.success) {
-      console.log(res);
 
       toastr.success(`Property has been Deactivated successfully`, "Success");
       setRerender(true);
@@ -488,6 +486,20 @@ const PropertyDetails = () => {
                   Edit
                 </button>
               ) : (
+              <div><div className="py-2">   
+            {" "}      
+              {PropertyUpdatedSuccess && (
+                <alert className="text-bold text-green-600">
+                  {PropertyUpdatedSuccess}
+                </alert>
+              )}
+              {propertyUpdatedError && (
+                <alert className="text-bold text-red-600">
+                  {propertyUpdatedError}
+                </alert>
+              )}
+         
+         </div>
                 <button
                   type="button"
                   class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -506,7 +518,7 @@ const PropertyDetails = () => {
                     />
                   </svg>
                   Update Property
-                </button>
+                </button></div>
               )}
 
               {getProperty?.status !== "approved" ? (

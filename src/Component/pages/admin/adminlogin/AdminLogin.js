@@ -26,7 +26,6 @@ const AdminLogin = () => {
       setLoading(true)
       const res = await adminLogin(values)
       if (res.success) {
-        console.log("res", res)
         localStorage.setItem("authAdmin", JSON.stringify(res))
       setRerender(true);
         navigate("/admin")

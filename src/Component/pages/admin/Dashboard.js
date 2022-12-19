@@ -10,7 +10,6 @@ const Dashborad = () => {
   const getAllUsers = async () => {
     setLoading(true);
     const res = await allUsersList({});
-    console.log("dsp:", res);
     if (res.success) {
       setUserData(res.users);
     }

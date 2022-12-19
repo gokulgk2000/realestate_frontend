@@ -14,26 +14,20 @@ import { useQuery } from "../helper/hook/useQuery";
 import { useModal } from "../helper/hook/useModal";
 import BuyerModal from "../models/BuyerModal";
 import { SERVER_URL } from "../helper/configuration";
-
 const Property = () => {
   const query = useQuery();
   let location = useLocation();
   const id = query.get("category");
   const searchKey = query.get("search");
   const bed = query.get("beds");
-
   const [searchText, setSearchText] = useState(searchKey);
   const [property, setproperty] = useState("");
   const [bedRoom, setBedRoom] = useState(bed);
-
   const [propertyId, setPropertyId] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const [user, setUser] = useState("");
-
   const [modalOpen, setModalOpen] = useModal();
-
   // console.log(id);
-
   const getuser = async () => {
     const payload = {
       userId: currentUser?.userID,
@@ -44,32 +38,23 @@ const Property = () => {
     } else {
     }
   };
-
   useEffect(() => {
     getuser();
   }, []);
-
   const searchPropertyByCategory = async () => {
     const res = await getPropertiescategoryId({
       id,
       searchText,bedRoom
     });
-
     if (res.success) {
       setproperty(res.category);
-
       console.log("show", res);
     } else {
     }
   };
-
   useEffect(() => {
-    
-    searchPropertyByCategory(); 
-
-    
+    searchPropertyByCategory();
   }, [searchText]);
-
   const handleBook = async (proId) => {
     const payload = {
       propertyId: proId,
@@ -80,7 +65,6 @@ const Property = () => {
     } else {
     }
   };
-
   //   const loadPropertyCount = async () => {
   //     const res = await getPropertyCount({ searchText });
   //     if (res.success) {
@@ -97,13 +81,11 @@ const Property = () => {
   //     };
   //     handleLoad();
   //   }, [page, limit]);
-
   //   useEffect(() => {
   //     setPage(1);
   //   }, [searchText]);
-
   return (
-    <div className="">
+    <div>
       {modalOpen && (
         <BuyerModal
           show={modalOpen}
@@ -111,26 +93,7 @@ const Property = () => {
           currentProperty={propertyId?._id}
         />
       )}
-
-
-      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1 ">
-        {/* <input
-          type="text"
-          placeholder="Search Your Dream House"
-          name="search"
-          className="look px-3 py-2 bg-gray-100 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-
-        <button
-          type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
-        >
-          Search
-        </button> */}
-
       <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
-
       </div>
       <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase ">
         {map(property, (pro, i) => (
@@ -148,15 +111,14 @@ const Property = () => {
                 </div>
                 <div className="col-span-2 pl-2 leading-10">
                 <div className="flex justify-start text-xl text-amber-700  text-shadow drop-shadow-2xl pt-4 pl-1">
-                   {pro?.Title}...</div>
-
+                   {pro?.Title}</div>
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}
                     className="sm:flex justify-between  md:text-xl  py-5 "
                   >
                     <div className="flex">
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"  
+                        xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
@@ -179,7 +141,7 @@ const Property = () => {
                         <div className="text-sm bt-2 text-amber-600  " >{pro?.streetName}</div>
                       </h3>{" "}
                     </div>
-                    <h6 className="pr-4 text-amber-700 shadow-black text-shadow drop-shadow-2xl">₹.{pro?.askPrice}<span className=" md:hidden pl-14">{pro?.bedRoom}BHK</span></h6>   
+                    <h6 className="pr-4 text-amber-700 shadow-black text-shadow drop-shadow-2xl">₹.{pro?.askPrice}<span className=" md:hidden pl-14">{pro?.bedRoom}BHK</span></h6>
                   </Link>
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}
@@ -189,12 +151,10 @@ const Property = () => {
                       <div className="underline  text-sm ">plot Area</div>
                       <div className="font-semibold">₹.{pro?.costSq}.sq.ft</div>
                     </p>
-                   
                     <p className="  ">
                       <div className="underline text-sm ">BHK</div>
                       <div className="font-semibold">{pro?.bedRoom}BHK</div>
                     </p>
-
                     <p>
                       <div className="underline text-sm">Facing</div>
                       <div className="font-semibold">{pro?.facing}</div>

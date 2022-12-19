@@ -27,8 +27,7 @@ const YourEdit = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [PropertyUpdatedSuccess, setPropertyUpdatedSuccess] = useState("");
-  const [propertyregistrationError, setpropertyregistrationError] =
-    useState("");
+  const [propertyUpdatedError, setpropertyUpdatedError] =useState("");
   const [removeImages, setRemoveImages] = useState([]);
   const [addImages, setAddImages] = useState([]);
   const [getProperty, setGetProperty] = useState({
@@ -53,7 +52,6 @@ const YourEdit = () => {
     status: "",
   });
   const [rerender, setRerender] = useState(true);
-  console.log("getProperty", getProperty?.propertyPic);
 
   const getPropertyId = async () => {
     const res = await getPropertyDetailsById({
@@ -116,13 +114,14 @@ const YourEdit = () => {
       }
     }
     payloadData.propertyPic = [...property.propertyPic, ...picIds];
-    console.log("payloadData : ", payloadData);
 
     const res = await updateProperty(payloadData);
     if (res.success) {
       setGetProperty(res.propertyPic);
-      console.log(res.propertyPic);
+      setPropertyUpdatedSuccess(res.msg)
       toastr.success(`Property has been updated successfully`, "Success");
+    }else{
+      setpropertyUpdatedError(res.msg)
     }
   };
   useEffect(() => {
@@ -139,7 +138,6 @@ const YourEdit = () => {
     const res = await addProperty(payload);
 
     if (res.success) {
-      console.log("res", res);
       toastr.success(`Property has been activated successfully`, "Success");
       setRerender(true);
     } else {
@@ -154,8 +152,6 @@ const YourEdit = () => {
     };
     const res = await removeProperty(payload);
     if (res.success) {
-      console.log(res);
-
       toastr.success(`Property has been Deactivated successfully`, "Success");
       setRerender(true);
     } else {
@@ -185,14 +181,14 @@ const YourEdit = () => {
         <NavLink
           to="/yourProperties"
           className={({ isActive }) =>
-            isActive ? "opacity-75" : "text-black underline"
+            isActive ? "opacity-75 " : "text-black underline hover:text-amber-700"
           }
         >
-          Properties
+          Back to Properties
         </NavLink>
       </Breadcrumbs>
       <div className="">
-        <div class="md:grid  md:grid-cols-2 min-w-full max-w-sm bg-white border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="md:grid  md:grid-cols-2 gap-x-3 min-w-full max-w-sm bg-white border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
           <div class="md:flex pl-5  md:flex-col items-left md:pb-10 py-2">
             <p className=" text-amber-700"> Seller :</p>
             <Input
@@ -380,8 +376,11 @@ const YourEdit = () => {
               className="border-2 px-2 py-1  border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               onChange={(e) => propertyImageUpload(e)}
             />
+          <p className="text-red-500 pt-3 text-sm">*Once update your Property,Admin will Approved!!!</p>
+
           </div>
-          <div className="grid md:grid-cols-1 md:h-52 px-3">
+          
+          <div className="grid md:grid-cols-1 md:h-52 px-3`">
       
               <img
                 className=" aspect-[2] md:h-96 w-full"
@@ -396,7 +395,7 @@ const YourEdit = () => {
               {getProperty?.propertyPic?.length > 0 &&
                 getProperty?.propertyPic?.map((image, j) => (
                   <button key={j}>
-                    <div className="relative group">
+                    <div className="relative group ">
                       {isEdit && (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +403,7 @@ const YourEdit = () => {
                           viewBox="0 0 24 24"
                           stroke-width="2"
                           stroke="currentColor"
-                          className="w-6 h-5 absolute right-4 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
+                          className="w-6 h-6 absolute right-12 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500 "
                           onClick={() => propertyImageRemove(image)}
                         >
                           <path
@@ -417,7 +416,7 @@ const YourEdit = () => {
 
                       <img
                         src={`${SERVER_URL}/file/${image.id}`}
-                        className="aspect-[2] h-28"
+                        className="aspect-[2] h-28 "
                         onClick={() => setCurrentImage(j)}
                       />
                     </div>
@@ -436,7 +435,9 @@ const YourEdit = () => {
                   ))}
               </div>
           </div>{" "}
-          <div class="flex  md:pl-5 justify-center pb-5">
+          
+          <div class="flex justify-center  md:pl-5  pb-5">
+
             {!isEdit ? (
               <button
                 type="button"
@@ -461,6 +462,20 @@ const YourEdit = () => {
                 Edit
               </button>
             ) : (
+            <div><div className="py-2">   
+            {" "}      
+              {PropertyUpdatedSuccess && (
+                <alert className="text-bold text-green-600">
+                  {PropertyUpdatedSuccess}
+                </alert>
+              )}
+              {propertyUpdatedError && (
+                <alert className="text-bold text-red-600">
+                  {propertyUpdatedError}
+                </alert>
+              )}
+         
+         </div>
               <button
                 type="button"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -480,6 +495,7 @@ const YourEdit = () => {
                 </svg>
                 Update Property
               </button>
+              </div>
             )}
           </div>
         </div>

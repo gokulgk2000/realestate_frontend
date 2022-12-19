@@ -29,7 +29,6 @@ const Activities = () => {
       } else {
         console.log("Error in fetching IntrestedData: ", res);
       }
-      console.log("res", res);
     };
     handleFetchUserProperty();
     // return () => {}

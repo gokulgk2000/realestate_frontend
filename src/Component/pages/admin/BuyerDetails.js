@@ -110,25 +110,25 @@ const BuyerDetails = () => {
               Firstname : {getBuyer?.firstname}
             </h5>
             <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
-              Lastname : {getBuyer?.lastname}
+              Lastname : {getBuyer?.lastname},
             </h5>
             <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               {" "}
-              Email :{getBuyer?.email}
+              Email :{getBuyer?.email},
+            </h5>
+            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose capitalize">
+              {" "}
+              Property Details :{getBuyer?.propertyId?.layoutName},{getBuyer?.propertyId?.location},
             </h5>
             <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               {" "}
-              Property Details :{getBuyer?.propertyId?.layoutName}
-            </h5>
-            <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
-              {" "}
-              Phone Number :{getBuyer?.phonenumber}
+              Phone Number :{getBuyer?.phonenumber},
             </h5>
             <h5 className="mx-1 text-xlfont-light text-gray-900 dark:text-white leading-loose">
               {" "}
               Status :
               <span style={{ color: statusColor[getBuyer?.status] }}>
-                {getBuyer?.status}
+                {getBuyer?.status}.
               </span>
             </h5>
           </div>

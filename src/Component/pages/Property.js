@@ -13,6 +13,7 @@ import {
 import { useQuery } from "../helper/hook/useQuery";
 import { useModal } from "../helper/hook/useModal";
 import BuyerModal from "../models/BuyerModal";
+import { SERVER_URL } from "../helper/configuration";
 
 const Property = () => {
   const query = useQuery();
@@ -24,6 +25,7 @@ const Property = () => {
   const [searchText, setSearchText] = useState(searchKey);
   const [property, setproperty] = useState("");
   const [bedRoom, setBedRoom] = useState(bed);
+  console.log("property",property);
 
   const [propertyId, setPropertyId] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
@@ -140,7 +142,7 @@ const Property = () => {
                     <img
                       className=" object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
                       alt="coimbatore realestate"
-                      src={pro?.propertyPic[0]}
+                      src={`${SERVER_URL}/file/${pro?.propertyPic[0]?.id}`}
                     />
                   </Link>
                 </div>

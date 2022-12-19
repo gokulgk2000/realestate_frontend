@@ -14,6 +14,7 @@ import Mobilenav from "./Mobilenav";
 import Image from "../assets/images/avadar3.webp";
 import Search from "../pages/Search";
 import Login from "../pages/auth/Login";
+import { Carousel } from "../pages/Carousel";
 
 const NavItem = [
   { name: "HOME", link: "/" },
@@ -50,9 +51,7 @@ function Navbar() {
     }
   };
   useEffect(() => {
-      getUserName();
-     
-    
+    getUserName();
   }, []);
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
@@ -72,11 +71,10 @@ function Navbar() {
   //   categories();
   // }, [searchText]);
 
-const AuthLogout=()=>{
-
-  logout()
-  navigate("/")
-}
+  const AuthLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   const navigateToProfile = (e) => {
     e.preventDefault();
@@ -101,34 +99,36 @@ const AuthLogout=()=>{
     // e.preventDefault();
     navigate(`/yourProperties?`);
   };
-  
+
   const handlepay = async () => {
-    console.log(user,"user")
+    console.log(user, "user");
     const payload = {
       userId: userFromStorage?.userID,
     };
-    
+
     const res = await getuserdetails(payload);
     if (res.success) {
       setUser(res?.User);
     } else {
       console.log("errors", res);
-    } 
-    navigate(`/payment?id=${user?._id}`)
+    }
+    navigate(`/payment?id=${user?._id}`);
   };
-  return (
-    <div className="Navbar  uppercase md:sticky top-0 bg-white  z-10  grad1 ">
-      <nav className=" ">
+  return (<div>
+   
+    <div className="Navbar  uppercase  sticky top-0 z-100  bg-white  ">
+     
+      <nav className="bg-transparent">
         <div className="py-3 px-1  mx-auto  ">
-          <div className="flex justify-between items-center px-5">
+          <div className="flex justify-between items-center px-5 shadow-md  py-2 ">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "shadow-sm "
-                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                      ? "border-b-2 border-black text-amber-700 "
+                      : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                   }
                 >
                   <div className="hover:text-amber-700">HOME</div>{" "}
@@ -138,8 +138,8 @@ const AuthLogout=()=>{
                     to="/sellproperty"
                     className={({ isActive }) =>
                       isActive
-                        ? "shadow-sm"
-                        : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                        ? "border-b-2 border-black text-amber-700"
+                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
                     {" "}
@@ -152,17 +152,18 @@ const AuthLogout=()=>{
                   to="/contact"
                   className={({ isActive }) =>
                     isActive
-                      ? "shadow-sm"
-                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                      ? "border-b-2 border-black text-amber-700"
+                      : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                   }
                 >
                   <div className="hover:text-amber-700">CONTACT US</div>
-                </NavLink> <NavLink
+                </NavLink>{" "}
+                <NavLink
                   to="/about"
                   className={({ isActive }) =>
                     isActive
-                      ? "shadow-sm"
-                      : "text-black p-1 hover:shadow-none rounded shadow-md flex items-center gap-4 justify-center "
+                      ? "border-b-2 border-black text-amber-700"
+                      : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                   }
                 >
                   <div className="hover:text-amber-700">ABOUT US</div>
@@ -171,11 +172,15 @@ const AuthLogout=()=>{
             ) : (
               <Mobilenav />
             )}
-{/* <Search/> */}
+            {/* <Search/> */}
 
             <div className=" ">
+
               {isAuthenticated() ? (
                 <div>
+
+
+
                   <div className=" relative  group">
                     <a>
                       {" "}
@@ -184,12 +189,24 @@ const AuthLogout=()=>{
                         <img
                           src={user?.profilePic || Image}
                           className="w-10 h-10 rounded-full"
-                           />
+                        />
                         <span>
-                          <div className="px-2 pt-1 text-slate-200 font hover:text-amber-300 hidden md:block lg:block border-t-0 border-l-0 grad1 hover:shadow-sm  rounded shadow-md">
-                            {user?.firstname} {user?.lastname}
+                          <div className="px-2 pt-1 text-amber-700 font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center  hover:border-black">
+                       {user?.firstname} {user?.lastname}
+                           
                           </div>
                         </span>
+                        <svg
+                   
+                   className="h-5 w-5 group-hover:invisible hidden md:block pt-1 mt-1"
+                
+                   viewBox="0 0 512 478.17"
+                 >
+                   <path
+                     fill-rule="nonzero"
+                     d="M98.24 0h315.52C467.83 0 512 44.17 512 98.23v281.71c0 54.05-44.18 98.23-98.24 98.23H98.24C44.17 478.17 0 434 0 379.94V98.23C0 44.28 44.29 0 98.24 0zm147.58 300.72-79.18-83.7c-5.31-5.62-5.07-14.49.55-19.81 2.71-2.56 6.18-3.84 9.63-3.84v-.07h158.36c7.78 0 14.09 6.31 14.09 14.09 0 4.27-1.91 8.1-4.92 10.69l-78.17 82.64c-5.31 5.63-14.19 5.87-19.81.55l-.55-.55zM413.76 45.09H98.24c-29.31 0-53.15 23.84-53.15 53.14v281.71c0 29.18 23.97 53.14 53.15 53.14h315.52c29.17 0 53.15-23.98 53.15-53.14V98.23c0-29.18-23.97-53.14-53.15-53.14z"
+                   />
+                 </svg>
                       </div>
                     </a>
                     <ul className="absolute   bg-white rounded-tr-3xl  rounded-bl-3xl pl-2  opcity-80 hidden  group-hover:block group-hover:right-2 group-hover:shadow-md ">
@@ -213,7 +230,7 @@ const AuthLogout=()=>{
                           </svg>
                           <button
                             className="  text-start font hover:text-amber-700 uppercase p-1  hover:shadow-none rounded shadow-sm"
-                           onClick={navigateToProfile}
+                            onClick={navigateToProfile}
                           >
                             Profile
                           </button>
@@ -303,7 +320,7 @@ const AuthLogout=()=>{
                             className=" text-start  p-1  font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
                             onClick={handlepay}
                           >
-                           Payment
+                            Payment
                           </button>
                         </div>{" "}
                       </div>
@@ -316,7 +333,7 @@ const AuthLogout=()=>{
                           stroke-width="1.5"
                           stroke="currentColor"
                           class="w-6 h-6 pt-2 text-teal-700"
-                          onClick={AuthLogout }
+                          onClick={AuthLogout}
                         >
                           <path
                             stroke-linecap="round"
@@ -338,7 +355,7 @@ const AuthLogout=()=>{
                 <button
                   type="button"
                   className="inline-block px-1 py-2 bg-amber-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-amber-500 hover:shadow-lg focus:bg-amber-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out"
-           >
+                >
                   <Link to="/login">Login</Link>
                 </button>
               )}
@@ -346,6 +363,9 @@ const AuthLogout=()=>{
           </div>
         </div>
       </nav>
+    </div>
+    
+ 
     </div>
   );
 }

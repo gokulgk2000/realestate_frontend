@@ -103,7 +103,7 @@ const Property = () => {
   //   }, [searchText]);
 
   return (
-    <div>
+    <div className="">
       {modalOpen && (
         <BuyerModal
           show={modalOpen}
@@ -112,7 +112,25 @@ const Property = () => {
         />
       )}
 
+
+      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1 ">
+        {/* <input
+          type="text"
+          placeholder="Search Your Dream House"
+          name="search"
+          className="look px-3 py-2 bg-gray-100 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+
+        <button
+          type="submit"
+          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
+        >
+          Search
+        </button> */}
+
       <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
+
       </div>
       <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase ">
         {map(property, (pro, i) => (

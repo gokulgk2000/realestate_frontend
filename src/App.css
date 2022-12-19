@@ -107,3 +107,21 @@ border: 2px;
 .btn-width-1{
   width: 439px;
 }
+.dd{
+  background-image: linear-gradient(to right, rgb(239, 226, 173), rgb(228, 219, 157));
+
+}
+.ddd{
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+.d-text{
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  opacity: 60%;
+}
+:hover.d-text{
+  zoom: 99.9%;
+  position: relative;
+ opacity: 100%;
+}

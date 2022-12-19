@@ -13,12 +13,23 @@ const RegisterProperty = () => {
     useState("");
   const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
     useState("");
-    const propertystatus=[    {value: '', text: 'select property status '}, {value: 'ongoing', text: 'ongoing '},
-    {value: 'pending', text: 'pending '},
-    {value: 'complete', text: 'complete '},]
-    const facing=[    {value: '', text: 'select facing '},    {value: 'east', text: 'east '},{value: 'west', text: 'west '}, {value: 'south', text: 'south '},
-    {value: 'north', text: 'north '},
-{value: 'southEast', text: 'southEast '},{value: 'southWest', text: 'southWest '},{value: 'northEast', text: 'northEast '},{value: 'northWest', text: 'northWest '}]
+  const propertystatus = [
+    { value: "", text: "select property status " },
+    { value: "ongoing", text: "ongoing " },
+    { value: "pending", text: "pending " },
+    { value: "complete", text: "complete " },
+  ];
+  const facing = [
+    { value: "", text: "select facing " },
+    { value: "east", text: "east " },
+    { value: "west", text: "west " },
+    { value: "south", text: "south " },
+    { value: "north", text: "north " },
+    { value: "southEast", text: "southEast " },
+    { value: "southWest", text: "southWest " },
+    { value: "northEast", text: "northEast " },
+    { value: "northWest", text: "northWest " },
+  ];
   const [allcategory, setAllCategory] = useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
@@ -44,7 +55,7 @@ const RegisterProperty = () => {
       askPrice: "",
       Description: "",
       status: "",
-      streetName:"",
+      streetName: "",
       category: "",
     },
     // validationSchema: Yup.object({
@@ -103,43 +114,40 @@ const RegisterProperty = () => {
     allcategory();
   }, []);
 
-  const convertBase64 = async (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
+  // const convertBase64 = async (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const fileReader = new FileReader();
+  //     fileReader.readAsDataURL(file);
+  //     fileReader.onload = () => {
+  //       resolve(fileReader.result);
+  //     };
+  //     fileReader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //   });
+  // };
   const handleImageUpload = async (e) => {
     const target = e.target;
-    const allImages =  [...target.files].map(f => f)
+    const allImages = [...target.files].map((f) => f);
     setPropertyPic(allImages);
   };
 
   const handlePropertyReg = async (payload) => {
-    let picIds=[]
-    let payloadData = payload
-    if(propertyPic?.length>0) {
-      let formData = new FormData()
+    let picIds = [];
+    let payloadData = payload;
+    if (propertyPic?.length > 0) {
+      let formData = new FormData();
       for (var i = 0; i < propertyPic.length; i++) {
-        formData.append("file", propertyPic[i])
+        formData.append("file", propertyPic[i]);
       }
-      const fileUploadRes = await axios.post(
-        `${SERVER_URL}/upload`,
-        formData,
-        { headers:{
-          'Content-Type': 'multipart/form-data',
-        }
-        }
-      )
-      const {data} = fileUploadRes
-      if(data?.success){
-        data.files?.map(file =>
+      const fileUploadRes = await axios.post(`${SERVER_URL}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const { data } = fileUploadRes;
+      if (data?.success) {
+        data.files?.map((file) =>
           picIds.push({
             type: file?.contentType,
             size: file?.size,
@@ -148,17 +156,15 @@ const RegisterProperty = () => {
             dbName: file?.filename,
             aflag: true,
           })
-        )
-
+        );
       }
-      console.log("fileUploadRes : ",fileUploadRes,)
-
+      console.log("fileUploadRes : ", fileUploadRes);
     }
-    payloadData.propertyPic=picIds
+    payloadData.propertyPic = picIds;
 
     const res = await PropertyRegistration(payloadData);
     if (res) {
-    setPropertyRegistrationSuccess (res.msg);
+      setPropertyRegistrationSuccess(res.msg);
       // localStorage.setItem("authUser", JSON.stringify(res));
     } else {
       setPropertyRegistrationError(res.msg);
@@ -275,25 +281,28 @@ const RegisterProperty = () => {
             ) : null}
           </div>
           <div className="m-2 grid grid-rows-2 font gap-2 mb-">
-              <div className="">Facing</div>
-              <select
-                id="facing"
-                name="facing"
-                label="facing"
-                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                value={validation.values.facing}
-                onChange={validation.handleChange||""}
-                invalid={
-                  validation.touched.facing &&
-                  validation.errors.facing
-                    ? true
-                    : false
-                }
-              > {facing.map((option, i) => (
+            <div className="">Facing</div>
+            <select
+              id="facing"
+              name="facing"
+              label="facing"
+              className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              value={validation.values.facing}
+              onChange={validation.handleChange || ""}
+              invalid={
+                validation.touched.facing && validation.errors.facing
+                  ? true
+                  : false
+              }
+            >
+              {" "}
+              {facing.map((option, i) => (
                 <option value={option?.value} key={i}>
                   {option?.text}
-                </option>   ))}
-              </select></div>
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             <Input
               label="approachRoad"
@@ -472,61 +481,62 @@ const RegisterProperty = () => {
             ) : null}
           </div>
 
-        
+          <div className="m-2 grid grid-rows-2 font gap-2">
+            <div> Category</div>
+            <select
+              id="category"
+              name="category"
+              label="category"
+              className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              value={validation.values.category || ""}
+              onChange={validation.handleChange}
+              invalid={
+                validation.touched.category && validation.errors.category
+                  ? true
+                  : false
+              }
+            >
+              {" "}
+              <option value=""> Select Category</option>
+              {allcategory.map((option, id) => (
+                <option value={option?._id} key={id}>
+                  {option?.name}
+                </option>
+              ))}
+            </select>
+            {validation.touched.category && validation.errors.category ? (
+              <span type="invalid">{validation.errors.category}</span>
+            ) : null}
+          </div>
 
-            <div className="m-2 grid grid-rows-2 font gap-2">
-              <div> Category</div>
-              <select
-                id="category"
-                name="category"
-                label="category"
-                className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                value={validation.values.category || ""}
-                onChange={validation.handleChange}
-                invalid={
-                  validation.touched.category && validation.errors.category
-                    ? true
-                    : false
-                }
-              >  <option value="" > Select Category
-           
-            </option>
-                {allcategory.map((option, id) => (
-                  <option value={option?._id} key={id}>
-                    {option?.name}
-                  </option>
-                ))}
-            </select>   
-              {validation.touched.category && validation.errors.category ? (
-                <span type="invalid">{validation.errors.category}</span>
-              ) : null}
-            </div>
-            
-            <div className="m-2 grid grid-rows-2 font gap-2">
-              <div>Property Status</div>
-              <select
-                id="propertyStatus"
-                name="propertyStatus"
-                label="propertyStatus"
-                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                value={validation.values.propertyStatus}
-                onChange={validation.handleChange||""}
-                invalid={
-                  validation.touched.propertyStatus &&
-                  validation.errors.propertyStatus
-                    ? true
-                    : false
-                }
-              > {propertystatus.map((option, i) => (
+          <div className="m-2 grid grid-rows-2 font gap-2">
+            <div>Property Status</div>
+            <select
+              id="propertyStatus"
+              name="propertyStatus"
+              label="propertyStatus"
+              className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              value={validation.values.propertyStatus}
+              onChange={validation.handleChange || ""}
+              invalid={
+                validation.touched.propertyStatus &&
+                validation.errors.propertyStatus
+                  ? true
+                  : false
+              }
+            >
+              {" "}
+              {propertystatus.map((option, i) => (
                 <option value={option?.value} key={i}>
                   {option?.text}
                 </option>
-    ))}
-              </select>
-              {validation.touched.propertyStatus && validation.errors.propertyStatus ? (
-                <span type="invalid">{validation.errors.propertyStatus}</span>
-              ) : null}
-            </div>
+              ))}
+            </select>
+            {validation.touched.propertyStatus &&
+            validation.errors.propertyStatus ? (
+              <span type="invalid">{validation.errors.propertyStatus}</span>
+            ) : null}
+          </div>
           <div className="font">
             <FileInput
               label="Property Images"
@@ -534,7 +544,8 @@ const RegisterProperty = () => {
               accept=".png, .jpg, .jpeg,.pdf,.webp"
               onChange={handleImageUpload}
             />
-          </div></div>
+          </div>
+        </div>
         <div className="flex justify-around   mr-6 pt-10  ">
           <div>
             {" "}

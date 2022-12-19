@@ -1,23 +1,36 @@
-import React from "react";
-import { Input } from "@material-tailwind/react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  addProperty,
   getPropertyDetailsById,
+  PropertyRegistration,
+  removeProperty,
   updateProperty,
 } from "../../helper/backend_helpers";
 import { useQuery } from "../../helper/hook/useQuery";
-import { Breadcrumbs } from "@material-tailwind/react";
+
+import { useModal } from "../../helper/hook/useModal";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-import { NavLink } from "react-router-dom";
+import RemoveModel from "../../models/RemoveModel";
+import { Breadcrumbs, Input } from "@material-tailwind/react";
+import AddModel from "../../models/AddModel";
+import FileInput from "../../reusable/FileInput";
+import { Link, NavLink } from "react-router-dom";
+import { SERVER_URL } from "../../helper/configuration";
+import axios from "axios";
+
 const YourEdit = () => {
   const query = useQuery();
-
+  const [modalOpen, setModalOpen, toggleModal] = useModal(false);
+  const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [isEdit, setIsEdit] = useState(false);
-
   const [currentImage, setCurrentImage] = useState(0);
-
+  const [loading, setLoading] = useState(false);
+  const [PropertyUpdatedSuccess, setPropertyUpdatedSuccess] = useState("");
+  const [propertyregistrationError, setpropertyregistrationError] =
+    useState("");
+  const [removeImages, setRemoveImages] = useState([]);
+  const [addImages, setAddImages] = useState([]);
   const [getProperty, setGetProperty] = useState({
     _id: "",
     category: "",
@@ -40,6 +53,8 @@ const YourEdit = () => {
     status: "",
   });
   const [rerender, setRerender] = useState(true);
+  console.log("getProperty", getProperty?.propertyPic);
+
   const getPropertyId = async () => {
     const res = await getPropertyDetailsById({
       propertyId: query.get("id"),
@@ -69,26 +84,46 @@ const YourEdit = () => {
       });
     }
   };
-  useEffect(() => {
-    if (rerender) {
-      getPropertyId();
-      setRerender(false);
-    }
-  }, [rerender]);
 
   const handleUpdatingProperty = async (e) => {
     e.preventDefault();
-    toastr.success(`Property has been updated successfully`, "Success");
-
     const property = { ...getProperty, _id: query.get("id") };
 
-    const res = await updateProperty(property);
+    let picIds = [];
+    let payloadData = property;
+    if (addImages?.length > 0) {
+      let formData = new FormData();
+      for (var i = 0; i < addImages?.length; i++) {
+        formData.append("file", addImages[i]);
+      }
+      const fileUploadRes = await axios.post(`${SERVER_URL}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const { data } = fileUploadRes;
+      if (data?.success) {
+        data.files?.map((file) =>
+          picIds.push({
+            type: file?.contentType,
+            size: file?.size,
+            id: file?.id,
+            name: file?.originalname,
+            dbName: file?.filename,
+            aflag: true,
+          })
+        );
+      }
+    }
+    payloadData.propertyPic = [...property.propertyPic, ...picIds];
+    console.log("payloadData : ", payloadData);
+
+    const res = await updateProperty(payloadData);
     if (res.success) {
       setGetProperty(res.propertyPic);
       console.log(res.propertyPic);
-    } else {
+      toastr.success(`Property has been updated successfully`, "Success");
     }
-    window.location.reload();
   };
   useEffect(() => {
     if (rerender) {
@@ -96,35 +131,48 @@ const YourEdit = () => {
       setRerender(false);
     }
   }, [rerender]);
-  const convertBase64 = async (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
+
+  const handleAddProperty = async () => {
+    const payload = {
+      PropertyID: query.get("id"),
+    };
+    const res = await addProperty(payload);
+
+    if (res.success) {
+      console.log("res", res);
+      toastr.success(`Property has been activated successfully`, "Success");
+      setRerender(true);
+    } else {
+      console.log("Error : ", res?.msg || "error");
+    }
+    setModalOpen1(false);
+  };
+
+  const handleRemovingProperty = async () => {
+    const payload = {
+      PropertyID: query.get("id"),
+    };
+    const res = await removeProperty(payload);
+    if (res.success) {
+      console.log(res);
+
+      toastr.success(`Property has been Deactivated successfully`, "Success");
+      setRerender(true);
+    } else {
+      console.log("Error : ", res?.msg || "error");
+    }
+    setModalOpen(false);
   };
 
   const propertyImageUpload = async (e) => {
     const target = e.target;
     const allImages = await Promise?.all(
       [...target.files].map(async (files) => {
-        return await convertBase64(files);
+        return await files;
       })
     );
-
-    setGetProperty({
-      ...getProperty,
-      propertyPic: [...getProperty?.propertyPic, ...allImages],
-    });
+    setAddImages([...addImages, ...allImages]);
   };
-
-  console.log("getProperty", getProperty);
-
   const propertyImageRemove = (image) => {
     const filteredImages = getProperty?.propertyPic.filter(
       (img) => img !== image
@@ -134,11 +182,12 @@ const YourEdit = () => {
   return (
     <div>
       <Breadcrumbs>
-        <NavLink to="/yourProperties"    className={({ isActive }) =>
-                    isActive
-                      ? "opacity-75"
-                      : "text-black underline"
-                  }>
+        <NavLink
+          to="/yourProperties"
+          className={({ isActive }) =>
+            isActive ? "opacity-75" : "text-black underline"
+          }
+        >
           Properties
         </NavLink>
       </Breadcrumbs>
@@ -150,7 +199,8 @@ const YourEdit = () => {
               type="text"
               name="Seller"
               placeholder="Enter the Seller "
-              value={getProperty?.Seller}sdsd
+              value={getProperty?.Seller}
+              sdsd
               disabled={!isEdit}
               onChange={(e) =>
                 setGetProperty({ ...getProperty, Seller: e.target.value })
@@ -332,14 +382,16 @@ const YourEdit = () => {
             />
           </div>
           <div className="grid md:grid-cols-1 md:h-52 px-3">
-            <img
-              className=" aspect-[2] md:h-96 w-full"
-              src={
-                getProperty?.propertyPic
-                  ? getProperty?.propertyPic[currentImage]
-                  : null
-              }
-            />
+      
+              <img
+                className=" aspect-[2] md:h-96 w-full"
+                src={`${SERVER_URL}/file/${
+                  getProperty?.propertyPic
+                    ? getProperty?.propertyPic[currentImage]?.id
+                    : null
+                }`}
+              />
+   
             <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
               {getProperty?.propertyPic?.length > 0 &&
                 getProperty?.propertyPic?.map((image, j) => (
@@ -364,14 +416,25 @@ const YourEdit = () => {
                       )}
 
                       <img
-                        src={image}
+                        src={`${SERVER_URL}/file/${image.id}`}
                         className="aspect-[2] h-28"
                         onClick={() => setCurrentImage(j)}
                       />
                     </div>
                   </button>
                 ))}
-            </div>
+             
+            </div> <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
+                {addImages?.length > 0 &&
+                  addImages?.map((joke, i) => (
+                    <>
+                      <img
+                        src={URL.createObjectURL(joke)}
+                        className="aspect-[2] h-28"
+                      />
+                    </>
+                  ))}
+              </div>
           </div>{" "}
           <div class="flex  md:pl-5 justify-center pb-5">
             {!isEdit ? (

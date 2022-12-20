@@ -107,7 +107,7 @@ const Property = () => {
   //   }, [searchText]);
 
   return (
-    <div>
+    <div className="">
       {modalOpen && (
         <BuyerModal
           show={modalOpen}
@@ -116,7 +116,7 @@ const Property = () => {
         />
       )}
 
-      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
+      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1 ">
         {/* <input
           type="text"
           placeholder="Search Your Dream House"

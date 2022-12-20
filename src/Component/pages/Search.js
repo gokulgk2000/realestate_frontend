@@ -68,11 +68,11 @@ const Search = () => {
   };
 
   return (
-    <div style={{ backgroundImage: `url(${ok})` }} className=" ">
-      <div className="md:px-20 md:pt-44  md:pb-44 ">
-        <div className=" md:shadow-md hover:shadow-2xl  md:h-48 md:border-2 md:border-b-gray-100  bg-transparent opacity-80 hover:opacity-100">
+    <div style={{ backgroundImage: `url(${ok})` }} className="w-screen ">
+      <div className="md:px-20 md:pt-44  md:pb-32 ">
+        <div className="animate-bounce  md:shadow-md hover:shadow-2xl hover:scale-95 md:h-48 md:border-2 md:border-b-gray-100  bg-transparent opacity-80 hover:opacity-100">
           ​
-          <div className="flex justify-start text-3xl pl-5 -mt-3 font ddd">
+          <div className="flex justify-start md:text-3xl   pl-5 -mt-3 font ddd ">
             Find Your Desired Home
           </div>
           <div className=" pl-9 items-center  lg:block pt-4  md:flex font">
@@ -184,13 +184,13 @@ const Search = () => {
                     onChange={(e) => setSearchText(e.target.value)}
                   />
                 </div>{" "}
-              {searchText? ( <svg
+              {searchText? ( <button onClick={navigateToProperty}><svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-14 w-12 px-2 md:hidden bg-white"
-                  viewBox="0 0 507 511.92"onClick={navigateToProperty}
+                  viewBox="0 0 507 511.92"
                 >
                   <path d="M223.36 0c61.68 0 117.53 25 157.95 65.43 40.42 40.42 65.42 96.26 65.42 157.94 0 45.12-13.39 87.12-36.4 122.25L507 450.99l-66.66 60.93-93.23-102.59c-35.42 23.63-77.98 37.4-123.75 37.4-61.67 0-117.52-25-157.94-65.42C25 340.88 0 285.04 0 223.36c0-61.67 25-117.52 65.42-157.94S161.69 0 223.36 0zM152.6 201.55l47.29 45.86 90.66-102.01c5.05-5.11 8.22-9.22 14.43-2.81l15.15 15.63c6.62 6.55 6.29 10.4.04 16.5L211.42 292.63c-13.18 12.91-10.89 13.7-24.25.45l-63.51-63.24c-2.79-3.01-2.49-6.06.56-9.07l18.39-19.26c3.55-3.74 6.38-3.41 9.99.04zm211.09-118.5c-35.91-35.91-85.53-58.13-140.33-58.13-54.8 0-104.41 22.22-140.32 58.13-35.91 35.91-58.12 85.51-58.12 140.31s22.21 104.42 58.12 140.32c35.91 35.92 85.52 58.12 140.32 58.12s104.42-22.2 140.33-58.12c35.91-35.9 58.11-85.51 58.11-140.32 0-54.8-22.2-104.4-58.11-140.31z" />
-                </svg>):(<svg
+                </svg></button>):(<svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-14 w-12 px-2 md:hidden bg-white"
                   viewBox="0 0 507 511.92"
@@ -225,10 +225,12 @@ const Search = () => {
             </form>
           </div>
         </div>
-        <p className="font text-3xl d-text hidden md:block  pt-20">
-          “You will never be completely at home again, because part of your
+        <p className="font text-3xl d-text hidden md:block text-center pt-20 ">
+        “The best investment on Earth is earth.”
+          {/* “You will never be completely at home again, because part of your
           heart will always be elsewhere. That is the price you pay for the
-          richness of loving and knowing people in more than one place.”
+          richness of loving and knowing people in more than one place.” */}
+          {/* “Home is a place you grow up wanting to leave, and grow old wanting to get back to.” */}
         </p>
       </div>
     </div>

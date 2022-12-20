@@ -111,7 +111,7 @@ const Property = () => {
                 </div>
                 <div className="col-span-2 pl-2 leading-10">
                 <Link   to={`/Detailspage?uid=${pro?._id}`} className="flex justify-start text-xl text-amber-700  text-shadow drop-shadow-2xl pt-4 pl-1">
-                   {pro?.Title}
+                   {pro?.title}
                    </Link>
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}

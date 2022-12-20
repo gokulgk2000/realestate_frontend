@@ -8,7 +8,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [registrationError, setRegistrationError] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState("");
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   //form validation
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
@@ -30,7 +30,7 @@ const Register = () => {
         .matches(/^(?=.{5,})/, "Must Contain 5 Characters"),
     }),
     onSubmit: async (values, onSubmitProps) => {
-      // setLoading(true)
+      setLoading(true)
       //   dispatch(registerUser({ ...values, aflag: true }))
       const res = await userRegisteration({ ...values, aflag: true });
       if (res.success) {
@@ -45,7 +45,7 @@ const Register = () => {
         setRegistrationError(res.msg);
         console.log("Response:", res);
       }
-      // setLoading(false)
+      setLoading(false)
     },
   });
   return (
@@ -72,7 +72,7 @@ const Register = () => {
               )}
               <div className="flex flex-row items-center justify-center lg:justify-center">
                 <p className=" text-3xl text-teal-500 font-bold mb-0 mr-8">
-                  Sign Up
+                  Register
                 </p>
                 <button
                   type="button"
@@ -184,12 +184,23 @@ const Register = () => {
               </div>
 
               <div className="text-center lg:text-left">
+                {loading ?(
                 <button
                   type="submit"
                   className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
-                  Sign Up
+                  Register
                 </button>
+                ):(
+
+                <button 
+                type="button"
+                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
+                   Registering...
+          
+                   </button>
+                )}
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0 ">
                   You have an account?
                   <a

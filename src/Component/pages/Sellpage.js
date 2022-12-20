@@ -32,6 +32,7 @@ const RegisterProperty = () => {
   ];
   const [allcategory, setAllCategory] = useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
+  const [loading, setLoading] = useState(false)
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
@@ -103,6 +104,8 @@ const RegisterProperty = () => {
         status: "pending",
       });
       onSubmitProps.resetForm();
+      setLoading(true)
+
     },
   });
 
@@ -157,6 +160,8 @@ const RegisterProperty = () => {
     } else {
       setPropertyRegistrationError(res.msg);
     }
+    setLoading(false)
+
   };
 
   return (
@@ -568,12 +573,20 @@ const RegisterProperty = () => {
                 </alert>
               )}
             </div>
+          <div>{loading?(
+          <button
+            className="w-44 my-3 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
+            >
+              Your Property Registering...
+          </button>
+          ):(
             <button
               type="submit"
               className="w-44 my-3 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
             >
               Submit
             </button>
+            )}</div>
           </div>
         </div>
       </form>

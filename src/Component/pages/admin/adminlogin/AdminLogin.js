@@ -114,9 +114,23 @@ const AdminLogin = () => {
             </div>
            
             <div className="mt-6">
-                <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform grad-btn">
-                    Login
+            {loading ?(
+                 <button 
+                type="button"
+                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
+                  Login...          
+                   </button>
+                ):(
+
+                <button
+                  type="submit"
+                  className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
+                  Login
                 </button>
+               
+                )}
             </div>
         </form>
     </div>

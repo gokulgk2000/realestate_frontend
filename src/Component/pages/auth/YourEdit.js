@@ -34,6 +34,7 @@ const YourEdit = () => {
   const [getProperty, setGetProperty] = useState({
     _id: "",
     category: "",
+    title: "",
     Seller: "",
     location: "",
     layoutName: "",
@@ -63,6 +64,7 @@ const YourEdit = () => {
       setGetProperty({
         id: Property?._id,
         category: Property?.category,
+        title: Property?.title,
         Seller: Property?.Seller,
         location: Property?.location,
         layoutName: Property?.layoutName,
@@ -191,13 +193,13 @@ const YourEdit = () => {
             <p className=" text-amber-700"> Title :</p>
             <Input
               type="text"
-              name="Title"
+              name="title"
               placeholder="Enter the Title "
-              value={getProperty?.Title}
+              value={getProperty?.title}
               sdsd
               disabled={!isEdit}
               onChange={(e) =>
-                setGetProperty({ ...getProperty, Title: e.target.value })
+                setGetProperty({ ...getProperty, title: e.target.value })
               }
             />
             <p className=" text-amber-700"> Seller :</p>

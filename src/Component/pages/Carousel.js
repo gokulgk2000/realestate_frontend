@@ -7,6 +7,7 @@ import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useModal } from "../helper/hook/useModal";
 import RequestedModel from "../models/RequestedModel";
 import Search from "./Search";
+import ok from "../assets/images/ok.jpg"
 
 export const Carousel = () => {
   const [isBiggerthanTab] = useMediaQuery(tab);
@@ -47,23 +48,13 @@ export const Carousel = () => {
         />
       )}
      
-   <div className="flex  justify-around ">
+     <div className="flex  justify-end absolute">
     <div className="absolute">
-    {currentUser && (
-        <div className="2xl:absolute hover:free  pt-3 leading-relaxed  ">
-          <button
-            className="md:p-2 font text-gray-300 grad-btn "
-            onClick={() => setModalOpen(true)}
-          >
-            New Request
-          </button>
-          <p className="text-xs text-gray-300">Click to Sent a New Request</p>
-        </div>
-      )}
-    <Search/>
-    {isBiggerthanTab && 
   
-  <div className="md:flex justify-between btn-width mt-72 ">
+    {/* <Search/> */}
+    {/* {isBiggerthanTab && 
+  
+  <div className="md:flex justify-between btn-width mt-72 px-5">
   <div className="  ">
     <button
          className=" "
@@ -111,11 +102,12 @@ export const Carousel = () => {
          </svg>
        </button>
       
-       </div> </div>}</div></div>
+       </div> </div>} */}
+       </div></div>
    
-      {isBiggerthanTab ? (
+      {/* {isBiggerthanTab ? (
         <img
-          className="aspect-[2] w-full" 
+          className="aspect-[2] w-full bg-transparent" 
           // src={`https://${images[selectedImageIndex].image.defaultHost}/i/${images[selectedImageIndex].image.endpoint}/${images[selectedImageIndex].image.name}`}
           src={image[selectImage]}
         />
@@ -125,11 +117,11 @@ export const Carousel = () => {
           src={image[selectImage]}
           // src={`https://${images[selectedImageIndex].mimage.defaultHost}/i/${images[selectedImageIndex].mimage.endpoint}/${images[selectedImageIndex].mimage.name}`}
         />
-      )}
+      )} */}
 
 
 
-      <div className="text-center">
+      {/* <div className="text-center">
         {image.map((i, j) => (
           <span
             key={j}
@@ -141,7 +133,23 @@ export const Carousel = () => {
             ●
           </span>
         ))}
-      </div>
+      </div> */}<div className="2xl:flex justify-end">
+
+       
+
+          {currentUser && (
+        <div className="2xl:absolute hover:free  pt-3 leading-relaxed  pl-6  pr-7" >
+          <button
+            className="md:p-2 font text-gray-300 grad-btn "
+            onClick={() => setModalOpen(true)}
+          >
+            New Request
+          </button>
+          <p className="text-xs text-gray-300">Click to Sent a New Request</p>
+        </div>
+      )}
+      
+      <Search></Search></div>
     </div>
   );
 };

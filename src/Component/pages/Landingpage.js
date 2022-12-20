@@ -72,7 +72,7 @@ const Landingpage = () => {
   return (
     <div>
 
-      <div className="  items-center  md:hidden  ">
+      {/* <div className="  items-center  md:hidden  ">
       <form className="flex justify-center  h-10 w-full ">
         <select
           id="category"
@@ -133,7 +133,7 @@ const Landingpage = () => {
           </button>)}   
         </div>
       </form>
-      </div>
+      </div> */}
 
       <div className="font ">
         <Carousel />
@@ -147,9 +147,9 @@ const Landingpage = () => {
         </div>
         ):(
         <>
-        <div className=" drop-shadow-xl pb-4">
+       
           <Property />
-        </div></>
+      </>
         )}
         {/* <Category /> */}
       </div>

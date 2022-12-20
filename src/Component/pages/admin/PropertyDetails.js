@@ -33,6 +33,7 @@ const PropertyDetails = () => {
   const [getProperty, setGetProperty] = useState({
     _id: "",
     category: "",
+    title:"",
     Seller: "",
     location: "",
     layoutName: "",
@@ -62,6 +63,7 @@ const PropertyDetails = () => {
       setGetProperty({
         id: Property?._id,
         category: Property?.category,
+        title: Property?.title,
         Seller: Property?.Seller,
         location: Property?.location,
         layoutName: Property?.layoutName,
@@ -82,7 +84,7 @@ const PropertyDetails = () => {
       });
     }
   };
-
+console.log("first",getProperty)
   const handleUpdatingProperty = async (e) => {
     e.preventDefault();
     const property = { ...getProperty, _id: query.get("id") };
@@ -222,12 +224,12 @@ const PropertyDetails = () => {
               <p className=" text-amber-700"> Title :</p>
               <Input
                 type="text"
-                name="Title"
+                name="title"
                 placeholder="Enter the Title "
-                value={getProperty?.Title}
+                value={getProperty?.title}
                 disabled={!isEdit}
                 onChange={(e) =>
-                  setGetProperty({ ...getProperty, Title: e.target.value })
+                  setGetProperty({ ...getProperty, title: e.target.value })
                 }
               />
               <p className=" text-amber-700"> Seller :</p>

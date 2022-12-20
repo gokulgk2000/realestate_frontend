@@ -93,25 +93,26 @@ const Property = () => {
           currentProperty={propertyId?._id}
         />
       )}
-      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
+      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1 ">
       </div>
-      <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase ">
+      <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase  ">
         {map(property, (pro, i) => (
           <div user={pro} key={"pro" + i}>
-            <div className=" grad-card shadow-sm hover:bg-amber-100 shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md scale-90 hover:scale-95 ease-in duration-300">
+            <div className="bg-transparent border-2 hover:border-0 shadow-sm pl-2 -py-2 hover:bg-amber-50 shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md scale-90 hover:scale-95 ease-in duration-300">
               <div className="grid grid-cols-3   my-3 ">
                 <div className="flex  justify-start items-center">
                   <Link to={`/Detailspage?uid=${pro?._id}`}>
                     <img
-                      className=" object-cover md:h-58 md:w-72 rounded-md aspect-[1]"
+                      className=" object-cover md:h-52 md:w-72 rounded-md aspect-[1] "
                       alt="coimbatore realestate"
                       src={`${SERVER_URL}/file/${pro?.propertyPic[0]?.id}`}
                     />
                   </Link>
                 </div>
                 <div className="col-span-2 pl-2 leading-10">
-                <div className="flex justify-start text-xl text-amber-700  text-shadow drop-shadow-2xl pt-4 pl-1">
-                   {pro?.Title}</div>
+                <Link   to={`/Detailspage?uid=${pro?._id}`} className="flex justify-start text-xl text-amber-700  text-shadow drop-shadow-2xl pt-4 pl-1">
+                   {pro?.Title}
+                   </Link>
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}
                     className="sm:flex justify-between  md:text-xl  py-5 "
@@ -145,7 +146,7 @@ const Property = () => {
                   </Link>
                   <Link
                     to={`/Detailspage?uid=${pro?._id}`}
-                    className="md:flex  mr-3 justify-between shadow-sm  hidden  shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md"
+                    className="md:flex border-x-2 border-t-3 mr-3 justify-between shadow-sm  hidden  shadow-blue-200 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md"
                   >
                     <p>
                       <div className="underline  text-sm ">plot Area</div>
@@ -160,7 +161,7 @@ const Property = () => {
                       <div className="font-semibold">{pro?.facing}</div>
                     </p>
                   </Link>
-                  <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 ">
+                  <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 pt-3">
                     <Link
                       to={`/Detailspage?uid=${pro?._id}`}
                       className="col-span-6"

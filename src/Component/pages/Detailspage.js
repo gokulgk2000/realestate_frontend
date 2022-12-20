@@ -64,7 +64,7 @@ const Detailspage = (props) => {
   return (
     <>
       {loading ? (
-        <>Loadingggggg....</>
+        <div className="flex justify-center py-5 text-xl font"> Loading...</div>
       ) : (
         <div>
           {modalOpen && (
@@ -76,6 +76,12 @@ const Detailspage = (props) => {
           )}
           <div className=" lg:pt-28 lg:pr-10 lg:pl-10 pb-5 ">
             <div className="py-4 px-8 bg-white shadow-lg ">
+              <div className="text-2xl semibold font text-amber-700 py-2 flex">
+                {property?.Title}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z" clip-rule="evenodd" />
+</svg>
+</div>
               <div className=" md:grid   grid-cols-3 ">
                 {" "}
                 <div className="">
@@ -173,7 +179,6 @@ const Detailspage = (props) => {
                       </div>{" "}
                     </div>
                   )}
-
                   <div>
                     <img
                       className=" aspect-[3/2] md:pr-5 md:h-96 "

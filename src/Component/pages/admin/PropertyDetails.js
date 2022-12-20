@@ -219,6 +219,17 @@ const PropertyDetails = () => {
           </Breadcrumbs>
           <div class="grid  grid-cols-2 min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="flex ml-5 flex-col items-left pb-10">
+              <p className=" text-amber-700"> Title :</p>
+              <Input
+                type="text"
+                name="Title"
+                placeholder="Enter the Title "
+                value={getProperty?.Title}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, Title: e.target.value })
+                }
+              />
               <p className=" text-amber-700"> Seller :</p>
               <Input
                 type="text"

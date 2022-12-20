@@ -18,6 +18,7 @@ import FileInput from "../../reusable/FileInput";
 import { Link, NavLink } from "react-router-dom";
 import { SERVER_URL } from "../../helper/configuration";
 import axios from "axios";
+import UpdateModel from "../../models/UpdateModel";
 
 const YourEdit = () => {
   const query = useQuery();
@@ -120,6 +121,8 @@ const YourEdit = () => {
       setGetProperty(res.propertyPic);
       setPropertyUpdatedSuccess(res.msg)
       toastr.success(`Property has been updated successfully`, "Success");
+    setModalOpen1(false);
+
     }else{
       setpropertyUpdatedError(res.msg)
     }
@@ -146,20 +149,6 @@ const YourEdit = () => {
     setModalOpen1(false);
   };
 
-  const handleRemovingProperty = async () => {
-    const payload = {
-      PropertyID: query.get("id"),
-    };
-    const res = await removeProperty(payload);
-    if (res.success) {
-      toastr.success(`Property has been Deactivated successfully`, "Success");
-      setRerender(true);
-    } else {
-      console.log("Error : ", res?.msg || "error");
-    }
-    setModalOpen(false);
-  };
-
   const propertyImageUpload = async (e) => {
     const target = e.target;
     const allImages = await Promise?.all(
@@ -177,6 +166,15 @@ const YourEdit = () => {
   };
   return (
     <div>
+      {modalOpen1 && (
+        <UpdateModel
+          show={modalOpen1}
+          onUpdateClick={handleUpdatingProperty}
+          confirmText="Yes,Active"
+          cancelText="Cancel"
+          onCloseClick={() => setModalOpen1(false)}
+        />
+      )}
       <Breadcrumbs>
         <NavLink
           to="/yourProperties"
@@ -190,6 +188,18 @@ const YourEdit = () => {
       <div className="">
         <div class="md:grid  md:grid-cols-2 gap-x-3 min-w-full max-w-sm bg-white border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
           <div class="md:flex pl-5  md:flex-col items-left md:pb-10 py-2">
+            <p className=" text-amber-700"> Title :</p>
+            <Input
+              type="text"
+              name="Title"
+              placeholder="Enter the Title "
+              value={getProperty?.Title}
+              sdsd
+              disabled={!isEdit}
+              onChange={(e) =>
+                setGetProperty({ ...getProperty, Title: e.target.value })
+              }
+            />
             <p className=" text-amber-700"> Seller :</p>
             <Input
               type="text"
@@ -479,7 +489,7 @@ const YourEdit = () => {
               <button
                 type="button"
                 class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={(e) => handleUpdatingProperty(e)}
+                onClick={() => toggleModal1()}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -7,6 +7,8 @@ import {
   getPropertiescategoryId,
 } from "../helper/backend_helpers";
 import ok from "../assets/images/wc.webp";
+import { useModal } from "../helper/hook/useModal";
+import RequestedModel from "../models/RequestedModel";
 const Search = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState();
@@ -16,7 +18,8 @@ const Search = () => {
   const [betRoomCount, setBetRoomCount] = useState("0");
   const [allcategory, setAllCategory] = useState([]);
   const [property, setProperty] = useState([]);
-
+  const [modalOpen, setModalOpen] = useModal(false);
+  const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const categories = async () => {
     const res = await getPropertiescategoryId({
       id: category,
@@ -68,16 +71,25 @@ const Search = () => {
   };
 
   return (
-    <div style={{ backgroundImage: `url(${ok})` }} className="w-screen ">
-      <div className="md:px-20 md:pt-44  md:pb-32 ">
-        <div className="animate-bounce  md:shadow-md hover:shadow-2xl hover:scale-95 md:h-48 md:border-2 md:border-b-gray-100  bg-transparent opacity-80 hover:opacity-100">
+    <div className="flex justify-between">
+
+    {modalOpen && (
+      <RequestedModel
+        show={modalOpen}
+        onCloseClick={() => setModalOpen(false)}
+        // currentUser={requestData?._id}
+      />
+    )}
+     
+      <div className=" md:pt-5 ">
+        <div className="animate-bounce  md:shadow-md hover:shadow-3xl hover:scale-95 md:h-48 delay-500 md:border-b-gray-100  bg-transparent opacity-80 hover:opacity-100">
           ​
-          <div className="flex justify-start md:text-3xl   pl-5 -mt-3 font ddd ">
+          <div className="flex justify-center md:text-3xl   pl-5 -mt-3 font ddd ">
             Find Your Desired Home
           </div>
-          <div className=" pl-9 items-center  lg:block pt-4  md:flex font">
+          <div className=" px-7 items-center  lg:block pt-4  md:flex font">
             <form className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 gap-x-1 opacity-90 hover:opacity-100">
-              <div className="flex">
+              <div className="flex px-4 md:px-0 border-2 border-slate-300 hover:border-black">
                 {" "}
                 <svg
                   className="h-14 w-14 pt-3  bg-white"
@@ -89,7 +101,7 @@ const Search = () => {
                   id="category"
                   name="category"
                   label="category"
-                  className="px-4 border-l-0   text-black capitalize  md:-ml-1 w-48"
+                  className="px-4 border-l-0 border-white  text-black capitalize  md:-ml-1 w-60 "
                   onChange={handleCategoryChange}
                 >
                   <option value={""}>Property Type</option>
@@ -100,7 +112,7 @@ const Search = () => {
                   ))}{" "}
                 </select>
               </div>
-              <div className="flex ">
+              <div className="flex px-4 md:px-0 border-2 hover:border-black border-slate-300">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +133,7 @@ const Search = () => {
                   id="bedRoom"
                   name="bedRoom"
                   label="BHK"
-                  className="  px-4 border-l-0  text-black capitalize w-48 md:-ml-1"
+                  className="  px-4 border-l-0  text-black capitalize w-60 md:-ml-1"
                   onChange={handleBedsChange}
                 >
                   <option value="0">BHK</option>
@@ -138,30 +150,8 @@ const Search = () => {
                 </select>
               </div>
 
-              {/* <select className="px-4 border  grad-btn text-white  " >
-        <option>
-          {" "}
-          <button class="  py-1 px-4 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  disabled:opacity-50 inline-flex items-center">
-            {" "}
-            BHK
-           
-          </button>{" "}
-        </option>
-        <option value="" className=" border-0 text-black hover:text-black ">
-          1BHK
-        </option>
-
-        <option value="" className=" border-0 text-black hover:text-black">
-          2BHK
-        </option>
-
-        <option value="" className=" border-0 text-black hover:text-black">
-          3BHK
-        </option>
-        <option value="" className=" border-0 text-black hover:text-black">
-          +4BHK
-        </option></select> */}
-              <div className="flex">
+             
+              <div className="flex px-4 md:px-0 border-2 hover:border-black border-slate-300">
                 {" "}
                 <svg
                   className="h-14 w-14 pt-3  bg-white"
@@ -172,7 +162,7 @@ const Search = () => {
                     d="M11.1,56.77A9,9,0,0,1,5,57.06,7.3,7.3,0,0,1,.05,50.89a9.59,9.59,0,0,1,2.31-7.1h0a2.06,2.06,0,0,1,.33-.33L57.68.53a2,2,0,0,1,2.6-.1L115.4,43.27h0a1.31,1.31,0,0,1,.24.23,9.06,9.06,0,0,1,2.58,8.36,7.78,7.78,0,0,1-1.76,3.35,7.65,7.65,0,0,1-3.12,2.12,8.44,8.44,0,0,1-6.54-.43q0,22.79,0,45.56H85.64c.07-.34.13-.69.19-1a28.14,28.14,0,0,0,.32-2.91H101.4v-44c0-1-37.81-30.86-42-34.11-4.43,3.37-42.93,33-42.93,34.27V98.51h14.4a28.54,28.54,0,0,0,.33,2.88l.06.39c0,.23.08.45.13.68H11.09q0-22.83,0-45.69Zm49.48-16V53.62H72.13v0A13,13,0,0,0,60.58,40.75Zm0,15.59v9.23H72.13V56.34Zm-2.72,9.22V56.34H46.31v9.23H57.86Zm0-11.94V40.75A13,13,0,0,0,46.31,53.59v0ZM59.22,38A15.64,15.64,0,0,1,74.84,53.58v14.7H43.59V53.58A15.65,15.65,0,0,1,59.22,38Zm-.31,38.9A20,20,0,0,1,78.56,97.3a20.38,20.38,0,0,1-.94,5.71,20.06,20.06,0,0,1-2.13,4.57l7.6,8.61a1,1,0,0,1-.08,1.36l-5.81,5.09a1,1,0,0,1-1.35-.09l-7.26-8.3a20.28,20.28,0,0,1-4.64,2,20,20,0,0,1-19.88-5.4l0,0a20,20,0,0,1,14.89-33.9Zm11.14,9a16.19,16.19,0,0,0-5.13-3.58l0,0a16,16,0,0,0-21,8.28l0,0a16.08,16.08,0,0,0-.22,12.19A16.17,16.17,0,0,0,47,108a16,16,0,0,0,5.13,3.57,15.79,15.79,0,0,0,6.09,1.33,16,16,0,0,0,11.41-4.46,16.23,16.23,0,0,0,3.57-5.12,16.09,16.09,0,0,0,.24-12.24,16.06,16.06,0,0,0-3.37-5.26ZM90.36,3.42l16.55.68V26.45L90.36,15.53V3.42Z"
                   />
                 </svg>
-                <div className=" p md:-ml-1">
+                <div className=" p md:-ml-1 ">
                   <input
                     type="text"
                     id="message"
@@ -180,11 +170,11 @@ const Search = () => {
                     required
                     name="search"
                     placeholder="Search   Location"
-                    className=" px-3  py-1 h-14 bg-white "
+                    className=" px-3  py-1 h-14 bg-white md:w-72  hover:border-black border-slate-300 border-l-0"
                     onChange={(e) => setSearchText(e.target.value)}
-                  />
+                  />  
                 </div>{" "}
-              {searchText? ( <button onClick={navigateToProperty}><svg
+              {searchText? ( <button onClick={navigateToProperty} className="md:hidden "><svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-14 w-12 px-2 md:hidden bg-white"
                   viewBox="0 0 507 511.92"
@@ -201,22 +191,22 @@ const Search = () => {
 
               {searchText ? (
                 <button
-                  className=" pb-1 border-2  bg-white hover:bg-amber-300 rounded-br-full rounded-tr-full"
+                  className=" pb-1 border-2  bg-white hover:bg-amber-300 md:w-64  hover:border-black border-slate-300 "
                   onClick={navigateToProperty}
                 >
                   {" "}
                   <button
-                    className="px-3  pt-1  hidden md:block text-black rounded-full hover:text-black hover:bg-amber-300"
+                    className="px-3  pt-1  hidden md:block text-black text-center  hover:text-black hover:bg-amber-300"
                     onClick={navigateToProperty}
                   >
                     Search Properties
                   </button>
                 </button>
               ) : (
-                <div className="flex ">
+                <div className="flex hover:border-black border-slate-300">
                   {" "}
-                  <button className=" pb-1 border-2 bg-white hover:bg-amber-200 ">
-                    <button className="px-3 pt-1  text-black  hover:text-black hidden md:block">
+                  <button className=" pb-1 border-2 bg-white hover:bg-amber-200 md:w-64 ">
+                    <button className="px-3 pt-1 text-center text-black  hover:text-black hidden md:block">
                       Search Properties
                     </button>
                   </button>
@@ -225,14 +215,31 @@ const Search = () => {
             </form>
           </div>
         </div>
-        <p className="font text-3xl d-text hidden md:block text-center pt-20 ">
-        “The best investment on Earth is earth.”
-          {/* “You will never be completely at home again, because part of your
-          heart will always be elsewhere. That is the price you pay for the
-          richness of loving and knowing people in more than one place.” */}
-          {/* “Home is a place you grow up wanting to leave, and grow old wanting to get back to.” */}
-        </p>
+      
+        
       </div>
+      <div className="absolute justify-end pl-8  animate-pulse">
+    {currentUser && (
+    <div className=" hover:free pt-3 leading-relaxed hidden md:block "  onClick={() => setModalOpen(true)}>
+      <button
+        className=" "
+        onClick={() => setModalOpen(true)}
+      >
+<svg className="md:h-10 md:w-10 h-5 w-5" viewBox="0 0 122.88 106.91"><path d="M56,92.15a38.3,38.3,0,0,0,11.23,5.78c8.41,2.66,17.75,2.25,27.12-1.74a2.72,2.72,0,0,1,2-.08l12,4L107,90.36a2.78,2.78,0,0,1,1-2.53,28.41,28.41,0,0,0,6.31-6.8,17.53,17.53,0,0,0,2.73-12.47,27,27,0,0,0-6-12.5c-.6-.76-1.25-1.5-1.92-2.23h0a42.62,42.62,0,0,0,1.27-6.59,50,50,0,0,1,5,5.34,32.71,32.71,0,0,1,7.14,15.14A23,23,0,0,1,119.05,84a32.7,32.7,0,0,1-6.29,7.12l1.61,12.4a2.79,2.79,0,0,1-3.6,3.21l-15.24-5a43.85,43.85,0,0,1-30,1.53A45,45,0,0,1,47.47,92.16c.65,0,1.33.06,2.06.09,2.18.06,4.34,0,6.46-.1ZM72.11,35.22a6.39,6.39,0,1,1-6.38,6.39,6.39,6.39,0,0,1,6.38-6.39Zm-42.18,0a6.39,6.39,0,1,1-6.38,6.39,6.39,6.39,0,0,1,6.38-6.39Zm21.09,0a6.39,6.39,0,1,1-6.38,6.39A6.38,6.38,0,0,1,51,35.22ZM52.3,0h.05C66.29.46,78.79,5.42,87.74,13.09,96.89,20.93,102.37,31.6,102,43.26v0c-.36,11.66-6.48,22-16.1,29.3-9.41,7.14-22.22,11.36-36.16,11A62.05,62.05,0,0,1,38.5,82.2a58.64,58.64,0,0,1-9.43-2.87l-22.83,9,7.65-18.19a42.35,42.35,0,0,1-10-12.73A35.22,35.22,0,0,1,0,40.3C.37,28.63,6.49,18.28,16.11,11,25.53,3.83,38.33-.38,52.28,0Zm-.17,6.35h-.05C39.62,6,28.25,9.74,19.94,16,11.83,22.2,6.66,30.83,6.37,40.47A29.15,29.15,0,0,0,9.56,54.53,36.92,36.92,0,0,0,19.7,66.69l1.89,1.51-3.65,8.67,11.21-4.41,1.2.51a52.07,52.07,0,0,0,9.47,3A57,57,0,0,0,49.94,77.2c12.47.36,23.85-3.36,32.16-9.66,8.11-6.16,13.28-14.79,13.57-24.43v0C96,33.44,91.32,24.54,83.6,17.92c-7.91-6.78-19-11.16-31.45-11.54Z"/></svg>
+
+        New Request
+      </button>
+      <p className="text-xs   text-gray-300">Click to Sent</p>
+    </div>
+  )}
+  {/* <div className="font text-3xl d-text hidden md:block text-center pt-10 ">
+
+  
+
+  “The best investment on Earth is earth.”
+   
+  </div> */}
+  </div>
     </div>
   );
 };

@@ -2,7 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { getPaymentId } from "../../helper/backend_helpers";
 import { useQuery } from "../../helper/hook/useQuery";
-
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 const Thankyoupage = () => {
   const query = useQuery();
 
@@ -10,6 +11,8 @@ const Thankyoupage = () => {
     console.log("Getting payment");
     const getUserPaymentData = async () => {
       const res = await getPaymentId({ pi: query.get("payment_intent") });
+      toastr.success(`Your Property Details Display "Soon"`, "Success");
+
       // console.log("Got payment",res)
     };
     getUserPaymentData();

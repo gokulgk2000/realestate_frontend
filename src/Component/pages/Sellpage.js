@@ -7,8 +7,13 @@ import * as Yup from "yup";
 import { findCategory, PropertyRegistration } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
 import axios from "axios";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
+import { useNavigate } from "react-router-dom";
 
 const RegisterProperty = () => {
+  const navigate = useNavigate()
+
   const [propertyregistrationError, setPropertyRegistrationError] =
     useState("");
   const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
@@ -41,7 +46,7 @@ const RegisterProperty = () => {
     initialValues: {
       regUser: currentUser?.userID,
       Seller: "",
-      Title: "",
+      title: "",
       location: "",
       layoutName: "",
       landArea: "",
@@ -60,30 +65,30 @@ const RegisterProperty = () => {
       streetName: "",
       category: "",
     },
-    // validationSchema: Yup.object({
+    validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Your Seller"),
-      Title: Yup.string().required("Please Enter Your Title"),
+      title: Yup.string().required("Please Enter Your Title"),
       location: Yup.string().required("Please Enter location "),
-    //   // layoutName: Yup.string().required("Please Enter Your Area"),
-    //   // landArea: Yup.string().required("Please Enter Your Landmark"),
-      facing: Yup.string().required("Please Enter Your City"),
-    //   // approachRoad: Yup.string().required("Please Enter approachRoad "),
-    //   // builtArea: Yup.string().required("Please Enter Your builtArea"),
+      layoutName: Yup.string().required("Please Enter Your Area"),
+      landArea: Yup.string().required("Please Enter Your Landmark"),
+      facing: Yup.string().required("Please Select facing"),
+      approachRoad: Yup.string().required("Please Enter approachRoad "),
+      builtArea: Yup.string().required("Please Enter Your builtArea"),
       bedRoom: Yup.string().required("Please Enter Your bedRoom"),
-    //   // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
+      floorDetails: Yup.string().required("Please Enter Your floorDetails"),
        propertyStatus: Yup.string().required("Please Enter Your propertyStatus"),
       nearTown: Yup.string().required("Please Enter Your nearTown"),
       costSq: Yup.string().required("Please Enter Your costSq"),
-    //   // facilities: Yup.string().required("Please Enter Your facilities"),
+      facilities: Yup.string().required("Please Enter Your facilities"),
       askPrice: Yup.number().required("Please Enter Your askPrice`number`"),
-    //   // Description: Yup.string().required("Please Enter Your Description"),
-           streetName: Yup.string().required("Please Enter Your streetName"),
+      Description: Yup.string().required("Please Enter Your Description"),
+      streetName: Yup.string().required("Please Enter Your streetName"),
       category: Yup.string().required("Please Enter Your category"),
-    // }),
+    }),
     onSubmit: (values, onSubmitProps) => {
       handlePropertyReg({
         Seller: values.Seller,
-        Title: values.Title,
+        title: values.title,
         location: values.location,
         layoutName: values.layoutName,
         landArea: values.landArea,
@@ -104,7 +109,9 @@ const RegisterProperty = () => {
         status: "pending",
       });
       onSubmitProps.resetForm();
-      setLoading(true)
+      navigate('/payment')
+      // toastr.success(`Your Property Details Display "Soon"`, "Success");
+       setLoading(true)
 
     },
   });
@@ -167,15 +174,21 @@ const RegisterProperty = () => {
   return (
     <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font ">
       <form
-        className="col-span-3"
+        className="col-span-3 gap-1"
         onSubmit={(e) => {
           e.preventDefault();
           validation.handleSubmit();
           return false;
         }}
       >
-        <h4 className="flex item-center justify-around font-Light text-2xl underline pb-3 ">
-          TITLE:Independent House For Sale
+        <h4 className="flex item-center justify-center font-semibold text-2xl pb-8 text-amber-700">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+  <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+</svg>
+
+
+        Sale Property
         </h4>
         <div className="sm:grid grid-cols-4 gap-2 ">
           <div>
@@ -194,26 +207,26 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.Seller && validation.errors.Seller ? (
-              <span type="invalid">{validation.errors.Seller}</span>
+              <span className="text-amber-700" type="invalid ">{validation.errors.Seller}</span>
             ) : null}
           </div>
           <div>
             <Input
               label="Title"
               type="text"
-              name="Title"
+              name="title"
               placeholder="Title"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
-              value={validation.values.Title || ""}
+              value={validation.values.title || ""}
               invalid={
-                validation.touched.Title && validation.errors.Title
+                validation.touched.title && validation.errors.title
                   ? true
                   : false
               }
             />
-            {validation.touched.Title && validation.errors.Title ? (
-              <span type="invalid">{validation.errors.Title}</span>
+            {validation.touched.title && validation.errors.title ? (
+              <span  className="text-amber-700" type="invalid">{validation.errors.title}</span>
             ) : null}
           </div>
           <div>
@@ -232,12 +245,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.location && validation.errors.location ? (
-              <span type="invalid">{validation.errors.location}</span>
+              <span  className="text-amber-700"type="invalid">{validation.errors.location}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="streetName"
+              label="Street Name"
               type="text"
               name="streetName"
               placeholder="Enter The streetName"
@@ -251,12 +264,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.streetName && validation.errors.streetName ? (
-              <span type="invalid">{validation.errors.location}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.location}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="layoutName"
+              label="Layout Name"
               type="text"
               name="layoutName"
               placeholder="Enter The LayoutName"
@@ -270,12 +283,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.layoutName && validation.errors.layoutName ? (
-              <span type="invalid">{validation.errors.layoutName}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.layoutName}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="landArea"
+              label="Land / Area"
               type="text"
               name="landArea"
               placeholder="Enter The LandArea"
@@ -289,7 +302,7 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.landArea && validation.errors.landArea ? (
-              <span type="invalid">{validation.errors.landArea}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.landArea}</span>
             ) : null}
           </div>
           <div className="m-2 grid grid-rows-2 font gap-2 mb-">
@@ -307,6 +320,7 @@ const RegisterProperty = () => {
                   : false
               }
             >
+              
               {" "}
               {facing.map((option, i) => (
                 <option value={option?.value} key={i}>
@@ -314,10 +328,13 @@ const RegisterProperty = () => {
                 </option>
               ))}
             </select>
+            {validation.touched.facing && validation.errors.facing ? (
+              <span  className="text-amber-700" type="invalid">{validation.errors.facing}</span>
+            ) : null}
           </div>
           <div>
             <Input
-              label="approachRoad"
+              label="approach Road"
               type="text"
               name="approachRoad"
               placeholder="Enter The ApproachRoad"
@@ -333,12 +350,12 @@ const RegisterProperty = () => {
             />
             {validation.touched.approachRoad &&
             validation.errors.approachRoad ? (
-              <span type="invalid">{validation.errors.approachRoad}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.approachRoad}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="builtArea"
+              label="built Area"
               type="text"
               name="builtArea"
               placeholder="Enter The BuiltArea"
@@ -352,12 +369,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.builtArea && validation.errors.builtArea ? (
-              <span type="invalid">{validation.errors.builtArea}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.builtArea}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="bedRoom"
+              label="bed Room"
               type="number"
               name="bedRoom"
               placeholder="Enter The BedRoom"
@@ -371,12 +388,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.bedRoom && validation.errors.bedRoom ? (
-              <span type="invalid">{validation.errors.bedRoom}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.bedRoom}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="floorDetails"
+              label="floor Details"
               type="text"
               name="floorDetails"
               placeholder="Enter The FloorDetails"
@@ -392,13 +409,13 @@ const RegisterProperty = () => {
             />
             {validation.touched.floorDetails &&
             validation.errors.floorDetails ? (
-              <span type="invalid">{validation.errors.floorDetails}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.floorDetails}</span>
             ) : null}
           </div>
 
           <div>
             <Input
-              label="nearTown"
+              label="near Town"
               type="text"
               name="nearTown"
               placeholder="Enter The NearTown"
@@ -412,12 +429,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.nearTown && validation.errors.nearTown ? (
-              <span type="invalid">{validation.errors.nearTown}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.nearTown}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="costSq"
+              label="cost Sq"
               type="number"
               name="costSq"
               placeholder="Enter The CostSq"
@@ -431,7 +448,7 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.costSq && validation.errors.costSq ? (
-              <span type="invalid">{validation.errors.costSq}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.costSq}</span>
             ) : null}
           </div>
           <div>
@@ -450,12 +467,12 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.facilities && validation.errors.facilities ? (
-              <span type="invalid">{validation.errors.facilities}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.facilities}</span>
             ) : null}
           </div>
           <div>
             <Input
-              label="askPrice"
+              label="ask Price (INR)"
               type="number"
               name="askPrice"
               placeholder="Enter The Price"
@@ -469,7 +486,7 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.askPrice && validation.errors.askPrice ? (
-              <span type="invalid">{validation.errors.askPrice}</span>
+              <span   className="text-amber-700"type="invalid">{validation.errors.askPrice}</span>
             ) : null}
           </div>
 
@@ -489,7 +506,7 @@ const RegisterProperty = () => {
               }
             />
             {validation.touched.Description && validation.errors.Description ? (
-              <span type="invalid">{validation.errors.Description}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.Description}</span>
             ) : null}
           </div>
 
@@ -499,7 +516,7 @@ const RegisterProperty = () => {
               id="category"
               name="category"
               label="category"
-              className="border-2 capitalize px-2 py-2 w- text-black border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              className="border-2 capitalize px-2 py-2 font-medium text-gray-400  border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               value={validation.values.category || ""}
               onChange={validation.handleChange}
               invalid={
@@ -517,7 +534,7 @@ const RegisterProperty = () => {
               ))}
             </select>
             {validation.touched.category && validation.errors.category ? (
-              <span type="invalid">{validation.errors.category}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.category}</span>
             ) : null}
           </div>
 
@@ -526,8 +543,8 @@ const RegisterProperty = () => {
             <select
               id="propertyStatus"
               name="propertyStatus"
-              label="propertyStatus"
-              className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              label="property Status"
+              className="border-2 capitalize px-2 py-2  text-gray-400  border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               value={validation.values.propertyStatus}
               onChange={validation.handleChange || ""}
               invalid={
@@ -546,16 +563,18 @@ const RegisterProperty = () => {
             </select>
             {validation.touched.propertyStatus &&
             validation.errors.propertyStatus ? (
-              <span type="invalid">{validation.errors.propertyStatus}</span>
+              <span  className="text-amber-700" type="invalid">{validation.errors.propertyStatus}</span>
             ) : null}
           </div>
           <div className="font">
             <FileInput
               label="Property Images"
               multiple={true}
+              maxLength={5}
               accept=".png, .jpg, .jpeg,.pdf,.webp"
               onChange={handleImageUpload}
             />
+            
           </div>
         </div>
         <div className="flex justify-around   mr-6 pt-10  ">

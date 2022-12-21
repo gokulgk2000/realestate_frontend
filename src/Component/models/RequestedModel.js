@@ -12,7 +12,17 @@ const RequestedModel =( {show,onCloseClick,}) => {
     const[request,setRequest]=useState("");
     const [requestSuccess, setRequestSuccess] = useState("");
   const [requesError, setRequestError] = useState("");
-
+  const facing = [
+    { value: "", text: "Select Facing " },
+    { value: "east", text: "east " },
+    { value: "west", text: "west " },
+    { value: "south", text: "south " },
+    { value: "north", text: "north " },
+    { value: "southEast", text: "southEast " },
+    { value: "southWest", text: "southWest " },
+    { value: "northEast", text: "northEast " },
+    { value: "northWest", text: "northWest " },
+  ];
     const validation = useFormik({
         enableReinitialize: true,
         initialValues:{
@@ -112,15 +122,26 @@ New Request</h5>
                          >
                            Facing
                          </label>
-                         <input
-                           type="text"
-                           name="facing"
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Enter facing"
-                           onChange={validation.handleChange}
-
-                          
-                         />
+                         <select
+                  id="facing"
+                  name="facing"
+                  label="facing"
+                  className="bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  value={validation.values.facing}
+                  onChange={validation.handleChange || ""}
+                  invalid={
+                    validation.touched.facing && validation.errors.facing
+                      ? true
+                      : false
+                  }
+            >    
+                  {" "}
+                  {facing.map((option, i) => (
+                    <option value={option?.value} key={i}>
+                      {option?.text}
+                    </option>
+                  ))}
+              </select>
                          
                          
                        <div>

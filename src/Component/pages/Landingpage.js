@@ -70,7 +70,7 @@ const Landingpage = () => {
     setBetRoomCount(event.target.value);
   };
   return (
-    <div>
+    <div className="bg-slate-50 md:px-10">
 
       {/* <div className="  items-center  md:hidden  ">
       <form className="flex justify-center  h-10 w-full ">

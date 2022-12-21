@@ -46,10 +46,10 @@ import Thankyoupage from "./Component/pages/PaymentPage/Thankyoupage";
 
 const App = () => {
   return (
-    <> 
+    <div className=""> 
     {isAuthAdmin()||window.location.pathname==="/admin-page"?(<AdminNav/>):( <div className="sticky top-0 z-50"><div><Header/></div><div className="" ><Navbar/></div></div>)} 
-     
-      <Routes >
+     <div >
+      <Routes  >
       <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
 
@@ -94,7 +94,7 @@ const App = () => {
         
       </Routes>
    {window.location.pathname==="/admin-page"?(<div></div>):( <Footer />)}  
-    </>
+   </div></div>
   );
 };
 

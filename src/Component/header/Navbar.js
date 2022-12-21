@@ -120,7 +120,7 @@ function Navbar() {
      
       <nav className="bg-transparent">
         <div className="py-3 px-1  mx-auto  ">
-          <div className="flex justify-between items-center px-5 shadow-md  py-2 ">
+          <div className="flex justify-between items-center md:pl-36 md:pr-28 shadow-md  py-2 ">
             {isMobileview ? (
               <div className="flex items-center gap-4 lg:mt-0 text-black  font">
                 <NavLink
@@ -184,7 +184,7 @@ function Navbar() {
                   <div className=" relative  group">
                     <a>
                       {" "}
-                      <div className="flex">
+                      <div className="flex ">
                         {" "}
                         <img
                           src={user?.profilePic || Image}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   addProperty,
+  findCategory,
   getPropertyDetailsById,
   PropertyRegistration,
   removeProperty,
@@ -29,6 +30,7 @@ const PropertyDetails = () => {
   const [PropertyUpdatedSuccess, setPropertyUpdatedSuccess] = useState("");
   const [propertyUpdatedError, setpropertyUpdatedError] =useState("");
   const [removeImages, setRemoveImages] = useState([]);
+  const [allcategory, setAllCategory] = useState([]);
   const [addImages, setAddImages] = useState([]);
   const [getProperty, setGetProperty] = useState({
     _id: "",
@@ -85,6 +87,16 @@ const PropertyDetails = () => {
     }
   };
 console.log("first",getProperty)
+useEffect(() => {
+  const allcategory = async () => {
+    const res = await findCategory();
+    setAllCategory(res.category);
+
+    return res;
+  };
+
+  allcategory();
+}, []);
   const handleUpdatingProperty = async (e) => {
     e.preventDefault();
     const property = { ...getProperty, _id: query.get("id") };
@@ -243,6 +255,17 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, Seller: e.target.value })
                 }
               />
+              <p className=" text-amber-700"> propertyStatus :</p>
+              <Input
+                type="text"
+                name="propertyStatus"
+                placeholder="Enter the propertyStatus "
+                value={getProperty?.propertyStatus}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, propertyStatus: e.target.value })
+                }
+              />
               <p className=" text-amber-700"> CostSq :</p>
 
               <Input
@@ -390,6 +413,26 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, askPrice: e.target.value })
                 }
               />
+              <p className=" text-amber-700"> Category :</p>
+              <select
+              id="category"
+              name="category"
+              label="category"
+              className="border-2 capitalize px-2 py-2  border-gray-200 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={getProperty?.category}
+                disabled={!isEdit}
+
+              onChange={(e) =>
+                setGetProperty({ ...getProperty, category: e.target.value })}
+            >
+              {" "}
+              <option value=""> Select Category</option>
+              {allcategory.map((option, id) => (
+                <option value={option?._id} key={id}>
+                  {option?.name}
+                </option>
+              ))}
+            </select>
               <p className=" text-amber-700">Description :</p>
 
               <Input

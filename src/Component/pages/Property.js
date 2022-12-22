@@ -98,7 +98,7 @@ const Property = () => {
       <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase  ">
         {map(property, (pro, i) => (
           <div user={pro} key={"pro" + i}>
-            <div className="bg-transparent border-2 hover:border-0 shadow-sm pl-2 -py-2 hover:bg-amber-50 shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md scale-90 hover:scale-95 ease-in duration-300">
+            <div className="bg-transparent   shadow-sm pl-2 pb-2 hover:pb-1  hover:px-3 hover:bg-amber-50 shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md scale-90  ease-in duration-300">
               <div className="grid grid-cols-3   my-3 ">
                 <div className="flex  justify-start items-center">
                   <Link to={`/Detailspage?uid=${pro?._id}`}>
@@ -161,17 +161,17 @@ const Property = () => {
                       <div className="font-semibold">{pro?.facing}</div>
                     </p>
                   </Link>
-                  <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 pt-3">
+                  <p className=" flex  justify-between  pt-3">
                     <Link
                       to={`/Detailspage?uid=${pro?._id}`}
-                      className="col-span-6"
+                      className=""
                     >
                       {" "}
-                      <p className=" text-sm  md:py-2 ">Agent:{pro?.Seller}</p>
+                      <p className=" text-sm  md:py-2 md:w-96 lg:w-44 xl-44">Agent:{pro?.Seller}</p>
                     </Link>
-                    <div className=" pr-5 md:pt-2 ">
+                    <div className=" pr-5">
                       <button
-                        className="grad-btn hover:grad1 hover:text-white rounded-sm px-1"
+                        className="grad-btn hover:grad1 hover:text-white rounded-md px-3 "
                         onClick={() =>
                           handleBook(pro?._id) && setModalOpen(true)
                         }

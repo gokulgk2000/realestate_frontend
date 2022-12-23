@@ -22,7 +22,6 @@ const Register = () => {
     },
     validationSchema: Yup.object({
       firstname: Yup.string().required("Please Enter Your firstname"),
-      lastname: Yup.string().required("Please Enter Your lastname"),
       email: Yup.string().required("Please Enter Your Email"),
       password: Yup.string()
         .required("Please Enter Your Password")
@@ -72,7 +71,7 @@ const Register = () => {
               )}
               <div className="flex flex-row items-center justify-center lg:justify-center">
                 <p className=" text-3xl text-teal-500 font-bold mb-0 mr-8">
-                  Register
+                Sign Up
                 </p>
                 <button
                   type="button"

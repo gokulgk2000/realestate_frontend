@@ -17,6 +17,7 @@ export default function Payment() {
   const currentUser = JSON.parse(localStorage.getItem("authUser"))
 
   const query = useQuery();
+  const email =  query.get("email");
   const id = query.get("id");
 //   console.log("gokuyl:",query.get("id"))
 //   console.log("gokul2:",id)
@@ -27,7 +28,8 @@ export default function Payment() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
         items: [{ id: "Coimbatore Real Estate" }],
-        user:id
+        user:id,
+        email: email,
     }),
     })
       .then((res) => res.json())

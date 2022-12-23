@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <div className="  w-full m-0 font-serif">
+      <div className="w-full m-0 font-serif">
         <footer className="text-center lg:text-left grad-footer text-gray-600">
           <div className="flex justify-center items-center lg:justify-between px-5 border-b text-gray-400 border-gray-300 ">
-            <div className="mr-12 hidden lg:block px-1">
-              <span>Get connected with us on social networks:</span>
-            </div>
             <div className="flex justify-center"></div>
           </div>
-          <div className="mx-6 py-10 text-center md:text-left">
+          <div className="mx-6 py-10 text-left md:text-left">
             <div className="grid grid-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-">
               <div className="">
                 <h6
@@ -21,9 +18,8 @@ const Footer = () => {
               font-semibold
               mb-4
               flex
-              items-center
-              justify-center
-              md:justify-start
+              items-center        
+              md:text-left
             "
                 >
                   <svg
@@ -51,21 +47,21 @@ const Footer = () => {
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+                <h6 className="uppercase font-semibold mb-4 flex md:text-left">
                   Categories
                 </h6>
                 <p className="mb-4">
-                  <Link to={"/"}  className="text-gray-600">
+                  <Link to={"/"} className="text-gray-600">
                     Residential
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"}  className="text-gray-600">
+                  <Link to={"/"} className="text-gray-600">
                     Appartment
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"}  className="text-gray-600">
+                  <Link to={"/"} className="text-gray-600">
                     Villa
                   </Link>
                 </p>
@@ -75,14 +71,13 @@ const Footer = () => {
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"}  className="text-gray-600">
+                  <Link to={"/"} className="text-gray-600">
                     Commercial
                   </Link>
                 </p>
-                
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+                <h6 className="uppercase font-semibold mb-4 flex  md:text-left">
                   Quick links
                 </h6>
                 <p className="mb-4">
@@ -91,26 +86,26 @@ const Footer = () => {
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/about"}  className="text-gray-600">
+                  <Link to={"/about"} className="text-gray-600">
                     About Us
                   </Link>
                 </p>
                 <p className="mb-4">
                   <Link to={"/contact"} className="text-gray-600">
-                 Contact
+                    Contact
                   </Link>
                 </p>
                 <p>
-                  <Link to={"/"}  className="text-gray-600">
+                  <Link to={"/"} className="text-gray-600">
                     Help
                   </Link>
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex justify-center md:justify-start">
+                <h6 className="uppercase font-semibold mb-4 flex  md:text-left">
                   Contact
                 </h6>
-                <p className="flex items-center justify-center md:justify-start mb-4">
+                <p className="flex items-center md:text-left mb-4">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -128,7 +123,7 @@ const Footer = () => {
                   </svg>
                   Coimbatore
                 </p>
-                <p className="flex items-center justify-center md:justify-start mb-4">
+                <p className="flex items-center  md:text-left mb-4">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -146,7 +141,7 @@ const Footer = () => {
                   </svg>
                   info@CoimbatoreRealEstate.com
                 </p>
-                <p className="flex items-center justify-center md:justify-start mb-4">
+                <p className="flex items-center md:text-left mb-4">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -162,16 +157,39 @@ const Footer = () => {
                       d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"
                     ></path>
                   </svg>
-                 8653467789
+                  8653467789
                 </p>
+                <div className="flex gap-3">
+                 <a href="https://www.facebook.com/"><svg
+                    class="w-6 h-6 text-gray-600 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg></a> 
+                 <a href="https://twitter.com/"> <svg
+                    class="w-6 h-6 text-gray-600 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                  </svg></a>
+                  <a href="https://in.linkedin.com/"><svg
+                    class="w-6 h-6 text-gray-600 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
+                  </svg></a>
+                </div>
               </div>
             </div>
           </div>
           <div className="text-center p-6 bg-gray-200">
-            <span>© 2022 Copyright:</span>
+            <span>© 2022 Copyright.</span>
             <Link
               className="text-gray-600 font-semibold"
-             to="https://tailwind-elements.com/"
+              to="https://tailwind-elements.com/"
             >
               RealEstate
             </Link>

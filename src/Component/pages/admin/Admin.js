@@ -3,7 +3,6 @@ import { Link, Outlet,NavLink } from "react-router-dom";
 import { allPropertiesList, allUsersList } from "../../helper/backend_helpers";
 const Admin = () => {
   const [allUsers, setAllUsers] = useState([]);
-  const [allProperties, setAllProperties] = useState([]);
   useEffect(() => {
     const getAllUsers = async () => {
       const res = await allUsersList({});
@@ -12,15 +11,6 @@ const Admin = () => {
       }
     };
     getAllUsers();
-  }, []);
-  useEffect(() => {
-    const getAllProperties = async () => {
-      const res = await allPropertiesList({});
-      if (res.success) {
-        setAllProperties(res.properties);
-      }
-    };
-    getAllProperties();
   }, []);
 
   return (

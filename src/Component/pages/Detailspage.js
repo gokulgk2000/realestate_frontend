@@ -13,9 +13,9 @@ import BuyerModal from "../models/BuyerModal";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import toastr from "toastr";
+import moment from "moment";
 const Detailspage = () => {
-  const [isBiggerthanPC] = useMediaQuery(monitor);
-  const [isBiggerthanTwo] = useMediaQuery(monitor, mobile);
+  
 
   const query = useQuery();
   const [loading, setLoading] = useState(true);
@@ -33,6 +33,7 @@ const Detailspage = () => {
       name:"",
       email:"",
       phonenumber:"",
+      propertyId:""
     },
     validationSchema: Yup.object({
    name: Yup.string().required(" Enter Your Name"),
@@ -52,7 +53,7 @@ const Detailspage = () => {
 
  const handlebuyerReg = async payload=> {
   const res = await  buyerReg (payload)
-  console.log(res)
+
   if(res.success) {
     setBuyerRegistrationSuccess(res.msg)
     toastr.success(`Buyer has been Registration successfully`, "Success");
@@ -120,15 +121,16 @@ const Detailspage = () => {
           )}
 
           <div className="bg-slate-100 ">
-            <div className="px-10 pt-8 pb-10 s">
-              <div className="grid grid-cols-7 gap-2 ">
+            <div className="flex justify-evenly pt-2"><div className="invisible">1</div><div className="invisible">1</div><div className="pl-24 font-normal text-xs">Posted on:{moment(property?.date).format("DD-MM-YYYY")}</div></div>
+            <div className="px-10 pt- pb-10 s">
+              <div className="grid grid-cols-7 gap-2 gap-y-2">
                 <div className="col-span-5 border-3 border-black">
                   <div className="grid shadow-2xl rounded-md bg-white p-7">
                     <div
                       className="flex font font-semibold pl-2  text-xl
   "
                     >
-                      {" "}
+                     
                       ₹. {property?.askPrice}
                     </div>
                     <div className="flex  pl-2 ">
@@ -162,8 +164,8 @@ const Detailspage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-span-2 pl-2">
-                        <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-3 w-96 ">
+                      <div className="col-span-2 pl-5">
+                        <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-2 ">
                           <div className="pt-2 ">
                             <span className="flex ">
                               {" "}
@@ -179,7 +181,7 @@ const Detailspage = () => {
                               <span className="font text-gray-500">Beds</span>
                             </span>
                           </div>
-                          <br />
+                          <div className="pt- pl-5 text-2xl">|</div>
                           <div className="pt-2 pl-5 ">
                             <span className="flex ">
                               <svg
@@ -246,9 +248,9 @@ const Detailspage = () => {
                           <div className="">
                             {" "}
                             <div className="font text-gray-500 pb-1">
-                              Approach Road
+                        Property Status
                               <div className="text-black font">
-                                {property?.approachRoad}
+                                {property?.propertyStatus}
                               </div>
                             </div>
                           </div>
@@ -414,6 +416,47 @@ const Detailspage = () => {
                   </div>
                 </div>
               </div>
+              <div className="grid  grid-cols-7 gap-2 pt-5">
+<div className="col-span-5 border-3 border-black  ">
+
+<div className="grid grid-cols-9  shadow-2xl rounded-md bg-white p-7 ">
+
+<table className="col-span-8 font1" >
+<p className=" text-2xl font-bold  py-4 ">More Details</p>
+<tbody className="gap-y-5">
+<tr className="">
+  <td className="  text-gray-500 py-4 text-lg  w-44">Price</td>
+  <td className=" text-black font-medium py-4">₹.{property?.askPrice}</td>
+</tr>
+<tr>
+  <td className="  text-gray-500 text-lg py-4">Address</td>
+  <td className=" text-black py-2 capitalize font-medium">{property?.layoutName},{property?.streetName},{property?.location}</td>
+</tr><tr>
+  <td className="  text-gray-500 text-lg py-4">Land Mark</td>
+  <td className=" text-black py-4 font-medium capitalize">{property.nearFacilities}</td>
+</tr><tr>
+  <td className="  text-gray-500 text-lg py-4">Approach Road</td>
+  <td className=" text-black py-4 font-medium capitalize">{property.approachRoad}</td>
+</tr>
+<tr>
+  <td className="  text-gray-500 text-lg py-4">Facilities</td>
+  <td className=" text-black py-4 font-medium capitalize">{property.facilities}</td>
+</tr>
+<tr>
+  <td className="  text-gray-500 text-lg py-4">Description</td>
+  <td className=" text-black py-4 font-medium capitalize">{property.Description}</td>
+</tr>
+</tbody> 
+
+</table>
+
+</div>
+
+</div>
+<div>2</div>
+
+              </div>
+
             </div>
           </div>
 

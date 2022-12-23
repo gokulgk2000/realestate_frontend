@@ -1,7 +1,7 @@
 import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { allPropertiesList } from "../../helper/backend_helpers";
+import { allPropertiesList, updateTopProperty } from "../../helper/backend_helpers";
 import Pagination from "../../pagination/Pagination";
 const PropertyList = () => {
   const [allProperties, setAllProperties] = useState([]);
@@ -18,19 +18,27 @@ const PropertyList = () => {
   const propertySearch = (searched) => {
     setSearchText(searched);
   };
+  const getAllProperties = async () => {
+    setLoading(true);
+    const res = await allPropertiesList();
+   
 
+    if (res.success) {
+      setAllProperties(res.properties);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
-    const getAllProperties = async () => {
-      setLoading(true);
-      const res = await allPropertiesList({});
-      setLoading(false);
 
-      if (res.success) {
-        setAllProperties(res.properties);
-      }
-    };
     getAllProperties();
   }, []);
+  const updatePremiumProperties = async (checked,propertyID)=>{
+    console.log("checked : ",checked);
+    const res = await updateTopProperty({propertyID,isPremium:checked});
+    if(res.success){
+await getAllProperties()
+    }
+  }
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -99,6 +107,9 @@ const PropertyList = () => {
                 <div className="flex items-center">status</div>
               </th>
               <th scope="col" className="py-3 px-6   text-amber-700 ">
+                <span className="flex items-center">upgrade</span>
+              </th>
+              <th scope="col" className="py-3 px-6   text-amber-700 ">
                 <span className="flex items-center">Details</span>
               </th>
             </tr>
@@ -162,6 +173,26 @@ const PropertyList = () => {
                     style={{ color: statusColor[PropertyData?.status] }}
                   >
                     {PropertyData?.status}
+                  </td>
+                  <td
+                    className="py-4 px-6 capitalize"
+                    style={{ color: statusColor[PropertyData?.status] }}
+                  >
+                    <ul className=" text-sm font-medium text-gray-900 rounded-lg  dark:text-white">
+    <li className="w-full ">
+        <div className="flex items-center pl-3">
+            <input
+             type="checkbox" 
+            //  name="facilities"
+            checked={PropertyData?.isPremium}
+             className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" 
+              onChange={(e)=>updatePremiumProperties(e.target.checked,PropertyData?._id)}
+          />
+        
+            <label for="vue-checkbox" className="py-3 ml-2 w-full text-sm font-medium dark:text-gray-300" >premium</label>
+        </div>
+    </li>
+</ul>           
                   </td>
                   <td className="py-4 px-6">
                     <Link

@@ -42,6 +42,8 @@ const userLogin = (payload) =>
   const getIntrestedPropertyBybuyerId = (payload) => post(`${BASE_URL}/intrested/getIntrestedByBuyerId`, payload);
   const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
+  const updateTopProperty = (payload) =>
+  put(`${BASE_URL}/admin/updateTopProperty`, payload);
   const GETALLUSERSBYLIMIT = (payload) =>
   post(`${BASE_URL}/admin/getAllUsersPage`, payload);
   const getuserdetails = (payload) =>
@@ -79,6 +81,7 @@ const updateProperty = (payload) =>
     allBuyerList,
     allPropertiesList,
     removeUser,
+    updateTopProperty,
     removeBuyer,
     removeProperty,
     getPropertybyUserId,

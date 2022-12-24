@@ -15,8 +15,6 @@ import { useFormik } from "formik";
 import toastr from "toastr";
 import moment from "moment";
 const Detailspage = () => {
-  
-
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
@@ -25,44 +23,41 @@ const Detailspage = () => {
   const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
   const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
   const [modalOpen, setModalOpen] = useModal();
-  
+
   const validation = useFormik({
     enableReinitialize: true,
-    initialValues:{
-    
-      name:"",
-      email:"",
-      phonenumber:"",
-      propertyId:""
+    initialValues: {
+      name: "",
+      email: "",
+      phonenumber: "",
+      propertyId: "",
     },
     validationSchema: Yup.object({
-   name: Yup.string().required(" Enter Your Name"),
-     email: Yup.string().required(" Enter Your Email"),
-     phonenumber: Yup.string().required(" Enter Your phonenumber")
+      name: Yup.string().required(" Enter Your Name"),
+      email: Yup.string().required(" Enter Your Email"),
+      phonenumber: Yup.string().required(" Enter Your phonenumber"),
     }),
-    onSubmit: (values,onSubmitProps) => {
+    onSubmit: (values, onSubmitProps) => {
       handlebuyerReg({
-    name: values.name,
+        name: values.name,
         email: values.email,
         phonenumber: values.phonenumber,
-        propertyId:property?._id 
-      })
-      onSubmitProps.resetForm()
+        propertyId: property?._id,
+      });
+      onSubmitProps.resetForm();
     },
-   })
+  });
 
- const handlebuyerReg = async payload=> {
-  const res = await  buyerReg (payload)
+  const handlebuyerReg = async (payload) => {
+    const res = await buyerReg(payload);
 
-  if(res.success) {
-    setBuyerRegistrationSuccess(res.msg)
-    toastr.success(`Buyer has been Registration successfully`, "Success");
- 
-  }
-  else{
-    setBuyerRegistrationError(res.msg)
-  }
-}
+    if (res.success) {
+      setBuyerRegistrationSuccess(res.msg);
+      toastr.success(`Buyer has been Registration successfully`, "Success");
+    } else {
+      setBuyerRegistrationError(res.msg);
+    }
+  };
   const propertyPicLength = property?.propertyPic?.length;
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
@@ -120,19 +115,20 @@ const Detailspage = () => {
             />
           )}
 
-          <div className="bg-slate-100 ">
-            <div className="flex justify-evenly pt-2"><div className="invisible">1</div><div className="invisible">1</div><div className="pl-24 font-normal text-xs">Posted on:{moment(property?.date).format("DD-MM-YYYY")}</div></div>
-            <div className="px-10 pt- pb-10 s">
-              <div className="grid grid-cols-7 gap-2 gap-y-2">
-                <div className="col-span-5 border-3 border-black">
-                  <div className="grid shadow-2xl rounded-md bg-white p-7">
-                    <div
-                      className="flex font font-semibold pl-2  text-xl
-  "
-                    >
-                     
+          <div className="bg-slate-100 md:pl-32 md:pr-24">
+            <div className="flex justify-end pt-2">
+              <div className=" font-normal text-xs">
+                Posted on:{moment(property?.date).format("DD-MM-YYYY")}
+              </div>
+            </div>
+            <div className="px- pt- pb-10 s">
+              <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
+                <div className="md:col-span-6 border-3 border-black">
+                  <div className="md:grid shadow-2xl rounded-md bg-white p-7">
+                    <div className="flex font font-semibold pl-2  text-xl">
                       ₹. {property?.askPrice}
                     </div>
+
                     <div className="flex  pl-2 ">
                       <span className="text-md pt-0 font text-gray-600 capitalize">
                         {property?.bedRoom}BHK {property?.title} For sale{" "}
@@ -141,14 +137,14 @@ const Detailspage = () => {
                         {property?.streetName}, {property?.location}
                       </span>
                     </div>
-                    <div className="grid grid-cols-4 gap-x- pt-3 ">
+                    <div className="grid md:grid-cols-4 gap-x- pt-3 ">
                       <div className="col-span-2 ">
                         <div className="grid gap-y-2 p-">
                           <img
                             className=" aspect-[3/2]  md:h-72 rounded-md"
                             src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
                           />
-                          <div className="grid grid-cols-5 gap-x-2 gap-y-2 pr-12">
+                          <div className="grid grid-cols-5 gap-x-2 gap-y-2 md:pr-12">
                             {property?.propertyPic?.length > 0 &&
                               property?.propertyPic?.map((image, j) => (
                                 <button key={j}>
@@ -164,49 +160,57 @@ const Detailspage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-span-2 pl-5">
-                        <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-2 ">
-                          <div className="pt-2 ">
-                            <span className="flex ">
-                              {" "}
-                              <svg
-                                viewBox="0 0 122.88 121.47"
-                                className="w-6 h-6 text-white"
-                              >
-                                <path d="M10.76,95.77l101.36,0.02l-11.52-45.63H22.25L10.76,95.77L10.76,95.77z M3.4,100.88l116.08,0.03l-18.18-70.24h-4.35v4.98 l1.93,7.66l-74.84-0.22l1.96-7.77v-4.65h-4.44L3.4,100.88L3.4,100.88z M64.57,34.09v-3.42h-6.21v3.42H64.57L64.57,34.09z M96.94,27.85h4.05l0.07-25.1H21.19l0.67,25.1h4.14v-8.44c0-0.64,0.26-1.23,0.68-1.65c0.42-0.42,1.01-0.68,1.65-0.68h27.7 c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65v8.44h6.21v-7.97c0-0.64,0.26-1.23,0.68-1.65 c0.42-0.42,1.01-0.68,1.65-0.68h27.7c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65V27.85L96.94,27.85z M94.06,20.44 h-26.6v16.08h26.6V20.44L94.06,20.44z M55.48,19.97h-26.6v16.55h26.6V19.97L55.48,19.97z M20.58,0h81.08l0,0.01 c0.59,0,1.13,0.24,1.51,0.63h0.01c0.39,0.39,0.63,0.93,0.63,1.52l-0.01,0l-0.08,26.96l18.85,72.83c0.01,0.05,0.02,0.11,0.03,0.17 l0,0l0,0.01l0,0.01l0,0.01l0,0.01c0.01,0.05,0.01,0.1,0.01,0.15l0.25,17.67l0.01,0.14c0,0.76-0.62,1.38-1.38,1.38H1.37v-0.01H1.36 c-0.76-0.01-1.36-0.63-1.36-1.39l0.25-17.8c0-0.06,0.01-0.12,0.01-0.18c0.01-0.06,0.02-0.12,0.03-0.18l18.84-72.86l0.01-0.05 c-0.24-8.87-0.71-18.04-0.71-26.88h-0.01c0-0.59,0.24-1.12,0.63-1.5c0.38-0.37,0.9-0.61,1.47-0.63L20.58,0L20.58,0L20.58,0z M2.97,103.63l-0.21,15.09h117.35l-0.21-15.06L2.97,103.63L2.97,103.63z" />
-                              </svg>
-                              <span className="font pl-2">
-                                {property?.bedRoom}{" "}
-                              </span>
-                              <span className="font text-gray-500">Beds</span>
-                            </span>
-                          </div>
-                          <div className="pt- pl-5 text-2xl">|</div>
-                          <div className="pt-2 pl-5 ">
-                            <span className="flex ">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg "
-                                className="h-6 w-6"
-                                viewBox="0 0 64 64"
-                              >
-                                <path d="M14.918 15.925c-.469.261-.635.852-.373 1.319l2.445 4.371c.176.317.506.496.846.496.16 0 .322-.04.473-.124.467-.261.635-.853.373-1.32l-2.445-4.371C15.975 15.83 15.387 15.663 14.918 15.925zM17.541 14.008c-.424.325-.506.933-.182 1.359l3.035 3.982c.191.25.48.381.773.381.203 0 .41-.065.586-.198.426-.325.508-.933.184-1.359L18.9 14.191C18.576 13.766 17.969 13.683 17.541 14.008zM24.27 17.386c.238 0 .475-.086.662-.26.391-.365.412-.979.047-1.371l-3.414-3.663c-.365-.392-.98-.413-1.371-.048-.393.365-.414.979-.049 1.371l3.416 3.663C23.752 17.283 24.01 17.386 24.27 17.386zM63.031 1.236H.971C.438 1.236 0 1.673 0 2.206s.438.97.971.97h33.648v2.454h1.939V3.176h2.23v2.454h1.939V3.176h2.23v2.454h1.938V3.176h2.23v2.454h1.939V3.176h2.24v2.454h1.939V3.176h1.9v2.454h1.939V3.176h5.945c.533 0 .969-.437.969-.97S63.564 1.236 63.031 1.236zM36.762 48.364c-.049-.155-.068-.32-.039-.475C36.693 48.043 36.703 48.208 36.762 48.364zM36.869 47.21V7.568h-1.184-.193-1.184V47.21c0 .698.572 1.28 1.279 1.28.533 0 .99-.33 1.184-.785C36.83 47.549 36.869 47.384 36.869 47.21z" />
-                                <path d="M32.369 36.669H6.943V35.7v-.97-1.816h2.346c.535 0 .969-.434.969-.97 0-.535-.434-.969-.969-.969H6.943v-16.24c0-.029-.145-2.541 1.348-4.219.572-.64 1.318-1.096 2.24-1.348-.311 1.707.301 3.666 1.756 5.13.193.194.436.281.688.281s.494-.087.689-.281l5.449-5.45c.379-.378.379-.989 0-1.367-2.201-2.201-5.518-2.463-7.398-.582-.039.039-.078.078-.107.116C9.59 7.19 7.98 7.937 6.836 9.236c-2.045 2.308-1.832 5.499-1.832 5.566v16.173H2.723c-.535 0-.969.434-.969.969 0 .536.434.97.969.97h2.281v1.816.97.969H2.725c-.436 0-.785.349-.785.786 0 .427.359.786.785.786h29.645V36.669zM40.912 47.782c.02-.048.039-.087.059-.136.049-.136.076-.291.076-.436V7.568h-1.191H39.66h-.852V47.21c0 .262-.029.504-.088.747.039.058.078.106.135.165.242.243.563.378.902.378C40.252 48.5 40.689 48.218 40.912 47.782zM45.111 47.705c0-.01.01-.02.02-.039.047-.136.076-.301.076-.456V7.568h-1.182H43.83h-.844V47.21c0 .252-.027.514-.096.756.039.048.076.106.125.155.252.243.572.378.912.378C44.441 48.5 44.916 48.189 45.111 47.705zM49.281 47.714c.01-.039.027-.068.037-.106.049-.126.068-.262.068-.397V7.568h-1.191H48h-.854V47.21c0 .252-.029.504-.086.747.037.058.086.116.135.165.242.243.563.378.902.378C48.631 48.5 49.086 48.17 49.281 47.714zM52.18 7.568h-.854V47.21c0 .262-.029.504-.096.747.037.058.076.106.135.165.193.185.416.301.66.349.02 0 .029.01.047.01.02 0 .039.01.059 0 .059.01.098.02.146.02.436 0 .834-.223 1.076-.592 0-.01.01-.019.02-.029.115-.204.184-.427.184-.669V7.568h-1.184H52.18zM56.02 7.568h-.523V47.21c0 .349-.059.688-.164 1.008.223.184.494.281.785.281.707 0 1.279-.582 1.279-1.29V7.568h-1.184H56.02zM13.859 58.741l-1.01-.043v2.418c0 .909.734 1.648 1.639 1.648h.543c.902 0 1.639-.74 1.639-1.648v-2.356h-2.182C14.289 58.759 14.088 58.75 13.859 58.741zM40.859 58.742c-.199.008-.398.017-.598.017H38.08v2.356c0 .909.73 1.648 1.629 1.648h.553c.904 0 1.639-.74 1.639-1.648v-1.406l-.031-1.011L40.859 58.742z" />
-                                <path
-                                  d="M48.098,50.439c-0.766,0-1.504-0.271-2.086-0.776c-0.563,0.495-1.299,0.776-2.084,0.776c-0.775,0-1.504-0.271-2.084-0.776
+                      <div className="col-span-2 md:pl-5">
+                        {property?.category?.name === "residential" ||
+                          property?.category?.name === "villa" ||
+                          (property?.category?.name === "appartment" && (
+                            <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-2 ">
+                              <div className="pt-2 ">
+                                <span className="flex ">
+                                  {" "}
+                                  <svg
+                                    viewBox="0 0 122.88 121.47"
+                                    className="w-6 h-6 text-white"
+                                  >
+                                    <path d="M10.76,95.77l101.36,0.02l-11.52-45.63H22.25L10.76,95.77L10.76,95.77z M3.4,100.88l116.08,0.03l-18.18-70.24h-4.35v4.98 l1.93,7.66l-74.84-0.22l1.96-7.77v-4.65h-4.44L3.4,100.88L3.4,100.88z M64.57,34.09v-3.42h-6.21v3.42H64.57L64.57,34.09z M96.94,27.85h4.05l0.07-25.1H21.19l0.67,25.1h4.14v-8.44c0-0.64,0.26-1.23,0.68-1.65c0.42-0.42,1.01-0.68,1.65-0.68h27.7 c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65v8.44h6.21v-7.97c0-0.64,0.26-1.23,0.68-1.65 c0.42-0.42,1.01-0.68,1.65-0.68h27.7c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65V27.85L96.94,27.85z M94.06,20.44 h-26.6v16.08h26.6V20.44L94.06,20.44z M55.48,19.97h-26.6v16.55h26.6V19.97L55.48,19.97z M20.58,0h81.08l0,0.01 c0.59,0,1.13,0.24,1.51,0.63h0.01c0.39,0.39,0.63,0.93,0.63,1.52l-0.01,0l-0.08,26.96l18.85,72.83c0.01,0.05,0.02,0.11,0.03,0.17 l0,0l0,0.01l0,0.01l0,0.01l0,0.01c0.01,0.05,0.01,0.1,0.01,0.15l0.25,17.67l0.01,0.14c0,0.76-0.62,1.38-1.38,1.38H1.37v-0.01H1.36 c-0.76-0.01-1.36-0.63-1.36-1.39l0.25-17.8c0-0.06,0.01-0.12,0.01-0.18c0.01-0.06,0.02-0.12,0.03-0.18l18.84-72.86l0.01-0.05 c-0.24-8.87-0.71-18.04-0.71-26.88h-0.01c0-0.59,0.24-1.12,0.63-1.5c0.38-0.37,0.9-0.61,1.47-0.63L20.58,0L20.58,0L20.58,0z M2.97,103.63l-0.21,15.09h117.35l-0.21-15.06L2.97,103.63L2.97,103.63z" />
+                                  </svg>
+                                  <span className="font pl-2">
+                                    {property?.bedRoom}{" "}
+                                  </span>
+                                  <span className="font text-gray-500">
+                                    Beds
+                                  </span>
+                                </span>
+                              </div>
+                              <div className="pt- pl-5 text-2xl">|</div>
+                              <div className="pt-2 pl-5 ">
+                                <span className="flex ">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg "
+                                    className="h-6 w-6"
+                                    viewBox="0 0 64 64"
+                                  >
+                                    <path d="M14.918 15.925c-.469.261-.635.852-.373 1.319l2.445 4.371c.176.317.506.496.846.496.16 0 .322-.04.473-.124.467-.261.635-.853.373-1.32l-2.445-4.371C15.975 15.83 15.387 15.663 14.918 15.925zM17.541 14.008c-.424.325-.506.933-.182 1.359l3.035 3.982c.191.25.48.381.773.381.203 0 .41-.065.586-.198.426-.325.508-.933.184-1.359L18.9 14.191C18.576 13.766 17.969 13.683 17.541 14.008zM24.27 17.386c.238 0 .475-.086.662-.26.391-.365.412-.979.047-1.371l-3.414-3.663c-.365-.392-.98-.413-1.371-.048-.393.365-.414.979-.049 1.371l3.416 3.663C23.752 17.283 24.01 17.386 24.27 17.386zM63.031 1.236H.971C.438 1.236 0 1.673 0 2.206s.438.97.971.97h33.648v2.454h1.939V3.176h2.23v2.454h1.939V3.176h2.23v2.454h1.938V3.176h2.23v2.454h1.939V3.176h2.24v2.454h1.939V3.176h1.9v2.454h1.939V3.176h5.945c.533 0 .969-.437.969-.97S63.564 1.236 63.031 1.236zM36.762 48.364c-.049-.155-.068-.32-.039-.475C36.693 48.043 36.703 48.208 36.762 48.364zM36.869 47.21V7.568h-1.184-.193-1.184V47.21c0 .698.572 1.28 1.279 1.28.533 0 .99-.33 1.184-.785C36.83 47.549 36.869 47.384 36.869 47.21z" />
+                                    <path d="M32.369 36.669H6.943V35.7v-.97-1.816h2.346c.535 0 .969-.434.969-.97 0-.535-.434-.969-.969-.969H6.943v-16.24c0-.029-.145-2.541 1.348-4.219.572-.64 1.318-1.096 2.24-1.348-.311 1.707.301 3.666 1.756 5.13.193.194.436.281.688.281s.494-.087.689-.281l5.449-5.45c.379-.378.379-.989 0-1.367-2.201-2.201-5.518-2.463-7.398-.582-.039.039-.078.078-.107.116C9.59 7.19 7.98 7.937 6.836 9.236c-2.045 2.308-1.832 5.499-1.832 5.566v16.173H2.723c-.535 0-.969.434-.969.969 0 .536.434.97.969.97h2.281v1.816.97.969H2.725c-.436 0-.785.349-.785.786 0 .427.359.786.785.786h29.645V36.669zM40.912 47.782c.02-.048.039-.087.059-.136.049-.136.076-.291.076-.436V7.568h-1.191H39.66h-.852V47.21c0 .262-.029.504-.088.747.039.058.078.106.135.165.242.243.563.378.902.378C40.252 48.5 40.689 48.218 40.912 47.782zM45.111 47.705c0-.01.01-.02.02-.039.047-.136.076-.301.076-.456V7.568h-1.182H43.83h-.844V47.21c0 .252-.027.514-.096.756.039.048.076.106.125.155.252.243.572.378.912.378C44.441 48.5 44.916 48.189 45.111 47.705zM49.281 47.714c.01-.039.027-.068.037-.106.049-.126.068-.262.068-.397V7.568h-1.191H48h-.854V47.21c0 .252-.029.504-.086.747.037.058.086.116.135.165.242.243.563.378.902.378C48.631 48.5 49.086 48.17 49.281 47.714zM52.18 7.568h-.854V47.21c0 .262-.029.504-.096.747.037.058.076.106.135.165.193.185.416.301.66.349.02 0 .029.01.047.01.02 0 .039.01.059 0 .059.01.098.02.146.02.436 0 .834-.223 1.076-.592 0-.01.01-.019.02-.029.115-.204.184-.427.184-.669V7.568h-1.184H52.18zM56.02 7.568h-.523V47.21c0 .349-.059.688-.164 1.008.223.184.494.281.785.281.707 0 1.279-.582 1.279-1.29V7.568h-1.184H56.02zM13.859 58.741l-1.01-.043v2.418c0 .909.734 1.648 1.639 1.648h.543c.902 0 1.639-.74 1.639-1.648v-2.356h-2.182C14.289 58.759 14.088 58.75 13.859 58.741zM40.859 58.742c-.199.008-.398.017-.598.017H38.08v2.356c0 .909.73 1.648 1.629 1.648h.553c.904 0 1.639-.74 1.639-1.648v-1.406l-.031-1.011L40.859 58.742z" />
+                                    <path
+                                      d="M48.098,50.439c-0.766,0-1.504-0.271-2.086-0.776c-0.563,0.495-1.299,0.776-2.084,0.776c-0.775,0-1.504-0.271-2.084-0.776
 		c-0.563,0.495-1.301,0.776-2.086,0.776s-1.512-0.271-2.084-0.776c-0.563,0.475-1.291,0.766-2.086,0.766
 		c-1.773,0-3.219-1.445-3.219-3.219v-7.03H3.695v7.787c0,5.353,3.994,9.949,9.289,10.686c0.02,0,0.039,0.01,0.059,0.01
 		c0.494,0.058,0.969,0.097,1.445,0.097h25.773c0.514,0,1.02-0.039,1.494-0.116c4.576-0.63,8.203-4.092,9.086-8.543
 		c-0.232-0.117-0.445-0.262-0.65-0.437C49.629,50.148,48.893,50.439,48.098,50.439z"
-                                />
-                              </svg>
-                              <span className="font  pl-2">
-                                {property?.bathRoom}{" "}
-                              </span>
-                              <span className="font text-gray-500">Baths</span>
-                            </span>
-                          </div>{" "}
-                        </div>
-                        <div className="grid grid-cols-3 gap-x-5 gap-y-7 px-3 pt-5">
+                                    />
+                                  </svg>
+                                  <span className="font  pl-2">
+                                    {property?.bathRoom}{" "}
+                                  </span>
+                                  <span className="font text-gray-500">
+                                    Baths
+                                  </span>
+                                </span>
+                              </div>{" "}
+                            </div>
+                          ))}
+                        <div className="grid md:grid-cols-3 grid-cols-2 gap-x-5 md:gap-y-7 gap-y-3 md:px-3 pt-5">
                           <div className="">
                             {" "}
                             <div className="font text-gray-500 pb-1">
@@ -216,15 +220,16 @@ const Detailspage = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="">
-                            {" "}
-                            <div className="font text-gray-500 capitalize pb-1">
-                              Facing
-                              <div className="text-black font">
-                                {property?.facing}
+                          {property?.category?.name !== "land" && (
+                            <div className="">
+                              <div className="font text-gray-500 capitalize pb-1">
+                                Facing
+                                <div className="text-black font">
+                                  {property?.facing}
+                                </div>
                               </div>
-                            </div>{" "}
-                          </div>
+                            </div>
+                          )}
                           <div className="">
                             <div className="font text-gray-500 capitalize pb-1">
                               Transaction Type{" "}
@@ -248,7 +253,7 @@ const Detailspage = () => {
                           <div className="">
                             {" "}
                             <div className="font text-gray-500 pb-1">
-                        Property Status
+                              Property Status
                               <div className="text-black font">
                                 {property?.propertyStatus}
                               </div>
@@ -304,15 +309,14 @@ const Detailspage = () => {
                               {property?.contact}
                             </span>
                           </div>
-                       
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-span-2 ">
-                  <div className="grid  border-gray-600  ">
-                    <div class="w-80 bg-white  shadow-2xl  rounded  animate-pulse hover:animate-none  cursor-pointer">
+                <div className="md:col-span-2 ">
+                  <div className="grid  border-gray-600 px-7 md:px-0 md:py-0 py-2">
+                    <div class="w-80 bg-white  shadow-2xl  rounded  animate-pulse hover:animate-none  cursor-pointer hidden md:block">
                       <p className="font flex justify-center pt-5 text-lg underline">
                         {" "}
                         Contact Owner
@@ -404,59 +408,228 @@ const Detailspage = () => {
                       <div class="p-4 border-t border-gray-200">
                         <div class="flex items-center justify-center">
                           <button
-                           
                             class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                            onClick={handlebuyerReg}  >
+                            onClick={handlebuyerReg}
+                          >
                             Contact
                           </button>
                         </div>
                       </div>
-                     
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="grid  grid-cols-7 gap-2 pt-5">
-<div className="col-span-5 border-3 border-black  ">
+              <div className="grid  md:grid-cols-8 gap-2 pt-5">
+                <div className="md:col-span-6 border-3 border-black  ">
+                  {" "}
+                  <p className=" text-2xl font-bold  md:py-4 md:hidden ">
+                    More Details
+                  </p>
+                  <div className="grid md:grid-cols-9 grid-cols-5 shadow-2xl rounded-md bg-white md:p-7 p-3">
+                    <table className="md:col-span-8 col-span-5 font1 md:block hidden">
+                      <p className=" text-2xl font-bold  md:py-4 hidden md:block ">
+                        More Details
+                      </p>
+                      <tbody className="gap-y-5">
+                        <tr className="">
+                          <td className="  text-gray-500 py-4 text-md  w-44">
+                            Price
+                          </td>
+                          <td className=" text-black font-medium py-4">
+                            ₹.{property?.askPrice}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="  text-gray-500 text-md py-4">
+                            Address
+                          </td>
+                          <td className=" text-black py-2 capitalize font-medium flex">
+                            {property?.layoutName},{property?.streetName},
+                            {property?.location}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="  text-gray-500 text-md py-4">
+                            Land Mark
+                          </td>
+                          <td className=" text-black py-4 font-medium capitalize">
+                            {property.nearFacilities}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="  text-gray-500 text-md py-4">
+                            Approach Road
+                          </td>
+                          <td className=" text-black py-4 font-medium capitalize">
+                            {property.approachRoad}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="  text-gray-500 text-md py-4">
+                            Facilities
+                          </td>
+                          <td className=" text-black py-4 font-medium capitalize font">
+                            {property.facilities}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div className="invisible">1</div>
+                    <div className="col-span-11 grid md:grid-cols-11 font1 ">
+                      <div className="md:col-span-2 text-gray-500 text-md md:hidden">
+                        {" "}
+                        Price
+                      </div>
+                      <div className="col-span-9 md:hidden text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5">
+                        {" "}
+                        {property?.askPrice},
+                      </div>
+                      <div className="md:col-span-2 text-gray-500 text-md md:hidden">
+                        {" "}
+                        Address
+                      </div>
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  md:pr-5 md:hidden">
+                        {" "}
+                        {property?.layoutName},{property?.streetName},
+                        {property?.location}
+                      </div>
+                      <div className="md:col-span-2 text-gray-500 text-md md:hidden">
+                        {" "}
+                        Land Mark
+                      </div>
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden">
+                        {" "}
+                        {property.nearFacilities}
+                      </div>
+                      <div className="md:col-span-2 col-span-5 text-gray-500 text-md md:hidden ">
+                        {" "}
+                        Approach Road
+                      </div>
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden">
+                        {" "}
+                        {property.approachRoad}
+                      </div>
+                      <div className="md:col-span-2 text-gray-500 text-md md:hidden">
+                        {" "}
+                        Facilities
+                      </div>
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden">
+                        {" "}
+                        {property.facilities}
+                      </div>
 
-<div className="grid grid-cols-9  shadow-2xl rounded-md bg-white p-7 ">
-
-<table className="col-span-8 font1" >
-<p className=" text-2xl font-bold  py-4 ">More Details</p>
-<tbody className="gap-y-5">
-<tr className="">
-  <td className="  text-gray-500 py-4 text-lg  w-44">Price</td>
-  <td className=" text-black font-medium py-4">₹.{property?.askPrice}</td>
-</tr>
-<tr>
-  <td className="  text-gray-500 text-lg py-4">Address</td>
-  <td className=" text-black py-2 capitalize font-medium">{property?.layoutName},{property?.streetName},{property?.location}</td>
-</tr><tr>
-  <td className="  text-gray-500 text-lg py-4">Land Mark</td>
-  <td className=" text-black py-4 font-medium capitalize">{property.nearFacilities}</td>
-</tr><tr>
-  <td className="  text-gray-500 text-lg py-4">Approach Road</td>
-  <td className=" text-black py-4 font-medium capitalize">{property.approachRoad}</td>
-</tr>
-<tr>
-  <td className="  text-gray-500 text-lg py-4">Facilities</td>
-  <td className=" text-black py-4 font-medium capitalize">{property.facilities}</td>
-</tr>
-<tr>
-  <td className="  text-gray-500 text-lg py-4">Description</td>
-  <td className=" text-black py-4 font-medium capitalize">{property.Description}</td>
-</tr>
-</tbody> 
-
-</table>
-
-</div>
-
-</div>
-<div>2</div>
-
+                      <div className="md:col-span-2 text-gray-500 text-md py-2">
+                        {" "}
+                        Description
+                      </div>
+                      <div className="col-span-9 text-black  md:pl-3 font-light text-sm capitalize md:py-3 pr-5">
+                        {" "}
+                        {property.Description}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="px-7  md:hidden  ">
+                  <div class="w-80 bg-white  shadow-2xl px-5 rounded  animate-pulse hover:animate-none  cursor-pointer">
+                    <p className="font flex justify-center pt-5 text-lg underline">
+                      {" "}
+                      Contact Owner
+                    </p>
+                    <div class="h-72 w-full checker-bg flex items-center justify-center p-4 text-blue-500">
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          validation.handleSubmit();
+                        }}
+                      >
+                        {" "}
+                        <div class="relative z-0 mb-6 w-full group">
+                          <input
+                            type="name"
+                            name="name"
+                            id="floating_name"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+                            placeholder=" "
+                            onChange={validation.handleChange}
+                            value={validation.values.name}
+                            invalid={validation.errors.name ? true : false}
+                          />
+                          <label
+                            for="floating_name"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                          >
+                            Name
+                          </label>{" "}
+                          {validation.errors.name ? (
+                            <span type="invalid">{validation.errors.name}</span>
+                          ) : null}
+                        </div>
+                        <div class="relative z-0 mb-6 w-full group ">
+                          <input
+                            type="email"
+                            name="email"
+                            id="floating_email"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+                            placeholder=" "
+                            onChange={validation.handleChange}
+                            value={validation.values.email}
+                            invalid={validation.errors.email ? true : false}
+                          />
+                          <label
+                            for="floating_email"
+                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                          >
+                            Email address
+                          </label>{" "}
+                          {validation.errors.email ? (
+                            <span type="invalid">
+                              {validation.errors.email}
+                            </span>
+                          ) : null}
+                        </div>
+                        <div class="relative z-0 mb-6 w-full group">
+                          <input
+                            type="phonenumber"
+                            name="phonenumber"
+                            id="floating_phonenumber"
+                            class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+                            placeholder=" "
+                            onChange={validation.handleChange}
+                            value={validation.values.phonenumber}
+                            invalid={
+                              validation.errors.phonenumber ? true : false
+                            }
+                          />
+                          <label
+                            for="floating_phoneNumber"
+                            class=" peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                          >
+                            Phone Number
+                          </label>{" "}
+                          {validation.errors.phonenumber ? (
+                            <span type="invalid">
+                              {validation.errors.phonenumber}
+                            </span>
+                          ) : null}
+                        </div>
+                      </form>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </div>
+                  <div class="p-4 border-t border-gray-200">
+                    <div class="flex items-center justify-center">
+                      <button
+                        class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                        onClick={handlebuyerReg}
+                      >
+                        Contact
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div></div>
               </div>
-
             </div>
           </div>
 

@@ -10,7 +10,7 @@ import Image from "../assets/images/avadar3.webp";
 import Search from "../pages/Search";
 import Login from "../pages/auth/Login";
 import { Carousel } from "../pages/Carousel";
-
+import Logo from "../assets/logo/logo.png";
 const NavItem = [
   { name: "HOME", link: "/" },
   { name: "SELL PROPERTY", link: "/sell" },
@@ -114,7 +114,9 @@ function Navbar() {
       <div className="Navbar  uppercase  sticky top-0 z-100  bg-white  ">
         <nav className="bg-transparent">
           <div className="py-3 px-1  mx-auto  ">
-            <div className="flex justify-between items-center px-5 shadow-md  py-2 ">
+            <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 ">
+            <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block"><Link to='/'> <img className="h-16" src={Logo}></img></Link></span>
+
               {isMobileview ? (
                 <div className="flex items-center gap-4 lg:mt-0 text-black  font">
                   <NavLink
@@ -138,7 +140,7 @@ function Navbar() {
                     {" "}
                     <div className="hover:text-amber-700">SELL PROPERTY</div>
                   </NavLink>
-                  <Link to="/login"></Link>{" "}
+                
                   <NavLink
                     to="/r"
                     className={({ isActive }) =>
@@ -180,8 +182,8 @@ function Navbar() {
                     <div className="hover:text-amber-700">ABOUT US</div>
                   </NavLink>
                 </div>
-              ) : (
-                <Mobilenav />
+              ) : (<div className="flex"> <div className="pt-4"><Mobilenav /></div><div> <Link to='/'> <img className="h-12" src={Logo}></img></Link></div> 
+              </div>
               )}
               {/* <Search/> */}
 
@@ -199,7 +201,7 @@ function Navbar() {
                           />
                           <span>
                             <div className="px-2 pt-1 text-amber-700 font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center  hover:border-black">
-                              {user?.firstname} {user?.lastname}
+                              {user?.firstname} 
                             </div>
                           </span>
                           <svg

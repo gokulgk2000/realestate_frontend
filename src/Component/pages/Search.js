@@ -16,7 +16,7 @@ const Search = () => {
   const [betRoomCount, setBetRoomCount] = useState("0");
   const [allcategory, setAllCategory] = useState([]);
   const [showBedRoom, setShowBedRoom] = useState(true);
-  const [showSqft, setShowSqft] = useState(false);
+ 
   const [property, setProperty] = useState([]);
 
   const categories = async () => {
@@ -82,19 +82,18 @@ const Search = () => {
   }, [selectCategory]);
 
   return (
-    <div style={{ backgroundImage: `url(${ok})` }} className="w-screen ">
-      <div className="md:px-20 md:pt-44  md:pb-32 ">
-        <div className="animate-bounce  md:shadow-md hover:shadow-2xl hover:scale-95 md:h-48 md:border-2 md:border-b-gray-100  bg-transparent opacity-80 hover:opacity-100">
+    // style={{ backgroundImage: `url(${ok})` }}
+   
+      <div className="  ">
+        <div className="">
           ​
-          <div className="flex justify-start md:text-3xl   pl-5 -mt-3 font ddd ">
-            Find Your Desired Home
-          </div>
-          <div className=" pl-9 items-center  lg:block pt-4  md:flex font">
-            <form className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 gap-x-1 opacity-90 hover:opacity-100">
-              <div className="flex">
+        
+          <div className="items-center  lg:block md:pt-4  md:flex font md:pl-0 pl-8 md:rounded-full">
+            <form className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-90 hover:opacity-100  rounded-full">
+              <div className="flex rounded-lg shadow-lg">
                 {" "}
                 <svg
-                  className="h-14 w-14 pt-3  bg-white"
+                  className="h-12 w-12 pt-3  bg-white rounded-bl-lg rounded-tl-lg"
                   viewBox="0 0 122.88 115.52"
                 >
                   <path d="M119.2,111.86V3.66H57.86V41l-3.65-2.9V2.68A2.89,2.89,0,0,1,55.05.87h0A2.92,2.92,0,0,1,57.13,0h62.8A2.92,2.92,0,0,1,122,.86l.13.14a2.9,2.9,0,0,1,.74,1.94V31.15h0v80.71H104V87.1a1.67,1.67,0,0,0-1.67-1.67H90.44v30.09h32.44v-3.66ZM7.74,115.51V79.74a6.18,6.18,0,0,1-4.27.2A5.08,5.08,0,0,1,1.12,78.3,5.2,5.2,0,0,1,0,75.64a6.72,6.72,0,0,1,1.61-5h0a1.67,1.67,0,0,1,.23-.23l38.38-30a1.38,1.38,0,0,1,1.81-.07l38.47,29.9h0l.17.15a6.34,6.34,0,0,1,1.79,5.84,5.39,5.39,0,0,1-3.4,3.82,5.9,5.9,0,0,1-4.57-.3v35.59H70.77V78.18c0-.68-26.39-21.54-29.3-23.81-3.09,2.35-30,23-30,23.91v37.24ZM41.33,79.2A14.75,14.75,0,0,1,56,93.89v15.65H26.64V93.89A14.73,14.73,0,0,1,41.33,79.2Zm1.27,2.62V93.93H53.46v0A12.17,12.17,0,0,0,42.6,81.82Zm0,14.66V107H53.46V96.48ZM40.05,107V96.48H29.2V107Zm0-13.06V81.82A12.18,12.18,0,0,0,29.2,93.89v0ZM23.94,112.32H58.71v2.55H23.94v-2.55ZM66.68,12.87h9.85a.29.29,0,0,1,.28.28v11.4a.28.28,0,0,1-.28.27H66.68a.27.27,0,0,1-.28-.27V13.15a.28.28,0,0,1,.28-.28Zm33.86,0h9.85a.29.29,0,0,1,.28.28v11.4a.28.28,0,0,1-.28.27h-9.85a.28.28,0,0,1-.28-.27V13.15a.29.29,0,0,1,.28-.28Zm-16.93,0h9.85a.29.29,0,0,1,.28.28v11.4a.28.28,0,0,1-.28.27H83.61a.27.27,0,0,1-.28-.27V13.15a.28.28,0,0,1,.28-.28ZM66.68,35.76h9.85a.28.28,0,0,1,.28.27v11.4a.29.29,0,0,1-.28.28H66.68a.28.28,0,0,1-.28-.28V36a.27.27,0,0,1,.28-.27Zm33.86,0h9.85a.28.28,0,0,1,.28.27v11.4a.29.29,0,0,1-.28.28h-9.85a.29.29,0,0,1-.28-.28V36a.28.28,0,0,1,.28-.27Zm-16.93,0h9.85a.28.28,0,0,1,.28.27v11.4a.29.29,0,0,1-.28.28H83.61a.28.28,0,0,1-.28-.28V36a.27.27,0,0,1,.28-.27Zm16.93,22.88h9.85a.29.29,0,0,1,.28.28V70.31a.29.29,0,0,1-.28.28h-9.85a.29.29,0,0,1-.28-.28V58.92a.29.29,0,0,1,.28-.28Zm-16.93,0h9.85a.29.29,0,0,1,.28.28V70.31a.29.29,0,0,1-.28.28h-3V66.82l-7.11-5.64V58.92a.28.28,0,0,1,.28-.28Z" />
@@ -116,11 +115,11 @@ const Search = () => {
               </div>
 
               {showBedRoom && (
-                <div className="flex ">
+                <div className="flex rounded-lg md:rounded-none shadow-lg">
                   {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-14 w-14 pt-3  bg-white"
+                    className="h-12 w-12 pt-3  bg-white"
                     shape-rendering="geometricPrecision"
                     text-rendering="geometricPrecision"
                     image-rendering="optimizeQuality"
@@ -137,7 +136,7 @@ const Search = () => {
                     id="bedRoom"
                     name="bedRoom"
                     label="BHK"
-                    className="  px-4 border-l-0  text-black capitalize w-48 md:-ml-1"
+                    className="  px-4 border-l-0 border-r-0  text-black capitalize w-48 md:-ml-1"
                     onChange={handleBedsChange}
                   >
                     <option value="0">BHK</option>
@@ -155,33 +154,11 @@ const Search = () => {
                 </div>
               )}
 
-              {/* <select className="px-4 border  grad-btn text-white  " >
-        <option>
-          {" "}
-          <button class="  py-1 px-4 bg-white text-gray-600 rounded absolute opcity-80   group-hover:block group-hover:  disabled:opacity-50 inline-flex items-center">
-            {" "}
-            BHK
-           
-          </button>{" "}
-        </option>
-        <option value="" className=" border-0 text-black hover:text-black ">
-          1BHK
-        </option>
-
-        <option value="" className=" border-0 text-black hover:text-black">
-          2BHK
-        </option>
-
-        <option value="" className=" border-0 text-black hover:text-black">
-          3BHK
-        </option>
-        <option value="" className=" border-0 text-black hover:text-black">
-          +4BHK
-        </option></select> */}
-              <div className="flex">
+            
+              <div className="flex shadow-lg">
                 {" "}
                 <svg
-                  className="h-14 w-14 pt-3  bg-white"
+                  className="h-12 w-12 pt-3  bg-white"
                   viewBox="0 0 118.43 122.88"
                 >
                   <path
@@ -212,51 +189,33 @@ const Search = () => {
                     </svg>
                   </button>
                 ) : (
-                  <svg
+                  <button><svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-14 w-12 px-2 md:hidden bg-white"
                     viewBox="0 0 507 511.92"
                   >
                     <path d="M223.36 0c61.68 0 117.53 25 157.95 65.43 40.42 40.42 65.42 96.26 65.42 157.94 0 45.12-13.39 87.12-36.4 122.25L507 450.99l-66.66 60.93-93.23-102.59c-35.42 23.63-77.98 37.4-123.75 37.4-61.67 0-117.52-25-157.94-65.42C25 340.88 0 285.04 0 223.36c0-61.67 25-117.52 65.42-157.94S161.69 0 223.36 0zM152.6 201.55l47.29 45.86 90.66-102.01c5.05-5.11 8.22-9.22 14.43-2.81l15.15 15.63c6.62 6.55 6.29 10.4.04 16.5L211.42 292.63c-13.18 12.91-10.89 13.7-24.25.45l-63.51-63.24c-2.79-3.01-2.49-6.06.56-9.07l18.39-19.26c3.55-3.74 6.38-3.41 9.99.04zm211.09-118.5c-35.91-35.91-85.53-58.13-140.33-58.13-54.8 0-104.41 22.22-140.32 58.13-35.91 35.91-58.12 85.51-58.12 140.31s22.21 104.42 58.12 140.32c35.91 35.92 85.52 58.12 140.32 58.12s104.42-22.2 140.33-58.12c35.91-35.9 58.11-85.51 58.11-140.32 0-54.8-22.2-104.4-58.11-140.31z" />
-                  </svg>
+                  </svg></button>
                 )}
               </div>
-
+<div className="hidden md:flex">
               {searchText ? (
-                <button
-                  className=" pb-1 border-2  bg-white hover:bg-amber-300 rounded-br-full rounded-tr-full"
-                  onClick={navigateToProperty}
-                >
-                  {" "}
-                  <button
-                    className="px-3  pt-1  hidden md:block text-black rounded-full hover:text-black hover:bg-amber-300"
-                    onClick={navigateToProperty}
-                  >
-                    Search Properties
-                  </button>
-                </button>
+              <div className="flex shadow-lg rounded-lg">
+<button className="rounded-br-lg rounded-tr-lg bg-white px-2" onClick={navigateToProperty}>Search Properties</button>
+              </div>
               ) : (
-                <div className="flex ">
+                <div className="flex shadow-lg rounded-lg">
                   {" "}
-                  <button className=" pb-1 border-2 bg-white hover:bg-amber-200 ">
-                    <button className="px-3 pt-1  text-black  hover:text-black hidden md:block">
-                      Search Properties
-                    </button>
-                  </button>
+                 <button className="rounded-br-lg rounded-tr-lg bg-white px-2">Search Properties</button>
                 </div>
               )}
+              </div>
             </form>
           </div>
         </div>
-        <p className="font text-3xl d-text hidden md:block text-center pt-20 ">
-          “The best investment on Earth is earth.”
-          {/* “You will never be completely at home again, because part of your
-          heart will always be elsewhere. That is the price you pay for the
-          richness of loving and knowing people in more than one place.” */}
-          {/* “Home is a place you grow up wanting to leave, and grow old wanting to get back to.” */}
-        </p>
+       
       </div>
-    </div>
+    
   );
 };
 

@@ -35,23 +35,29 @@ const PropertyDetails = () => {
     category: "",
     title:"",
     Seller: "",
+    yourName: "",
     location: "",
     layoutName: "",
+    streetName: "",
     landArea: "",
     facing: "",
     approachRoad: "",
     builtArea: "",
     bedRoom: "",
+    bathRoom: "",
+    floor: "",
     floorDetails: "",
     propertyStatus: "",
-    nearTown: "",
+    nearFacilities: "",
     costSq: "",
     facilities: "",
-    askPrice: "",
+    bargainPrice: "",
+    negotiablePrice: "",
     propertyPic: "",
     Description: "",
     status: "",
   });
+  console.log("getProperty",getProperty)
   const [rerender, setRerender] = useState(true);
 
   const getPropertyId = async () => {
@@ -65,19 +71,24 @@ const PropertyDetails = () => {
         category: Property?.category,
         title: Property?.title,
         Seller: Property?.Seller,
+        yourName: Property?.yourName,
         location: Property?.location,
         layoutName: Property?.layoutName,
         landArea: Property?.landArea,
+        streetName: Property?.streetName,
         facing: Property?.facing,
         approachRoad: Property?.approachRoad,
         builtArea: Property?.builtArea,
         bedRoom: Property?.bedRoom,
+        bathRoom: Property?.bathRoom,
+        floor: Property?.floor,
         floorDetails: Property?.floorDetails,
         propertyStatus: Property?.propertyStatus,
-        nearTown: Property?.nearTown,
+        nearFacilities: Property?.nearFacilities,
         costSq: Property?.costSq,
         facilities: Property?.facilities,
-        askPrice: Property?.askPrice,
+        bargainPrice: Property?.bargainPrice,
+        negotiablePrice: Property?.negotiablePrice,
         propertyPic: Property?.propertyPic,
         Description: Property?.Description,
         status: Property?.status,
@@ -243,6 +254,17 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, Seller: e.target.value })
                 }
               />
+              <p className=" text-amber-700"> yourName :</p>
+              <Input
+                type="text"
+                name="yourName"
+                placeholder="Enter the yourName "
+                value={getProperty?.yourName}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, yourName: e.target.value })
+                }
+              />
               <p className=" text-amber-700"> CostSq :</p>
 
               <Input
@@ -275,6 +297,17 @@ console.log("first",getProperty)
                 disabled={!isEdit}
                 onChange={(e) =>
                   setGetProperty({ ...getProperty, layoutName: e.target.value })
+                }
+              />
+              <p className=" text-amber-700"> streetName :</p>
+              <Input
+                type="text"
+                name="streetName"
+                placeholder="Enter the streetName "
+                value={getProperty?.streetName}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, streetName: e.target.value })
                 }
               />
               <p className=" text-amber-700"> LandArea :</p>
@@ -339,6 +372,18 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, bedRoom: e.target.value })
                 }
               />
+              <p className=" text-amber-700"> bathRoom :</p>
+
+              <Input
+                type="text"
+                name="bathRoom"
+                placeholder="Enter the bathRoom "
+                value={getProperty?.bathRoom}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, bathRoom: e.target.value })
+                }
+              />
               <p className=" text-amber-700"> FloorDetails :</p>
 
               <Input
@@ -354,16 +399,32 @@ console.log("first",getProperty)
                   })
                 }
               />
-              <p className=" text-amber-700"> NearTown :</p>
+              <p className=" text-amber-700"> floor :</p>
 
               <Input
                 type="text"
-                name="NearTown"
-                placeholder="Enter the NearTown "
-                value={getProperty?.nearTown}
+                name="floor"
+                placeholder="Enter the floor "
+                value={getProperty?.floor}
                 disabled={!isEdit}
                 onChange={(e) =>
-                  setGetProperty({ ...getProperty, nearTown: e.target.value })
+                  setGetProperty({
+                    ...getProperty,
+                    floor: e.target.value,
+                  })
+                }
+              />
+             
+              <p className=" text-amber-700"> nearFacilities :</p>
+
+              <Input
+                type="text"
+                name="nearFacilities"
+                placeholder="Enter the nearFacilities "
+                value={getProperty?.nearFacilities}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, nearFacilities: e.target.value })
                 }
               />
               <p className=" text-amber-700"> Facilities :</p>
@@ -378,16 +439,28 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, facilities: e.target.value })
                 }
               />
-              <p className=" text-amber-700">AskPrice :</p>
+              <p className=" text-amber-700">bargainPrice :</p>
+
+              <Input
+                type="number"
+                name="bargainPrice"
+                placeholder="Enter the bargainPrice "
+                value={getProperty?.bargainPrice}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, bargainPrice: e.target.value })
+                }
+              />
+              <p className=" text-amber-700">negotiablePrice :</p>
 
               <Input
                 type="text"
-                name="AskPrice"
-                placeholder="Enter the AskPrice "
-                value={getProperty?.askPrice}
+                name="negotiablePrice"
+                placeholder="Enter the negotiablePrice "
+                value={getProperty?.negotiablePrice}
                 disabled={!isEdit}
                 onChange={(e) =>
-                  setGetProperty({ ...getProperty, askPrice: e.target.value })
+                  setGetProperty({ ...getProperty, negotiablePrice: e.target.value })
                 }
               />
               <p className=" text-amber-700">Description :</p>

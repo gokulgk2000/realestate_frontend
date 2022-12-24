@@ -9,6 +9,8 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/property/Sellproperty`, payload);
   const getPropertybyUserId = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
+  const getPremiumProperty = (payload) =>
+  post(`${BASE_URL}/admin/topProperty`, payload);
   const getPropertyCount = (payload) =>
   post(`${BASE_URL}/property/propertyCount`, payload);
   const getSearchAllProperty = (payload) =>
@@ -72,6 +74,7 @@ const updateProperty = (payload) =>
     getbuyerdetails,
     PropertyRegistration,
     userLogin,
+    getPremiumProperty,
     getSearchAllProperty,
     getPropertyCount,
     getProById,

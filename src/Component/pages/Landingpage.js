@@ -2,29 +2,31 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { findCategory, getPropertiescategoryId } from "../helper/backend_helpers";
+import {
+  findCategory,
+  getPropertiescategoryId,
+} from "../helper/backend_helpers";
 import Property from "./Property";
-import {Carousel} from "./Carousel";
-
+import { Carousel } from "./Carousel";
+import TopProperties from "./TopProperties";
 
 const Landingpage = () => {
-
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState();
   const [category, setCategory] = useState();
-  const[bedRoom,setBetRoom]=('')
+  const [bedRoom, setBetRoom] = "";
   const [selectCategory, setSelectCategory] = useState([]);
   const [betRoomCount, setBetRoomCount] = useState();
   const [allcategory, setAllCategory] = useState([]);
   const [property, setProperty] = useState([]);
-  const [isLoading, setLoading]=useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const categories = async () => {
     setLoading(true);
     const res = await getPropertiescategoryId({
       id: category,
       searchText,
-      bedRoom
+      bedRoom,
     });
 
     if (res.success) {
@@ -43,7 +45,7 @@ const Landingpage = () => {
   useEffect(() => {
     const allcategory = async () => {
       const res = await findCategory();
-     
+
       setAllCategory(res.category);
 
       // setAllCategory(res.category._id);
@@ -52,13 +54,11 @@ const Landingpage = () => {
     };
 
     allcategory();
-  }, [ ]);
+  }, []);
 
   const navigateToProperty = (e) => {
-    e.preventDefault(); 
-    navigate(
-      `/property?search=${searchText}&category=${selectCategory}&beds=${betRoomCount}`
-    );
+    e.preventDefault();
+    navigate(`/property`);
   };
 
   const handleCategoryChange = (event) => {
@@ -70,8 +70,7 @@ const Landingpage = () => {
     setBetRoomCount(event.target.value);
   };
   return (
-    <div>
-
+    <div className=" md:pl-32 md:pr-24">
       {/* <div className="  items-center  md:hidden  ">
       <form className="flex justify-center  h-10 w-full ">
         <select
@@ -137,19 +136,28 @@ const Landingpage = () => {
 
       <div className="font ">
         <Carousel />
-   {isLoading ?(
-        <div className="text-center p-5  "> 
-       <button type="button" class="grad1 ">
-  <svg class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
-  </svg>
-  Loading...
-</button>
-        </div>
-        ):(
-        <>
-       
-          <Property />
-      </>
+        {isLoading ? (
+          <div className="text-center p-5  ">
+            <button type="button" class="grad1 ">
+              <svg
+                class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 "
+                viewBox="0 0 24 24"
+              ></svg>
+              Loading...
+            </button>
+          </div>
+        ) : (
+          <div className="shadow-2xl  ">
+            <TopProperties />
+            <div className="flex justify-center py-2">
+              <button
+                className="bg-amber-300 py-2 px-3 rounded-lg hover:bg-amber-400 hover:text-white"
+                onClick={navigateToProperty}
+              >
+                View More
+              </button>
+            </div>
+          </div>
         )}
         {/* <Category /> */}
       </div>

@@ -187,7 +187,7 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
                 </div>
 
                 <p class="ml-2 text-gray-800 line-clamp-1">
-                  {pro?.yourName} {pro?.category}
+                  {pro?.yourName} 
                 </p>
               </div>
             </div>

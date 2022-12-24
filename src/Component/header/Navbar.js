@@ -142,7 +142,7 @@ function Navbar() {
                   </NavLink>
                 
                   <NavLink
-                    to="/r"
+                    to="/promotors"
                     className={({ isActive }) =>
                       isActive
                         ? "border-b-2 border-black text-amber-700"
@@ -152,7 +152,7 @@ function Navbar() {
                     <div className="hover:text-amber-700">PROMOTORS</div>
                   </NavLink>{" "}
                   <NavLink
-                    to="/p"
+                    to="/mediators"
                     className={({ isActive }) =>
                       isActive
                         ? "border-b-2 border-black text-amber-700"

@@ -238,7 +238,7 @@ else{const allImages = [...target.files].map((f) => f);
   };
 
   return (
-    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font ">
+    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-32 md:pr-24">
       <form
         className="col-span-3 gap-1"
         onSubmit={(e) => {
@@ -786,16 +786,7 @@ else{const allImages = [...target.files].map((f) => f);
 </ul>
 ))}
 </div>
-<div className="list-container">
-          <label>You Selected:</label>
-          {facilitiesList.map((item, index) => {
-            return (
-              <div className="chip">
-                <p className="chip-label">{item}</p>
-              </div>
-            );
-          })}
-        </div>
+
         <div className="flex justify-around  mr-6 pt-10  ">
           <div>
             {" "}

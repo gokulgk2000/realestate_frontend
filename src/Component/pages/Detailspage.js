@@ -129,22 +129,22 @@ const Detailspage = () => {
                       ₹. {property?.askPrice}
                     </div>
 
-                    <div className="flex  pl-2 ">
+                    <div className="md:flex grid  pl-2 ">
                       <span className="text-md pt-0 font text-gray-600 capitalize">
                         {property?.bedRoom}BHK {property?.title} For sale{" "}
                       </span>{" "}
-                      <span className="font text-lg capitalize pl-2 underline">
+                      <span className="font text-lg capitalize md:pl-2 underline">
                         {property?.streetName}, {property?.location}
                       </span>
                     </div>
-                    <div className="grid md:grid-cols-4 gap-x- pt-3 ">
+                    <div className="grid md:grid-cols-5 gap-x- pt-3 ">
                       <div className="col-span-2 ">
                         <div className="grid gap-y-2 p-">
                           <img
                             className=" aspect-[3/2]  md:h-72 rounded-md"
                             src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
                           />
-                          <div className="grid grid-cols-5 gap-x-2 gap-y-2 md:pr-12">
+                          <div className="grid grid-cols-5 gap-x-2 gap-y-2 md:pr">
                             {property?.propertyPic?.length > 0 &&
                               property?.propertyPic?.map((image, j) => (
                                 <button key={j}>
@@ -160,7 +160,7 @@ const Detailspage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-span-2 md:pl-5">
+                      <div className="md:col-span-3 grid md:pl-5">
                         {property?.category?.name === "residential" ||
                           property?.category?.name === "villa" ||
                           (property?.category?.name === "appartment" && (
@@ -210,7 +210,7 @@ const Detailspage = () => {
                               </div>{" "}
                             </div>
                           ))}
-                        <div className="grid md:grid-cols-3 grid-cols-2 gap-x-5 md:gap-y-7 gap-y-3 md:px-3 pt-5">
+                        <div className="grid md:grid-cols-3 grid-cols-2 gap-x-5 md:gap-y-7 gap-y-3 md:px-3 pt-5 ">
                           <div className="">
                             {" "}
                             <div className="font text-gray-500 pb-1">
@@ -250,7 +250,7 @@ const Detailspage = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="">
+                  {property?.category?.name !== "land" &&     <div className="">
                             {" "}
                             <div className="font text-gray-500 pb-1">
                               Property Status
@@ -258,16 +258,17 @@ const Detailspage = () => {
                                 {property?.propertyStatus}
                               </div>
                             </div>
-                          </div>
-                          <div className="">
+                          </div>}   
+                        {property?.category?.name !== "land" &&
+                         <div className="">
                             <div className="font text-gray-500 pb-1">
                               Floor Details
                               <div className="text-black font">
                                 {property?.floorDetails}
                               </div>
                             </div>
-                          </div>
-                        </div>
+                          </div>} 
+                     </div> 
 
                         <div className="pt-5">
                           <hr />

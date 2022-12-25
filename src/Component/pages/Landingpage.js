@@ -147,7 +147,7 @@ const Landingpage = () => {
             </button>
           </div>
         ) : (
-          <div className="shadow-2xl  ">
+          <div className="shadow-2xl py-2 ">
             <TopProperties />
             <div className="flex justify-center py-2">
               <button

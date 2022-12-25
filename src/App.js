@@ -40,6 +40,8 @@ import AdminPath, { isAuthAdmin } from "./Component/pages/admin/AuthAdmin";
 import Requested from "./Component/pages/Requestedpage";
 import Payment from "./Component/pages/PaymentPage/Payment";
 import Thankyoupage from "./Component/pages/PaymentPage/Thankyoupage";
+import Promotors from "./Component/pages/promotors/Promotors";
+import Mediators from "./Component/pages/mediators/Mediators";
 
 
 
@@ -55,6 +57,8 @@ const App = () => {
 
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
+      <Route path="/promotors" element={<Promotors />} />
+      <Route path="/mediators" element={<Mediators />} />
         <Route path="/about" element={<About />} />
 
         <Route path="/Intrested" element={<Intrested />} />

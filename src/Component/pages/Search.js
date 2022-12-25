@@ -29,7 +29,7 @@ const Search = () => {
     if (res.success) {
       setProperty(res.category);
 
-      console.log("first", res);
+      console.log("view", res);
     } else {
     }
   };

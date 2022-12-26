@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import toastr from "toastr";
 import moment from "moment";
+import GalleryModel from "../models/GalleryModel";
 const Detailspage = () => {
   const query = useQuery();
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,7 @@ const Detailspage = () => {
   const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
   const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
   const [modalOpen, setModalOpen] = useModal();
+  const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
 
   const validation = useFormik({
     enableReinitialize: true,
@@ -38,6 +40,8 @@ const Detailspage = () => {
       phonenumber: Yup.string().required(" Enter Your phonenumber"),
     }),
     onSubmit: (values, onSubmitProps) => {
+    console.log("buyer",values)
+
       handlebuyerReg({
         name: values.name,
         email: values.email,
@@ -48,11 +52,15 @@ const Detailspage = () => {
     },
   });
 
-  const handlebuyerReg = async (payload) => {
-    const res = await buyerReg(payload);
+  const handlebuyerReg = async () => {
+    const payload = {
+      
+    }
+    const res = await buyerReg (payload);
 
     if (res.success) {
       setBuyerRegistrationSuccess(res.msg);
+      console.log("buyer",res)
       toastr.success(`Buyer has been Registration successfully`, "Success");
     } else {
       setBuyerRegistrationError(res.msg);
@@ -64,7 +72,7 @@ const Detailspage = () => {
 
     if (res.success) {
       setproperty(res?.property);
-      console.log("data", res);
+      // console.log("data", res);
     } else {
       console.log("Error while fetching property");
     }
@@ -113,8 +121,13 @@ const Detailspage = () => {
               onCloseClick={() => setModalOpen(false)}
               currentProperty={propertyId?._id}
             />
+          )}{" "}
+          {modalOpen1 && (
+            <GalleryModel
+              show={modalOpen1}
+              onCloseClick={() => setModalOpen1(false)}
+            />
           )}
-
           <div className="bg-slate-100 md:pl-32 md:pr-24">
             <div className="flex justify-end pt-2">
               <div className=" font-normal text-xs">
@@ -126,7 +139,7 @@ const Detailspage = () => {
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     <div className="flex font font-semibold pl-2  text-xl">
-                      ₹. {property?.askPrice}
+                      ₹. {property?.negotiablePrice}
                     </div>
 
                     <div className="md:flex grid  pl-2 ">
@@ -139,24 +152,85 @@ const Detailspage = () => {
                     </div>
                     <div className="grid md:grid-cols-5 gap-x- pt-3 ">
                       <div className="col-span-2 ">
-                        <div className="grid gap-y-2 p-">
+                        <div className="grid gap-y-1 p-">
+                         <div className="grid">
+                                    <div className="absolute">
+                                      <div className="flex pl-2 pt-2 text-white font">
+                                      <svg
+                                        viewBox="0 0 122.88 91.24 "
+                                        className="h-5 w-5 bg-slate-200"
+                                      >
+                                        <path d="M6.23,0H116.7c1.72,0,3.25,0.7,4.37,1.81c1.11,1.11,1.81,2.69,1.81,4.37v78.88c0,1.72-0.7,3.25-1.81,4.37 c-0.09,0.09-0.19,0.19-0.33,0.28c-1.07,0.98-2.51,1.53-4.09,1.53H6.18c-1.72,0-3.25-0.7-4.37-1.81C0.7,88.32,0,86.74,0,85.06V6.18 c0-1.72,0.7-3.25,1.81-4.37S4.51,0,6.18,0L6.23,0L6.23,0L6.23,0z M31.74,21.42c4.9,0,8.87,3.97,8.87,8.86 c0,4.9-3.97,8.87-8.87,8.87s-8.87-3.97-8.87-8.87C22.87,25.39,26.84,21.42,31.74,21.42L31.74,21.42L31.74,21.42z M69.05,59.46 l17.73-30.66l18.84,47.65l-87.92,0v-5.91l7.39-0.37l7.39-18.1l3.69,12.93h11.08l9.6-24.75L69.05,59.46L69.05,59.46L69.05,59.46z M115.54,7.34H7.39v76.51h108.15L115.54,7.34L115.54,7.34L115.54,7.34z" />
+                                      </svg>
+                                   <p>
+                                    {property?.propertyPic?.length}Photos{" "}</p></div> </div>
+                                
                           <img
-                            className=" aspect-[3/2]  md:h-72 rounded-md"
+                            className=" aspect-[3/2]  md:h-72 rounded-tr-md rounded-tl-md"
                             src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
+                          /></div>
+                          <div className="grid grid-cols-4 gap-x-2 gap-y-2 md:pr">
+                            {" "} 
+                            <div className="col-span-3 gap-x-2 grid grid-cols-3">
+                              {" "}
+                              {property?.propertyPic?.length > 0 &&
+                                property?.propertyPic
+                                  ?.slice(0, 3)
+                                  .map((image, j) => {
+                                    if (property?.propertyPic.length > 4) {
+                                      return (
+                                        <button
+                                          key={j}
+                                          onClick={() => setcurentImage(j)}
+                                        >
+                                          <div className="">
+                                            <img
+                                              src={`${SERVER_URL}/file/${image.id}`}
+                                              className="aspect-[3/2] h-20  rounded-bl-md rounded-br-md"
+                                              onClick={() => setcurentImage(j)}
+                                            />
+                                          </div>
+                                        </button>
+                                      );
+                                    } else {
+                                      return (
+                                        <button key={j}>
+                                          <div className="" >
+                                            <img
+                                              src={`${SERVER_URL}/file/${image.id}`}
+                                              className="aspect-[3/2] h-20  rounded-md"
+                                              onClick={() => setcurentImage(j)}
+                                            />
+                                          </div>
+                                        </button>
+                                      );
+                                    }
+                                  })}
+                            </div>{" "}
+                            {property?.propertyPic?.length >= 3 && (   <div className="  "onClick={() => setModalOpen1(true)}>
+                        
+                                <div
+                                  className="text-white md:text-base font-medium text-sm  flex justify-end cursor-pointer
+                                "
+                                  
+                                >
+                                  <div className="absolute pr-1 ">
+                                    <div className="md:pl-7 pl-5 pt-2">
+                                      <svg
+                                        viewBox="0 0 122.88 91.24 "
+                                        className="h-5 w-5 bg-slate-200"
+                                      >
+                                        <path d="M6.23,0H116.7c1.72,0,3.25,0.7,4.37,1.81c1.11,1.11,1.81,2.69,1.81,4.37v78.88c0,1.72-0.7,3.25-1.81,4.37 c-0.09,0.09-0.19,0.19-0.33,0.28c-1.07,0.98-2.51,1.53-4.09,1.53H6.18c-1.72,0-3.25-0.7-4.37-1.81C0.7,88.32,0,86.74,0,85.06V6.18 c0-1.72,0.7-3.25,1.81-4.37S4.51,0,6.18,0L6.23,0L6.23,0L6.23,0z M31.74,21.42c4.9,0,8.87,3.97,8.87,8.86 c0,4.9-3.97,8.87-8.87,8.87s-8.87-3.97-8.87-8.87C22.87,25.39,26.84,21.42,31.74,21.42L31.74,21.42L31.74,21.42z M69.05,59.46 l17.73-30.66l18.84,47.65l-87.92,0v-5.91l7.39-0.37l7.39-18.1l3.69,12.93h11.08l9.6-24.75L69.05,59.46L69.05,59.46L69.05,59.46z M115.54,7.34H7.39v76.51h108.15L115.54,7.34L115.54,7.34L115.54,7.34z" />
+                                      </svg>
+                                    </div>
+                                    + {property?.propertyPic?.length}Photos{" "}
+                                  </div><img
+                            className=" aspect-[3/2] h-20 rounded-bl-md  rounded-br-md"
+                            src={`${SERVER_URL}/file/${property?.propertyPic[3]?.id}`}
                           />
-                          <div className="grid grid-cols-5 gap-x-2 gap-y-2 md:pr">
-                            {property?.propertyPic?.length > 0 &&
-                              property?.propertyPic?.map((image, j) => (
-                                <button key={j}>
-                                  <div className="">
-                                    <img
-                                      src={`${SERVER_URL}/file/${image.id}`}
-                                      className="aspect-[3/2] h-20  rounded-md"
-                                      onClick={() => setcurentImage(j)}
-                                    />
-                                  </div>
-                                </button>
-                              ))}
+                                </div>
+                             
+                            </div> )}{" "}
                           </div>
                         </div>
                       </div>
@@ -250,25 +324,28 @@ const Detailspage = () => {
                               </div>
                             </div>
                           </div>
-                  {property?.category?.name !== "land" &&     <div className="">
-                            {" "}
-                            <div className="font text-gray-500 pb-1">
-                              Property Status
-                              <div className="text-black font">
-                                {property?.propertyStatus}
+                          {property?.category?.name !== "land" && (
+                            <div className="">
+                              {" "}
+                              <div className="font text-gray-500 pb-1">
+                                Property Status
+                                <div className="text-black font">
+                                  {property?.propertyStatus}
+                                </div>
                               </div>
                             </div>
-                          </div>}   
-                        {property?.category?.name !== "land" &&
-                         <div className="">
-                            <div className="font text-gray-500 pb-1">
-                              Floor Details
-                              <div className="text-black font">
-                                {property?.floorDetails}
+                          )}
+                          {property?.category?.name !== "land" && (
+                            <div className="">
+                              <div className="font text-gray-500 pb-1">
+                                Floor Details
+                                <div className="text-black font">
+                                  {property?.floorDetails}
+                                </div>
                               </div>
                             </div>
-                          </div>} 
-                     </div> 
+                          )}
+                        </div>
 
                         <div className="pt-5">
                           <hr />
@@ -307,7 +384,7 @@ const Detailspage = () => {
                             </span>
                             Contact-
                             <span className="text-black font">
-                              {property?.contact}
+                              {property?.phone}
                             </span>
                           </div>
                         </div>
@@ -409,6 +486,7 @@ const Detailspage = () => {
                       <div class="p-4 border-t border-gray-200">
                         <div class="flex items-center justify-center">
                           <button
+                          type="submit"
                             class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                             onClick={handlebuyerReg}
                           >
@@ -437,7 +515,7 @@ const Detailspage = () => {
                             Price
                           </td>
                           <td className=" text-black font-medium py-4">
-                            ₹.{property?.askPrice}
+                            ₹.{property?.negotiablePrice}
                           </td>
                         </tr>
                         <tr>
@@ -613,374 +691,30 @@ const Detailspage = () => {
                             </span>
                           ) : null}
                         </div>
-                      </form>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </div>
-                  <div class="p-4 border-t border-gray-200">
+                        <div class="p-4 border-t border-gray-200">
                     <div class="flex items-center justify-center">
                       <button
+                      type="submit"
                         class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                        
+
                         onClick={handlebuyerReg}
                       >
                         Contact
                       </button>
                     </div>
                   </div>
+                      </form>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </div>
+                 
                 </div>
                 <div></div>
               </div>
             </div>
           </div>
-
-          {/* <div className=" lg:pt-28 lg:pr-10 lg:pl-10 pb-5 ">
-            <div className="py-4 px-8 bg-white shadow-lg ">
-              <div className="text-2xl semibold font text-amber-700 py-2 flex">
-                {property?.title}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className=" md:grid   grid-cols-3 ">
-                {" "}
-                <div className="">
-                  {isBiggerthanTwo ? (
-                    <div className="absolute grid">
-                      <div className="md:flex mt-44 md:space-x-48 hidden  xl:space-x-80 md:pl-6  lg:pl-15">
-                        {" "}
-                        <button
-                          className="  "
-                          onClick={() => prevImageOnClick()}
-                        >
-                          <svg
-                            version="1.1"
-                            id="Layer_1"
-                            className="w-9 h-9 bg-white hover:bg-am rounded-full hover:bg-amber-400 "
-                            viewBox="0 0 122.88 122.88"
-                          >
-                            <g>
-                              <path d="M84.93,4.66C77.69,1.66,69.75,0,61.44,0C44.48,0,29.11,6.88,18,18C12.34,23.65,7.77,30.42,4.66,37.95 C1.66,45.19,0,53.13,0,61.44c0,16.96,6.88,32.33,18,43.44c5.66,5.66,12.43,10.22,19.95,13.34c7.24,3,15.18,4.66,23.49,4.66 c8.31,0,16.25-1.66,23.49-4.66c7.53-3.12,14.29-7.68,19.95-13.34c5.66-5.66,10.22-12.43,13.34-19.95c3-7.24,4.66-15.18,4.66-23.49 c0-8.31-1.66-16.25-4.66-23.49c-3.12-7.53-7.68-14.29-13.34-19.95C99.22,12.34,92.46,7.77,84.93,4.66L84.93,4.66z M65.85,47.13 c2.48-2.52,2.45-6.58-0.08-9.05s-6.58-2.45-9.05,0.08L38.05,57.13c-2.45,2.5-2.45,6.49,0,8.98l18.32,18.62 c2.48,2.52,6.53,2.55,9.05,0.08c2.52-2.48,2.55-6.53,0.08-9.05l-7.73-7.85l22-0.13c3.54-0.03,6.38-2.92,6.35-6.46 c-0.03-3.54-2.92-6.38-6.46-6.35l-21.63,0.13L65.85,47.13L65.85,47.13z M80.02,16.55c5.93,2.46,11.28,6.07,15.76,10.55 c4.48,4.48,8.09,9.83,10.55,15.76c2.37,5.71,3.67,11.99,3.67,18.58c0,6.59-1.31,12.86-3.67,18.58 c-2.46,5.93-6.07,11.28-10.55,15.76c-4.48,4.48-9.83,8.09-15.76,10.55C74.3,108.69,68.03,110,61.44,110s-12.86-1.31-18.58-3.67 c-5.93-2.46-11.28-6.07-15.76-10.55c-4.48-4.48-8.09-9.82-10.55-15.76c-2.37-5.71-3.67-11.99-3.67-18.58 c0-6.59,1.31-12.86,3.67-18.58c2.46-5.93,6.07-11.28,10.55-15.76c4.48-4.48,9.83-8.09,15.76-10.55c5.71-2.37,11.99-3.67,18.58-3.67 C68.03,12.88,74.3,14.19,80.02,16.55L80.02,16.55z" />
-                            </g>
-                          </svg>
-                        </button>
-                        <button className=" ">
-                          {" "}
-                          <div className=" ">
-                            <button
-                              className=""
-                              onClick={() => nextImageOnClick()}
-                            >
-                              <svg
-                                version="1.1"
-                                id="Layer_1"
-                                className="w-9 h-9 bg-white hover:bg-am rounded-full hover:bg-amber-400 "
-                                viewBox="0 0 122.88 122.88"
-                              >
-                                <g>
-                                  <path d="M37.95,4.66C45.19,1.66,53.13,0,61.44,0c16.96,0,32.33,6.88,43.44,18c5.66,5.66,10.22,12.43,13.34,19.95 c3,7.24,4.66,15.18,4.66,23.49c0,16.96-6.88,32.33-18,43.44c-5.66,5.66-12.43,10.22-19.95,13.34c-7.24,3-15.18,4.66-23.49,4.66 c-8.31,0-16.25-1.66-23.49-4.66c-7.53-3.12-14.29-7.68-19.95-13.34C12.34,99.22,7.77,92.46,4.66,84.93C1.66,77.69,0,69.75,0,61.44 c0-8.31,1.66-16.25,4.66-23.49C7.77,30.42,12.34,23.66,18,18C23.65,12.34,30.42,7.77,37.95,4.66L37.95,4.66z M43.11,67.76 c-3.54-0.03-6.38-2.92-6.35-6.46c0.03-3.54,2.92-6.38,6.46-6.35l21.63,0.13l-7.82-7.95c-2.48-2.52-2.45-6.58,0.07-9.05 c2.52-2.48,6.57-2.45,9.05,0.08l18.67,18.97c2.45,2.5,2.45,6.49,0,8.98L66.52,84.72c-2.48,2.52-6.53,2.55-9.05,0.08 c-2.52-2.48-2.55-6.53-0.08-9.05l7.73-7.85L43.11,67.76L43.11,67.76z M42.86,16.55c-5.93,2.46-11.28,6.07-15.76,10.55 c-4.48,4.48-8.09,9.83-10.55,15.76c-2.37,5.71-3.67,11.99-3.67,18.58c0,6.59,1.31,12.86,3.67,18.58 c2.46,5.93,6.07,11.28,10.55,15.76c4.48,4.48,9.83,8.09,15.76,10.55c5.72,2.37,11.99,3.67,18.58,3.67c6.59,0,12.86-1.31,18.58-3.67 c5.93-2.46,11.28-6.07,15.76-10.55c4.48-4.48,8.09-9.82,10.55-15.76c2.37-5.71,3.67-11.99,3.67-18.58c0-6.59-1.31-12.86-3.67-18.58 c-2.46-5.93-6.07-11.28-10.55-15.76c-4.48-4.48-9.83-8.09-15.76-10.55c-5.71-2.37-11.99-3.67-18.58-3.67S48.58,14.19,42.86,16.55 L42.86,16.55z" />
-                                </g>
-                              </svg>
-                            </button>
-                          </div>
-                        </button>
-                      </div>{" "}
-                    </div>
-                  ) : (
-                    <div className="absolute grid">
-                      <div className="md:flex mt-44 md:space-x-64 2xl:space-x-44 lg:space-x-44  hidden pl-16">
-                        {" "}
-                        <button>
-                          {" "}
-                          <div className="   ">
-                            <button
-                              className=" "
-                              onClick={() => prevImageOnClick()}
-                            >
-                              <svg
-                                version="1.1"
-                                id="Layer_1"
-                                className="w-9 h-9 bg-white hover:bg-am rounded-full hover:bg-amber-400 "
-                                viewBox="0 0 122.88 122.88"
-                              >
-                                <g>
-                                  <path d="M84.93,4.66C77.69,1.66,69.75,0,61.44,0C44.48,0,29.11,6.88,18,18C12.34,23.65,7.77,30.42,4.66,37.95 C1.66,45.19,0,53.13,0,61.44c0,16.96,6.88,32.33,18,43.44c5.66,5.66,12.43,10.22,19.95,13.34c7.24,3,15.18,4.66,23.49,4.66 c8.31,0,16.25-1.66,23.49-4.66c7.53-3.12,14.29-7.68,19.95-13.34c5.66-5.66,10.22-12.43,13.34-19.95c3-7.24,4.66-15.18,4.66-23.49 c0-8.31-1.66-16.25-4.66-23.49c-3.12-7.53-7.68-14.29-13.34-19.95C99.22,12.34,92.46,7.77,84.93,4.66L84.93,4.66z M65.85,47.13 c2.48-2.52,2.45-6.58-0.08-9.05s-6.58-2.45-9.05,0.08L38.05,57.13c-2.45,2.5-2.45,6.49,0,8.98l18.32,18.62 c2.48,2.52,6.53,2.55,9.05,0.08c2.52-2.48,2.55-6.53,0.08-9.05l-7.73-7.85l22-0.13c3.54-0.03,6.38-2.92,6.35-6.46 c-0.03-3.54-2.92-6.38-6.46-6.35l-21.63,0.13L65.85,47.13L65.85,47.13z M80.02,16.55c5.93,2.46,11.28,6.07,15.76,10.55 c4.48,4.48,8.09,9.83,10.55,15.76c2.37,5.71,3.67,11.99,3.67,18.58c0,6.59-1.31,12.86-3.67,18.58 c-2.46,5.93-6.07,11.28-10.55,15.76c-4.48,4.48-9.83,8.09-15.76,10.55C74.3,108.69,68.03,110,61.44,110s-12.86-1.31-18.58-3.67 c-5.93-2.46-11.28-6.07-15.76-10.55c-4.48-4.48-8.09-9.82-10.55-15.76c-2.37-5.71-3.67-11.99-3.67-18.58 c0-6.59,1.31-12.86,3.67-18.58c2.46-5.93,6.07-11.28,10.55-15.76c4.48-4.48,9.83-8.09,15.76-10.55c5.71-2.37,11.99-3.67,18.58-3.67 C68.03,12.88,74.3,14.19,80.02,16.55L80.02,16.55z" />
-                                </g>
-                              </svg>
-                            </button>
-                          </div>
-                        </button>
-                        <button className=" ">
-                          {" "}
-                          <div className="">
-                            <button
-                              className=""
-                              onClick={() => nextImageOnClick()}
-                            >
-                              <svg
-                                version="1.1"
-                                id="Layer_1"
-                                className="w-9 h-9 bg-white hover:bg-am rounded-full hover:bg-amber-400 "
-                                viewBox="0 0 122.88 122.88"
-                              >
-                                <g>
-                                  <path d="M37.95,4.66C45.19,1.66,53.13,0,61.44,0c16.96,0,32.33,6.88,43.44,18c5.66,5.66,10.22,12.43,13.34,19.95 c3,7.24,4.66,15.18,4.66,23.49c0,16.96-6.88,32.33-18,43.44c-5.66,5.66-12.43,10.22-19.95,13.34c-7.24,3-15.18,4.66-23.49,4.66 c-8.31,0-16.25-1.66-23.49-4.66c-7.53-3.12-14.29-7.68-19.95-13.34C12.34,99.22,7.77,92.46,4.66,84.93C1.66,77.69,0,69.75,0,61.44 c0-8.31,1.66-16.25,4.66-23.49C7.77,30.42,12.34,23.66,18,18C23.65,12.34,30.42,7.77,37.95,4.66L37.95,4.66z M43.11,67.76 c-3.54-0.03-6.38-2.92-6.35-6.46c0.03-3.54,2.92-6.38,6.46-6.35l21.63,0.13l-7.82-7.95c-2.48-2.52-2.45-6.58,0.07-9.05 c2.52-2.48,6.57-2.45,9.05,0.08l18.67,18.97c2.45,2.5,2.45,6.49,0,8.98L66.52,84.72c-2.48,2.52-6.53,2.55-9.05,0.08 c-2.52-2.48-2.55-6.53-0.08-9.05l7.73-7.85L43.11,67.76L43.11,67.76z M42.86,16.55c-5.93,2.46-11.28,6.07-15.76,10.55 c-4.48,4.48-8.09,9.83-10.55,15.76c-2.37,5.71-3.67,11.99-3.67,18.58c0,6.59,1.31,12.86,3.67,18.58 c2.46,5.93,6.07,11.28,10.55,15.76c4.48,4.48,9.83,8.09,15.76,10.55c5.72,2.37,11.99,3.67,18.58,3.67c6.59,0,12.86-1.31,18.58-3.67 c5.93-2.46,11.28-6.07,15.76-10.55c4.48-4.48,8.09-9.82,10.55-15.76c2.37-5.71,3.67-11.99,3.67-18.58c0-6.59-1.31-12.86-3.67-18.58 c-2.46-5.93-6.07-11.28-10.55-15.76c-4.48-4.48-9.83-8.09-15.76-10.55c-5.71-2.37-11.99-3.67-18.58-3.67S48.58,14.19,42.86,16.55 L42.86,16.55z" />
-                                </g>
-                              </svg>
-                            </button>
-                          </div>
-                        </button>
-                      </div>{" "}
-                    </div>
-                  )}
-                  <div>
-                    <img
-                      className=" aspect-[3/2] md:pr-5 md:h-96 "
-                      src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
-                    />
-                  </div>
-
-                  <div className="text-center">
-                    {" "}
-                    {property?.propertyPic.map((image, j) => (
-                      <span
-                        key={j}
-                        className={`${
-                          curentImage === j ? "text-red-500" : "text-gray-300"
-                        } cursor-pointer px-0.5`}
-                        onClick={() => setcurentImage(j)}
-                      >
-                        ●
-                      </span>
-                    ))}
-                  </div>
-                  <div className=" md:pt-10 flex justify-center">
-                    <button
-                      className="border-2 border-amber-800 hover:text-white rounded-sm px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                      onClick={() =>
-                         handleBook(property?._id) && setModalOpen(true)
-                      }
-                    >
-                      Contact
-                    </button>
-                  </div>
-                </div>
-                <br className="md:hidden " />
-                <div className=" md:col-span-2 bg-white border-none -mt-5 ">
-                  <details
-                    class="txt-shadow open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
-                    open
-                  >
-                    <summary class="text-sm text-amber-700 leading-6  dark:text-white font-semibold select-none">
-                      Property Details
-                    </summary>
-                    <div className="  rounded-2xl  capitalize  ">
-                      <div className="md:grid md:grid-cols-2 md:gap-5 px-4 font  txt-shadow hidden">
-                        <table className="leading-10 ">
-                          <tr>
-                            <td>Seller </td>
-                            <td className="text-amber-700    dark:text-white">
-                              {property?.Seller}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Location </td>
-                            <td className="text-amber-700">
-                              {" "}
-                              {property?.location} ,{property?.streetName}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Layoutname </td>
-                            <td className="text-amber-700">
-                              {property?.layoutName}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>landArea </td>
-                            <td className="text-amber-700">
-                              {property?.landArea}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> Property Type </td>
-                            <td className="text-amber-700">
-                              {property?.category?.name}
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>facing </td>
-                            <td className="text-amber-700">
-                              {property?.facing}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>approachRoad </td>
-                            <td className="text-amber-700">
-                              {property?.approachRoad}
-                            </td>{" "}
-                          </tr>
-                        </table>
-
-                        <table>
-                          <tr>
-                            <td>builtArea </td>
-                            <td className="text-amber-700">
-                              {property?.builtArea}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>bedRoom </td>
-                            <td className="text-amber-700">
-                              {property?.bedRoom}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>floorDetails </td>
-                            <td className="text-amber-700">
-                              {property?.floorDetails}
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td>askPrice </td>
-                            <td className="text-amber-700">
-                              {property?.askPrice}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>nearTown </td>
-                            <td className="text-amber-700">
-                              {property?.nearTown}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Costsq </td>
-                            <td className="text-amber-700">
-                              {" "}
-                              ₹.{property?.costSq}sft
-                            </td>
-                          </tr>
-                          <tr className=" truncate">
-                            <td>facilities </td>
-                            <td className="text-amber-700  overflow-hidden text-ellipsis whitespace-wrap w-72 ">
-                              {property?.facilities}
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-
-                      <div className="grid md:grid-cols-1  px-1 text-base font-medium  md:hidden ">
-                        <table className="text-base leading-10">
-                        <tr> <td>Seller </td>
-                          <td className="text-amber-700  text-base  dark:text-white">
-                            {property?.Seller}
-                          </td></tr> 
-                          <tr>
-                            <td>Location </td>
-                            <td className="text-amber-700 ">
-                              {" "}
-                              {property?.location} ,
-                            
-                            </td>
-                          </tr>
-                          <tr> <td>streetName </td>
-                          <td className="text-amber-700">
-                            {property?.streetName}
-                          </td></tr> 
-                          <tr> <td>Layoutname </td>
-                          <td className="text-amber-700">
-                            {property?.layoutName}
-                          </td></tr> 
-                          <tr>
-                            <td>landArea </td>
-                            <td className="text-amber-700">
-                              {property?.landArea}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td> Property Type </td>
-                            <td className="text-amber-700">
-                              {property?.category?.name}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>facing </td>
-                            <td className="text-amber-700">
-                              {property?.facing}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>approachRoad </td>
-                            <td className="text-amber-700">
-                              {property?.approachRoad}
-                            </td>{" "}
-                          </tr>
-                          <tr>
-                            {" "}
-                            <td>builtArea </td>
-                            <td className="text-amber-700">
-                              {property?.builtArea}
-                            </td>
-                          </tr>{" "}
-                         <tr> <td>bedRoom </td>
-                          <td className="text-amber-700">
-                            {property?.bedRoom}
-                          </td>{" "}</tr>
-                      <tr>    <td>floorDetails </td>
-                          <td className="text-amber-700">
-                            {property?.floorDetails}
-                          </td>{" "}</tr>
-                        <tr><td>askPrice </td>
-                          <td className="text-amber-700">
-                            {property?.askPrice}
-                          </td>{" "}</tr>  
-                        <tr>  <td>nearTown </td>
-                          <td className="text-amber-700">
-                            {property?.nearTown}
-                          </td>{" "}</tr>
-                       <tr>  <td>Costsq </td>
-                          <td className="text-amber-700">
-                            {" "}
-                             
-                          </td>{" "}</tr>
-                       
-                        </table>
-                        <p className="border-t-2"> <p className="flex justify-center" >facilities </p>
-                          <p className="text-amber-700  overflow-hidden text-ellipsis whitespace-wrap w-72 ">
-                         {property?.facilities}
-                          </p></p> 
-                      </div>
-                    </div>
-                  </details>
-                  <br />
-                  <div className="bg-white border-none -mt-5 ">
-                    <details
-                      class=" open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-2 rounded-lg"
-                      close
-                    >
-                      <summary class=" text-sm txt-shadow leading-6 text-amber-700 dark:text-white font-semibold select-none">
-                        Description
-                      </summary>
-                      <div class="mt-3 text-md leading-6 font text-slate-800 dark:text-slate-400 p-3">
-                        <p> {property?.Description}</p>
-                      </div>
-                    </details>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       )}
     </>

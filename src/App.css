@@ -1,76 +1,85 @@
 .stretch {
-    width: 50;
-    height: 5cm;
-    resize: horizontal;
-   
-  
-  }
-  @media (min-width: 768px){
-
-.look{
-
-  width: 620px;
+  width: 50;
+  height: 5cm;
+  resize: horizontal;
 }
-
+@media (min-width: 768px) {
+  .look {
+    width: 620px;
   }
-  .in{
-
-border: 2px;
-
-  }
-  .font {
-    font-family: 'Rubik',serif;
-   
+}
+.in {
+  border: 2px;
+}
+.font {
+  font-family: "Rubik", serif;
 }
 .font1 {
-  font-family: 'Rubik',serif;
- font-size: medium;
+  font-family: "Rubik", serif;
+  font-size: medium;
 }
 .grad1 {
-  
-  background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(149, 113, 4));
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0),
+    rgb(149, 113, 4)
+  );
 }
 .grad-mob {
-  
-  background-image: linear-gradient(to top, rgba(204, 255, 0, 0), rgb(149, 113, 4));
+  background-image: linear-gradient(
+    to top,
+    rgba(204, 255, 0, 0),
+    rgb(149, 113, 4)
+  );
 }
-.bg{
+.bg {
   height: 900px;
-  
 }
-.bg-res{
-
- height: 900px;
- width: 100px;
+.bg-res {
+  height: 900px;
+  width: 100px;
 }
 .grad-btn {
-  
-  background-image: linear-gradient(to right, rgb(149, 113, 8), rgba(208, 208, 21, 0));
-  
+  background-image: linear-gradient(
+    to right,
+    rgb(149, 113, 8),
+    rgba(208, 208, 21, 0)
+  );
 }
 .grad-btn-x {
-  
-  background-image: linear-gradient(to left, rgb(149, 113, 8), rgba(208, 208, 21, 0));
-  
+  background-image: linear-gradient(
+    to left,
+    rgb(149, 113, 8),
+    rgba(208, 208, 21, 0)
+  );
 }
-:hover.grad-btn-x{
-  background-image: linear-gradient(to right, rgb(149, 113, 4), rgb(149, 113, 4));
-
-
+:hover.grad-btn-x {
+  background-image: linear-gradient(
+    to right,
+    rgb(149, 113, 4),
+    rgb(149, 113, 4)
+  );
 }
-:hover.grad-btn{
-  background-image: linear-gradient(to right, rgb(149, 113, 4), rgb(149, 113, 4));
-
-
+:hover.grad-btn {
+  background-image: linear-gradient(
+    to right,
+    rgb(149, 113, 4),
+    rgb(149, 113, 4)
+  );
 }
 .grad-card {
-  
-  background-image: linear-gradient(to right, rgba(222, 226, 194, 0), rgb(228, 211, 152));
+  background-image: linear-gradient(
+    to right,
+    rgba(222, 226, 194, 0),
+    rgb(228, 211, 152)
+  );
 }
 .grad-footer {
-  
-  background-image: linear-gradient(to right, rgb(149, 113, 8), rgba(208, 208, 21, 0));
-  
+  background-image: linear-gradient(
+    to right,
+    rgb(149, 113, 8),
+    rgba(208, 208, 21, 0)
+  );
 }
 
 .each-slide-effect > div {
@@ -88,59 +97,80 @@ border: 2px;
   text-align: center;
 }
 
-.carousel-btn{
-
+.carousel-btn {
   margin-left: 1450px;
 }
-.text-color{
+.text-color {
   color: #86711c;
 }
-.search{
+.search {
   padding-left: 510px;
 }
 
-.text-shadow{
+.text-shadow {
   text-shadow: 1px 2px 2px#b5a6a6;
 }
-.txt-shadow{  text-shadow: 1px 0px 0px ;
+.txt-shadow {
+  text-shadow: 1px 0px 0px;
 }
 
-.btn-width{
+.btn-width {
   width: 1500px;
 }
-.btn-width-1{
+.btn-width-1 {
   width: 439px;
 }
-.dd{
-  background-image: linear-gradient(to right, rgb(239, 226, 173), rgb(228, 219, 157));
-
+.dd {
+  background-image: linear-gradient(
+    to right,
+    rgb(239, 226, 173),
+    rgb(228, 219, 157)
+  );
 }
-.ddd{
+.ddd {
   color: white;
   text-shadow: 2px 2px 4px #000000;
 }
-.d-text{
+.d-text {
   color: white;
   text-shadow: 2px 2px 4px #000000;
   opacity: 60%;
 }
-:hover.d-text{
+:hover.d-text {
   zoom: 99.9%;
   position: relative;
- opacity: 100%;
+  opacity: 100%;
 }
 .animate-bounce {
-  animation: bounce 1s ;
-  
+  animation: bounce 1s;
 }
 @keyframes bounce {
-    0%, 100% {
-        transform: translateY(-25%);
-        animation-timing-function: cubic-bezier(0.8,0,1,1);
-    }
-    50% {
-        transform: none;
-        animation-timing-function: cubic-bezier(0,0,0.2,1);
-    }
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
 }
-  
+
+.nav-color {
+  background-color: #a48641;
+}
+.nav-txt {
+  color: #0b0b0a;
+}
+:hover.nav-txt{
+  color:#a48641
+}
+
+
+@media (min-width: 768px) {
+  .card-h{
+
+    height: 470px;
+  }
+
+ }

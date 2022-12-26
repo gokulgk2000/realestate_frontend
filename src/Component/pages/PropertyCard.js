@@ -10,10 +10,10 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
     setModalOpen(true);
   };
   return (
-    <Link to={`/Detailspage?uid=${pro?._id}`} className="grid ">
+    <Link to={`/Detailspage?uid=${pro?._id}`} className="grid py-2 px-2  ">
       <div class=" w-full capitalize grid shadow-2xl rounded-lg">
-        <div class="grid  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full card-h rounded-lg">
-          <div class="grid shadow p-4 rounded-lg bg-white ">
+        <div class="grid  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full  rounded-lg ">
+          <div class="grid shadow p-4 rounded-lg bg-white  card-h">
             <div class="flex justify-center relative rounded-lg overflow-hidden h-52">
               <div class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
                 <div class="absolute inset-0 bg-black">
@@ -150,7 +150,7 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
               <p class="inline-flex flex-col xl:flex-row justify-end xl:items-center text-gray-700 md:pr-1">
                 <span class="mt-2 xl:mt-0">
                   <p class="inline-block font-medium  text-primary whitespace-nowrap leading-tight rounded-xl md:pr-1">
-                    <span class="text-lg"> ₹.{pro?.askPrice} </span>
+                    <span class="text-lg"> ₹.{pro?.negotiablePrice} </span>
                   </p>
                 </span>
               </p>
@@ -159,7 +159,7 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
             <div class="grid grid-cols-2 py-2">
               <div class="flex items-center">
                 <div class="relative">
-                  <div class="rounded-full w-3 h-3 md:w-6 md:h-6 bg-gray-200">
+                  <div class="rounded-full w-3 h-3 md:w-6 md:h-6 bg-gray-200 pl-5">
                     {" "}
                     <span class="absolute top-0 right-0 inline-block w-6 h-6 bg-primary-red rounded-full pl-1 ">
                       <svg

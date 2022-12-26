@@ -10,7 +10,8 @@ import Image from "../assets/images/avadar3.webp";
 import Search from "../pages/Search";
 import Login from "../pages/auth/Login";
 import { Carousel } from "../pages/Carousel";
-import Logo from "../assets/logo/logo.png";
+import Yo from "../assets/images/re.png";
+import Logo from "../assets/logo/re.png";
 const NavItem = [
   { name: "HOME", link: "/" },
   { name: "SELL PROPERTY", link: "/sell" },
@@ -111,78 +112,78 @@ function Navbar() {
   };
   return (
     <div>
-      <div className="Navbar  uppercase  sticky top-0 z-100  bg-white  ">
-        <nav className="bg-transparent">
-          <div className="py-3 px-1  mx-auto  ">
+      <div className="Navbar  uppercase  sticky top-0 z-100 ">
+        <nav className="nav-color ">
+          <div className=" px-1  mx-auto  ">
             <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 ">
-            <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block"><Link to='/'> <img className="h-16" src={Logo}></img></Link></span>
-
+            <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span>
+           
               {isMobileview ? (
                 <div className="flex items-center gap-4 lg:mt-0 text-black  font">
                   <NavLink
                     to="/"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-amber-700 "
-                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
+                        ? "border-b-2 border-black text-white "
+                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
-                    <div className="hover:text-amber-700">HOME</div>{" "}
+                    <div className="hover:text-white">HOME</div>{" "}
                   </NavLink>
                   <NavLink
                     to="/sellproperty"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-amber-700"
-                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
+                        ? "border-b-2 border-black text-white "
+                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
                     {" "}
-                    <div className="hover:text-amber-700">SELL PROPERTY</div>
+                    <div className="hover:text-white">SELL PROPERTY</div>
                   </NavLink>
                 
                   <NavLink
                     to="/promotors"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-amber-700"
+                        ? "border-b-2 border-black text-white"
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-amber-700">PROMOTORS</div>
+                    <div className="hover:text-white">PROMOTORS</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/mediators"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-amber-700"
+                        ? "border-b-2 border-black text-white"
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-amber-700">MEDIATORS</div>
+                    <div className="hover:text-white">MEDIATORS</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/contact"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-amber-700"
+                        ? "border-b-2 border-black ttext-white"
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-amber-700">CONTACT US</div>
+                    <div className="hover:text-white">CONTACT US</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/about"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-amber-700"
+                        ? "border-b-2 border-black text-white"
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
-                    <div className="hover:text-amber-700">ABOUT US</div>
+                    <div className="hover:text-white">ABOUT US</div>
                   </NavLink>
                 </div>
-              ) : (<div className="flex"> <div className="pt-4"><Mobilenav /></div><div> <Link to='/'> <img className="h-12" src={Logo}></img></Link></div> 
+              ) : (<div className="flex"> <div className="pt-4"><Mobilenav /></div><div> <Link to='/'> <img className="h-16 w-16" src={Logo}></img></Link></div> 
               </div>
               )}
               {/* <Search/> */}
@@ -197,10 +198,10 @@ function Navbar() {
                           {" "}
                           <img
                             src={user?.profilePic || Image}
-                            className="w-10 h-10 rounded-full"
+                            className="w-10 h-10 rounded-full cursor-pointer"
                           />
                           <span>
-                            <div className="px-2 pt-1 text-amber-700 font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center  hover:border-black">
+                            <div className="px-2 pt-1 text-white font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center cursor-pointer hover:border-black">
                               {user?.firstname} 
                             </div>
                           </span>
@@ -235,7 +236,7 @@ function Navbar() {
                               />
                             </svg>
                             <button
-                              className="  text-start font hover:text-amber-700 uppercase p-1  hover:shadow-none rounded shadow-sm"
+                              className="  text-start font nav-txt p-1  hover:shadow-none rounded shadow-sm"
                               onClick={navigateToProfile}
                             >
                               Profile
@@ -260,7 +261,7 @@ function Navbar() {
                             />
                           </svg>
                           <button
-                            className=" text-start  p-1 font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                            className=" text-start  p-1 font  nav-txt  hover:shadow-none rounded shadow-sm"
                             onClick={(e) => navigateToYourActivities(e)}
                           >
                             Manage properties
@@ -323,7 +324,7 @@ function Navbar() {
                               </g>
                             </svg>
                             <button
-                              className=" text-start  p-1  font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                              className=" text-start  p-1  font  nav-txt  hover:shadow-none rounded shadow-sm"
                               onClick={handlepay}
                             >
                               Payment
@@ -348,7 +349,7 @@ function Navbar() {
                             />
                           </svg>
                           <button
-                            className=" text-start  p-1  font hover:text-amber-700 uppercase hover:shadow-none rounded shadow-sm"
+                            className=" text-start  p-1  font nav-txt  hover:shadow-none rounded shadow-sm"
                             onClick={AuthLogout}
                           >
                             Logout

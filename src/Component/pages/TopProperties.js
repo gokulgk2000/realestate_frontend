@@ -6,6 +6,8 @@ import { getPremiumProperty, getProById } from '../helper/backend_helpers';
 import { useModal } from '../helper/hook/useModal';
 import BuyerModal from '../models/BuyerModal';
 import PropertyCard from './PropertyCard';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const TopProperties = () => {
 const[property,setProperty]=useState()
@@ -38,28 +40,38 @@ const [propertyId, setPropertyId] = useState([]);
     } else {
       console.log("Failed to fetch message", res);
     }
+  };const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
   };
   
   return (
     
-    <div>     {modalOpen && (
-      <BuyerModal
-        show={modalOpen}
-        onCloseClick={() => setModalOpen(false)}
-        currentProperty={propertyId?._id}
-      />
-    )}
-<div className=' grid md:grid-cols-4 gap-y-2 gap-x-2'>
+     <div>    
+
+<Carousel
+  
+  responsive={responsive}
+ >
+    
+
 {map(property, (pro, i) => (
           <PropertyCard pro={pro} setModalOpen={setModalOpen} handleBook={handleBook} key={i}/>
         ))}
-<div>
 
 
-</div>
 
-</div>
-
+</Carousel>
 
     </div>
   )

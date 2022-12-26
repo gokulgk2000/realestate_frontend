@@ -42,6 +42,7 @@ import Payment from "./Component/pages/PaymentPage/Payment";
 import Thankyoupage from "./Component/pages/PaymentPage/Thankyoupage";
 import Promotors from "./Component/pages/promotors/Promotors";
 import Mediators from "./Component/pages/mediators/Mediators";
+import GalleryModel from "./Component/models/GalleryModel";
 
 
 
@@ -54,7 +55,6 @@ const App = () => {
       <Routes >
       <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
-
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
       <Route path="/promotors" element={<Promotors />} />

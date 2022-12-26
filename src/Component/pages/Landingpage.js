@@ -9,7 +9,7 @@ import {
 import Property from "./Property";
 import { Carousel } from "./Carousel";
 import TopProperties from "./TopProperties";
-
+import background from"../assets/images/eva.jpg"
 const Landingpage = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState();
@@ -70,7 +70,7 @@ const Landingpage = () => {
     setBetRoomCount(event.target.value);
   };
   return (
-    <div className=" md:pl-32 md:pr-24">
+    <div className=" md:pl-32 md:pr-24  ">
       {/* <div className="  items-center  md:hidden  ">
       <form className="flex justify-center  h-10 w-full ">
         <select
@@ -134,7 +134,7 @@ const Landingpage = () => {
       </form>
       </div> */}
 
-      <div className="font ">
+      <div className="font pt-1">
         <Carousel />
         {isLoading ? (
           <div className="text-center p-5  ">

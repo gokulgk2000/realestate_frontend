@@ -34,6 +34,7 @@ const PropertyDetails = () => {
     _id: "",
     category: "",
     title:"",
+    transactionType:"",
     Seller: "",
     yourName: "",
     location: "",
@@ -55,7 +56,7 @@ const PropertyDetails = () => {
     negotiablePrice: "",
     propertyPic: "",
     Description: "",
-    status: "",
+    status: "",phone:"",
   });
   console.log("getProperty",getProperty)
   const [rerender, setRerender] = useState(true);
@@ -70,6 +71,7 @@ const PropertyDetails = () => {
         id: Property?._id,
         category: Property?.category,
         title: Property?.title,
+        transactionType: Property?.transactionType,
         Seller: Property?.Seller,
         yourName: Property?.yourName,
         location: Property?.location,
@@ -92,6 +94,7 @@ const PropertyDetails = () => {
         propertyPic: Property?.propertyPic,
         Description: Property?.Description,
         status: Property?.status,
+        phone: Property?.phone,
       });
     }
   };
@@ -414,6 +417,21 @@ console.log("first",getProperty)
                   })
                 }
               />
+              <p className=" text-amber-700"> transactionType :</p>
+
+              <Input
+                type="text"
+                name="transactionType"
+                placeholder="Enter the transactionType "
+                value={getProperty?.transactionType}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({
+                    ...getProperty,
+                    transactionType: e.target.value,
+                  })
+                }
+              />
              
               <p className=" text-amber-700"> nearFacilities :</p>
 
@@ -454,7 +472,7 @@ console.log("first",getProperty)
               <p className=" text-amber-700">negotiablePrice :</p>
 
               <Input
-                type="text"
+                type="number"
                 name="negotiablePrice"
                 placeholder="Enter the negotiablePrice "
                 value={getProperty?.negotiablePrice}
@@ -463,9 +481,7 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, negotiablePrice: e.target.value })
                 }
               />
-              <p className=" text-amber-700">Description :</p>
-
-              <Input
+              <p className=" text-amber-700">Description :</p> <Input
                 type="text"
                 name="Description"
                 placeholder="Enter the Description "
@@ -476,6 +492,19 @@ console.log("first",getProperty)
                     ...getProperty,
                     Description: e.target.value,
                   })
+                }
+              />
+             
+              <p className=" text-amber-700">Phone Number :</p>
+
+              <Input
+                type="number"
+                name="phone"
+                placeholder="Enter Your Phone Number "
+                value={getProperty?.phone}
+                disabled={!isEdit}
+                onChange={(e) =>
+                  setGetProperty({ ...getProperty, phone: e.target.value })
                 }
               />
               <p className=" text-amber-700">Property Picture :</p>

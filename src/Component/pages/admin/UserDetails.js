@@ -100,10 +100,7 @@ const UserDetails = () => {
         <button className="opacity-60 font">
           Sellers
         </button></Link>
-        <Link to="/admin/userdetails">
-        <button href="" className="text-amber-700 font">
-          SellersDetails
-        </button></Link>
+      
       </Breadcrumbs>
       <div className="min-w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 py-5 px-5">
         <div className="flex flex-col items-left pb-10 leading-loose">

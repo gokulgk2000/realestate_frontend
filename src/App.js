@@ -43,6 +43,8 @@ import Thankyoupage from "./Component/pages/PaymentPage/Thankyoupage";
 import Promotors from "./Component/pages/promotors/Promotors";
 import Mediators from "./Component/pages/mediators/Mediators";
 import GalleryModel from "./Component/models/GalleryModel";
+import PromotersDetails from "./Component/pages/promotors/PromotersDetails";
+import BuyerPage from "./Component/pages/BuyerPage";
 
 
 
@@ -58,6 +60,7 @@ const App = () => {
       <Route path="/category" element={<Category />} />
       <Route path="/property" element={<Property />} />
       <Route path="/promotors" element={<Promotors />} />
+      <Route path="/promotorsDetails" element={<PromotersDetails />} />
       <Route path="/mediators" element={<Mediators />} />
         <Route path="/about" element={<About />} />
 
@@ -79,6 +82,7 @@ const App = () => {
         <Route path="/feedback" element={<Feedbackpage />} />
         <Route element={<ProtectedRoutes />}>
         <Route path="/sellproperty" element={<Sell />}   />
+        <Route path="/buyer" element={<BuyerPage />}   />
         </Route>
         <Route path="admin-page" element={<AdminLogin />} />
 

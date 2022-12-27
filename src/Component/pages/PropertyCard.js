@@ -196,6 +196,7 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
         </div>
       </div>
     </Link>
+    
   );
 };
 

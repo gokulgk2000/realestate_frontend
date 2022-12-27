@@ -9,12 +9,15 @@ import {
   getPropertybyUserId,
   getPropertyCount,
   getuserdetails,
+  GETALLUSERSBYLIMIT,
 } from "../helper/backend_helpers";
 import { useQuery } from "../helper/hook/useQuery";
 import { useModal } from "../helper/hook/useModal";
 import BuyerModal from "../models/BuyerModal";
 import { SERVER_URL } from "../helper/configuration";
 import PropertyCard from "./PropertyCard";
+import { Breadcrumbs } from "@material-tailwind/react";
+import Pagination from "../pagination/Pagination";
 
 const Property = () => {
   const query = useQuery();
@@ -26,10 +29,13 @@ const Property = () => {
   const [searchText, setSearchText] = useState(searchKey);
   const [property, setproperty] = useState("");
   const [bedRoom, setBedRoom] = useState(bed);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [setPosts] = useState([]);
   const [error, setError] = useState("");
   const [propertyId, setPropertyId] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
-  const [user, setUser] = useState("");
+  const [isLoading, setLoading] = useState(false);
+
 
   const [modalOpen, setModalOpen] = useModal();
 
@@ -89,26 +95,18 @@ const Property = () => {
     }
   };
 
-  //   const loadPropertyCount = async () => {
-  //     const res = await getPropertyCount({ searchText });
-  //     if (res.success) {
-  //       setpropertyCount(res.count);
-  //     } else {
-  //      // console.log("getPropertyCount  ", res);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     const handleLoad = async () => {
-  //       setLoading(true);
-  //       await loadProperty();
-  //       setLoading(false);
-  //     };
-  //     handleLoad();
-  //   }, [page, limit]);
-
-  //   useEffect(() => {
-  //     setPage(1);
-  //   }, [searchText]);
+ useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await GETALLUSERSBYLIMIT({
+        userId: query.get("id"),
+      });
+      setPosts(res.data);
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -119,6 +117,14 @@ const Property = () => {
           currentProperty={propertyId?._id}
         />
       )}
+      <Breadcrumbs>
+            <Link to="/">
+              <button className="opacity-60 font">Home</button>
+            </Link>
+            {/* <Link to="/promotors">
+              <button className="opacity-60 font"> Promotors List</button>
+            </Link> */}
+          </Breadcrumbs>
 
       <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1 ">
         {/* <input
@@ -137,10 +143,22 @@ const Property = () => {
         </button> */}
       </div>
       <div className="md:grid  gap-  grid-cols-4  font uppercase md:pl-32 md:pr-24 gap-x-5 gap-y-5 pb-3">
-        {map(property, (pro, i) => (
+        {
+        map( property .slice((currentPage - 1) * 12, currentPage * 12),(pro, i) => (
           <PropertyCard pro={pro} setModalOpen={setModalOpen} handleBook={handleBook} key={i}/>
         ))}
+        
       </div>
+      <div className="text-center">
+          <nav aria-label="text-center ">
+            <Pagination
+              postsPerPage={12}
+              totalPosts={property?.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </nav>
+        </div>
       {/* <input type="range" label={true} onChange={rangechange} /> */}
     </div>
   );

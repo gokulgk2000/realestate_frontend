@@ -143,6 +143,17 @@ function Navbar() {
                   </NavLink>
                 
                   <NavLink
+                    to="/buyer"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "border-b-2 border-black text-white"
+                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
+                    }
+                  >
+                    <div className="hover:text-white">BUY</div>
+                  </NavLink>{" "}
+                
+                  <NavLink
                     to="/promotors"
                     className={({ isActive }) =>
                       isActive
@@ -160,7 +171,7 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-white">MEDIATORS</div>
+                    <div className="hover:text-white">Facilitators</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/contact"

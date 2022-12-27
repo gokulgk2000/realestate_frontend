@@ -1,31 +1,159 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { allUsersList, GETALLUSERSBYLIMIT } from "../../helper/backend_helpers";
+import Pagination from "../../pagination/Pagination";
+import { useQuery } from "../../helper/hook/useQuery";
+import { Breadcrumbs } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
+import image from "../../assets/images/avadar1.jpg"
+
 
 const Promotors = () => {
+  const query = useQuery();
+  const [isLoading, setLoading] = useState(false);
+  const [setPosts] = useState([]);
+  const [promoterData, setPromoterData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+  const [searchText, setSearchText] = useState("");
+
+  console.log("promoters",promoterData)
+
+  const statusColor = {
+    approved: "green",
+    Pending: "#e8bf09",
+    rejected: "red",
+  };
+
+  const requestSearch = (searched) => {
+    setSearchText(searched);
+  };
+
+  const getAllUsers = async () => {
+    setLoading(true);
+    const res = await allUsersList({});
+    // console.log("dsp:",res);
+    if (res.success) {
+      setPromoterData(res.users);
+
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await GETALLUSERSBYLIMIT({
+        userId: query.get("id"),
+      });
+      setPosts(res.data);
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div className="py-2 md:pl-36 md:pr-24">
-      <div className="flex flex-col justify-center max-w-xs py-6 px-2 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">
+    <div className=" py-2 md:pl-36 md:pr-24 bg-slate-50">
+    <Breadcrumbs>
+            <Link to="/">
+              <button className="opacity-60 font underline">Home</button>
+            </Link>
+          </Breadcrumbs>
+    
+      <div className="w-full flex justify-center items-center mt-2 pb-4 ">
+          <input
+            type="text"
+            placeholder="Search Promotoe"
+            name="search"
+            className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+            onChange={(e) => requestSearch(e.target.value)}
+          />
+          <button
+            type="submit"
+            className=" nav-color px-3 py-2 -ml-1.5 font-semibold hover:text-white text-black rounded-tr-full rounded-br-full"
+          >
+            Search
+          </button>
+        </div>             
+         <div className="grid grid-cols-4 gap-x-4 gap-y-3 ">
+         {promoterData
+                ?.filter(
+                  (item) =>
+                    item?.firstname
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase()) ||
+                    item?.lastname
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase()) ||
+                    item?.email
+                      .toString()
+                      .toLowerCase()
+                      .includes(searchText.toString().toLowerCase())
+                )
+                .slice((currentPage - 1) * 12, currentPage * 12)
+                .map((Data, i) => (
+
+      <Link to={`/promotorsDetails?id=${Data?._id}`} className=" px-8 py-6 shadow-sm rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-gray-50 shadow-xl " key={i}>
+
+         { Data.profilePic?  (
         <img
-          src="https://source.unsplash.com/150x150/?portrait?3"
+          src={Data.profilePic}
           alt=""
-          className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
+          className="w-32 h-32 mx-auto rounded-md dark:bg-gray-500 aspect-square"
         />
-        <div className="space-y-4 text-center divide-y divide-gray-700">
+        ):( 
+         <img 
+         className="w-32 h-32 mx-auto rounded-md dark:bg-gray-500 aspect-square"
+         src={image}/>
+          )}
+        <div className="space-y-4  divide-y divide-gray-300">
           <div className="my-2 space-y-1">
-            <h2 className="text-xl font-semibold sm:text-2xl">Promotor Name</h2>
-            <p className="px-5 text-xs sm:text-base dark:text-gray-400"></p>
+            <h2 className=" text-sm flex text-gray-500 font-semibold ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+</svg>
+Promotor Name</h2>
+            <p className=" text-xl font-semibold dark:text-gray-400"> {Data.firstname} {Data.lastname}</p>
           </div>
           <div className="flex justify-start pt-2 space-x-4 align-center">
-            <div>
-			<svg className="h-6 w-7 -mr-2"
-    viewBox="0 0 501.01 511.5">
-    <path fill-rule="nonzero"
-        d="M145.23 241.93c31.31 55.96 68.11 95.64 125.54 125.55 4.98-4.48 7.64-8.17 11.76-13.51 16.29-21.45 36.58-47.2 69.81-31.68 21.68 10.97 64.29 34.03 82.31 47.39 6.86 4.82 11.82 10.9 15.16 17.81 7.09 14.71 6.17 31.58 1.67 46.85-2.32 7.86-5.7 15.65-9.71 22.71-15.05 26.44-40.04 40.23-68.87 47.72-35.05 9.07-66.72 9.32-101.56-1.42-26.29-8.13-50.72-21.27-74.05-35.67l-3.01-1.86c-11.32-7.05-23.48-14.63-35.93-23.89l-.09-.08c-23.99-18.06-48.14-40.28-70.04-65.14-20.28-23.02-38.76-48.46-53.51-75.13-13.52-24.45-23.88-50.13-29.65-76.13-8.21-37.03-7.6-79.66 10.62-113.82 21.33-39.98 60.04-56.32 103.38-52.5l1.07.13c7.49.94 14.3 5.51 17.99 12.11l49.31 83.35c4.82 6.52 7.62 13.23 8.56 20.12 3.59 26.47-18.11 42.75-36.68 56.36-6.33 4.6-13.4 9.73-14.08 10.73zm92.87-52.2c-7.4-1.91-11.85-9.48-9.94-16.88 1.91-7.41 9.48-11.86 16.88-9.94 44.1 11.5 84.18 47.81 97.88 91.55 2.27 7.31-1.8 15.1-9.12 17.37-7.31 2.28-15.1-1.8-17.37-9.12-10.82-34.54-43.55-63.93-78.33-72.98zm1.84-84.95c-7.55-1.28-12.63-8.46-11.35-16.01 1.28-7.55 8.46-12.64 16.01-11.35C329.95 92.2 405.39 164 426.66 247.63c1.89 7.43-2.61 15-10.04 16.89-7.44 1.89-15.01-2.61-16.89-10.05-18.63-73.26-84.98-136.72-159.79-149.69zm8.92-77.11c-7.61-.87-13.08-7.76-12.21-15.37.87-7.6 7.75-13.08 15.36-12.21 118.69 13.89 222.73 108.9 248.67 225.33 1.65 7.47-3.07 14.86-10.53 16.51-7.46 1.65-14.86-3.07-16.5-10.53-23.4-104.98-117.76-191.21-224.79-203.73zM119.56 255c-.47-.77-.88-1.58-1.22-2.44-8.35-21.18 8.78-33.62 24.07-44.7 7.35-5.3 20.15-13.96 23.95-22.75 2.23-5.11 1.15-8.92-2.08-13.27l-1.3-1.85-48.67-82.28c-31.03-2.17-57.86 8.63-73.25 37.45-14.84 27.81-14.58 64.08-7.93 94.08 5.1 23.01 14.5 46.13 26.85 68.47 27.53 49.8 70.27 96.95 115.63 131.16 11.04 8.23 22.87 15.62 33.89 22.48l3.07 1.92c39.75 24.7 82.66 45.09 131.23 37.92 7.42-1.09 14.86-2.47 21.87-4.28 27.72-7.21 49.33-20.63 58.18-50.69 3.15-10.7 4.66-25.46-5.59-32.87-22.42-14.64-54.45-32.46-78.35-45.11-12.33-5.49-24.51 9.95-34.45 23.04-7.16 9.36-14.86 20.05-26.28 24.33-5.6 2.1-11.4 2.04-16.92-.23l-1.86-.79C196.02 361.76 154.37 317.52 119.56 255z" />
+            <div className="font"> <h2 className=" flex text-sm text-gray-500">	
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0l6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z" />
 </svg>
-            </div>
-            <div className="font">Contact -</div>
+Contact  </h2>
+            <p>{Data.phoneno}</p></div>
           </div>
+          <div className="my-2 space-y-1">
+            <h2 className="text-sm  flex text-gray-500 font-semibold ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+</svg>
+Email </h2>
+            <p className=" text-xs font-semibold dark:text-gray-400">{Data.email}</p>
+          </div>
+          
         </div>
-      </div>
+        </Link>
+        ))}
+        </div>
+       
+        <div className="text-center">
+          <nav aria-label="text-center ">
+            <Pagination
+              postsPerPage={12}
+              totalPosts={promoterData?.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </nav>
+        </div>
     </div>
   );
 };

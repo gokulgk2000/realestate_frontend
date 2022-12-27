@@ -114,7 +114,7 @@ Loading...
                   <div className="flex items-center">Status</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                  <span className="">User Details</span>
+                  <span className="">Buyer Details</span>
                 </th>
               </tr>
             </thead>
@@ -122,11 +122,7 @@ Loading...
               {buyerData
                 ?.filter(
                   (item) =>
-                    item?.firstname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.lastname
+                    item?.name
                       .toString()
                       .toLowerCase()
                       .includes(searchText.toString().toLowerCase()) ||
@@ -148,9 +144,10 @@ Loading...
                       {i + 1}
                     </th>
                     <td className="py-4 px-6 capitalize">
-                      {Data?.firstname} {Data?.lastname}
+                      {Data?.name}
                     </td>
-                    <td className="py-4 px-6 hidden md:block">{Data?.email}</td>
+                    <td className="py-4 px-6 hidden md:block">
+                      {Data?.email}</td>
                     <td
                       className="py-4 px-6 capitalize"
                       style={{ color: statusColor[Data?.status] }}

@@ -52,18 +52,18 @@ const RegisterProperty = () => {
    
   ];
   const facilities = [
-    { value: "eb", text: "EB " },
-    { value: "water", text: "Water 24*7 " },
-    { value: "carParking", text: "Car Parking " },
-    { value: "gym", text: "Gym " },
-    { value: "communityHall", text: "Community Hall " },
-    { value: "lift", text: "Lift " },
-    { value: "gatedCommunity", text: "Gated Community " },
-    { value: "security", text: "Security " },
-    { value: "swimmingfool", text: "Swimming Fool " },
-    { value: "walkingTrack", text: "Walking Track " },
-    { value: "park", text: "Park " },
-    { value: "cctv", text: "CCTV Monitoring 24*7 " },
+    { value: "eb,", text: "EB " },
+    { value: "water,", text: "Water 24*7 " },
+    { value: "carParking,", text: "Car Parking " },
+    { value: "gym,", text: "Gym " },
+    { value: "communityHall,", text: "Community Hall " },
+    { value: "lift,", text: "Lift " },
+    { value: "gatedCommunity,", text: "Gated Community " },
+    { value: "security,", text: "Security " },
+    { value: "swimmingfool,", text: "Swimming Fool " },
+    { value: "walkingTrack,", text: "Walking Track " },
+    { value: "park,", text: "Park " },
+    { value: "cctv,", text: "CCTV Monitoring 24*7 " },
    
   ];
   const [allcategory, setAllCategory] = useState([]);

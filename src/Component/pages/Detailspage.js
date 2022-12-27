@@ -129,7 +129,7 @@ const Detailspage = () => {
             />
           )}
           <div className="bg-slate-100 md:pl-32 md:pr-24">
-            <div className="flex justify-end pt-2">
+            <div className="flex justify-end pt-2 md:px-0 sm:px-0 lg:px-28">
               <div className=" font-normal text-xs">
                 Posted on:{moment(property?.date).format("DD-MM-YYYY")}
               </div>
@@ -138,16 +138,16 @@ const Detailspage = () => {
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
-                    <div className="flex font font-semibold pl-2  text-xl">
+                    <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}
                     </div>
 
-                    <div className="md:flex grid  pl-2 ">
-                      <span className="text-md pt-0 font text-gray-600 capitalize">
-                        {property?.bedRoom}BHK {property?.title} For sale{" "}
+                    <div className="md:flex grid  pl- ">
+                      <span className="font text-lg capitalize md:pl- underline">
+                      {property?.location},{property?.streetName}, 
                       </span>{" "}
-                      <span className="font text-lg capitalize md:pl-2 underline">
-                        {property?.streetName}, {property?.location}
+                      <span className="text-md pt-1 font text-gray-600 capitalize ">
+                      {property?.title}  {property?.bedRoom}BHK  For sale{" "}
                       </span>
                     </div>
                     <div className="grid md:grid-cols-5 gap-x- pt-3 ">
@@ -235,9 +235,9 @@ const Detailspage = () => {
                         </div>
                       </div>
                       <div className="md:col-span-3 grid md:pl-5">
-                        {property?.category?.name === "residential" ||
+                        {(property?.category?.name === "residential" ||
                           property?.category?.name === "villa" ||
-                          (property?.category?.name === "appartment" && (
+                          property?.category?.name === "appartment") && (
                             <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-2 ">
                               <div className="pt-2 ">
                                 <span className="flex ">
@@ -283,7 +283,7 @@ const Detailspage = () => {
                                 </span>
                               </div>{" "}
                             </div>
-                          ))}
+                          )}
                         <div className="grid md:grid-cols-3 grid-cols-2 gap-x-5 md:gap-y-7 gap-y-3 md:px-3 pt-5 ">
                           <div className="">
                             {" "}
@@ -307,7 +307,7 @@ const Detailspage = () => {
                           <div className="">
                             <div className="font text-gray-500 capitalize pb-1">
                               Transaction Type{" "}
-                              <div>{property?.transactionType}</div>
+                              <div className="text-black font" >{property?.transactionType}</div>
                             </div>
                           </div>
 
@@ -391,10 +391,10 @@ const Detailspage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="md:col-span-2 ">
-                  <div className="grid  border-gray-600 px-7 md:px-0 md:py-0 py-2">
-                    <div class="w-80 bg-white  shadow-2xl  rounded  animate-pulse hover:animate-none  cursor-pointer hidden md:block">
+                </div >
+                <div className="md:col-span-2 lg:    ">
+                  <div className="grid  border-gray-600 px-7 md:px-0 md:py-0 py-2 ">
+                    <div class="w-80 bg-white  shadow-2xl  rounded  animate- hover:animate-none  cursor-pointer hidden md:block">
                       <p className="font flex justify-center pt-5 text-lg underline">
                         {" "}
                         Contact Owner
@@ -561,7 +561,7 @@ const Detailspage = () => {
                       </div>
                       <div className="col-span-9 md:hidden text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5">
                         {" "}
-                        {property?.askPrice},
+                        ₹.{property?.negotiablePrice}
                       </div>
                       <div className="md:col-span-2 text-gray-500 text-md md:hidden">
                         {" "}
@@ -597,11 +597,11 @@ const Detailspage = () => {
                         {property.facilities}
                       </div>
 
-                      <div className="md:col-span-2 text-gray-500 text-md py-2">
+                      <div className="md:col-span-2 text-gray-500 text-md py-2 ">
                         {" "}
                         Description
                       </div>
-                      <div className="col-span-9 text-black  md:pl-3 font-light text-sm capitalize md:py-3 pr-5">
+                      <div className="col-span-9 text-black  md:pl-3 font-light text-sm capitalize md:py-3 pr-5  ">
                         {" "}
                         {property.Description}
                       </div>

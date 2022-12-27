@@ -14,7 +14,7 @@ import Yo from "../assets/images/re.png";
 import Logo from "../assets/logo/re.png";
 const NavItem = [
   { name: "HOME", link: "/" },
-  { name: "SELL PROPERTY", link: "/sell" },
+  { name: "SELL", link: "/sell" },
   { name: "CONTACT US ", link: "/about" },
   // { name: "", link: "/property" },
   // { name: "REQUESTED", link: "/request" },
@@ -113,9 +113,9 @@ function Navbar() {
   return (
     <div>
       <div className="Navbar  uppercase  sticky top-0 z-100 ">
-        <nav className="nav-color ">
-          <div className=" px-1  mx-auto  ">
-            <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 ">
+        <nav className="nav-color">
+          <div className=" px-  mx-auto  ">
+            <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
             <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span>
            
               {isMobileview ? (
@@ -139,7 +139,7 @@ function Navbar() {
                     }
                   >
                     {" "}
-                    <div className="hover:text-white">SELL PROPERTY</div>
+                    <div className="hover:text-white">SELL </div>
                   </NavLink>
                 
                   <NavLink

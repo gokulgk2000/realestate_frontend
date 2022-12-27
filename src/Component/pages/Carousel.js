@@ -142,11 +142,11 @@ export const Carousel = () => {
        </div></div>
    
       {isBiggerthanTab ? (
-        // <img
-        //   className="w-full aspect-[2/1] h-96" 
-        //   src={image[selectImage]}
-        // />
-        <div><img src={Do} className="aspect-[] h-96 w-screen object-cover " /></div>
+        <img
+          className="w-full aspect-[2/1] h-96 object-cover" 
+          src={image[selectImage]}
+        />
+        // <div><img src={Do} className="aspect-[] h-96 w-screen object-cover " /></div>
       ) : (
         // <img
         //   className="w-full  "

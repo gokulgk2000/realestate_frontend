@@ -49,6 +49,10 @@ const RegisterProperty = () => {
     { value: "mediators", text: "Mediators " },
     { value: "websiteConsent", text: "WebSite Consent " },
   ];
+  const aboutProperty = [
+    { value: "newProperty", text: "New  Property " },
+    { value: "oldProperty", text: "Old Property " },
+  ];
   const facilities = [
     { value: "eb,", text: "EB " },
     { value: "water,", text: "Water 24*7 " },
@@ -90,6 +94,7 @@ const RegisterProperty = () => {
       floorDetails: "",
       floor: "",
       propertyStatus: "",
+      aboutProperty: "",
       nearFacilities: "",
       costSq: "",
       bargainPrice: "",
@@ -114,6 +119,7 @@ const RegisterProperty = () => {
       // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
       // floor: Yup.number().required("Please Enter Your floor"),
       propertyStatus: Yup.string().required("Please Enter Property Status"),
+      aboutProperty: Yup.string().required("Please Enter About Property"),
       //  nearFacilities: Yup.string().required("Please Enter Your nearFacilities"),
       costSq: Yup.string().required("Please Enter Your costSq"),
       // facilities: Yup.string().required("Please Enter Your facilities"),
@@ -142,6 +148,7 @@ const RegisterProperty = () => {
         floorDetails: values.floorDetails,
         floor: values.floor,
         propertyStatus: values.propertyStatus,
+        aboutProperty: values.aboutProperty,
         nearFacilities: values.nearFacilities,
         costSq: values.costSq,
         facilities: facilitiesList,
@@ -300,6 +307,36 @@ const RegisterProperty = () => {
               </span>
             ) : null}
           </div>
+        
+          <div className=" grid grid-rows-2 font gap-2">
+            <div> *About Property</div>
+            <select
+              id="aboutProperty"
+              name="aboutProperty"
+              label="aboutProperty"
+              className="block  py-1 pl-2 capitalize w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+              value={validation.values.aboutProperty || ""}
+              onChange={validation.handleChange}
+              invalid={
+                validation.touched.aboutProperty && validation.errors.aboutProperty
+                  ? true
+                  : false
+              }
+            >
+              {" "}
+              <option value="">Select About Property</option>
+              {aboutProperty.map((option, id) => (
+                <option value={option?._id} key={id}>
+                  {option?.text}
+                </option>
+              ))}
+            </select>
+            {validation.touched.aboutProperty && validation.errors.aboutProperty ? (
+              <span className="text-red-500 " type="invalid">
+                {validation.errors.aboutProperty}
+              </span>
+            ) : null}
+          </div>{" "}
           <div className=" grid grid-rows-2 font gap-2">
             <div> *Property Type</div>
             <select

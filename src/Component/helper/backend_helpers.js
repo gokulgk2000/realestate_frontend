@@ -4,17 +4,19 @@ const BASE_URL = `${SERVER_URL}/api`;
 const userRegisteration = (payload) =>
   post(`${BASE_URL}/user/register`, payload);
 
-const userLogin = (payload) => post(`${BASE_URL}/user/login`, payload);
+
 const Login = (payload) => post(`${BASE_URL}/user/login`, payload);
+
 const PropertyRegistration = (payload) =>
+  post(`${BASE_URL}/property/Sellproperty`, payload);
 
 const userLogin = (payload) =>
   post(`${BASE_URL}/user/login`, payload);
 const logoutUser = (payload) =>
   get(`${BASE_URL}/user/logout`, payload);
-  const PropertyRegistration = (payload) =>
 
-  post(`${BASE_URL}/property/Sellproperty`, payload);
+
+
 const getPropertybyUserId = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
 const getPremiumProperty = (payload) =>
@@ -92,6 +94,7 @@ export {
   userRegisteration,
   buyerRegister,
   Login,
+  logoutUser,
   adminLogin,
   getpassword,
   getforget,

@@ -2,9 +2,11 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { userRegisteration } from "../../helper/backend_helpers";
+import { buyerReg, buyerRegister, userRegisteration } from "../../helper/backend_helpers";
+import toastr from "toastr";
+import "toastr/build/toastr.min.css";
 
-const Register = () => {
+const BuyerRegister = () => {
   const navigate = useNavigate();
   const [registrationError, setRegistrationError] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState("");
@@ -16,22 +18,22 @@ const Register = () => {
 
     initialValues: {
       firstname: "",
-      lastname: "",
       email: "",
+      phonenumber: "",
       password: "",
     },
     validationSchema: Yup.object({
-      firstname: Yup.string().required("Please Enter Your firstname"),
+        firstname: Yup.string().required("Please Enter Your firstname"),
       email: Yup.string().required("Please Enter Your Email"),
+      phonenumber: Yup.string().required("Please Enter Your phonenumber"),
       password: Yup.string()
         .required("Please Enter Your Password")
 
         .matches(/^(?=.{5,})/, "Must Contain 5 Characters"),
     }),
-    onSubmit: async (values, onSubmitProps) => {
-      setLoading(true)
-      //   dispatch(registerUser({ ...values, aflag: true }))
-      const res = await userRegisteration({ ...values, aflag: true });
+    onSubmit:async (values, onSubmitProps) => {
+     
+       const res = await buyerRegister({ ...values, aflag: true });
       if (res.success) {
         // localStorage.setItem("user",JSON.stringify(res))
         setRegistrationSuccess(res.msg);
@@ -46,7 +48,8 @@ const Register = () => {
       }
       setLoading(false)
     },
-  });
+    
+    })
   return (
     <section className="h-100">
       <div className="px-6 h-full text-gray-800 py-5">
@@ -96,7 +99,7 @@ const Register = () => {
                 <input
                   type="text"
                   name="firstname"
-                  id="firstname"
+                  id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="First Name "
                   onChange={validation.handleChange}
@@ -114,28 +117,7 @@ const Register = () => {
                   </formFeedback>
                 ) : null}
               </div>
-              <div className="mb-6  text-red-500">
-                <input
-                  type="text"
-                  name="lastname"
-                  id="lastname"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Last Name"
-                  onChange={validation.handleChange}
-                  onBlur={validation.handleBlur}
-                  value={validation.values.lastname || ""}
-                  invalid={
-                    validation.touched.lastname && validation.errors.lastname
-                      ? true
-                      : false
-                  }
-                />
-                {validation.touched.lastname && validation.errors.lastname ? (
-                  <formFeedback type="invalid">
-                    {validation.errors.lastname}
-                  </formFeedback>
-                ) : null}
-              </div>
+            
               <div className="mb-6  text-red-500">
                 <input
                   type="email"
@@ -158,6 +140,23 @@ const Register = () => {
                   </formFeedback>
                 ) : null}
               </div>
+              <div className="mb-6  text-red-500">
+                        
+                        <input
+                          type="number"
+                          name="phonenumber"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Enter Phone Number"
+                          onChange={validation.handleChange}
+                          value={validation.values.phonenumber}
+                          invalid={validation.errors.phonenumber ? true : false}
+                        />
+                        {validation.errors.phonenumber ? (
+                          <span type="invalid">
+                            {validation.errors.phonenumber}
+                          </span>
+                        ) : null}
+                      </div>
 
               <div className="mb-6  text-red-500">
                 <input
@@ -218,4 +217,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default BuyerRegister;

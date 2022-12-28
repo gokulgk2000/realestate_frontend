@@ -5,7 +5,7 @@ import Header from "./Component/header";
 import Navbar from "./Component/header/Navbar";
 import About from "./Component/pages/About";
 import Login from "./Component/pages/auth/Login";
-import Register from "./Component/pages/auth/Register";
+import Register from "./Component/pages/auth/SellerRegister"; 
 import Detailspage from "./Component/pages/Detailspage";
 import Feedbackpage from "./Component/pages/Feedbackpage";
 import Landingpage from "./Component/pages/Landingpage";
@@ -45,6 +45,11 @@ import Mediators from "./Component/pages/mediators/Mediators";
 import GalleryModel from "./Component/models/GalleryModel";
 import PromotersDetails from "./Component/pages/promotors/PromotersDetails";
 import BuyerPage from "./Component/pages/BuyerPage";
+import Forgetpassword from "./Component/pages/auth/Forgetpassword";
+import Passwordpage from "./Component/pages/auth/Passwordpage";
+import SelectedUser from "./Component/pages/auth/SelectedUser";
+import SellerRegister from "./Component/pages/auth/SellerRegister";
+import BuyerRegister from "./Component/pages/auth/BuyerRegister";
 
 
 
@@ -64,7 +69,12 @@ const App = () => {
       <Route path="/promotorsDetails" element={<PromotersDetails />} />
       <Route path="/mediators" element={<Mediators />} />
         <Route path="/about" element={<About />} />
+        <Route path="/sellerregister" element={<SellerRegister />} />
+        <Route path="/buyerregister" element={<BuyerRegister />} />
+        <Route path="/selecteduser" element={<SelectedUser/>} />
 
+  <Route path="/forget" element={<Forgetpassword/>} />
+        <Route path="/password" element={<Passwordpage/>} />
         <Route path="/Intrested" element={<Intrested />} />
 
         <Route path="/contact" element={<Contact />} />
@@ -79,6 +89,7 @@ const App = () => {
         <Route path="/thankyou" element={<Thankyoupage/>} />
         
         <Route path="/login" element={<Login />} />
+      
         <Route path="/register" element={<Register />} />
         <Route path="/feedback" element={<Feedbackpage />} />
         <Route element={<ProtectedRoutes />}>

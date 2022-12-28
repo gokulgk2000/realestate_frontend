@@ -44,6 +44,13 @@ const Login = () => {
     },
   })
 
+  
+  const navigatepassword = (e) => {
+    e.preventDefault();
+    navigate("/forget")
+    }
+ 
+
   return (
     <section className="h-100">
     <div className="px-6 h-full text-gray-800 py-5">
@@ -169,11 +176,11 @@ const Login = () => {
               ) : null}
             </div>
   
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6"  >
               <div className="form-group form-check">
                
               </div>
-              <a href="/forgotpassword" className="text-blue-800">Forgot password?</a>
+              <label onClick={navigatepassword}  className="text-blue-800">Forgot password?</label>
             </div>
   
             <div className="text-center lg:text-left">
@@ -197,7 +204,7 @@ const Login = () => {
               <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                 Don't have an account?
                 <a
-                  href="/register"
+                  href="/selecteduser"
                   className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-2"
                   >Sign Up</a>
                

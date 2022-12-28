@@ -23,7 +23,8 @@ const FileInput = ({ label, name, value,placeholder, maxLength,multiple="false",
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
-        className="block py-2 px-2  w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+        className="block py-2 px-2  w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-black hover:shadow-2xl
+        hover:bg-white appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
         props
       />
     </div>

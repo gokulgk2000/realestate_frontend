@@ -106,7 +106,7 @@ const RegisterProperty = () => {
     },
     validationSchema: Yup.object({
       Seller: Yup.string().required("Please Enter Owner"),
-      yourName: Yup.string().required("Please Enter Owner Name"),
+      // yourName: Yup.string().required("Please Enter Owner Name"),
       title: Yup.string().required("Please Enter Your Title"),
       location: Yup.string().required("Please Enter Property location "),
       layoutName: Yup.string().required("Please Enter Property Layoutname"),
@@ -118,7 +118,7 @@ const RegisterProperty = () => {
       // bathRoom: Yup.string().required("Please Enter Your bathRoom"),
       // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
       // floor: Yup.number().required("Please Enter Your floor"),
-      propertyStatus: Yup.string().required("Please Enter Property Status"),
+      // propertyStatus: Yup.string().required("Please Enter Property Status"),
       aboutProperty: Yup.string().required("Please Enter About Property"),
       //  nearFacilities: Yup.string().required("Please Enter Your nearFacilities"),
       costSq: Yup.string().required("Please Enter Your costSq"),
@@ -263,7 +263,7 @@ const RegisterProperty = () => {
   return (
     <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-32 md:pr-24 capitalize flex justify-center">
       <form
-        className="col-span-3 gap-1"
+        className="col-span-3 gap-1 bg-blue-100 px-2"
         onSubmit={(e) => {
           e.preventDefault();
           validation.handleSubmit();
@@ -285,7 +285,7 @@ const RegisterProperty = () => {
         <p className="text-red-500 text-sm pb-5">
           " * " Fields are mandatory.So,Fill the mandatory Fields
         </p>
-        <div className="sm:grid grid-cols-4   gap-y-10">
+        <div className="sm:grid grid-cols-4   gap-y-10 pb-4 ">
           <div>
             <Input
               label="*Title"
@@ -314,7 +314,8 @@ const RegisterProperty = () => {
               id="aboutProperty"
               name="aboutProperty"
               label="aboutProperty"
-              className="block  py-1 pl-2 capitalize w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+              className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.aboutProperty || ""}
               onChange={validation.handleChange}
               invalid={
@@ -343,7 +344,8 @@ const RegisterProperty = () => {
               id="category"
               name="category"
               label="category"
-              className="block  py-1 pl-2 capitalize w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+              className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.category || ""}
               onChange={validation.handleChange}
               invalid={
@@ -526,7 +528,8 @@ const RegisterProperty = () => {
               id="Seller"
               name="Seller"
               label="Owner"
-              className="block py-1 px-2 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+              className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.Seller}
               onChange={validation.handleChange || ""}
               invalid={
@@ -589,13 +592,14 @@ const RegisterProperty = () => {
           }}
         />
         <div className="grid md:grid-cols-4 md:gap-y-10 md:pt-5">
-          <div className="  font ">
+          <div className="pb-1 font ">
             Property Status
             <select
               id="propertyStatus"
               name="propertyStatus"
               label="property Status"
-              className="block pt-5 px-2 w-60  text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+              className="block py-3 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.propertyStatus}
               onChange={validation.handleChange || ""}
               invalid={
@@ -642,13 +646,14 @@ const RegisterProperty = () => {
             ) : null}
           </div>
           {showFacing && (
-            <div className=" grid grid-rows-2 font gap-2 mb-">
-              <div className="">Facing</div>
+            <div className="  grid-rows- font gap-2 mb-">
+              <div className="pb-1">Facing</div>
               <select
                 id="facing"
                 name="facing"
                 label="facing"
-                className="block py-1 px-2 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+                className="block py-2 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+                hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
                 value={validation.values.facing}
                 onChange={validation.handleChange || ""}
                 invalid={
@@ -763,14 +768,15 @@ const RegisterProperty = () => {
           )}
           {show && (
             <div>
-              <div className=" grid grid-rows-2 font gap-2 mb-">
-                <div>Floor Details</div>
+              <div className=" font gap-2 mb-">
+                <div className="pb-1">Floor Details</div>
 
                 <select
                   id="facing"
                   name="floorDetails"
                   label="Floor Details"
-                  className="block py-1 px-2 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+                  className="block py-2 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2  hover:shadow-2xl
+                  hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
                   value={validation.values.floorDetails}
                   onChange={validation.handleChange || ""}
                   invalid={
@@ -804,7 +810,7 @@ const RegisterProperty = () => {
           <p className="text- flex-w pt-10">
             {" "}
             Facilities in Your Property:
-            <div className=" grid md:grid-cols-6 mb-4 font-semibold text-gray-900 dark:text-white">
+            <div className=" grid md:grid-cols-6 mb-4 font-semibold text-gray-900 dark:text-white gap-3">
               {facilities.map((items, i) => (
                 <ul
                   className=" bg-gray-50 text-sm font-medium text-gray-900 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -867,9 +873,7 @@ const RegisterProperty = () => {
         </div>
       </form>
 
-      <div className="pr-3 hidden  md:block col-span-2">
-        {/* <img className="aspect-[2/3]" src={Image} /> */}
-      </div>
+      
     </div>
   );
 };

@@ -3,9 +3,17 @@ import { SERVER_URL } from "../helper/configuration";
 const BASE_URL = `${SERVER_URL}/api`;
 const userRegisteration = (payload) =>
   post(`${BASE_URL}/user/register`, payload);
+
 const userLogin = (payload) => post(`${BASE_URL}/user/login`, payload);
 const Login = (payload) => post(`${BASE_URL}/user/login`, payload);
 const PropertyRegistration = (payload) =>
+
+const userLogin = (payload) =>
+  post(`${BASE_URL}/user/login`, payload);
+const logoutUser = (payload) =>
+  get(`${BASE_URL}/user/logout`, payload);
+  const PropertyRegistration = (payload) =>
+
   post(`${BASE_URL}/property/Sellproperty`, payload);
 const getPropertybyUserId = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
@@ -68,8 +76,17 @@ const getuserProperty = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
 const getPaymentId = (payload) =>
   post(`${BASE_URL}/payment/getPaymentId`, payload);
+
 const getforget = (payload) => post(`${BASE_URL}/user/forgotpassword`, payload);
 const getpassword = (payload) => put(`${BASE_URL}/user/resetpassword`, payload);
+
+ 
+
+
+
+
+
+
 
 export {
   userRegisteration,

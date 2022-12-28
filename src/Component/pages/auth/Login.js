@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import * as Yup from "yup"
 
 import { userLogin } from '../../helper/backend_helpers'
+import { useUser } from '../contextProvider/UserProvider'
 const Login = () => {
+ const {setCurrentUser}= useUser()
   const navigate = useNavigate()
   const [loginSuccess, setLoginSuccess] = useState("")
   const [loginError, setLoginError] = useState("")
@@ -27,6 +29,7 @@ const Login = () => {
    
       if (res.success) {
         localStorage.setItem("authUser", JSON.stringify(res))
+        setCurrentUser(res)
         setLoginSuccess(res?.msg)
         setLoginError("")
         navigate("/")

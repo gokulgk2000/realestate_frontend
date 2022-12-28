@@ -12,6 +12,7 @@ import Login from "../pages/auth/Login";
 import { Carousel } from "../pages/Carousel";
 import Yo from "../assets/images/re.png";
 import Logo from "../assets/logo/re.png";
+import { useUser } from "../pages/contextProvider/UserProvider";
 const NavItem = [
   { name: "HOME", link: "/" },
   { name: "SELL", link: "/sell" },
@@ -22,6 +23,8 @@ const NavItem = [
   // { name: "Contactus", link: "#" },
 ];
 function Navbar() {
+  const {currentUser:userFromStorage,setCurrentUser}=useUser()
+  // console.log("userData", userData);
   // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const [isMobileview] = useMediaQuery(mobile);
@@ -33,7 +36,7 @@ function Navbar() {
   // const query = useQuery();
   // const id = query.get("id");
 
-  const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
+  // const userFromStorage = JSON.parse(localStorage.getItem("authUser"));
 
   // console.log("user",user)
   const getUserName = async () => {
@@ -48,7 +51,7 @@ function Navbar() {
   };
   useEffect(() => {
     getUserName();
-  }, []);
+  }, [userFromStorage]);
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
   //     id,
@@ -69,6 +72,7 @@ function Navbar() {
 
   const AuthLogout = () => {
     logout();
+    setCurrentUser({})
     navigate("/");
   };
 

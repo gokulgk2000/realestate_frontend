@@ -12,8 +12,8 @@ const FileInput = ({ label, name, value,placeholder, maxLength,multiple="false",
 
 // }
   return (
-    <div className="pr-2 grid grid-rows-2 text-gray-700  gap-2">
-      <label className="capitalize">{label}</label>
+    <div className="pr-2  text-gray-700  ">
+      <label className="capitaliz ">{label}</label>
       <input
         type="file"
         accept={accept}
@@ -23,7 +23,7 @@ const FileInput = ({ label, name, value,placeholder, maxLength,multiple="false",
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
-        className="block py-1 px-2 w-60  text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+        className="block py-2 px-2  w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
         props
       />
     </div>

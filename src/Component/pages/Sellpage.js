@@ -19,13 +19,13 @@ const RegisterProperty = () => {
   const [propertyregistrationSuccess, setPropertyRegistrationSuccess] =
     useState("");
   const propertystatus = [
-    { value: "", text: "select property status " },
-    { value: "ongoing", text: "ongoing " },
-    { value: "pending", text: "pending " },
-    { value: "complete", text: "complete " },
+    { value: "", text: "Select Property Status " },
+    { value: "ongoing", text: "Ongoing " },
+    { value: "pending", text: "Pending " },
+    { value: "complete", text: "Complete " },
   ];
   const facing = [
-    { value: "", text: "select facing " },
+    { value: "", text: "Select Facing " },
     { value: "east", text: "east " },
     { value: "west", text: "west " },
     { value: "south", text: "south " },
@@ -36,7 +36,7 @@ const RegisterProperty = () => {
     { value: "northWest", text: "northWest " },
   ];
   const floorDetails = [
-    { value: "", text: "Select Your FloorDetails  " },
+    { value: "", text: "Select Your Floor Details  " },
     { value: "cementFloor", text: "CementFloor " },
     { value: "mosaic", text: "Mosaic " },
     { value: "tiles", text: "Tiles " },
@@ -171,10 +171,10 @@ const RegisterProperty = () => {
   }, [validation?.values?.category]);
 
   useEffect(() => {
-    if (validation?.values?.category === "637d5528f4dc56d8268ea2a8") return  setShowFacing(false);
-   
+    if (validation?.values?.category === "637d5528f4dc56d8268ea2a8")
+      return setShowFacing(false);
     else return setShowFacing(true);
-  }, [validation?. values.category]);
+  }, [validation?.values.category]);
   useEffect(() => {
     const allcategory = async () => {
       const res = await findCategory();
@@ -254,7 +254,7 @@ const RegisterProperty = () => {
   };
 
   return (
-    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-32 md:pr-24 ">
+    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-32 md:pr-24 capitalize flex justify-center">
       <form
         className="col-span-3 gap-1"
         onSubmit={(e) => {
@@ -306,7 +306,7 @@ const RegisterProperty = () => {
               id="category"
               name="category"
               label="category"
-              className="block py-1 px-2 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+              className="block  py-1 pl-2 capitalize w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
               value={validation.values.category || ""}
               onChange={validation.handleChange}
               invalid={
@@ -324,7 +324,7 @@ const RegisterProperty = () => {
               ))}
             </select>
             {validation.touched.category && validation.errors.category ? (
-              <span className="text-red-500" type="invalid">
+              <span className="text-red-500 " type="invalid">
                 {validation.errors.category}
               </span>
             ) : null}
@@ -355,7 +355,7 @@ const RegisterProperty = () => {
               label="*Lay-Out Name"
               type="text"
               name="layoutName"
-              placeholder="Enter The LayoutName"
+              placeholder="Enter The Lay-out Name"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.layoutName || ""}
@@ -376,7 +376,7 @@ const RegisterProperty = () => {
               label="Street Name"
               type="text"
               name="streetName"
-              placeholder="Enter The streetName"
+              placeholder="Enter The street Name"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.streetName || ""}
@@ -397,7 +397,7 @@ const RegisterProperty = () => {
               label="approach Road"
               type="text"
               name="approachRoad"
-              placeholder="Enter The ApproachRoad"
+              placeholder="Enter The Approach Road"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.approachRoad || ""}
@@ -420,7 +420,7 @@ const RegisterProperty = () => {
               label="near Facilities"
               type="text"
               name="nearFacilities"
-              placeholder="Enter The nearFacilities"
+              placeholder="Enter The Near Facilities"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.nearFacilities || ""}
@@ -443,7 +443,7 @@ const RegisterProperty = () => {
               label="*cost per Sq/Acra/cent"
               type="number"
               name="costSq"
-              placeholder="Enter The CostSq"
+              placeholder="Enter The Cost/Sq"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.costSq || ""}
@@ -461,10 +461,10 @@ const RegisterProperty = () => {
           </div>{" "}
           <div>
             <Input
-              label="negotiable Price (INR)"
-              type="number"
+              label="Market Price"
+               type="number"
               name="negotiablePrice"
-              placeholder="Enter The Price"
+              placeholder="₹. Enter The Price"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.negotiablePrice || ""}
@@ -511,7 +511,7 @@ const RegisterProperty = () => {
               </span>
             ) : null}
           </div>{" "}
-          <div>
+          <div className="">
             <Input
               label="Description"
               type="text"
@@ -532,7 +532,7 @@ const RegisterProperty = () => {
               </span>
             ) : null}
           </div>
-          <div               className="block py-1 px-2  w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
+          <div           
 >
             <FileInput
               label=" *Property Images"
@@ -551,9 +551,9 @@ const RegisterProperty = () => {
             border: "none",
           }}
         />
-        <div className="grid grid-cols-4 ">
+        <div className="grid md:grid-cols-4 md:gap-y-10 md:pt-5">
           <div className="  font ">
-           Property Status
+            Property Status
             <select
               id="propertyStatus"
               name="propertyStatus"
@@ -588,7 +588,7 @@ const RegisterProperty = () => {
               label="Land / Area"
               type="text"
               name="landArea"
-              placeholder="Enter The LandArea"
+              placeholder="Enter The Land Area"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.landArea || ""}
@@ -605,13 +605,13 @@ const RegisterProperty = () => {
             ) : null}
           </div>
           {showFacing && (
-            <div className="m-2 grid grid-rows-2 font gap-2 mb-">
+            <div className=" grid grid-rows-2 font gap-2 mb-">
               <div className="">Facing</div>
               <select
                 id="facing"
                 name="facing"
                 label="facing"
-                className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="block py-1 px-2 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                 value={validation.values.facing}
                 onChange={validation.handleChange || ""}
                 invalid={
@@ -639,7 +639,7 @@ const RegisterProperty = () => {
               label="built Area"
               type="text"
               name="builtArea"
-              placeholder="Enter The BuiltArea"
+              placeholder="Enter The Built Area"
               onChange={validation.handleChange}
               onBlur={validation.handleBlur}
               value={validation.values.builtArea || ""}
@@ -661,7 +661,7 @@ const RegisterProperty = () => {
                 label="bed Room"
                 type="number"
                 name="bedRoom"
-                placeholder="Enter The No Of BedRoom"
+                placeholder="Enter The No Of Bed Room"
                 onChange={validation.handleChange}
                 onBlur={validation.handleBlur}
                 value={validation.values.bedRoom || ""}
@@ -684,7 +684,7 @@ const RegisterProperty = () => {
                 label="bath Room"
                 type="number"
                 name="bathRoom"
-                placeholder="Enter The No Of BathRoom"
+                placeholder="Enter The No Of Bath Room"
                 onChange={validation.handleChange}
                 onBlur={validation.handleBlur}
                 value={validation.values.bathRoom || ""}
@@ -726,14 +726,14 @@ const RegisterProperty = () => {
           )}
           {show && (
             <div>
-              <div className="m-2 grid grid-rows-2 font gap-2 mb-">
+              <div className=" grid grid-rows-2 font gap-2 mb-">
                 <div>Floor Details</div>
 
                 <select
                   id="facing"
                   name="floorDetails"
                   label="Floor Details"
-                  className="border-2 capitalize px-2 py-2  text-black border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block py-1 px-2 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                   value={validation.values.floorDetails}
                   onChange={validation.handleChange || ""}
                   invalid={
@@ -761,28 +761,10 @@ const RegisterProperty = () => {
           )}
         </div>
 
-        {/* <div>
-            <Input
-              label="facilities"
-              type="text"
-              name="facilities"
-              placeholder="Enter The Facilities"
-              onChange={validation.handleChange}
-              onBlur={validation.handleBlur}
-              value={validation.values.facilities || ""}
-              invalid={
-                validation.touched.facilities && validation.errors.facilities
-                  ? true
-                  : false
-              }
-            />
-            {validation.touched.facilities && validation.errors.facilities ? (
-              <span  className="text-red-500" type="invalid">{validation.errors.facilities}</span>
-            ) : null}
-          </div> */}
+   
 
         {show && (
-          <p className="text- flex-w">
+          <p className="text- flex-w pt-10">
             {" "}
             Facilities in Your Property:
             <div className=" grid md:grid-cols-6 mb-4 font-semibold text-gray-900 dark:text-white">

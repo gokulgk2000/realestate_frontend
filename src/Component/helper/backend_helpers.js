@@ -5,6 +5,8 @@ const userRegisteration = (payload) =>
   post(`${BASE_URL}/user/register`, payload);
 const userLogin = (payload) =>
   post(`${BASE_URL}/user/login`, payload);
+const logoutUser = (payload) =>
+  get(`${BASE_URL}/user/logout`, payload);
   const PropertyRegistration = (payload) =>
   post(`${BASE_URL}/property/Sellproperty`, payload);
   const getPropertybyUserId = (payload) =>
@@ -64,7 +66,7 @@ const updateProperty = (payload) =>
   post(`${BASE_URL}/property/getpropertyByUserId`, payload);
   const getPaymentId = (payload) =>
   post(`${BASE_URL}/payment/getPaymentId`, payload);
-  export {userRegisteration,
+  export {userRegisteration,logoutUser,
     adminLogin,
     FeedbackRegistration,
     getuserProperty,

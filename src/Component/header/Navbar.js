@@ -147,7 +147,7 @@ function Navbar() {
                   </NavLink>
                 
                   <NavLink
-                    to="/buyer"
+                    to="/property"
                     className={({ isActive }) =>
                       isActive
                         ? "border-b-2 border-black text-white"

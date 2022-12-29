@@ -56,6 +56,8 @@ const getAllrequested = (payload) =>
   get(`${BASE_URL}/requested/getAllrequested`, payload);
 const getIntrestedPropertyBybuyerId = (payload) =>
   post(`${BASE_URL}/intrested/getIntrestedByBuyerId`, payload);
+const IntrestedByPropertyId = (payload) =>
+  post(`${BASE_URL}/intrested/createIntrestedProperty`, payload);
 const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
 const updateTopProperty = (payload) =>
@@ -92,6 +94,7 @@ const getpassword = (payload) => put(`${BASE_URL}/user/resetpassword`, payload);
 
 export {
   userRegisteration,
+  IntrestedByPropertyId,
   buyerRegister,
   Login,
   logoutUser,

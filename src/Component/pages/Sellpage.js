@@ -263,7 +263,7 @@ const RegisterProperty = () => {
   return (
     <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-32 md:pr-24 capitalize flex justify-center">
       <form
-        className="col-span-3 gap-1 bg-blue-100 px-2"
+        className="col-span-3 gap-1 bg-gray-50 px-2"
         onSubmit={(e) => {
           e.preventDefault();
           validation.handleSubmit();
@@ -587,7 +587,7 @@ const RegisterProperty = () => {
           className=" "
           style={{
             background: "#a48641",
-            height: "5px",
+            height: "1px",
             border: "none",
           }}
         />

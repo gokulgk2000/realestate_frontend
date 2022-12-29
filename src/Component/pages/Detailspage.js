@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   buyerReg,
+  getInterest,
   getProById,
   getPropertyById,
   IntrestedByPropertyId,
@@ -19,7 +20,7 @@ import GalleryModel from "../models/GalleryModel";
 import { useUser } from "./contextProvider/UserProvider";
 import { Link } from "react-router-dom";
 const Detailspage = () => {
-  const {currentUser,setCurrentUser}=useUser()
+  const { currentUser, setCurrentUser } = useUser();
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
@@ -27,6 +28,8 @@ const Detailspage = () => {
   const [propertyId, setPropertyId] = useState([]);
   const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
   const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
+  const [interest, setInterestSuccess] = useState([]);
+  const [interesterror,setInterestError] = useState([])
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
 
@@ -58,7 +61,7 @@ const Detailspage = () => {
 
   // const handlebuyerReg = async () => {
   //   const payload = {
-      
+
   //   }
   //   const res = await buyerReg (payload);
 
@@ -70,21 +73,19 @@ const Detailspage = () => {
   //     setBuyerRegistrationError(res.msg);
   //   }
   // };
-// const intrestedProperty =async()=>{
-//   const res = await IntrestedByPropertyId({ 
-//     regUser: currentUser?.userID,
-//     propertyId: query.get("uid") });
-    
-//     if (res.success) {
-//       setproperty(res?.Intrested);
-    
-//       console.log("data", res);
-//     } else {
-//       console.log("Error while fetching property");
-//     }
-//   };
+  // const intrestedProperty =async()=>{
+  //   const res = await IntrestedByPropertyId({
+  //     regUser: currentUser?.userID,
+  //     propertyId: query.get("uid") });
 
+  //     if (res.success) {
+  //       setproperty(res?.Intrested);
 
+  //       console.log("data", res);
+  //     } else {
+  //       console.log("Error while fetching property");
+  //     }
+  //   };
 
   const propertyPicLength = property?.propertyPic?.length;
   const propertyDetails = async () => {
@@ -129,6 +130,21 @@ const Detailspage = () => {
       console.log("Failed to fetch message", res);
     }
   };
+  const interested  =  async () => {
+    const payload = {
+      propertyId: property?._id,
+
+      regUser:currentUser?.userID
+    }
+    const res = await getInterest(payload);
+    if (res.success) {
+      setInterestSuccess(res.msg);
+    }else{
+      setInterestError(res.msg);
+
+    }
+
+  }
   return (
     <>
       {loading ? (
@@ -158,39 +174,46 @@ const Detailspage = () => {
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
+                    <div className="flex justify-end">
+                      <button onClick={interested} className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                        Intrested
+                      </button>
+                    </div>
                     <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}
                     </div>
 
                     <div className="md:flex grid  pl- ">
                       <span className="font text-lg capitalize md:pl- underline">
-                      {property?.location},{property?.streetName}, 
+                        {property?.location},{property?.streetName},
                       </span>{" "}
                       <span className="text-md pt-1 font text-gray-600 capitalize ">
-                      {property?.title}  {property?.bedRoom}BHK  For sale{" "}
+                        {property?.title} {property?.bedRoom}BHK For sale{" "}
                       </span>
                     </div>
                     <div className="grid md:grid-cols-5 gap-x- pt-3 ">
                       <div className="col-span-2 ">
                         <div className="grid gap-y-1 p-">
-                         <div className="grid">
-                                    <div className="absolute">
-                                      <div className="flex pl-2 pt-2 text-white font">
-                                      <svg
-                                        viewBox="0 0 122.88 91.24 "
-                                        className="h-5 w-5 bg-slate-200"
-                                      >
-                                        <path d="M6.23,0H116.7c1.72,0,3.25,0.7,4.37,1.81c1.11,1.11,1.81,2.69,1.81,4.37v78.88c0,1.72-0.7,3.25-1.81,4.37 c-0.09,0.09-0.19,0.19-0.33,0.28c-1.07,0.98-2.51,1.53-4.09,1.53H6.18c-1.72,0-3.25-0.7-4.37-1.81C0.7,88.32,0,86.74,0,85.06V6.18 c0-1.72,0.7-3.25,1.81-4.37S4.51,0,6.18,0L6.23,0L6.23,0L6.23,0z M31.74,21.42c4.9,0,8.87,3.97,8.87,8.86 c0,4.9-3.97,8.87-8.87,8.87s-8.87-3.97-8.87-8.87C22.87,25.39,26.84,21.42,31.74,21.42L31.74,21.42L31.74,21.42z M69.05,59.46 l17.73-30.66l18.84,47.65l-87.92,0v-5.91l7.39-0.37l7.39-18.1l3.69,12.93h11.08l9.6-24.75L69.05,59.46L69.05,59.46L69.05,59.46z M115.54,7.34H7.39v76.51h108.15L115.54,7.34L115.54,7.34L115.54,7.34z" />
-                                      </svg>
-                                   <p>
-                                    {property?.propertyPic?.length}Photos{" "}</p></div> </div>
-                                
-                          <img
-                            className=" aspect-[3/2]  md:h-72 rounded-tr-md rounded-tl-md"
-                            src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
-                          /></div>
+                          <div className="grid">
+                            <div className="absolute">
+                              <div className="flex pl-2 pt-2 text-white font">
+                                <svg
+                                  viewBox="0 0 122.88 91.24 "
+                                  className="h-5 w-5 bg-slate-200"
+                                >
+                                  <path d="M6.23,0H116.7c1.72,0,3.25,0.7,4.37,1.81c1.11,1.11,1.81,2.69,1.81,4.37v78.88c0,1.72-0.7,3.25-1.81,4.37 c-0.09,0.09-0.19,0.19-0.33,0.28c-1.07,0.98-2.51,1.53-4.09,1.53H6.18c-1.72,0-3.25-0.7-4.37-1.81C0.7,88.32,0,86.74,0,85.06V6.18 c0-1.72,0.7-3.25,1.81-4.37S4.51,0,6.18,0L6.23,0L6.23,0L6.23,0z M31.74,21.42c4.9,0,8.87,3.97,8.87,8.86 c0,4.9-3.97,8.87-8.87,8.87s-8.87-3.97-8.87-8.87C22.87,25.39,26.84,21.42,31.74,21.42L31.74,21.42L31.74,21.42z M69.05,59.46 l17.73-30.66l18.84,47.65l-87.92,0v-5.91l7.39-0.37l7.39-18.1l3.69,12.93h11.08l9.6-24.75L69.05,59.46L69.05,59.46L69.05,59.46z M115.54,7.34H7.39v76.51h108.15L115.54,7.34L115.54,7.34L115.54,7.34z" />
+                                </svg>
+                                <p>{property?.propertyPic?.length}Photos </p>
+                              </div>{" "}
+                            </div>
+
+                            <img
+                              className=" aspect-[3/2]  md:h-72 rounded-tr-md rounded-tl-md"
+                              src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
+                            />
+                          </div>
                           <div className="grid grid-cols-4 gap-x-2 gap-y-2 md:pr">
-                            {" "} 
+                            {" "}
                             <div className="col-span-3 gap-x-2 grid grid-cols-3">
                               {" "}
                               {property?.propertyPic?.length > 0 &&
@@ -215,7 +238,7 @@ const Detailspage = () => {
                                     } else {
                                       return (
                                         <button key={j}>
-                                          <div className="" >
+                                          <div className="">
                                             <img
                                               src={`${SERVER_URL}/file/${image.id}`}
                                               className="aspect-[3/2] h-20  rounded-md"
@@ -227,12 +250,14 @@ const Detailspage = () => {
                                     }
                                   })}
                             </div>{" "}
-                            {property?.propertyPic?.length >= 3 && (   <div className="  "onClick={() => setModalOpen1(true)}>
-                        
+                            {property?.propertyPic?.length >= 3 && (
+                              <div
+                                className="  "
+                                onClick={() => setModalOpen1(true)}
+                              >
                                 <div
                                   className="text-white md:text-base font-medium text-sm  flex justify-end cursor-pointer
                                 "
-                                  
                                 >
                                   <div className="absolute pr-1 ">
                                     <div className="md:pl-7 pl-5 pt-2">
@@ -244,13 +269,14 @@ const Detailspage = () => {
                                       </svg>
                                     </div>
                                     + {property?.propertyPic?.length}Photos{" "}
-                                  </div><img
-                            className=" aspect-[3/2] h-20 rounded-bl-md  rounded-br-md"
-                            src={`${SERVER_URL}/file/${property?.propertyPic[3]?.id}`}
-                          />
+                                  </div>
+                                  <img
+                                    className=" aspect-[3/2] h-20 rounded-bl-md  rounded-br-md"
+                                    src={`${SERVER_URL}/file/${property?.propertyPic[3]?.id}`}
+                                  />
                                 </div>
-                             
-                            </div> )}{" "}
+                              </div>
+                            )}{" "}
                           </div>
                         </div>
                       </div>
@@ -258,52 +284,50 @@ const Detailspage = () => {
                         {(property?.category?.name === "residential" ||
                           property?.category?.name === "villa" ||
                           property?.category?.name === "appartment") && (
-                            <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-2 ">
-                              <div className="pt-2 ">
-                                <span className="flex ">
-                                  {" "}
-                                  <svg
-                                    viewBox="0 0 122.88 121.47"
-                                    className="w-6 h-6 text-white"
-                                  >
-                                    <path d="M10.76,95.77l101.36,0.02l-11.52-45.63H22.25L10.76,95.77L10.76,95.77z M3.4,100.88l116.08,0.03l-18.18-70.24h-4.35v4.98 l1.93,7.66l-74.84-0.22l1.96-7.77v-4.65h-4.44L3.4,100.88L3.4,100.88z M64.57,34.09v-3.42h-6.21v3.42H64.57L64.57,34.09z M96.94,27.85h4.05l0.07-25.1H21.19l0.67,25.1h4.14v-8.44c0-0.64,0.26-1.23,0.68-1.65c0.42-0.42,1.01-0.68,1.65-0.68h27.7 c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65v8.44h6.21v-7.97c0-0.64,0.26-1.23,0.68-1.65 c0.42-0.42,1.01-0.68,1.65-0.68h27.7c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65V27.85L96.94,27.85z M94.06,20.44 h-26.6v16.08h26.6V20.44L94.06,20.44z M55.48,19.97h-26.6v16.55h26.6V19.97L55.48,19.97z M20.58,0h81.08l0,0.01 c0.59,0,1.13,0.24,1.51,0.63h0.01c0.39,0.39,0.63,0.93,0.63,1.52l-0.01,0l-0.08,26.96l18.85,72.83c0.01,0.05,0.02,0.11,0.03,0.17 l0,0l0,0.01l0,0.01l0,0.01l0,0.01c0.01,0.05,0.01,0.1,0.01,0.15l0.25,17.67l0.01,0.14c0,0.76-0.62,1.38-1.38,1.38H1.37v-0.01H1.36 c-0.76-0.01-1.36-0.63-1.36-1.39l0.25-17.8c0-0.06,0.01-0.12,0.01-0.18c0.01-0.06,0.02-0.12,0.03-0.18l18.84-72.86l0.01-0.05 c-0.24-8.87-0.71-18.04-0.71-26.88h-0.01c0-0.59,0.24-1.12,0.63-1.5c0.38-0.37,0.9-0.61,1.47-0.63L20.58,0L20.58,0L20.58,0z M2.97,103.63l-0.21,15.09h117.35l-0.21-15.06L2.97,103.63L2.97,103.63z" />
-                                  </svg>
-                                  <span className="font pl-2">
-                                    {property?.bedRoom}{" "}
-                                  </span>
-                                  <span className="font text-gray-500">
-                                    Beds
-                                  </span>
+                          <div className="flex bg-slate-200 rounded-md justify-start h-10 pl-2 ">
+                            <div className="pt-2 ">
+                              <span className="flex ">
+                                {" "}
+                                <svg
+                                  viewBox="0 0 122.88 121.47"
+                                  className="w-6 h-6 text-white"
+                                >
+                                  <path d="M10.76,95.77l101.36,0.02l-11.52-45.63H22.25L10.76,95.77L10.76,95.77z M3.4,100.88l116.08,0.03l-18.18-70.24h-4.35v4.98 l1.93,7.66l-74.84-0.22l1.96-7.77v-4.65h-4.44L3.4,100.88L3.4,100.88z M64.57,34.09v-3.42h-6.21v3.42H64.57L64.57,34.09z M96.94,27.85h4.05l0.07-25.1H21.19l0.67,25.1h4.14v-8.44c0-0.64,0.26-1.23,0.68-1.65c0.42-0.42,1.01-0.68,1.65-0.68h27.7 c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65v8.44h6.21v-7.97c0-0.64,0.26-1.23,0.68-1.65 c0.42-0.42,1.01-0.68,1.65-0.68h27.7c0.64,0,1.23,0.26,1.65,0.68c0.42,0.42,0.68,1.01,0.68,1.65V27.85L96.94,27.85z M94.06,20.44 h-26.6v16.08h26.6V20.44L94.06,20.44z M55.48,19.97h-26.6v16.55h26.6V19.97L55.48,19.97z M20.58,0h81.08l0,0.01 c0.59,0,1.13,0.24,1.51,0.63h0.01c0.39,0.39,0.63,0.93,0.63,1.52l-0.01,0l-0.08,26.96l18.85,72.83c0.01,0.05,0.02,0.11,0.03,0.17 l0,0l0,0.01l0,0.01l0,0.01l0,0.01c0.01,0.05,0.01,0.1,0.01,0.15l0.25,17.67l0.01,0.14c0,0.76-0.62,1.38-1.38,1.38H1.37v-0.01H1.36 c-0.76-0.01-1.36-0.63-1.36-1.39l0.25-17.8c0-0.06,0.01-0.12,0.01-0.18c0.01-0.06,0.02-0.12,0.03-0.18l18.84-72.86l0.01-0.05 c-0.24-8.87-0.71-18.04-0.71-26.88h-0.01c0-0.59,0.24-1.12,0.63-1.5c0.38-0.37,0.9-0.61,1.47-0.63L20.58,0L20.58,0L20.58,0z M2.97,103.63l-0.21,15.09h117.35l-0.21-15.06L2.97,103.63L2.97,103.63z" />
+                                </svg>
+                                <span className="font pl-2">
+                                  {property?.bedRoom}{" "}
                                 </span>
-                              </div>
-                              <div className="pt- pl-5 text-2xl">|</div>
-                              <div className="pt-2 pl-5 ">
-                                <span className="flex ">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg "
-                                    className="h-6 w-6"
-                                    viewBox="0 0 64 64"
-                                  >
-                                    <path d="M14.918 15.925c-.469.261-.635.852-.373 1.319l2.445 4.371c.176.317.506.496.846.496.16 0 .322-.04.473-.124.467-.261.635-.853.373-1.32l-2.445-4.371C15.975 15.83 15.387 15.663 14.918 15.925zM17.541 14.008c-.424.325-.506.933-.182 1.359l3.035 3.982c.191.25.48.381.773.381.203 0 .41-.065.586-.198.426-.325.508-.933.184-1.359L18.9 14.191C18.576 13.766 17.969 13.683 17.541 14.008zM24.27 17.386c.238 0 .475-.086.662-.26.391-.365.412-.979.047-1.371l-3.414-3.663c-.365-.392-.98-.413-1.371-.048-.393.365-.414.979-.049 1.371l3.416 3.663C23.752 17.283 24.01 17.386 24.27 17.386zM63.031 1.236H.971C.438 1.236 0 1.673 0 2.206s.438.97.971.97h33.648v2.454h1.939V3.176h2.23v2.454h1.939V3.176h2.23v2.454h1.938V3.176h2.23v2.454h1.939V3.176h2.24v2.454h1.939V3.176h1.9v2.454h1.939V3.176h5.945c.533 0 .969-.437.969-.97S63.564 1.236 63.031 1.236zM36.762 48.364c-.049-.155-.068-.32-.039-.475C36.693 48.043 36.703 48.208 36.762 48.364zM36.869 47.21V7.568h-1.184-.193-1.184V47.21c0 .698.572 1.28 1.279 1.28.533 0 .99-.33 1.184-.785C36.83 47.549 36.869 47.384 36.869 47.21z" />
-                                    <path d="M32.369 36.669H6.943V35.7v-.97-1.816h2.346c.535 0 .969-.434.969-.97 0-.535-.434-.969-.969-.969H6.943v-16.24c0-.029-.145-2.541 1.348-4.219.572-.64 1.318-1.096 2.24-1.348-.311 1.707.301 3.666 1.756 5.13.193.194.436.281.688.281s.494-.087.689-.281l5.449-5.45c.379-.378.379-.989 0-1.367-2.201-2.201-5.518-2.463-7.398-.582-.039.039-.078.078-.107.116C9.59 7.19 7.98 7.937 6.836 9.236c-2.045 2.308-1.832 5.499-1.832 5.566v16.173H2.723c-.535 0-.969.434-.969.969 0 .536.434.97.969.97h2.281v1.816.97.969H2.725c-.436 0-.785.349-.785.786 0 .427.359.786.785.786h29.645V36.669zM40.912 47.782c.02-.048.039-.087.059-.136.049-.136.076-.291.076-.436V7.568h-1.191H39.66h-.852V47.21c0 .262-.029.504-.088.747.039.058.078.106.135.165.242.243.563.378.902.378C40.252 48.5 40.689 48.218 40.912 47.782zM45.111 47.705c0-.01.01-.02.02-.039.047-.136.076-.301.076-.456V7.568h-1.182H43.83h-.844V47.21c0 .252-.027.514-.096.756.039.048.076.106.125.155.252.243.572.378.912.378C44.441 48.5 44.916 48.189 45.111 47.705zM49.281 47.714c.01-.039.027-.068.037-.106.049-.126.068-.262.068-.397V7.568h-1.191H48h-.854V47.21c0 .252-.029.504-.086.747.037.058.086.116.135.165.242.243.563.378.902.378C48.631 48.5 49.086 48.17 49.281 47.714zM52.18 7.568h-.854V47.21c0 .262-.029.504-.096.747.037.058.076.106.135.165.193.185.416.301.66.349.02 0 .029.01.047.01.02 0 .039.01.059 0 .059.01.098.02.146.02.436 0 .834-.223 1.076-.592 0-.01.01-.019.02-.029.115-.204.184-.427.184-.669V7.568h-1.184H52.18zM56.02 7.568h-.523V47.21c0 .349-.059.688-.164 1.008.223.184.494.281.785.281.707 0 1.279-.582 1.279-1.29V7.568h-1.184H56.02zM13.859 58.741l-1.01-.043v2.418c0 .909.734 1.648 1.639 1.648h.543c.902 0 1.639-.74 1.639-1.648v-2.356h-2.182C14.289 58.759 14.088 58.75 13.859 58.741zM40.859 58.742c-.199.008-.398.017-.598.017H38.08v2.356c0 .909.73 1.648 1.629 1.648h.553c.904 0 1.639-.74 1.639-1.648v-1.406l-.031-1.011L40.859 58.742z" />
-                                    <path
-                                      d="M48.098,50.439c-0.766,0-1.504-0.271-2.086-0.776c-0.563,0.495-1.299,0.776-2.084,0.776c-0.775,0-1.504-0.271-2.084-0.776
+                                <span className="font text-gray-500">Beds</span>
+                              </span>
+                            </div>
+                            <div className="pt- pl-5 text-2xl">|</div>
+                            <div className="pt-2 pl-5 ">
+                              <span className="flex ">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg "
+                                  className="h-6 w-6"
+                                  viewBox="0 0 64 64"
+                                >
+                                  <path d="M14.918 15.925c-.469.261-.635.852-.373 1.319l2.445 4.371c.176.317.506.496.846.496.16 0 .322-.04.473-.124.467-.261.635-.853.373-1.32l-2.445-4.371C15.975 15.83 15.387 15.663 14.918 15.925zM17.541 14.008c-.424.325-.506.933-.182 1.359l3.035 3.982c.191.25.48.381.773.381.203 0 .41-.065.586-.198.426-.325.508-.933.184-1.359L18.9 14.191C18.576 13.766 17.969 13.683 17.541 14.008zM24.27 17.386c.238 0 .475-.086.662-.26.391-.365.412-.979.047-1.371l-3.414-3.663c-.365-.392-.98-.413-1.371-.048-.393.365-.414.979-.049 1.371l3.416 3.663C23.752 17.283 24.01 17.386 24.27 17.386zM63.031 1.236H.971C.438 1.236 0 1.673 0 2.206s.438.97.971.97h33.648v2.454h1.939V3.176h2.23v2.454h1.939V3.176h2.23v2.454h1.938V3.176h2.23v2.454h1.939V3.176h2.24v2.454h1.939V3.176h1.9v2.454h1.939V3.176h5.945c.533 0 .969-.437.969-.97S63.564 1.236 63.031 1.236zM36.762 48.364c-.049-.155-.068-.32-.039-.475C36.693 48.043 36.703 48.208 36.762 48.364zM36.869 47.21V7.568h-1.184-.193-1.184V47.21c0 .698.572 1.28 1.279 1.28.533 0 .99-.33 1.184-.785C36.83 47.549 36.869 47.384 36.869 47.21z" />
+                                  <path d="M32.369 36.669H6.943V35.7v-.97-1.816h2.346c.535 0 .969-.434.969-.97 0-.535-.434-.969-.969-.969H6.943v-16.24c0-.029-.145-2.541 1.348-4.219.572-.64 1.318-1.096 2.24-1.348-.311 1.707.301 3.666 1.756 5.13.193.194.436.281.688.281s.494-.087.689-.281l5.449-5.45c.379-.378.379-.989 0-1.367-2.201-2.201-5.518-2.463-7.398-.582-.039.039-.078.078-.107.116C9.59 7.19 7.98 7.937 6.836 9.236c-2.045 2.308-1.832 5.499-1.832 5.566v16.173H2.723c-.535 0-.969.434-.969.969 0 .536.434.97.969.97h2.281v1.816.97.969H2.725c-.436 0-.785.349-.785.786 0 .427.359.786.785.786h29.645V36.669zM40.912 47.782c.02-.048.039-.087.059-.136.049-.136.076-.291.076-.436V7.568h-1.191H39.66h-.852V47.21c0 .262-.029.504-.088.747.039.058.078.106.135.165.242.243.563.378.902.378C40.252 48.5 40.689 48.218 40.912 47.782zM45.111 47.705c0-.01.01-.02.02-.039.047-.136.076-.301.076-.456V7.568h-1.182H43.83h-.844V47.21c0 .252-.027.514-.096.756.039.048.076.106.125.155.252.243.572.378.912.378C44.441 48.5 44.916 48.189 45.111 47.705zM49.281 47.714c.01-.039.027-.068.037-.106.049-.126.068-.262.068-.397V7.568h-1.191H48h-.854V47.21c0 .252-.029.504-.086.747.037.058.086.116.135.165.242.243.563.378.902.378C48.631 48.5 49.086 48.17 49.281 47.714zM52.18 7.568h-.854V47.21c0 .262-.029.504-.096.747.037.058.076.106.135.165.193.185.416.301.66.349.02 0 .029.01.047.01.02 0 .039.01.059 0 .059.01.098.02.146.02.436 0 .834-.223 1.076-.592 0-.01.01-.019.02-.029.115-.204.184-.427.184-.669V7.568h-1.184H52.18zM56.02 7.568h-.523V47.21c0 .349-.059.688-.164 1.008.223.184.494.281.785.281.707 0 1.279-.582 1.279-1.29V7.568h-1.184H56.02zM13.859 58.741l-1.01-.043v2.418c0 .909.734 1.648 1.639 1.648h.543c.902 0 1.639-.74 1.639-1.648v-2.356h-2.182C14.289 58.759 14.088 58.75 13.859 58.741zM40.859 58.742c-.199.008-.398.017-.598.017H38.08v2.356c0 .909.73 1.648 1.629 1.648h.553c.904 0 1.639-.74 1.639-1.648v-1.406l-.031-1.011L40.859 58.742z" />
+                                  <path
+                                    d="M48.098,50.439c-0.766,0-1.504-0.271-2.086-0.776c-0.563,0.495-1.299,0.776-2.084,0.776c-0.775,0-1.504-0.271-2.084-0.776
 		c-0.563,0.495-1.301,0.776-2.086,0.776s-1.512-0.271-2.084-0.776c-0.563,0.475-1.291,0.766-2.086,0.766
 		c-1.773,0-3.219-1.445-3.219-3.219v-7.03H3.695v7.787c0,5.353,3.994,9.949,9.289,10.686c0.02,0,0.039,0.01,0.059,0.01
 		c0.494,0.058,0.969,0.097,1.445,0.097h25.773c0.514,0,1.02-0.039,1.494-0.116c4.576-0.63,8.203-4.092,9.086-8.543
 		c-0.232-0.117-0.445-0.262-0.65-0.437C49.629,50.148,48.893,50.439,48.098,50.439z"
-                                    />
-                                  </svg>
-                                  <span className="font  pl-2">
-                                    {property?.bathRoom}{" "}
-                                  </span>
-                                  <span className="font text-gray-500">
-                                    Baths
-                                  </span>
+                                  />
+                                </svg>
+                                <span className="font  pl-2">
+                                  {property?.bathRoom}{" "}
                                 </span>
-                              </div>{" "}
-                            </div>
-                          )}
+                                <span className="font text-gray-500">
+                                  Baths
+                                </span>
+                              </span>
+                            </div>{" "}
+                          </div>
+                        )}
                         <div className="grid md:grid-cols-3 grid-cols-2 gap-x-5 md:gap-y-7 gap-y-3 md:px-3 pt-5 ">
                           <div className="">
                             {" "}
@@ -327,7 +351,9 @@ const Detailspage = () => {
                           <div className="">
                             <div className="font text-gray-500 capitalize pb-1">
                               Transaction Type{" "}
-                              <div className="text-black font" >{property?.transactionType}</div>
+                              <div className="text-black font">
+                                {property?.transactionType}
+                              </div>
                             </div>
                           </div>
 
@@ -411,7 +437,7 @@ const Detailspage = () => {
                       </div>
                     </div>
                   </div>
-                </div >
+                </div>
                 <div className="md:col-span-2 lg:    ">
                   <div className="grid  border-gray-600 px-7 md:px-0 md:py-0 py-2 ">
                     <div class="w-80 bg-white  shadow-2xl  rounded  animate- hover:animate-none  cursor-pointer hidden md:block">
@@ -423,7 +449,6 @@ const Detailspage = () => {
                         <form
                           onSubmit={(e) => {
                             e.preventDefault();
-                           
                           }}
                         >
                           {" "}
@@ -434,7 +459,6 @@ const Detailspage = () => {
                               id="floating_name"
                               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                               placeholder=" "
-                            
                             />
                             <label
                               for="floating_name"
@@ -442,7 +466,6 @@ const Detailspage = () => {
                             >
                               Name
                             </label>{" "}
-                            
                           </div>
                           <div class="relative z-0 mb-6 w-full group ">
                             <input
@@ -451,7 +474,6 @@ const Detailspage = () => {
                               id="floating_email"
                               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                               placeholder=" "
-                             
                             />
                             <label
                               for="floating_email"
@@ -459,7 +481,6 @@ const Detailspage = () => {
                             >
                               Email address
                             </label>{" "}
-                           
                           </div>
                           <div class="relative z-0 mb-6 w-full group">
                             <input
@@ -468,7 +489,6 @@ const Detailspage = () => {
                               id="floating_phonenumber"
                               class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                               placeholder=" "
-                             
                             />
                             <label
                               for="floating_phoneNumber"
@@ -476,7 +496,6 @@ const Detailspage = () => {
                             >
                               Phone Number
                             </label>{" "}
-                           
                           </div>
                         </form>
                         <div></div>
@@ -485,15 +504,15 @@ const Detailspage = () => {
 
                       <div class="p-4 border-t border-gray-200">
                         <div class="flex items-center justify-center">
-                          
                           <Link to="/buyerregister">
-                          <button
-                          type="submit"
-                            class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                            // onClick={intrestedProperty}
-                          >
-                            Contact
-                          </button></Link>
+                            <button
+                              type="submit"
+                              class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                              // onClick={intrestedProperty}
+                            >
+                              Contact
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -620,7 +639,6 @@ const Detailspage = () => {
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
-                         
                         }}
                       >
                         {" "}
@@ -631,7 +649,6 @@ const Detailspage = () => {
                             id="floating_name"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder=" "
-                            
                           />
                           <label
                             for="floating_name"
@@ -639,7 +656,6 @@ const Detailspage = () => {
                           >
                             Name
                           </label>{" "}
-                        
                         </div>
                         <div class="relative z-0 mb-6 w-full group ">
                           <input
@@ -648,7 +664,6 @@ const Detailspage = () => {
                             id="floating_email"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder=" "
-                            
                           />
                           <label
                             for="floating_email"
@@ -656,7 +671,6 @@ const Detailspage = () => {
                           >
                             Email address
                           </label>{" "}
-                        
                         </div>
                         <div class="relative z-0 mb-6 w-full group">
                           <input
@@ -665,7 +679,6 @@ const Detailspage = () => {
                             id="floating_phonenumber"
                             class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder=" "
-                           
                           />
                           <label
                             for="floating_phoneNumber"
@@ -673,29 +686,26 @@ const Detailspage = () => {
                           >
                             Phone Number
                           </label>{" "}
-                         
                         </div>
                         <div class="p-4 border-t border-gray-200">
-                    <div class="flex items-center justify-center">
-                      <Link to="/buyerregister">
-                      <button
-                      type="submit"
-                        class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                        
+                          <div class="flex items-center justify-center">
+                            <Link to="/buyerregister">
+                              <button
+                                type="submit"
+                                class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
 
-                        // onClick={intrestedProperty}
-                      >
-                        Contact
-                      </button>
-                      </Link>
-                    </div>
-                  </div>
+                                // onClick={intrestedProperty}
+                              >
+                                Contact
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
                       </form>
                       <div></div>
                       <div></div>
                     </div>
                   </div>
-                 
                 </div>
                 <div></div>
               </div>

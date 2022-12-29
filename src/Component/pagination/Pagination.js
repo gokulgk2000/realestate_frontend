@@ -31,8 +31,9 @@ export default function Pagination({
       <nav className='block'>
         <ul className='flex pl- rounded list-none flex-wrap justify-center'>
           <li>
-            {pageNumbers.map((number) => (
+            {pageNumbers.map((number,i) => (
               <button
+              key={i}
                 onClick={() => {
                   paginate(number);
                 }}

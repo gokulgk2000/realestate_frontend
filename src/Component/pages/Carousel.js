@@ -15,7 +15,7 @@ export const Carousel = () => {
 
   const [selectImage, setSelectImage] = useState(0);
   const carouselLength = image.length;
-  console.log(carouselLength);
+  // console.log(carouselLength);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const nextImageOnClick = () => {
     if (selectImage < carouselLength - 1) {

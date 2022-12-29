@@ -11,16 +11,16 @@ const PromotersDetails = () => {
 
   const query = useQuery();
 
-  const [loading, setLoading] = useState(false);
 const[property,setProperty]=useState()
 
   const [currentPage, setCurrentPage] = useState(1);
   const [userData, setUserData] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
   const [getUser, setGetUser] = useState(null);
   const [rerender, setRerender] = useState(true);
-console.log("user: " ,property)
+// console.log("user: " ,property)
   const requestSearch = (searched) => {
     setSearchText(searched);
   };
@@ -30,7 +30,7 @@ console.log("user: " ,property)
     });
     if (res.success) {
       setGetUser(res.User);
-      console.log("res", res);
+      // console.log("res", res);
     }
   };
 
@@ -100,17 +100,21 @@ console.log("user: " ,property)
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
     </div> */}
     </div>
+    {isLoading ? (
+      <div className="flex justify-center py-5  "> Loading...</div>
+      ) : (
     <div className="grid md:grid-cols-4 gap-x-8">
-      {map(property?.slice((currentPage - 1) * 8, currentPage * 8), (pro, i) => (
+      
+      {map(property?.slice((currentPage - 1) * 10, currentPage * 10), (pro, i) => (
       
           <PropertyCard pro={pro}  key={i}/>
   
         ))}
-       </div>
+       </div>)}
        <div className="text-center">
           <nav aria-label="text-center ">
             <Pagination
-              postsPerPage={8}
+              postsPerPage={10}
               totalPosts={property?.length}
               paginate={paginate}
               currentPage={currentPage}

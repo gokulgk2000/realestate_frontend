@@ -33,7 +33,7 @@ const Landingpage = () => {
       setProperty(res.category);
       setLoading(false);
 
-      console.log("first", res);
+      // console.log("first", res);
     } else {
     }
   };
@@ -138,9 +138,9 @@ const Landingpage = () => {
         <Carousel />
         {isLoading ? (
           <div className="text-center p-5  ">
-            <button type="button" class="grad1 ">
+            <button type="button" className="grad1 ">
               <svg
-                class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 "
+                className="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 "
                 viewBox="0 0 24 24"
               ></svg>
               Loading...

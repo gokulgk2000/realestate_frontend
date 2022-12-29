@@ -83,6 +83,8 @@ const getPaymentId = (payload) =>
 
 const getforget = (payload) => post(`${BASE_URL}/user/forgotpassword`, payload);
 const getpassword = (payload) => put(`${BASE_URL}/user/resetpassword`, payload);
+const getInterest = (payload) => post(`${BASE_URL}/intrested/createInterest`, payload);
+const getinterestbyId = (payload) => post(`${BASE_URL}/intrested/getinterested`, payload);
 
  
 
@@ -94,6 +96,8 @@ const getpassword = (payload) => put(`${BASE_URL}/user/resetpassword`, payload);
 
 export {
   userRegisteration,
+  getinterestbyId,
+  getInterest,
   IntrestedByPropertyId,
   buyerRegister,
   Login,

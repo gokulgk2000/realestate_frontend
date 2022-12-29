@@ -22,10 +22,7 @@ const Forgetpassword = () => {
 
     const emailRef = useRef();
     const navigate = useNavigate();
-    const navigateTopassword = (e) => {
-        e.preventDefault();
-        navigate(`/password`);
-      };
+  
 
     //   const getUserName = async () => {
     //     const res = await getUserById({
@@ -41,7 +38,8 @@ const Forgetpassword = () => {
     //     getUserName();
     //   }, []);
 const sendotp = async (e) => {
- 
+  e.preventDefault();
+        navigate('/password')
     const payload = {
        
         email:validation.values.email
@@ -50,8 +48,8 @@ const sendotp = async (e) => {
     const record = response.data;
     if(record.statusText===" success"){
         toastr.success(record.message);
-        e.preventDefault();
-        navigate('/password');
+       ;
+       
     }else{
       toastr.error(record.message);
     }

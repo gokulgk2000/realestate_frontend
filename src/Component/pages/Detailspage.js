@@ -3,6 +3,7 @@ import {
   buyerReg,
   getProById,
   getPropertyById,
+  IntrestedByPropertyId,
 } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
 import { mobile, monitor, pc, tab } from "../helper/constatnt/ScreenSize";
@@ -15,7 +16,10 @@ import { useFormik } from "formik";
 import toastr from "toastr";
 import moment from "moment";
 import GalleryModel from "../models/GalleryModel";
+import { useUser } from "./contextProvider/UserProvider";
+import { Link } from "react-router-dom";
 const Detailspage = () => {
+  const {currentUser,setCurrentUser}=useUser()
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
@@ -26,46 +30,62 @@ const Detailspage = () => {
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
 
-  const validation = useFormik({
-    enableReinitialize: true,
-    initialValues: {
-      name: "",
-      email: "",
-      phonenumber: "",
-      propertyId: "",
-    },
-    validationSchema: Yup.object({
-      name: Yup.string().required(" Enter Your Name"),
-      email: Yup.string().required(" Enter Your Email"),
-      phonenumber: Yup.string().required(" Enter Your phonenumber"),
-    }),
-    onSubmit: (values, onSubmitProps) => {
-    console.log("buyer",values)
+  // const validation = useFormik({
+  //   enableReinitialize: true,
+  //   initialValues: {
+  //     name: "",
+  //     email: "",
+  //     phonenumber: "",
+  //     propertyId: "",
+  //   },
+  //   validationSchema: Yup.object({
+  //     name: Yup.string().required(" Enter Your Name"),
+  //     email: Yup.string().required(" Enter Your Email"),
+  //     phonenumber: Yup.string().required(" Enter Your phonenumber"),
+  //   }),
+  //   onSubmit: (values, onSubmitProps) => {
+  //   console.log("buyer",values)
 
-      handlebuyerReg({
-        name: values.name,
-        email: values.email,
-        phonenumber: values.phonenumber,
-        propertyId: property?._id,
-      });
-      onSubmitProps.resetForm();
-    },
-  });
+  //     handlebuyerReg({
+  //       name: values.name,
+  //       email: values.email,
+  //       phonenumber: values.phonenumber,
+  //       propertyId: property?._id,
+  //     });
+  //     onSubmitProps.resetForm();
+  //   },
+  // });
 
-  const handlebuyerReg = async () => {
-    const payload = {
+  // const handlebuyerReg = async () => {
+  //   const payload = {
       
-    }
-    const res = await buyerReg (payload);
+  //   }
+  //   const res = await buyerReg (payload);
 
-    if (res.success) {
-      setBuyerRegistrationSuccess(res.msg);
-      console.log("buyer",res)
-      toastr.success(`Buyer has been Registration successfully`, "Success");
-    } else {
-      setBuyerRegistrationError(res.msg);
-    }
-  };
+  //   if (res.success) {
+  //     setBuyerRegistrationSuccess(res.msg);
+  //     console.log("buyer",res)
+  //     toastr.success(`Buyer has been Registration successfully`, "Success");
+  //   } else {
+  //     setBuyerRegistrationError(res.msg);
+  //   }
+  // };
+// const intrestedProperty =async()=>{
+//   const res = await IntrestedByPropertyId({ 
+//     regUser: currentUser?.userID,
+//     propertyId: query.get("uid") });
+    
+//     if (res.success) {
+//       setproperty(res?.Intrested);
+    
+//       console.log("data", res);
+//     } else {
+//       console.log("Error while fetching property");
+//     }
+//   };
+
+
+
   const propertyPicLength = property?.propertyPic?.length;
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
@@ -403,7 +423,7 @@ const Detailspage = () => {
                         <form
                           onSubmit={(e) => {
                             e.preventDefault();
-                            validation.handleSubmit();
+                           
                           }}
                         >
                           {" "}
@@ -414,9 +434,7 @@ const Detailspage = () => {
                               id="floating_name"
                               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                               placeholder=" "
-                              onChange={validation.handleChange}
-                              value={validation.values.name}
-                              invalid={validation.errors.name ? true : false}
+                            
                             />
                             <label
                               for="floating_name"
@@ -424,11 +442,7 @@ const Detailspage = () => {
                             >
                               Name
                             </label>{" "}
-                            {validation.errors.name ? (
-                              <span type="invalid">
-                                {validation.errors.name}
-                              </span>
-                            ) : null}
+                            
                           </div>
                           <div class="relative z-0 mb-6 w-full group ">
                             <input
@@ -437,9 +451,7 @@ const Detailspage = () => {
                               id="floating_email"
                               class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                               placeholder=" "
-                              onChange={validation.handleChange}
-                              value={validation.values.email}
-                              invalid={validation.errors.email ? true : false}
+                             
                             />
                             <label
                               for="floating_email"
@@ -447,11 +459,7 @@ const Detailspage = () => {
                             >
                               Email address
                             </label>{" "}
-                            {validation.errors.email ? (
-                              <span type="invalid">
-                                {validation.errors.email}
-                              </span>
-                            ) : null}
+                           
                           </div>
                           <div class="relative z-0 mb-6 w-full group">
                             <input
@@ -460,11 +468,7 @@ const Detailspage = () => {
                               id="floating_phonenumber"
                               class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                               placeholder=" "
-                              onChange={validation.handleChange}
-                              value={validation.values.phonenumber}
-                              invalid={
-                                validation.errors.phonenumber ? true : false
-                              }
+                             
                             />
                             <label
                               for="floating_phoneNumber"
@@ -472,11 +476,7 @@ const Detailspage = () => {
                             >
                               Phone Number
                             </label>{" "}
-                            {validation.errors.phonenumber ? (
-                              <span type="invalid">
-                                {validation.errors.phonenumber}
-                              </span>
-                            ) : null}
+                           
                           </div>
                         </form>
                         <div></div>
@@ -485,13 +485,15 @@ const Detailspage = () => {
 
                       <div class="p-4 border-t border-gray-200">
                         <div class="flex items-center justify-center">
+                          
+                          <Link to="/buyerregister">
                           <button
                           type="submit"
                             class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                            onClick={handlebuyerReg}
+                            // onClick={intrestedProperty}
                           >
                             Contact
-                          </button>
+                          </button></Link>
                         </div>
                       </div>
                     </div>
@@ -618,7 +620,7 @@ const Detailspage = () => {
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
-                          validation.handleSubmit();
+                         
                         }}
                       >
                         {" "}
@@ -629,9 +631,7 @@ const Detailspage = () => {
                             id="floating_name"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder=" "
-                            onChange={validation.handleChange}
-                            value={validation.values.name}
-                            invalid={validation.errors.name ? true : false}
+                            
                           />
                           <label
                             for="floating_name"
@@ -639,9 +639,7 @@ const Detailspage = () => {
                           >
                             Name
                           </label>{" "}
-                          {validation.errors.name ? (
-                            <span type="invalid">{validation.errors.name}</span>
-                          ) : null}
+                        
                         </div>
                         <div class="relative z-0 mb-6 w-full group ">
                           <input
@@ -650,9 +648,7 @@ const Detailspage = () => {
                             id="floating_email"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder=" "
-                            onChange={validation.handleChange}
-                            value={validation.values.email}
-                            invalid={validation.errors.email ? true : false}
+                            
                           />
                           <label
                             for="floating_email"
@@ -660,11 +656,7 @@ const Detailspage = () => {
                           >
                             Email address
                           </label>{" "}
-                          {validation.errors.email ? (
-                            <span type="invalid">
-                              {validation.errors.email}
-                            </span>
-                          ) : null}
+                        
                         </div>
                         <div class="relative z-0 mb-6 w-full group">
                           <input
@@ -673,11 +665,7 @@ const Detailspage = () => {
                             id="floating_phonenumber"
                             class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
                             placeholder=" "
-                            onChange={validation.handleChange}
-                            value={validation.values.phonenumber}
-                            invalid={
-                              validation.errors.phonenumber ? true : false
-                            }
+                           
                           />
                           <label
                             for="floating_phoneNumber"
@@ -685,23 +673,21 @@ const Detailspage = () => {
                           >
                             Phone Number
                           </label>{" "}
-                          {validation.errors.phonenumber ? (
-                            <span type="invalid">
-                              {validation.errors.phonenumber}
-                            </span>
-                          ) : null}
+                         
                         </div>
                         <div class="p-4 border-t border-gray-200">
                     <div class="flex items-center justify-center">
+                      <Link to="/buyerregister">
                       <button
                       type="submit"
                         class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                         
 
-                        onClick={handlebuyerReg}
+                        // onClick={intrestedProperty}
                       >
                         Contact
                       </button>
+                      </Link>
                     </div>
                   </div>
                       </form>

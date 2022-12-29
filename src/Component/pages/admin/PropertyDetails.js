@@ -451,7 +451,7 @@ console.log("first",getProperty)
                   setGetProperty({ ...getProperty, facilities: e.target.value })
                 }
               />
-              <p className=" text-amber-700">bargainPrice :</p>
+              {/* <p className=" text-amber-700">bargainPrice :</p>
 
               <Input
                 type="number"
@@ -462,8 +462,8 @@ console.log("first",getProperty)
                 onChange={(e) =>
                   setGetProperty({ ...getProperty, bargainPrice: e.target.value })
                 }
-              />
-              <p className=" text-amber-700">negotiablePrice :</p>
+              /> */}
+              <p className=" text-amber-700">Market Price :</p>
 
               <Input
                 type="number"

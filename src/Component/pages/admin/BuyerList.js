@@ -14,7 +14,7 @@ const BuyerList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
-
+console.log("buyerData",buyerData)
   const statusColor = {
     approved: "green",
     pending: "#e8bf09",
@@ -122,14 +122,8 @@ Loading...
               {buyerData
                 ?.filter(
                   (item) =>
-                    item?.name
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.email
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase())
+                    item?.name?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.email?.toString().toLowerCase().includes(searchText.toString().toLowerCase())
                 )
                 .slice((currentPage - 1) * 10, currentPage * 10)
                 .map((Data, i) => (

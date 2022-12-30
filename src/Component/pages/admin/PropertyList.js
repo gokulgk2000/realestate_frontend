@@ -117,34 +117,14 @@ await getAllProperties()
           <tbody>
             {allProperties
               ?.filter(
-                (item) =>
-                  item?.Seller.toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase()) ||
-                  item?.location
-                    .toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase()) ||
-                  item?.askPrice
-                    .toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase()) ||
-                  item?.facing
-                    .toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase()) ||
-                  item?.category
-                    .toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase()) ||
-                  item?.landArea
-                    .toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase()) ||
-                  item?.layoutName
-                    .toString()
-                    .toLowerCase()
-                    .includes(searchText.toString().toLowerCase())
+                (item =>
+                  item?.Seller?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                  item?.location?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                  item?.askPrice?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                  item?.facing?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                  item?.category?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                  item?.landArea?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                  item?.layoutName?.toString().toLowerCase().includes(searchText.toString().toLowerCase()))
               )
               .slice((currentPage - 1) * 10, currentPage * 10)
               .map((PropertyData, p) => (

@@ -47,7 +47,7 @@ const Promotors = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div className=" py-2 md:pl-36 md:pr-24 bg-slate-50">
+    <div className=" py-2 md:pl-36 md:pr-24 bg-slate-50 ">
        {isLoading ? (
       <div className="flex justify-center py-5  "> Loading...</div>
       ) : (
@@ -61,7 +61,7 @@ const Promotors = () => {
       <div className="w-full flex justify-center items-center mt-2 pb-4 ">
           <input
             type="text"
-            placeholder="Search Promotoe"
+            placeholder="Search Promotors..."
             name="search"
             className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
             onChange={(e) => requestSearch(e.target.value)}
@@ -73,22 +73,13 @@ const Promotors = () => {
             Search
           </button>
         </div>             
-         <div className="grid grid-cols-4 gap-x-4 gap-y-3 ">
+         <div className="grid grid-cols-4 gap-x-4 gap-y-3  ">
          {promoterData
                 ?.filter(
-                  (item) =>
-                    item?.firstname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.lastname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.email
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase())
+                  (item =>
+                    item?.firstname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.lastname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.email?.toString().toLowerCase().includes(searchText.toString().toLowerCase()))
                 )
                 .slice((currentPage - 1) * 12, currentPage * 12)
                 .map((Data, i) => (
@@ -107,7 +98,7 @@ const Promotors = () => {
          src={image}/>
           )}
         <div className="space-y-4  divide-y divide-gray-300">
-          <div className="my-2 space-y-1">
+          <div className="my-2 space-y-1 capitalize">
             <h2 className=" text-sm flex text-gray-500 font-semibold ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />

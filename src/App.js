@@ -58,7 +58,7 @@ const App = () => {
   // console.log("window location : ",window.location)
   return (
     <> 
-    {window.location.pathname==="/admin-page" ||window.location.pathname==="/admin" ?(<AdminNav/>):( <div className="sticky top-0 z-50"><div className="" ><Navbar/></div></div>)} 
+    {window.location.pathname==="/admin-page" ||window.location.pathname==="/admin" ?(<AdminNav/>):( <div className="sticky top-0 z-50"><Header/><Navbar/></div>)} 
      
       <Routes >
       <Route path="/"  element={<Landingpage />} />

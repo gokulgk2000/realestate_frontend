@@ -118,19 +118,10 @@ Loading...
             <tbody>
               {userData
                 ?.filter(
-                  (item) =>
-                    item?.firstname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.lastname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.email
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase())
+                  (item =>
+                    item?.firstname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.lastname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.email?.toString().toLowerCase().includes(searchText.toString().toLowerCase()))
                 )
                 .slice((currentPage - 1) * 10, currentPage * 10)
                 .map((Data, i) => (

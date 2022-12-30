@@ -151,7 +151,7 @@ const Landingpage = () => {
             <TopProperties />
             <div className="flex justify-center py-2">
               <button
-                className="bg-amber-300 py-2 px-3 rounded-lg hover:bg-amber-400 hover:text-white"
+                className="nav-color py-2 px-3 rounded-lg hover:bg-amber-500 hover:text-white"
                 onClick={navigateToProperty}
               >
                 View More

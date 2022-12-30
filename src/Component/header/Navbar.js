@@ -3,6 +3,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getUserById, getuserdetails } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
+import RequestedModel from "../models/RequestedModel";
+import { useModal } from "../helper/hook/useModal";
 
 import { isAuthenticated, logout } from "../pages/auth/Auth";
 import Mobilenav from "./Mobilenav";
@@ -29,6 +31,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
+  const [modalOpen, setModalOpen] = useModal(false);
   const [rerender, setRerender] = useState(true);
 
   // const [property, setproperty] = useState("");
@@ -114,22 +117,33 @@ function Navbar() {
     }
     navigate(`/payment?id=${user?._id}&email=${user?.email}`);
   };
+
+const activeClass = "border-b-2 border-black text-yellow-500"
+
   return (
     <div>
+        {modalOpen && (
+        <RequestedModel
+          show={modalOpen}
+          onCloseClick={() => setModalOpen(false)}
+          // currentUser={requestData?._id}
+        />
+      )}
+     
       <div className="Navbar  uppercase  sticky top-0 z-100 ">
         <nav className="nav-color">
           <div className=" px-  mx-auto  ">
             <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
-            <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span>
+            {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
            
               {isMobileview ? (
-                <div className="flex items-center gap-4 lg:mt-0 text-black  font">
+                <div className="flex items-center gap-4 lg:mt-0 text-black font text-md">
                   <NavLink
                     to="/"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-white "
-                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
+                        ? activeClass
+                        : "text-black flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
                     <div className="hover:text-white">HOME</div>{" "}
@@ -138,7 +152,7 @@ function Navbar() {
                     to="/sellproperty"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-white "
+                        ? activeClass
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
@@ -150,7 +164,7 @@ function Navbar() {
                     to="/buyer"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-white"
+                        ? activeClass
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
@@ -161,7 +175,7 @@ function Navbar() {
                     to="/promotors"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-white"
+                        ? activeClass
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
@@ -171,17 +185,23 @@ function Navbar() {
                     to="/mediators"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-white"
+                        ? activeClass
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
                     <div className="hover:text-white">Facilitators</div>
                   </NavLink>{" "}
+                 
+          <div  className="pl-2 rounded-lg px-2 "
+            onClick={() => setModalOpen(true)}>
+              <button className=" uppercase text-md hover:text-white flex items-center gap-4 justify-center hover:border-b-2 hover:border-black">Buyer Request</button>
+            </div>
+         
                   <NavLink
                     to="/contact"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black ttext-white"
+                        ? activeClass
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
@@ -191,7 +211,7 @@ function Navbar() {
                     to="/about"
                     className={({ isActive }) =>
                       isActive
-                        ? "border-b-2 border-black text-white"
+                        ? activeClass
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >

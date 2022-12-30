@@ -85,26 +85,11 @@ const RequestedList = () => {
           {requestData
             ?.filter(
               (item) =>
-                item?.regUser?.firstname
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.regUser?.lastname
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.location
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.askPrice
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.nearTown
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase())
+                item?.regUser?.firstname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.regUser?.lastname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.location?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.askPrice?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.nearTown?.toString().toLowerCase().includes(searchText.toString().toLowerCase())
             )
             .slice((currentPage - 1) * 10, currentPage * 10)
             .map((Data, i) => (
@@ -160,23 +145,10 @@ const RequestedList = () => {
               {requestData
                 ?.filter(
                   (item) =>
-                    item?.facing
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.location
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.askPrice
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                      
-                    item?.nearTown
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase())
+                    item?.facing?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.location?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.askPrice?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.nearTown?.toString().toLowerCase().includes(searchText.toString().toLowerCase())
                 )
                 .slice((currentPage - 1) * 10, currentPage * 10)
                 .map((Data, i) => (

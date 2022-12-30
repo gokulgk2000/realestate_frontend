@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <div>
       <div className="w-full m-0 font-serif">
-        <footer className="text-center lg:text-left grad-footer text-gray-600">
-          <div className="flex justify-center items-center lg:justify-between px-5 border-b text-gray-400 border-gray-300 ">
+        <footer className="text-center lg:text-left nav-color text-gray-900">
+          <div className="flex justify-center items-center lg:justify-between px-5 border-b text-gray-900 border-gray-300 ">
             <div className="flex justify-center"></div>
           </div>
           <div className="mx-6 py-10 text-left md:text-left">
@@ -47,56 +47,56 @@ const Footer = () => {
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex md:text-left">
+                <h6 className="uppercase font-semibold mb-4 flex text-gray-900 md:text-left">
                   Categories
                 </h6>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Residential
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Appartment
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Villa
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Land
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Commercial
                   </Link>
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex  md:text-left">
+                <h6 className="uppercase font-semibold mb-4 flex text-gray-900 md:text-left">
                   Quick links
                 </h6>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Home
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/about"} className="text-gray-600">
+                  <Link to={"/about"} className="text-gray-900">
                     About Us
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/contact"} className="text-gray-600">
+                  <Link to={"/contact"} className="text-gray-900">
                     Contact
                   </Link>
                 </p>
                 <p>
-                  <Link to={"/"} className="text-gray-600">
+                  <Link to={"/"} className="text-gray-900">
                     Help
                   </Link>
                 </p>

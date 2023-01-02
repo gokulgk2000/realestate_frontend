@@ -3,6 +3,7 @@ import Pagination from "../pagination/Pagination";
 import { useQuery } from "../helper/hook/useQuery";
 import { getuserProperty } from "../helper/backend_helpers";
 import { Link } from 'react-router-dom';
+import { Breadcrumbs } from "@material-tailwind/react";
 const Activities = () => {
   const query = useQuery();
 
@@ -39,6 +40,13 @@ const Activities = () => {
 
   return (
     <div>
+      <Breadcrumbs>
+      <Link to="/">
+          <button  className="opacity-60 font underline">
+           Home
+          </button></Link>
+         
+      </Breadcrumbs>
       <div className=" overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w- flex justify-center items-center mt-2 pb-4  ">
           <input

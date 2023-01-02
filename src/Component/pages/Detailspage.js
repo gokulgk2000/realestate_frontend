@@ -21,6 +21,7 @@ import moment from "moment";
 import GalleryModel from "../models/GalleryModel";
 import { useUser } from "./contextProvider/UserProvider";
 import { Link } from "react-router-dom";
+import { Breadcrumbs } from "@material-tailwind/react";
 const Detailspage = () => {
   const { currentUser, setCurrentUser } = useUser();
   const query = useQuery();
@@ -28,16 +29,11 @@ const Detailspage = () => {
   const [property, setproperty] = useState({});
   const [curentImage, setcurentImage] = useState(0);
   const [propertyId, setPropertyId] = useState([]);
-  const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
-  const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
-  const [interestProperty, setInterestProperty] = useState([]);
-  const [uninterestProperty, setUnInterestProperty] = useState([]);
   const [interesterror, setInterestError] = useState([]);
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
-  const [interest,setInterest] = useState([])
-  const [Interest, setInterestSuccess] = useState();
-console.log("interest",interest)
+  const [interest, setInterest] = useState([]);
+  const [InterestSuccess, setInterestSuccess] = useState();
 
 
   // const validation = useFormik({
@@ -132,84 +128,56 @@ console.log("interest",interest)
     const res = await getProById(payload);
     if (res.success) {
       setPropertyId(res.Property);
-      console.log("fmsg", res);
     } else {
       console.log("Failed to fetch message", res);
     }
   };
-  
-  const interested = async () => {
 
+
+  const handleFetchInterested = async () => {
+    const payload = {
+      userID: currentUser?.userID,
+    };
+    const res = await getinterestbyId(payload);
+    if (res.success) {
+      setInterest(res?.Intrested);
+      setInterestSuccess(res.msg);
+    } else {
+      setInterestError(res.msg);
+    }
+  };
+
+  const interested = async () => {
     const payload = {
       propertyId: property?._id,
       regUser: currentUser?.userID,
     };
     const res = await getInterest(payload);
     if (res.success) {
-      setInterestProperty(res.msg);
-      const payload = {
-        userID:currentUser?.userID,
-      }
-     await getinterestbyId(payload);
-     if (res.success) {
-      setInterest(res?.Intrested)
-      setInterestSuccess(res.msg);
-    }else{
-      setInterestError(res.msg);
-
-    }
+      handleFetchInterested()
       toastr.success(`Your Interest Property Added  successfully`, "Success");
     } else {
       setInterestError(res.msg);
     }
-
   };
-  
  
-
-  const getunInterest = async() =>{
+  const getunInterest = async () => {
     const payload = {
-    userID:interest[0]?._id
-    }
+      userID: interest[0]?._id,
+    };
     const res = await getUnInterest(payload);
     if (res.success) {
-      setUnInterestProperty(res.msg);
-      const payload = {
-        userID:currentUser?.userID,
-      }
-      if (res.success) {
-        setInterest(res?.Intrested)
-        setInterestSuccess(res.msg);
-      }else{
-        setInterestError(res.msg);
-  
-      }
-    }else{
-    
-
+     await  handleFetchInterested()
+    } else {
     }
-    console.log(res,":")
-  }
-  
-  useEffect(() => {
-    const handleFetchInterested = async() =>{
-      const payload = {
-        userID:currentUser?.userID,
-      }
-      const res = await getinterestbyId(payload);
-      if (res.success) {
-        setInterest(res?.Intrested)
-        setInterestSuccess(res.msg);
-      }else{
-        setInterestError(res.msg);
-  
-      }
-    console.log(res)
-    } 
-    handleFetchInterested()
-  },[])
- const found = interest?.find(i => i?.propertyId?._id === property?._id)
+  };
 
+  useEffect(() => {
+
+    handleFetchInterested();
+  }, []);
+  const found = interest?.find((i) => i?.propertyId?._id === property?._id);
+  console.log("found : ", interest,found);
   return (
     <>
       {loading ? (
@@ -230,6 +198,11 @@ console.log("interest",interest)
             />
           )}
           <div className="bg-slate-100 md:pl-32 md:pr-24">
+            <Breadcrumbs>
+              <Link to="/">
+                <button className="opacity-60 font underline">Home</button>
+              </Link>
+            </Breadcrumbs>
             <div className="flex justify-end pt-2 md:px-0 sm:px-0 lg:px-28">
               <div className=" font-normal text-xs">
                 Posted on:{moment(property?.date).format("DD-MM-YYYY")}
@@ -240,16 +213,21 @@ console.log("interest",interest)
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     <div className="flex justify-end">
-                      {!found ? (<button
-                        onClick={interested}
-                        className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                      >
-                        Interested
-                      </button>
-                      ):(
-                     <button onClick={getunInterest} className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md">
-                        UnInterested
-                      </button>)}
+                      {!found?.aflag===true? (
+                        <button
+                          onClick={interested}
+                          className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                        >
+                          Interested
+                        </button>
+                      ) : (
+                        <button
+                          onClick={getunInterest}
+                          className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                        >
+                          UnInterested
+                        </button>
+                      )}
                     </div>
                     <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}

@@ -89,7 +89,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
     >
       <div className="fixed inset-0  bg-gray-500 bg-opacity-75 transition-opacity ">
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex mt-40 items-end justify-center p-4 text-center sm:items-center sm:p-0 ">
+          <div className="flex mt-10 items-end justify-center p-4 text-center sm:items-center sm:p-0 ">
             <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-md">
               <div className="bg-white px-4  p-6 pb-4 md:w-full ">
                 <div className="flex justify-between ">

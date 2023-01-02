@@ -1,14 +1,55 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { array } from "yup";
+import { getinterestbyId, getUnInterest } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
+import { useUser } from "./contextProvider/UserProvider";
 
 const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
+  const { currentUser, setCurrentUser } = useUser();
+
+  const [interest,setInterest] = useState([])
+  const [Interest, setInterestSuccess] = useState();
+  const [interesterror,setInterestError] = useState([]);
+  const [interestProperty, setInterestProperty] = useState([]);
+  const [uninterestProperty, setUnInterestProperty] = useState([]);
   const handleContactClick = (e) => {
     e.stopPropagation();
     handleBook(pro?._id);
     setModalOpen(true);
   };
+//   useEffect(() => {
+//   const handleFetchInterested = async() =>{
+//     const payload = {
+//       userID:currentUser?.userID,
+//     }
+//     const res = await getinterestbyId(payload);
+//     if (res.success) {
+//       setInterest(res?.Intrested)
+//       setInterestSuccess(res.msg);
+//     }else{
+//       setInterestError(res.msg);
+
+//     }
+//   console.log(res)
+//   } 
+//   handleFetchInterested()
+// },[])
+// const getunInterest = async() =>{
+//   const payload = {
+//    userID:interest?._id
+//   }
+//   const res = await getUnInterest(payload);
+//   if (res.success) {
+//     setUnInterestProperty(res.msg);
+//   }else{
+  
+
+//   }
+//   console.log(res)
+// }
   return (
     <Link to={`/Detailspage?uid=${pro?._id}`} className="grid py-2 px-2  ">
       <div className=" w-full capitalize grid shadow-2xl rounded-lg">
@@ -17,6 +58,23 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
             <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
               <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
                 <div className="absolute inset-0 bg-black">
+                  {/* <div className="relative group">
+                    <button>
+                <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            className="w-6 h-6 absolute right-0 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
+                            onClick={() => getUnInterest()}
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg></button></div> */}
                   {" "}
                   <img
                     className=" object-cover md:h-52  md:w-72 rounded-md aspect-[1]"

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   buyerReg,
   getInterest,
+  getinterestbyId,
   getProById,
   getPropertyById,
+  getUnInterest,
   IntrestedByPropertyId,
 } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
@@ -28,10 +30,15 @@ const Detailspage = () => {
   const [propertyId, setPropertyId] = useState([]);
   const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
   const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
-  const [interest, setInterestSuccess] = useState([]);
-  const [interesterror,setInterestError] = useState([])
+  const [interestProperty, setInterestProperty] = useState([]);
+  const [uninterestProperty, setUnInterestProperty] = useState([]);
+  const [interesterror, setInterestError] = useState([]);
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
+  const [interest,setInterest] = useState([])
+  const [Interest, setInterestSuccess] = useState();
+console.log("interest",interest)
+
 
   // const validation = useFormik({
   //   enableReinitialize: true,
@@ -130,21 +137,79 @@ const Detailspage = () => {
       console.log("Failed to fetch message", res);
     }
   };
-  const interested  =  async () => {
+  
+  const interested = async () => {
+
     const payload = {
       propertyId: property?._id,
-
-      regUser:currentUser?.userID
-    }
+      regUser: currentUser?.userID,
+    };
     const res = await getInterest(payload);
     if (res.success) {
+      setInterestProperty(res.msg);
+      const payload = {
+        userID:currentUser?.userID,
+      }
+     await getinterestbyId(payload);
+     if (res.success) {
+      setInterest(res?.Intrested)
       setInterestSuccess(res.msg);
     }else{
       setInterestError(res.msg);
 
     }
+      toastr.success(`Your Interest Property Added  successfully`, "Success");
+    } else {
+      setInterestError(res.msg);
+    }
 
+  };
+  
+ 
+
+  const getunInterest = async() =>{
+    const payload = {
+    userID:interest[0]?._id
+    }
+    const res = await getUnInterest(payload);
+    if (res.success) {
+      setUnInterestProperty(res.msg);
+      const payload = {
+        userID:currentUser?.userID,
+      }
+      if (res.success) {
+        setInterest(res?.Intrested)
+        setInterestSuccess(res.msg);
+      }else{
+        setInterestError(res.msg);
+  
+      }
+    }else{
+    
+
+    }
+    console.log(res,":")
   }
+  
+  useEffect(() => {
+    const handleFetchInterested = async() =>{
+      const payload = {
+        userID:currentUser?.userID,
+      }
+      const res = await getinterestbyId(payload);
+      if (res.success) {
+        setInterest(res?.Intrested)
+        setInterestSuccess(res.msg);
+      }else{
+        setInterestError(res.msg);
+  
+      }
+    console.log(res)
+    } 
+    handleFetchInterested()
+  },[])
+ const found = interest?.find(i => i?.propertyId?._id === property?._id)
+
   return (
     <>
       {loading ? (
@@ -175,9 +240,16 @@ const Detailspage = () => {
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     <div className="flex justify-end">
-                      <button onClick={interested} className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md">
-                        Intrested
+                      {!found ? (<button
+                        onClick={interested}
+                        className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                      >
+                        Interested
                       </button>
+                      ):(
+                     <button onClick={getunInterest} className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                        UnInterested
+                      </button>)}
                     </div>
                     <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}
@@ -438,7 +510,7 @@ const Detailspage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="md:col-span-2 lg:    ">
+                {/* <div className="md:col-span-2 lg:    ">
                   <div className="grid  border-gray-600 px-7 md:px-0 md:py-0 py-2 ">
                     <div class="w-80 bg-white  shadow-2xl  rounded  animate- hover:animate-none  cursor-pointer hidden md:block">
                       <p className="font flex justify-center pt-5 text-lg underline">
@@ -517,7 +589,7 @@ const Detailspage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="grid  md:grid-cols-8 gap-2 pt-5">
                 <div className="md:col-span-6 border-3 border-black  ">

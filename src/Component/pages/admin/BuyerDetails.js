@@ -88,13 +88,17 @@ const BuyerDetails = () => {
       )}
       <div>
         <Breadcrumbs>
-        <Link to="/admin/Dashboard">
+        <Link to="/admin">
           <button  className="opacity-60 font">
             Dashboard
           </button></Link>
           <Link to="/admin/buyerlist">
           <button  className="opacity-60 font">
-            Buyers
+            Buyers List
+          </button></Link>
+          <Link to="/admin/buyerlist"disabled>
+          <button  className="text-amber-700 font">
+            Buyers Details
           </button></Link>
           
         </Breadcrumbs>

@@ -220,11 +220,14 @@ console.log("first",getProperty)
       ) : (
         <>
           <Breadcrumbs>
-            <Link to="/admin/Dashboard">
+            <Link to="/admin">
               <button className="opacity-60 font">Dashboard</button>
             </Link>
             <Link to="/admin/PropertyList">
-              <button className="opacity-60 font">Properties</button>
+              <button className="opacity-60 font">Properties List</button>
+            </Link>
+            <Link to="/admin/PropertyList" disabled>
+              <button className="text-amber-700 font">Properties Details</button>
             </Link>
           </Breadcrumbs>
           <div class="grid  grid-cols-2 min-w-full py-5 max-w-sm bg-white border border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -467,6 +470,7 @@ console.log("first",getProperty)
 
               <Input
                 type="number"
+                min={0}
                 name="negotiablePrice"
                 placeholder="Enter the negotiablePrice "
                 value={getProperty?.negotiablePrice}
@@ -493,6 +497,7 @@ console.log("first",getProperty)
 
               <Input
                 type="number"
+                min={0}
                 name="phone"
                 placeholder="Enter Your Phone Number "
                 value={getProperty?.phone}

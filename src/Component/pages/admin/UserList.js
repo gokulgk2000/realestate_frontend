@@ -54,24 +54,23 @@ const UserList = () => {
 
   return (
     <div>  {isLoading ?(
-      <div className="text-center p-5  "> 
-     <button type="button" class="grad1 ">
-<svg class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
-</svg>
+      <div className="text-center py-20   "> 
+     <button type="button" className=" text-amber-700 border border-amber-700 py-2 px-3 rounded-lg">
 Loading...
 </button>
       </div>
       ):(
       <>
       <Breadcrumbs>
-      <Link to="/admin/Dashboard">
+      <Link to="/admin">
         <button  className="opacity-60 font">
           Dashboard
         </button></Link>
-        <Link to="/admin/userlist">
-        <button className="opacity-60 font">
-          Sellers
+      <Link to="/admin/userlist"disabled>
+        <button  className="text-amber-700 font">
+          Users List
         </button></Link>
+       
       </Breadcrumbs>
       <div className=" md:overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4 ">

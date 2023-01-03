@@ -35,15 +35,17 @@ const RequestedModel = ({ show, onCloseClick }) => {
   const validation = useFormik({
     enableReinitialize: true,
     initialValues: {
+      regUser: currentUser?.userID,
       location: "",
-      propertyType: "",
-      facing: "",
+      propertyType: propertyType,
+      facing: facing,
       landArea: "",
       buildArea: "",
       expectedPrice: "",
     },
     onSubmit: (values, onSubmitProps) => {
       requested({
+
         location: values.location,
         propertyType: values.propertyType,
         facing: values.facing,
@@ -254,6 +256,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
                         </label>
                         <input
                           type="number"
+                          min={0}
                           name="expectedPrice"
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Enter expectedPrice"

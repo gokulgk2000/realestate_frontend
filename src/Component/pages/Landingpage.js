@@ -138,11 +138,8 @@ const Landingpage = () => {
         <Carousel />
         {isLoading ? (
           <div className="text-center p-5  ">
-            <button type="button" className="grad1 ">
-              <svg
-                className="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 "
-                viewBox="0 0 24 24"
-              ></svg>
+            <button type="button" className=" text-amber-700 border border-amber-700 py-2 px-3 rounded-lg">
+            
               Loading...
             </button>
           </div>
@@ -151,7 +148,7 @@ const Landingpage = () => {
             <TopProperties />
             <div className="flex justify-center py-2">
               <button
-                className="nav-color py-2 px-3 rounded-lg hover:bg-amber-500 hover:text-white"
+                className="text-amber-700 border border-amber-700 py-2 px-3 rounded-lg hover:bg-amber-700 hover:text-white"
                 onClick={navigateToProperty}
               >
                 View More

@@ -29,6 +29,10 @@ const Detailspage = () => {
   const [property, setproperty] = useState({});
   const [curentImage, setcurentImage] = useState(0);
   const [propertyId, setPropertyId] = useState([]);
+  const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
+  const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
+  const [interestProperty, setInterestProperty] = useState([]);
+  const [uninterestProperty, setUnInterestProperty] = useState([]);
   const [interesterror, setInterestError] = useState([]);
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
@@ -144,7 +148,7 @@ const Detailspage = () => {
       setInterestSuccess(res.msg);
     } else {
       setInterestError(res.msg);
-    }
+    }console.log(res,"gokul")
   };
 
   const interested = async () => {
@@ -153,12 +157,13 @@ const Detailspage = () => {
       regUser: currentUser?.userID,
     };
     const res = await getInterest(payload);
-    if (res.success) {
+    if (res) {
       handleFetchInterested()
       toastr.success(`Your Interest Property Added  successfully`, "Success");
     } else {
       setInterestError(res.msg);
     }
+    
   };
  
   const getunInterest = async () => {
@@ -167,9 +172,7 @@ const Detailspage = () => {
     };
     const res = await getUnInterest(payload);
     if (res.success) {
-     await  handleFetchInterested()
-     toastr.success(`Your UnInterest Property Remove  successfully`, "Success");
-
+     await handleFetchInterested()
     } else {
     }
   };
@@ -215,7 +218,7 @@ const Detailspage = () => {
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     <div className="flex justify-end">
-                      {!found?.aflag===true? (
+                      {!found ?.aflag===true? (
                         <button
                           onClick={interested}
                           className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"

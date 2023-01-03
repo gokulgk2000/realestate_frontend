@@ -173,6 +173,8 @@ const Detailspage = () => {
     const res = await getUnInterest(payload);
     if (res.success) {
      await handleFetchInterested()
+     toastr.success(`Your UnInterest Property Remove  successfully`, "Success");
+
     } else {
     }
   };
@@ -218,7 +220,7 @@ const Detailspage = () => {
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     <div className="flex justify-end">
-                      {!found ?.aflag===true? (
+                      {!found ? (
                         <button
                           onClick={interested}
                           className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"

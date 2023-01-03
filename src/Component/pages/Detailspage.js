@@ -168,6 +168,8 @@ const Detailspage = () => {
     const res = await getUnInterest(payload);
     if (res.success) {
      await  handleFetchInterested()
+     toastr.success(`Your UnInterest Property Remove  successfully`, "Success");
+
     } else {
     }
   };

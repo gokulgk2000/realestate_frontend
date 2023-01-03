@@ -23,7 +23,7 @@ import { useUser } from "./contextProvider/UserProvider";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 const Detailspage = () => {
-  const { currentUser, setCurrentUser } = useUser();
+  const { currentUser, } = useUser();
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
@@ -184,7 +184,8 @@ const Detailspage = () => {
     handleFetchInterested();
   }, []);
   const found = interest?.find((i) => i?.propertyId?._id === property?._id);
-  console.log("found : ", interest,found);
+  
+
   return (
     <>
       {loading ? (
@@ -210,7 +211,7 @@ const Detailspage = () => {
                 <button className="opacity-60 font underline">Home</button>
               </Link>
             </Breadcrumbs>
-            <div className="flex justify-end pt-2 md:px-0 sm:px-0 lg:px-28">
+            <div className="flex justify-end mr-52    pt-2 md:px-0 sm:px-0 lg:px-28">
               <div className=" font-normal text-xs">
                 Posted on:{moment(property?.date).format("DD-MM-YYYY")}
               </div>
@@ -219,8 +220,8 @@ const Detailspage = () => {
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
-                    <div className="flex justify-end">
-                      {!found ? (
+                   {currentUser &&<div className="flex justify-end">
+                      {!found ?(
                         <button
                           onClick={interested}
                           className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
@@ -235,7 +236,7 @@ const Detailspage = () => {
                           UnInterested
                         </button>
                       )}
-                    </div>
+                    </div>} 
                     <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}
                     </div>

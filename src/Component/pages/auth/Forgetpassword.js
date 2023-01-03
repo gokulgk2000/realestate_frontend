@@ -5,61 +5,55 @@ import "toastr/build/toastr.min.css";
 import toastr from "toastr";
 import { useRef } from "react";
 import { getforget, getUserById } from "../../helper/backend_helpers";
-import * as Yup from "yup"
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
 
 const Forgetpassword = () => {
-    const validation = useFormik({
-        initialValues :{
-            email : "",
-            
-        },
-        validationSchema: Yup.object({
-            email: Yup.string().required("Email is required"),
-        })
-    })
+  const validation = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().required("Email is required"),
+    }),
+  });
 
-    const emailRef = useRef();
-    const navigate = useNavigate();
-  
+  const emailRef = useRef();
+  const navigate = useNavigate();
 
-    //   const getUserName = async () => {
-    //     const res = await getUserById({
-    //       userID: userFromStorage?.userID,
-    //     });
-    //     if (res.success) {
-    //       setUser(res.User);
-    
-    //       // console.log("res", res);
-    //     }
-    //   };
-    //   useEffect(() => {
-    //     getUserName();
-    //   }, []);
-const sendotp = async (e) => {
-  e.preventDefault();
-        navigate('/password')
+  //   const getUserName = async () => {
+  //     const res = await getUserById({
+  //       userID: userFromStorage?.userID,
+  //     });
+  //     if (res.success) {
+  //       setUser(res.User);
+
+  //       // console.log("res", res);
+  //     }
+  //   };
+  //   useEffect(() => {
+  //     getUserName();
+  //   }, []);
+  const sendotp = async (e) => {
+    e.preventDefault();
+    navigate("/password");
     const payload = {
-       
-        email:validation.values.email
-    }
-    const response = await getforget(payload)
+      email: validation.values.email,
+    };
+    const response = await getforget(payload);
     const record = response.data;
-    if(record.statusText===" success"){
-        toastr.success(record.message);
-       ;
-       
-    }else{
+    if (record.statusText === " success") {
+      toastr.success(record.message);
+    } else {
       toastr.error(record.message);
     }
+  };
 
-}
- 
   return (
     <section className="h-100">
       <div className="px-6 h-full text-gray-800 py-5">
-       <div className="flex xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full g-6">
+        <div className="flex xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full g-6">
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
             <div className="flex flex-row items-center justify-center lg:justify-center">
               <p className=" text-3xl text-teal-500 font-bold mb-0 mr-8">
@@ -67,7 +61,6 @@ const sendotp = async (e) => {
               </p>
             </div>
             <div className="mb-6 mt-5  text-red-500">
-           
               <input
                 type="email"
                 name="email"
@@ -78,7 +71,10 @@ const sendotp = async (e) => {
               ></input>
             </div>
             <div>
-              <button onClick={sendotp} className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+              <button
+                onClick={sendotp}
+                className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                >
                 Send Otp
               </button>
             </div>

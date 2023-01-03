@@ -125,6 +125,7 @@ const ProfileUpdate = () => {
                 <Input
                   label="PhoneNumber"
                   type="number"
+                  min="0"
                   name="phoneno"
                   placeholder="Enter the phonenumber "
                   value={user?.phoneno}
@@ -163,8 +164,8 @@ const ProfileUpdate = () => {
           <div className="mt-12 flex  justify-center">
             <button
               onClick={(e) => updateProfile(e)}
-              className=" py-1.5 px-4 w-20 transition-colors  font-medium  text-white rounded-lg grad-btn disabled:opacity-50"
-            >
+              className="w-36 h-10 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
+              >
               Update
             </button>
           </div>

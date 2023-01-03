@@ -481,6 +481,7 @@ const RegisterProperty = () => {
             <Input
               label="*cost per Sq/Acra/cent"
               type="number"
+              min="0"
               name="costSq"
               placeholder="Enter The Cost/Sq"
               onChange={validation.handleChange}
@@ -502,6 +503,7 @@ const RegisterProperty = () => {
             <Input
               label="Market Price"
                type="number"
+               min="0"
               name="negotiablePrice"
               placeholder="₹. Enter The Price"
               onChange={validation.handleChange}
@@ -574,6 +576,8 @@ const RegisterProperty = () => {
           </div>
           <div           
 >
+          <p className="text-red-500 text-sm pb-5">(limit 5 pictures only)</p>
+
             <FileInput
               label=" *Property Images"
               multiple={true}
@@ -702,6 +706,7 @@ const RegisterProperty = () => {
               <Input
                 label="bed Room"
                 type="number"
+                min="0"
                 name="bedRoom"
                 placeholder="Enter The No Of Bed Room"
                 onChange={validation.handleChange}
@@ -725,6 +730,7 @@ const RegisterProperty = () => {
               <Input
                 label="bath Room"
                 type="number"
+                min="0"
                 name="bathRoom"
                 placeholder="Enter The No Of Bath Room"
                 onChange={validation.handleChange}
@@ -748,6 +754,7 @@ const RegisterProperty = () => {
               <Input
                 label="floor "
                 type="number"
+                min="0"
                 name="floor"
                 placeholder="Enter The floor"
                 onChange={validation.handleChange}

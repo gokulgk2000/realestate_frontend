@@ -25,7 +25,7 @@ const NavItem = [
   // { name: "Contactus", link: "#" },
 ];
 function Navbar() {
-  const {currentUser:userFromStorage,setCurrentUser}=useUser()
+  const { currentUser: userFromStorage, setCurrentUser } = useUser();
   // console.log("userData", userData);
   // const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
@@ -75,13 +75,17 @@ function Navbar() {
 
   const AuthLogout = () => {
     logout();
-    setCurrentUser({})
+    setCurrentUser(null);
     navigate("/");
   };
 
   const navigateToProfile = (e) => {
     e.preventDefault();
     navigate(`/ProfileUpdate`);
+  };
+  const naviagteToLogin = (e) => {
+    e.preventDefault();
+    navigate(`/login`);
   };
 
   // const navigateToProperty = (e) => {
@@ -118,24 +122,24 @@ function Navbar() {
     navigate(`/payment?id=${user?._id}&email=${user?.email}`);
   };
 
-const activeClass = "border-b-2 border-black text-yellow-500"
+  const activeClass = "border-b-2 border-black text-yellow-500";
 
   return (
     <div>
-        {modalOpen && (
+      {modalOpen && (
         <RequestedModel
           show={modalOpen}
           onCloseClick={() => setModalOpen(false)}
           // currentUser={requestData?._id}
         />
       )}
-     
+
       <div className="Navbar  uppercase  sticky top-0 z-100 ">
         <nav className="nav-color">
           <div className=" px-  mx-auto  ">
             <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
-            {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
-           
+              {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
+
               {isMobileview ? (
                 <div className="flex items-center gap-4 lg:mt-0 text-black font text-md">
                   <NavLink
@@ -159,7 +163,6 @@ const activeClass = "border-b-2 border-black text-yellow-500"
                     {" "}
                     <div className="hover:text-white">SELL </div>
                   </NavLink>
-                
                   <NavLink
                     to="/buyer"
                     className={({ isActive }) =>
@@ -170,7 +173,6 @@ const activeClass = "border-b-2 border-black text-yellow-500"
                   >
                     <div className="hover:text-white">BUY</div>
                   </NavLink>{" "}
-                
                   <NavLink
                     to="/promotors"
                     className={({ isActive }) =>
@@ -191,12 +193,20 @@ const activeClass = "border-b-2 border-black text-yellow-500"
                   >
                     <div className="hover:text-white">Facilitators</div>
                   </NavLink>{" "}
-                 
-          <div  className="pl-2 rounded-lg px-2 "
-            onClick={() => setModalOpen(true)}>
-              <button className=" uppercase text-md hover:text-white flex items-center gap-4 justify-center hover:border-b-2 hover:border-black">Buyer Request</button>
-            </div>
-         
+                  <div className="pl-2 rounded-lg px-2 ">
+                    {userFromStorage ? (
+                      <button
+                        onClick={() => setModalOpen(true)}
+                        className=" uppercase text-md hover:text-white flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
+                      >
+                        Buyer Request
+                      </button>
+                    ) : (
+                      <button onClick={naviagteToLogin} className=" uppercase text-md hover:text-white flex items-center gap-4 justify-center hover:border-b-2 hover:border-black">
+                        Buyer Request
+                      </button>
+                    )}
+                  </div>
                   <NavLink
                     to="/contact"
                     className={({ isActive }) =>
@@ -218,8 +228,20 @@ const activeClass = "border-b-2 border-black text-yellow-500"
                     <div className="hover:text-white">ABOUT US</div>
                   </NavLink>
                 </div>
-              ) : (<div className="flex"> <div className="pt-4"><Mobilenav /></div><div> <Link to='/'> <img className="h-16 w-16" src={Logo}></img></Link></div> 
-              </div>
+              ) : (
+                <div className="flex">
+                  {" "}
+                  <div className="pt-4">
+                    <Mobilenav />
+                  </div>
+                  <div>
+                    {" "}
+                    <Link to="/">
+                      {" "}
+                      <img className="h-16 w-16" src={Logo}></img>
+                    </Link>
+                  </div>
+                </div>
               )}
               {/* <Search/> */}
 
@@ -233,11 +255,12 @@ const activeClass = "border-b-2 border-black text-yellow-500"
                           {" "}
                           <img
                             src={user?.profilePic || Image}
-                            className="w-10 h-10 rounded-full cursor-pointer"rule="true"
+                            className="w-10 h-10 rounded-full cursor-pointer"
+                            rule="true"
                           />
                           <span>
                             <div className="px-2 pt-1 text-white font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center cursor-pointer hover:border-black">
-                              {user?.firstname} 
+                              {user?.firstname}
                             </div>
                           </span>
                           <svg

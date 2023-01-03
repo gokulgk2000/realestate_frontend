@@ -9,6 +9,7 @@ const Input = ({ label, type = "text", name, value,placeholder, onChange,...prop
       <input
         type={type}
         name={name}
+        min="0"
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}

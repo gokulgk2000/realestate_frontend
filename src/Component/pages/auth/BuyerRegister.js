@@ -144,6 +144,7 @@ const BuyerRegister = () => {
                         
                         <input
                           type="number"
+                          min="0"
                           name="phonenumber"
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Enter Phone Number"
@@ -185,16 +186,16 @@ const BuyerRegister = () => {
                 {loading ?(
                 <button
                   type="submit"
-                  className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                >
+                  className="border-2 rounded-md border-amber-800 hover:text-white uppercase px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+           
                   Register
                 </button>
                 ):(
 
                 <button 
                 type="button"
-                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                >
+                className="border-2 rounded-md border-amber-800 hover:text-white  px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+              
                    Registering...
           
                    </button>

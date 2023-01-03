@@ -77,7 +77,7 @@ const Passwordpage = () => {
                   name="email"
                   onChange={validation.handleChange}
                   value={validation.values.email}
-                  placeholder="Enter  otp"
+                  placeholder="Enter  Email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
@@ -104,8 +104,8 @@ const Passwordpage = () => {
                 <div className="mt-4">
                   <button
                     type="submit"
-                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-teal-700 hover:shadow-lg focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  >
+                    className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                    >
                     Submit
                   </button>
                 </div>

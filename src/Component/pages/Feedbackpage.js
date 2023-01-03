@@ -197,8 +197,8 @@ const Feedbackpage = () => {
         <div className="md:flex md:items-center">
           <div className="md:w-1/3">
             <button
-              className="shadow bg-blue-600 hover:bg-teal-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="submit"
+                  className="w-32 h-10  font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
+                  type="submit"
             >
               Send
             </button>

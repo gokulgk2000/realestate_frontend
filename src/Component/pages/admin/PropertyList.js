@@ -45,23 +45,22 @@ await getAllProperties()
   return (
     <div>
        {isLoading ?(
-        <div className="text-center p-5  "> 
-       <button type="button" class="grad1 w-28"disabled>
-  <svg class="animate-spin h-5 w-5 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
-  </svg>
+        <div className="text-center py-20  "> 
+       <button type="button" className=" text-amber-700 border border-amber-700 py-2 px-3 rounded-lg" disabled>
+ 
   Loading...
 </button>
         </div>
         ):(
         <>
       <Breadcrumbs>
-      <Link to="/admin/Dashboard" >
+      <Link to="/admin" >
             <button className="opacity-60 font">
               Dashboard
             </button></Link>
-            <Link to="/admin/PropertyList">
-            <button className="opacity-60 font">
-              Properties
+            <Link to="/admin/PropertyList" disabled>
+            <button className="text-amber-700 font">
+              Properties List
             </button></Link>
       </Breadcrumbs>
       <div className="md:overflow-x-auto  shadow-md sm:rounded-lg">

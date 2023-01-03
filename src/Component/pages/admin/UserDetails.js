@@ -92,13 +92,17 @@ const UserDetails = () => {
       )}
 
       <Breadcrumbs>
-      <Link to="/admin/Dashboard">
+      <Link to="/admin">
         <button  className="opacity-60 font">
           Dashboard
         </button></Link>
-        <Link to="/admin/userlist">
+        <Link to="/admin/userlist" >
         <button className="opacity-60 font">
-          Sellers
+          Users List
+        </button></Link>
+        <Link to="/admin/userlist" disabled>
+        <button className="text-amber-700 font">
+          User Details
         </button></Link>
       
       </Breadcrumbs>

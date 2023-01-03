@@ -56,7 +56,7 @@ const Admin = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                Sellers{" "}
+                Users{" "}
               </NavLink>
            
           

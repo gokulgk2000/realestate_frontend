@@ -23,7 +23,7 @@ const Dashborad = () => {
   return(
   <div className="hidden md:block">
     <Breadcrumbs>
-    <Link to="/admin/Dashboard">
+    <Link to="/admin">
       <button className="text-amber-700 font">
         Dashboard
       </button></Link>

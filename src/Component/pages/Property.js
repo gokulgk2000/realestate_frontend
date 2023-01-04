@@ -108,7 +108,7 @@ const requestSearch = (searched) => {
   if(property?.length===0){
     return(
       <div className="py-10">
-         <Breadcrumbs>
+         <Breadcrumbs className="">
             <Link to="/">
               <button className="opacity-60 font">Home</button>
             </Link>
@@ -154,7 +154,7 @@ const requestSearch = (searched) => {
           currentProperty={propertyId?._id}
         />
       )}
-      <Breadcrumbs>
+      <Breadcrumbs className="flex justify-start md:pl-32   ">
             <Link to="/">
               <button className="opacity-60 font">Home</button>
             </Link>

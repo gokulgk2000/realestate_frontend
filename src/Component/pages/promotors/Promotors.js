@@ -47,12 +47,12 @@ const Promotors = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div className=" py-2 md:pl-36 md:pr-24 bg-slate-50 ">
+    <div className=" py-2 md:pl-32 md:pr-24 bg-slate-50 ">
        {isLoading ? (
       <div className="flex justify-center py-5  "> Loading...</div>
       ) : (
         <div>
-    <Breadcrumbs>
+    <Breadcrumbs className="-ml-3">
             <Link to="/">
               <button className="opacity-60 font underline">Home</button>
             </Link>
@@ -85,7 +85,7 @@ const Promotors = () => {
                 .slice((currentPage - 1) * 12, currentPage * 12)
                 .map((Data, i) => (
 
-      <Link to={`/promotorsDetails?id=${Data?._id}`} className=" px-8 py-6 shadow-sm rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-gray-50 shadow-xl " key={i}>
+      <Link to={`/promotorsDetails?id=${Data?._id}`} className=" px-8 py-6 rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-gray-50 shadow-xl " key={i}>
 
          { Data.profilePic?  (
         <img

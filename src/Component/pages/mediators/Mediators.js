@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 const Mediators = () => {
   return (
-    <div className="py-2 md:pl-36 md:pr-24">
-      <Breadcrumbs>
+    <div className="py-2 md:pl-32 md:pr-24">
+      <Breadcrumbs className='-ml-3'>
             <Link to="/">
               <button className="opacity-60 font underline">Home</button>
             </Link>

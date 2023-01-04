@@ -115,7 +115,7 @@ const[property,setProperty]=useState()
         <div className="text-gray-700 font-semibold  ">Name : {getUser?.firstname} {getUser?.lastname}  </div>
         <div className="text-gray-700 font-semibold">Email : {getUser?.email} </div>
         <div className="text-gray-700 font-semibold">Contact : {getUser?.phoneno} </div>
-        <div className="fe text-gray-700 font-semibold text-amber-500">
+        <div className="fe  font-semibold text-amber-500">
           <h2 className="pt-5">Review </h2>
 <button className="flex">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className=" hover:text-black w-6 h-6">

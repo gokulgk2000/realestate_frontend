@@ -122,7 +122,7 @@ function Navbar() {
     navigate(`/payment?id=${user?._id}&email=${user?.email}`);
   };
 
-  const activeClass = "border-b-2 border-black text-yellow-500";
+  const activeClass = "border-b-2 border-black text-white";
 
   return (
     <div>
@@ -136,8 +136,8 @@ function Navbar() {
 
       <div className="Navbar  uppercase  sticky top-0 z-100 ">
         <nav className="nav-color">
-          <div className=" px-  mx-auto  ">
-            <div className="flex md:justify-around justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
+          <div className=" pl-4  mx-auto  ">
+            <div className="flex justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
               {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
 
               {isMobileview ? (
@@ -245,7 +245,7 @@ function Navbar() {
               )}
               {/* <Search/> */}
 
-              <div className=" ">
+              <div className=" -mr-3">
                 {isAuthenticated() ? (
                   <div>
                     <div className=" relative  group">

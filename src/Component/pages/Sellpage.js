@@ -261,9 +261,9 @@ const RegisterProperty = () => {
   };
 
   return (
-    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-32 md:pr-24 capitalize flex justify-center">
+    <div className="md:grid grid-cols-2 ml-5 p-1 font-serif font md:pl-28 md:pr-24 capitalize flex justify-center">
       <form
-        className="col-span-3 gap-1 bg-gray-50 px-2"
+        className="col-span-3 gap-1 bg-gray-50 px-10"
         onSubmit={(e) => {
           e.preventDefault();
           validation.handleSubmit();

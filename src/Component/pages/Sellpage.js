@@ -195,9 +195,12 @@ const RegisterProperty = () => {
   const handleImageUpload = async (e) => {
     const target = e.target;
     // console.log("images length : ",)
-    if ([...target.files]?.length > 5) {
+    if ([...target.files]?.length > 5)  {
       alert("'Property Images Limit is 5 ' ");
-    } else {
+    } else if ([...target.files]?.length < 2)  {
+      alert("'Property Images Must be Atleast  * 2 * ' ");
+    } 
+    else {
       const allImages = [...target.files].map((f) => f);
       setPropertyPic(allImages);
     }
@@ -582,6 +585,7 @@ const RegisterProperty = () => {
               label=" *Property Images"
               multiple={true}
               maxLength={5}
+              minLength={2}
               accept=".png, .jpg, .jpeg,.pdf,.webp"
               onChange={handleImageUpload}
             />

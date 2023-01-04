@@ -1,5 +1,5 @@
 import React from "react";
-const FileInput = ({ label, name, value,placeholder, maxLength,multiple="false",accept ="png,jpg,jpeg,webp,gif",onChange,...props }) => {
+const FileInput = ({ label, name, value,placeholder, maxLength,minLength,multiple="false",accept ="png,jpg,jpeg,webp,gif",onChange,...props }) => {
 //   const checkFiles=(files)   
 //     if(files.length>10) {
 //         alert("length exceeded; files have been truncated");
@@ -20,6 +20,7 @@ const FileInput = ({ label, name, value,placeholder, maxLength,multiple="false",
         name={name}
         multiple={multiple}
         maxLength={maxLength}
+        minLength={minLength}
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}

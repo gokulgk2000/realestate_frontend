@@ -70,7 +70,14 @@ if(interest?.length===0){
     <div className='md:pl-32 md:pr-24 '>
        
     <div >
-       
+    <Breadcrumbs>
+          <Link to="/">
+            <button className="opacity-60 font p-1">Home</button>
+          </Link>
+          <Link to="/buyer">
+            <button className="text-amber-700 font p-1 underline">Intrested List</button>
+          </Link>
+        </Breadcrumbs>  
     <div className="w-full flex justify-center items-center mt-5 pb-4  ">
           <input
             type="text"

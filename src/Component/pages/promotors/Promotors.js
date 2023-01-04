@@ -54,7 +54,10 @@ const Promotors = () => {
         <div>
     <Breadcrumbs className="-ml-3">
             <Link to="/">
-              <button className="opacity-60 font underline">Home</button>
+              <button className="opacity-60 font p-1">Home</button>
+            </Link>
+            <Link to="/promotors">
+              <button className="text-amber-700 font underline p-1">Promotors List</button>
             </Link>
           </Breadcrumbs>
     

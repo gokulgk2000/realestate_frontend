@@ -7,7 +7,10 @@ const Mediators = () => {
     <div className="py-2 md:pl-32 md:pr-24">
       <Breadcrumbs className='-ml-3'>
             <Link to="/">
-              <button className="opacity-60 font underline">Home</button>
+              <button className="opacity-60 font p-1 ">Home</button>
+            </Link>
+            <Link to="/mediators">
+              <button className="text-amber-700 font underline p-1">Facilitator Name</button>
             </Link>
           </Breadcrumbs>
     <div className="flex flex-col justify-center max-w-xs py-6 px-2 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">

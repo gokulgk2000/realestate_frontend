@@ -45,7 +45,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
     },
     onSubmit: (values, onSubmitProps) => {
       requested({
-
+        regUser: currentUser?.userID,
         location: values.location,
         propertyType: values.propertyType,
         facing: values.facing,
@@ -266,14 +266,14 @@ const RequestedModel = ({ show, onCloseClick }) => {
                       <div className=" flex justify-between mt-4">
                         <button
                           type="button"
-                          className=" px-6 py-2.5  text-red-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:text-red-600 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className=" px-6 py-2.5  text-red-400  font-medium text-xs leading-tight uppercase rounded shadow-md hover:text-red-600 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                           onClick={onCloseClick}
                         >
                           Close
                         </button>
                         <button
                           type="submit"
-                          className=" inline-block px-6 py-2.5 text-blue-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className=" inline-block px-6 py-2.5 text-blue-800  font-medium text-xs leading-tight uppercase rounded shadow-md  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                           onClick={requested}
                         >
                           Submit

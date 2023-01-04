@@ -76,7 +76,7 @@ const Promotors = () => {
             Search
           </button>
         </div>             
-         <div className="grid grid-cols-4 gap-x-4 gap-y-3  ">
+         <div className="grid md:grid-cols-4 gap-x-4 gap-y-3  ">
          {promoterData
                 ?.filter(
                   (item =>

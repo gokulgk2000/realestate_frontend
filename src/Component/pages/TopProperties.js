@@ -58,7 +58,35 @@ const [propertyId, setPropertyId] = useState([]);
   return (
     
      <div>    
-
+      <div className='flex justify-center text-2xl py-5 uppercase '>
+      <svg
+                 
+                 className="h-6 w-6"
+                 viewBox="0 0 512 512"
+               >
+                 <polygon
+                   fill="#ffd759"
+                   points="102.6 494.1 137 320.1 6 200.5 182.1 179.5 255.3 17.9 329.7 178.9 506 198.6 375.9 319.2 411.6 492.9 256.8 406.4"
+                 />
+                 <polygon
+                   fill="#fabd3b"
+                   points="256 256 6 200.5 137 320.1"
+                 />
+                 <polygon
+                   fill="#fabd3b"
+                   points="256 256 102.6 494.1 256.8 406.4 411.6 492.9"
+                 />
+                 <polygon
+                   fill="#fabd3b"
+                   points="256 256 506 198.6 375.9 319.2"
+                 />
+                 <polygon
+                   fill="#fabd3b"
+                   points="255.3 17.9 256 256 329.7 178.9"
+                 />
+               </svg>
+<h1 className='pl-1 text-amber-400'>Top Properties...</h1>
+</div>
 <Carousel
   
   responsive={responsive}

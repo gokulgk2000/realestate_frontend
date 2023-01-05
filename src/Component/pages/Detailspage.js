@@ -23,22 +23,19 @@ import { useUser } from "./contextProvider/UserProvider";
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 const Detailspage = () => {
-  const { currentUser, } = useUser();
+  const { currentUser } = useUser();
   const query = useQuery();
   const [loading, setLoading] = useState(true);
   const [property, setproperty] = useState({});
   const [curentImage, setcurentImage] = useState(0);
   const [propertyId, setPropertyId] = useState([]);
-  const [BuyerRegistrationSuccess, setBuyerRegistrationSuccess] = useState("");
-  const [BuyerRegistrationError, setBuyerRegistrationError] = useState("");
-  const [interestProperty, setInterestProperty] = useState([]);
-  const [uninterestProperty, setUnInterestProperty] = useState([]);
   const [interesterror, setInterestError] = useState([]);
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [interest, setInterest] = useState([]);
+  const [isInterest, setIsInterest] = useState([]);
+  const [unInterest, setUnInterest] = useState([]);
   const [InterestSuccess, setInterestSuccess] = useState();
-
 
   // const validation = useFormik({
   //   enableReinitialize: true,
@@ -137,7 +134,6 @@ const Detailspage = () => {
     }
   };
 
-
   const handleFetchInterested = async () => {
     const payload = {
       userID: currentUser?.userID,
@@ -145,46 +141,52 @@ const Detailspage = () => {
     const res = await getinterestbyId(payload);
     if (res.success) {
       setInterest(res?.Intrested);
+
       setInterestSuccess(res.msg);
     } else {
       setInterestError(res.msg);
-    }console.log(res,"gokul")
+    }
   };
 
   const interested = async () => {
+    setLoading(true);
     const payload = {
       propertyId: property?._id,
       regUser: currentUser?.userID,
     };
     const res = await getInterest(payload);
     if (res) {
-      handleFetchInterested()
+      await handleFetchInterested();
+      setIsInterest(res?.intrested);
       toastr.success(`Your Interest Property Added  successfully`, "Success");
     } else {
       setInterestError(res.msg);
     }
-    
+    setLoading(false);
   };
- 
   const getunInterest = async () => {
+    setLoading(true);
     const payload = {
       userID: interest[0]?._id,
     };
     const res = await getUnInterest(payload);
     if (res.success) {
-     await handleFetchInterested()
-     toastr.success(`Your UnInterest Property Remove  successfully`, "Success");
-
+      await handleFetchInterested();
+      setUnInterest(res?.removeProperty);
+      toastr.success(
+        `Your UnInterest Property Remove  successfully`,
+        "Success"
+      );
     } else {
     }
+    setLoading(false);
+    
   };
-
+  console.log(unInterest, ":unInterest");
   useEffect(() => {
-
     handleFetchInterested();
   }, []);
   const found = interest?.find((i) => i?.propertyId?._id === property?._id);
-  
 
   return (
     <>
@@ -210,6 +212,9 @@ const Detailspage = () => {
               <Link to="/">
                 <button className="opacity-60 font underline">Home</button>
               </Link>
+              <Link to="/Detailspage">
+                <button className="text-amber-700 font underline">Property Details</button>
+              </Link>
             </Breadcrumbs>
             <div className="flex justify-end mr-52    pt-2 md:px-0 sm:px-0 lg:px-28">
               <div className=" font-normal text-xs">
@@ -220,23 +225,25 @@ const Detailspage = () => {
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
-                   {currentUser &&<div className="flex justify-end">
-                      {!found ?(
-                        <button
-                          onClick={interested}
-                          className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                        >
-                          Interested
-                        </button>
-                      ) : (
-                        <button
-                          onClick={getunInterest}
-                          className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                        >
-                          UnInterested
-                        </button>
-                      )}
-                    </div>} 
+                    {currentUser && (
+                      <div className="flex justify-end">
+                        {!found ? (
+                          <button
+                            onClick={interested}
+                            className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                          >
+                            Interested
+                          </button>
+                        ) : (
+                          <button
+                            onClick={getunInterest}
+                            className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                          >
+                            UnInterested
+                          </button>
+                        )}
+                      </div>
+                    )}
                     <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}
                     </div>

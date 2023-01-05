@@ -11,8 +11,9 @@ const Thankyoupage = () => {
     console.log("Getting payment");
     const getUserPaymentData = async () => {
       const res = await getPaymentId({ pi: query.get("payment_intent") });
+      if(res.success){
       toastr.success(`Your Property Details Display "Soon"`, "Success");
-
+    }
       // console.log("Got payment",res)
     };
     getUserPaymentData();

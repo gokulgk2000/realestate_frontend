@@ -44,7 +44,7 @@ console.log("interest",interest)
 if(interest?.length===0){
   return(
     <div className="py-10">
-       <Breadcrumbs>
+       <Breadcrumbs >
           <Link to="/">
             <button className="opacity-60 font">Home</button>
           </Link>
@@ -70,7 +70,7 @@ if(interest?.length===0){
     <div className='md:pl-32 md:pr-24 '>
        
     <div >
-    <Breadcrumbs>
+    <Breadcrumbs className='px-0'>
           <Link to="/">
             <button className="opacity-60 font p-1">Home</button>
           </Link>

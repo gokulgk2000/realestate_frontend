@@ -148,7 +148,8 @@ export const Carousel = () => {
           >
        
           </span>
-        ))}   <div className="md:-mt-24 -mt-12 animate-bounce "> <Search/></div>
+        ))}  
+         {/* <div className="md:-mt-24 -mt-12 animate-bounce "> <Search/></div> */}
       </div>
       
      

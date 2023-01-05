@@ -47,12 +47,12 @@ const Promotors = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div className=" py-2 md:pl-32 md:pr-24 bg-slate-50 ">
+    <div className=" md:py-2 sm:py-2 md:pl-32 md:pr-24 bg-slate-50 px-5">
        {isLoading ? (
       <div className="flex justify-center py-5  "> Loading...</div>
       ) : (
         <div>
-    <Breadcrumbs className="-ml-3">
+    <Breadcrumbs className="px-0">
             <Link to="/">
               <button className="opacity-60 font p-1">Home</button>
             </Link>

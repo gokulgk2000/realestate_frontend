@@ -136,7 +136,7 @@ function Navbar() {
 
       <div className="Navbar  uppercase  sticky top-0 z-100 ">
         <nav className="nav-color">
-          <div className=" pl-4  mx-auto  ">
+          <div className=" md:pl-4  mx-auto  ">
             <div className="flex justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
               {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
 
@@ -245,7 +245,7 @@ function Navbar() {
               )}
               {/* <Search/> */}
 
-              <div className=" -mr-3">
+              <div className=" md:-mr-3">
                 {isAuthenticated() ? (
                   <div>
                     <div className=" relative  group">
@@ -259,12 +259,12 @@ function Navbar() {
                             rule="true"
                           />
                           <span>
-                            <div className="px-2 pt-1 text-white font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center cursor-pointer hover:border-black">
+                            <div className="px-2 pt-2 text-white font  hidden md:block lg:block hover:text-md items-center gap-4 justify-center cursor-pointer hover:border-black">
                               {user?.firstname}
                             </div>
                           </span>
                           <svg
-                            className="h-5 w-5 group-hover:invisible hidden md:block pt-1 mt-1"
+                            className="h-5 w-5 group-hover:invisible hidden md:block pt-1 mt-2.5"
                             viewBox="0 0 512 478.17"
                           >
                             <path

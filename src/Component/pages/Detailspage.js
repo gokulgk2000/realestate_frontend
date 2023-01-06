@@ -169,8 +169,9 @@ const Detailspage = () => {
     const payload = {
       userID: interest[0]?._id,
     };
+    
     const res = await getUnInterest(payload);
-    if (res.success) {
+    if (res) {
       await handleFetchInterested();
       setUnInterest(res?.removeProperty);
       toastr.success(
@@ -179,6 +180,7 @@ const Detailspage = () => {
       );
     } else {
     }
+    console.log(payload,":gokul")
     setLoading(false);
     
   };

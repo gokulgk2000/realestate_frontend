@@ -99,7 +99,7 @@ await getAllProperties()
                 scope="col"
                 className="py-3 px-6  hidden md:block text-amber-700"
               >
-                <div className="flex items-center">AskPrice</div>
+                <div className="flex items-center">Title</div>
               </th>
            
               <th scope="col" className="py-3 px-6   text-amber-700">
@@ -141,10 +141,10 @@ await getAllProperties()
                     scope="row"
                     className="py-4 px-3 font-medium  whitespace-nowrap dark:text-white capitalize"
                   ><Link   to={`/admin/propertydetails?id=${PropertyData?._id}`}>
-                    {PropertyData?.Seller} ,<p>{PropertyData?.location}</p></Link>
+                    {PropertyData?.yourName } ,<p>{PropertyData?.location}</p></Link>
                   </th>
                   <td className="py-4 px-6 capitalize hidden md:block">
-                    {PropertyData?.askPrice}
+                    {PropertyData?.title}
                   </td>
                  
                   <td

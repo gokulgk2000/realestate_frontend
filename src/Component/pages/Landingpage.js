@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   findCategory,
+  getinterestbyId,
   getPropertiescategoryId,
+  getPropertyById,
 } from "../helper/backend_helpers";
 import Property from "./Property";
 import { Carousel } from "./Carousel";
@@ -12,8 +14,13 @@ import TopProperties from "./TopProperties";
 import background from "../assets/images/eva.jpg";
 import PropertyCard from "./PropertyCard";
 import { debounce } from "lodash";
+import { useUser } from "./contextProvider/UserProvider";
+import { useQuery } from "../helper/hook/useQuery";
 const Landingpage = () => {
+  const query = useQuery();
   const navigate = useNavigate();
+  const { currentUser } = useUser();
+
   const [searchText, setSearchText] = useState("");
   const [category, setCategory] = useState();
   const [bedRoom, setBetRoom] = "";
@@ -23,6 +30,9 @@ const Landingpage = () => {
   const [properties, setProperties] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [showBedRoom, setShowBedRoom] = useState(true);
+  const [interestProperties,setInterestProperties] = useState([])
+  const [property, setproperty] = useState({});
+
 
   const getProperties = async (searchText) => {
     setLoading(true);
@@ -39,7 +49,16 @@ const Landingpage = () => {
     } else {
     }
   };
+  const propertyDetails = async () => {
+    const res = await getPropertyById({ propertyId: query.get("uid") });
 
+    if (res.success) {
+      setproperty(res?.property);
+      // console.log("data", res);
+    } else {
+      console.log("Error while fetching property");
+    }
+  };
 
   // useEffect(() => {
   //   categories();
@@ -90,6 +109,29 @@ const Landingpage = () => {
       setShowBedRoom(false);
     }
   }, [selectCategory,betRoomCount]);
+  useEffect(() => {
+    const handleFetchInterested = async () => {
+      const payload = {
+        userID: currentUser?.userID,
+      };
+      const res = await getinterestbyId(payload);
+
+      if (res.success) {
+        setInterestProperties(res?.Intrested);
+      }
+    };
+    handleFetchInterested();
+  }, []);
+
+const found =(id) =>{
+const isExit=interestProperties.find(p=>p?.propertyId?._id===id);
+// const found = interest?.find((i) => i?.propertyId?._id === property?._id);
+console.log("show,",isExit,id,interestProperties)
+
+return isExit? true:false
+
+}
+
   return (
     <div className=" md:pl-32 md:pr-24  ">
       <div className="font pt-1">
@@ -231,12 +273,12 @@ const Landingpage = () => {
           isValid && <div className="md:grid  gap-  grid-cols-4  font uppercase  g gap-y-5 pb-3">
              {properties
               .map((pro, i) => (
-          <PropertyCard pro={pro}  key={i}/>
+          <PropertyCard pro={pro} showHeart={found(pro?._id)} key={i}/>
           ))}
         
       </div>)}
           <div className="shadow-2xl py-2 ">
-            <TopProperties />
+            <TopProperties found={found}/>
             <div className="flex justify-center py-2">
            
             </div>

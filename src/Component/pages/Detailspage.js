@@ -176,7 +176,7 @@ const Detailspage = () => {
 
     setLoading(true);
     const payload = {
-      interestId: found?._id,
+      interestPropertyID: found?._id,
     };
 
     const res = await getUnInterest(payload);

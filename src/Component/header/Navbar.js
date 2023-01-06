@@ -32,7 +32,6 @@ function Navbar() {
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
   const [modalOpen, setModalOpen] = useModal(false);
-  const [rerender, setRerender] = useState(true);
 
   // const [property, setproperty] = useState("");
   // const [currentUser, setCurrentUser] = useState();

@@ -174,7 +174,7 @@ const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 py-2">
+            <div className="grid grid-cols- py-2">
               <div className="flex items-center">
                 <div className="relative">
                   <div className="rounded-full w-3 h-3 md:w-6 md:h-6 bg-gray-200 pl-5">

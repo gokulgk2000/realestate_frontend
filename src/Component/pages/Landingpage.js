@@ -22,8 +22,6 @@ const Landingpage = () => {
   const { currentUser } = useUser();
 
   const [searchText, setSearchText] = useState("");
-  const [category, setCategory] = useState();
-  const [bedRoom, setBetRoom] = "";
   const [selectCategory, setSelectCategory] = useState(null);
   const [betRoomCount, setBetRoomCount] = useState(0);
   const [allcategory, setAllCategory] = useState([]);
@@ -31,10 +29,9 @@ const Landingpage = () => {
   const [isLoading, setLoading] = useState(false);
   const [showBedRoom, setShowBedRoom] = useState(true);
   const [interestProperties,setInterestProperties] = useState([])
-  const [property, setproperty] = useState({});
 
 
-  const getProperties = async (searchText) => {
+  const getProperties = async ({selectCategory,searchText,betRoomCount}) => {
     setLoading(true);
     const res = await getPropertiescategoryId({
       id: selectCategory,
@@ -44,25 +41,13 @@ const Landingpage = () => {
 
     if (res.success) {
       setProperties(res.category);
-      setLoading(false);
 
     } else {
     }
-  };
-  const propertyDetails = async () => {
-    const res = await getPropertyById({ propertyId: query.get("uid") });
+    setLoading(false);
 
-    if (res.success) {
-      setproperty(res?.property);
-      // console.log("data", res);
-    } else {
-      console.log("Error while fetching property");
-    }
   };
 
-  // useEffect(() => {
-  //   categories();
-  // }, [searchText]);
 
   useEffect(() => {
     const allcategory = async () => {
@@ -86,7 +71,6 @@ const Landingpage = () => {
   );
   const requestSearch = (searched) => {
     setSearchText(searched);
-   if(isValid) handleSearch(searched)
   }
    
   const handleCategoryChange = (event) => {
@@ -97,7 +81,7 @@ const Landingpage = () => {
   };
 
   useEffect(() => {
-    if(isValid)getProperties(searchText)
+    if(isValid)handleSearch({selectCategory,searchText,betRoomCount})
     if (
       selectCategory === "637d5513f4dc56d8268ea2a4" ||
       selectCategory === "637d5520f4dc56d8268ea2a6" ||
@@ -108,7 +92,7 @@ const Landingpage = () => {
       setBetRoomCount("0");
       setShowBedRoom(false);
     }
-  }, [selectCategory,betRoomCount]);
+  }, [selectCategory,betRoomCount,searchText]);
   useEffect(() => {
     const handleFetchInterested = async () => {
       const payload = {
@@ -134,7 +118,7 @@ return isExit? true:false
 
   return (
     <div className=" md:pl-32 md:pr-24  ">
-      <div className="font pt-1">
+      <div className="font pt-">
         <Carousel />
         <div className="  items-center md:-mt-14  ">
           <div className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-100  rounded-full ">

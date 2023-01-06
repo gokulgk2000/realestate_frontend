@@ -263,7 +263,7 @@ const Detailspage = () => {
                       </div>
                     )} */}
                     <div className="flex font font-semibold pl-  text-xl">
-                      ₹. {property?.negotiablePrice}
+                      ₹. {property?.askPrice}
                     </div>
                     <div className="md:flex grid  pl- ">
                       <span className="font text-lg capitalize md:pl- underline">

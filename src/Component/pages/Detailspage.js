@@ -20,7 +20,7 @@ import toastr from "toastr";
 import moment from "moment";
 import GalleryModel from "../models/GalleryModel";
 import { useUser } from "./contextProvider/UserProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumbs } from "@material-tailwind/react";
 const Detailspage = () => {
   const { currentUser } = useUser();
@@ -32,11 +32,15 @@ const Detailspage = () => {
   const [interesterror, setInterestError] = useState([]);
   const [modalOpen, setModalOpen] = useModal();
   const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
-  const [interest, setInterest] = useState([]);
+  const [interest, setInterest] = useState();
   const [isInterest, setIsInterest] = useState([]);
   const [unInterest, setUnInterest] = useState([]);
   const [InterestSuccess, setInterestSuccess] = useState();
-
+  const navigate = useNavigate();
+ const navigateTologin = (e) =>{
+  e.preventDefault();
+  navigate(`/login`);
+ }
   // const validation = useFormik({
   //   enableReinitialize: true,
   //   initialValues: {
@@ -113,6 +117,8 @@ const Detailspage = () => {
       setcurentImage((prev) => prev - 1);
     } else setcurentImage(propertyPicLength - 1);
   };
+  const found = interest?.find((i) => i?.propertyId?._id === property?._id);
+
 
   useEffect(() => {
     const handleProperty = async () => {
@@ -147,7 +153,7 @@ const Detailspage = () => {
       setInterestError(res.msg);
     }
   };
-
+  console.log(interest,"interest")
   const interested = async () => {
     setLoading(true);
     const payload = {
@@ -158,6 +164,8 @@ const Detailspage = () => {
     if (res) {
       await handleFetchInterested();
       setIsInterest(res?.intrested);
+      
+  
       toastr.success(`Your Interest Property Added  successfully`, "Success");
     } else {
       setInterestError(res.msg);
@@ -165,13 +173,14 @@ const Detailspage = () => {
     setLoading(false);
   };
   const getunInterest = async () => {
+
     setLoading(true);
     const payload = {
-      userID: interest[0]?._id,
+      interestId: found?._id,
     };
-    
+
     const res = await getUnInterest(payload);
-    if (res) {
+    if (res.success) {
       await handleFetchInterested();
       setUnInterest(res?.removeProperty);
       toastr.success(
@@ -180,15 +189,13 @@ const Detailspage = () => {
       );
     } else {
     }
-    console.log(payload,":gokul")
+  
     setLoading(false);
-    
   };
-  console.log(unInterest, ":unInterest");
+  
   useEffect(() => {
     handleFetchInterested();
   }, []);
-  const found = interest?.find((i) => i?.propertyId?._id === property?._id);
 
   return (
     <>
@@ -215,7 +222,9 @@ const Detailspage = () => {
                 <button className="opacity-60 font underline">Home</button>
               </Link>
               <Link to="/Detailspage">
-                <button className="text-amber-700 font underline">Property Details</button>
+                <button className="text-amber-700 font underline">
+                  Property Details
+                </button>
               </Link>
             </Breadcrumbs>
             <div className="flex justify-end mr-52    pt-2 md:px-0 sm:px-0 lg:px-28">
@@ -238,7 +247,7 @@ const Detailspage = () => {
                           </button>
                         ) : (
                           <button
-                            onClick={getunInterest}
+                            onClick={()=>getunInterest(property?._id) }
                             className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                           >
                             UnInterested
@@ -246,10 +255,17 @@ const Detailspage = () => {
                         )}
                       </div>
                     )}
+                    {/* :
+                    {!currentUser && (
+                      <div className="flex justify-end">
+                        <button onClick={navigateTologin} className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                          Interested
+                        </button>
+                      </div>
+                    )} */}
                     <div className="flex font font-semibold pl-  text-xl">
                       ₹. {property?.negotiablePrice}
                     </div>
-
                     <div className="md:flex grid  pl- ">
                       <span className="font text-lg capitalize md:pl- underline">
                         {property?.location},{property?.streetName},

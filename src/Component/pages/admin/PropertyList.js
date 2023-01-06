@@ -81,7 +81,7 @@ await getAllProperties()
           </button>
         </div>
        
-        <table className="md:w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+        <table className="md:w-full  text-sm text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               {" "}
@@ -105,10 +105,10 @@ await getAllProperties()
               <th scope="col" className="py-3 px-6   text-amber-700">
                 <div className="flex items-center">status</div>
               </th>
-              <th scope="col" className="py-3 px-6   text-amber-700 ">
-                <span className="flex items-center">upgrade</span>
+              <th scope="col" className="py-3 pl-3   text-amber-700 ">
+                <span className="flex items-center">Upgrade</span>
               </th>
-              <th scope="col" className="py-3 px-6   text-amber-700 ">
+              <th scope="col" className="py-3 px-6   text-amber-700  hidden md:block">
                 <span className="flex items-center">Details</span>
               </th>
             </tr>
@@ -134,14 +134,14 @@ await getAllProperties()
                   <th
                     scope="row"
                     className="py-4 md:px-6 px-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {p + 1}
+                  ><Link  to={`/admin/propertydetails?id=${PropertyData?._id}`}>
+                    {p + 1}</Link>
                   </th>{" "}
                   <th
                     scope="row"
                     className="py-4 px-3 font-medium  whitespace-nowrap dark:text-white capitalize"
-                  >
-                    {PropertyData?.Seller} ,<p>{PropertyData?.location}</p>
+                  ><Link   to={`/admin/propertydetails?id=${PropertyData?._id}`}>
+                    {PropertyData?.Seller} ,<p>{PropertyData?.location}</p></Link>
                   </th>
                   <td className="py-4 px-6 capitalize hidden md:block">
                     {PropertyData?.askPrice}
@@ -150,8 +150,8 @@ await getAllProperties()
                   <td
                     className="py-4 px-6 capitalize"
                     style={{ color: statusColor[PropertyData?.status] }}
-                  >
-                    {PropertyData?.status}
+                  ><Link   to={`/admin/propertydetails?id=${PropertyData?._id}`}>
+                    {PropertyData?.status}</Link>
                   </td>
                   <td
                     className="py-4 px-6 capitalize"
@@ -168,12 +168,12 @@ await getAllProperties()
               onChange={(e)=>updatePremiumProperties(e.target.checked,PropertyData?._id)}
           />}  
         
-            <label for="vue-checkbox" className="py-3 ml-2 w-full text-sm font-medium dark:text-gray-300" >premium</label>
+            <label for="vue-checkbox" className="py-3 ml-2 w-full text-sm font-medium dark:text-gray-300 hidden md:block" >premium</label>
         </div>
     </li>
 </ul>           
                   </td>
-                  <td className="py-4 px-6">
+                  <td className="py-4 px-6 hidden md:block">
                     <Link
                       to={`/admin/propertydetails?id=${PropertyData?._id}`}
                       className="font-medium   text-amber-700  dark:text-blue-500 hover:underline"

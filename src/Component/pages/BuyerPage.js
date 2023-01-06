@@ -109,7 +109,7 @@ if(interest?.length===0){
       <PropertyCard pro={pro?.propertyId}  key={i}/>
       
     ))}
-    {interest?.isInterest !== true &&(<div>okk</div>)}
+    {/* {interest?.isInterest !== true &&(<div>okk</div>)} */}
     </div>
     </div>
   )}

@@ -6,6 +6,9 @@ import { NavLink } from "react-router-dom";
 const Mobile = [
   { name: "HOME", link: "/" },
   { name: "SELL PROPERTY", link: "/sellproperty" },
+  { name: "BUY", link: "/buyer" },
+  { name: "PROMOTORS", link: "/promotors" },
+  { name: "FACILITATORS", link: "/mediators" },
   { name: "CONTACT US ", link: "/contact" },
   { name: "ABOUT US ", link: "/about" },
 ];

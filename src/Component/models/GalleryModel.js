@@ -46,12 +46,12 @@ const GalleryModel = ({ onCloseClick }) => {
 
   return (
     <div
-      className='className="relative z-10"
+      className='className="relative z-10 "
     aria-labelledby="modal-title"
     role="dialog"
     aria-modal="true"'
     >
-      <div className=" inset-0 bg-slate-100 bg-opacity-100 transition-opacity md:pl-36  md:pr-24 md:py-24 md:fixed md:z-10 sm:static px-5">
+      <div className=" inset-0 bg-slate-100 bg-opacity-100 transition-opacity md:pl-32  md:pr-24 md:py-32 md:fixed md:z-10 sm:static px-5 ">
         <div className=" flex justify-between pr-3 ">
           {" "}
           <div className="flex justify-between  pl- ">
@@ -80,7 +80,7 @@ const GalleryModel = ({ onCloseClick }) => {
           </svg> */}
         </div>
         <div className="  grid  md:grid-cols-6 gap-x-2 gap-y-2 md:pr">
-          <div className="col-span-6  grid gap-x- gap-y-6 md:grid-cols-3">
+          <div className="col-span-6  grid gap-x- gap-y-2 md:grid-cols-3">
             {property?.propertyPic?.length > 0 &&
               property?.propertyPic?.map((image, j) => (
                 <button key={j}>

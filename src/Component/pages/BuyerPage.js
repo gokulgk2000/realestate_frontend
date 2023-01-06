@@ -44,7 +44,7 @@ console.log("interest",interest)
 if(interest?.length===0){
   return(
     <div className="py-10">
-       <Breadcrumbs >
+       <Breadcrumbs>
           <Link to="/">
             <button className="opacity-60 font">Home</button>
           </Link>
@@ -70,7 +70,7 @@ if(interest?.length===0){
     <div className='md:pl-32 md:pr-24 '>
        
     <div >
-    <Breadcrumbs className='px-0'>
+    <Breadcrumbs>
           <Link to="/">
             <button className="opacity-60 font p-1">Home</button>
           </Link>
@@ -95,7 +95,7 @@ if(interest?.length===0){
           </button>
         </div>
       </div>
-    <div className="grid md:grid-cols-4 gap-x-2">
+    <div className="grid md:grid-cols-4 gap-x-2 font uppercase">
       
         {interest
          ?.filter(
@@ -107,9 +107,9 @@ if(interest?.length===0){
         .map((pro, i) => (
       
       <PropertyCard pro={pro?.propertyId}  key={i}/>
-
+      
     ))}
-    
+    {interest?.isInterest !== true &&(<div>okk</div>)}
     </div>
     </div>
   )}

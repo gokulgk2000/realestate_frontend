@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { Carousel } from "./Carousel";
 import TopProperties from "./TopProperties";
 import background from "../assets/images/eva.jpg";
 import PropertyCard from "./PropertyCard";
+import { debounce } from "lodash";
 const Landingpage = () => {
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
@@ -23,7 +24,7 @@ const Landingpage = () => {
   const [isLoading, setLoading] = useState(false);
   const [showBedRoom, setShowBedRoom] = useState(true);
 
-  const getProperties = async () => {
+  const getProperties = async (searchText) => {
     setLoading(true);
     const res = await getPropertiescategoryId({
       id: selectCategory,
@@ -38,6 +39,7 @@ const Landingpage = () => {
     } else {
     }
   };
+
 
   // useEffect(() => {
   //   categories();
@@ -57,18 +59,26 @@ const Landingpage = () => {
     allcategory();
   }, []);
 
+  const isValid= Boolean(selectCategory) || Boolean(searchText)
+  const handleSearch = useCallback(
+    debounce(
+      getProperties, 500),
+    []
+  );
   const requestSearch = (searched) => {
-    setSearchText(searched);}
-
+    setSearchText(searched);
+   if(isValid) handleSearch(searched)
+  }
+   
   const handleCategoryChange = (event) => {
     setSelectCategory(event.target.value);
   };
   const handleBedsChange = (event) => {
     setBetRoomCount(event.target.value);
   };
-  const isValid= Boolean(selectCategory) || Boolean(searchText)
+
   useEffect(() => {
-   if(isValid) getProperties()
+    if(isValid)getProperties(searchText)
     if (
       selectCategory === "637d5513f4dc56d8268ea2a4" ||
       selectCategory === "637d5520f4dc56d8268ea2a6" ||
@@ -79,7 +89,7 @@ const Landingpage = () => {
       setBetRoomCount("0");
       setShowBedRoom(false);
     }
-  }, [selectCategory,betRoomCount,searchText]);
+  }, [selectCategory,betRoomCount]);
   return (
     <div className=" md:pl-32 md:pr-24  ">
       <div className="font pt-1">

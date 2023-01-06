@@ -61,7 +61,7 @@ const [propertyId, setPropertyId] = useState([]);
       <div className='flex justify-center text-2xl py-5 uppercase '>
       <svg
                  
-                 className="h-6 w-6"
+                 className="h-6 w-6 pt-"
                  viewBox="0 0 512 512"
                >
                  <polygon
@@ -85,7 +85,7 @@ const [propertyId, setPropertyId] = useState([]);
                    points="255.3 17.9 256 256 329.7 178.9"
                  />
                </svg>
-<h1 className='pl-1 text-amber-400'>Top Properties...</h1>
+<h1 className='pl-2 -mt-0.5  text-amber-800'>Top Properties</h1>
 </div>
 <Carousel
   

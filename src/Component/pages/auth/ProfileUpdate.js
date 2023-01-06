@@ -161,10 +161,10 @@ const ProfileUpdate = () => {
               </div>{" "}
             </div>{" "}
           </div>{" "}
-          <div className="mt-12 flex  justify-center">
+          <div className="mt-12 flex  justify-center ">
             <button
               onClick={(e) => updateProfile(e)}
-              className="w-36 h-10 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
+              className="w-36 h-10 font uppercase text-amber-800   border border-amber-800 hover:bg-amber-800  hover:text-white font-light py-1 px-1 rounded mb-20"
               >
               Update
             </button>

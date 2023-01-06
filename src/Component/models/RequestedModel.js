@@ -96,14 +96,14 @@ const RequestedModel = ({ show, onCloseClick }) => {
               <div className="bg-white px-4  p-6 pb-4 md:w-full ">
                 <div className="flex justify-between ">
                   <div>
-                    <h5 class="flex pt-2 text-xl font font-semibold tracking-tight dark:text-white uppercase">
+                    <h5 class="flex text-xl px-4  font-semibold tracking-normal dark:text-white uppercase">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
-                        class="w-6 h-10 text-amber-800"
+                        class="w-6 h-10 text-amber-800 pb-2 pr-1"
                       >
                         <path
                           stroke-linecap="round"
@@ -266,14 +266,14 @@ const RequestedModel = ({ show, onCloseClick }) => {
                       <div className=" flex justify-between mt-4">
                         <button
                           type="button"
-                          className=" px-6 py-2.5  text-red-400  font-medium text-xs leading-tight uppercase rounded shadow-md hover:text-red-600 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className=" px-6 py-2.5  text-red-400 border border-red-600  font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-600 hover:text-white hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                           onClick={onCloseClick}
                         >
                           Close
                         </button>
                         <button
                           type="submit"
-                          className=" inline-block px-6 py-2.5 text-blue-800  font-medium text-xs leading-tight uppercase rounded shadow-md  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className=" inline-block px-6 py-2.5 text-blue-800   border border-blue-600 hover:bg-blue-600 hover:text-white font-medium text-xs leading-tight uppercase rounded shadow-md  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                           onClick={requested}
                         >
                           Submit

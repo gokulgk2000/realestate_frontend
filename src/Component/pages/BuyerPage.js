@@ -89,7 +89,7 @@ if(interest?.length===0){
 
           <button
             type="submit"
-            className=" nav-color px-3 py-2 -ml-1.5 hover:bg-amber-900  text-black hover:text-white rounded-tr-full rounded-br-full"
+            className=" nav-color px-3 py-2  -ml-1.5 hover:bg-amber-900  text-black hover:text-white rounded-tr-full rounded-br-full"
           >
             Search
           </button>

@@ -9,7 +9,7 @@ import Register from "./Component/pages/auth/SellerRegister";
 import Detailspage from "./Component/pages/Detailspage";
 import Feedbackpage from "./Component/pages/Feedbackpage";
 import Landingpage from "./Component/pages/Landingpage";
-import Property from "./Component/pages/Property";
+// import Property from "./Component/pages/Property";
 import ProtectedRoutes from "./routers/ProtectedRoutes";
 import Sell from "./Component/pages/Sellpage";
 import Admin from "./Component/pages/admin/Admin";
@@ -64,7 +64,7 @@ const App = () => {
       <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />
       <Route path="/category" element={<Category />} />
-      <Route path="/property" element={<Property />} />
+      {/* <Route path="/property" element={<Property />} /> */}
       <Route path="/promotors" element={<Promotors />} />
       <Route path="/promotorsDetails" element={<PromotersDetails />} />
       <Route path="/mediators" element={<Mediators />} />

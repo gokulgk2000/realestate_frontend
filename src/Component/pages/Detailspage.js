@@ -208,7 +208,7 @@ const Detailspage = () => {
             />
           )}
           <div className="bg-slate-100 md:pl-32 md:pr-24">
-            <Breadcrumbs>
+            <Breadcrumbs className="px-0">
               <Link to="/">
                 <button className="opacity-60 font underline">Home</button>
               </Link>

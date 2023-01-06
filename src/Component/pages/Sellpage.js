@@ -72,6 +72,7 @@ const RegisterProperty = () => {
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [showFacing, setShowFacing] = useState(false);
+  const [showPropertyStatus, setShowPropertyStatus] = useState(false);
   const [facilitiesList, setFacilitiesList] = useState([]);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const validation = useFormik({
@@ -182,6 +183,13 @@ const RegisterProperty = () => {
       return setShowFacing(false);
     else return setShowFacing(true);
   }, [validation?.values.category]);
+
+  
+  useEffect(() => {
+    if (validation?.values?.aboutProperty === "New Property")
+      return setShowPropertyStatus(false);
+    else return setShowPropertyStatus(true);
+  }, [validation?.values.aboutProperty]);
   useEffect(() => {
     const allcategory = async () => {
       const res = await findCategory();
@@ -600,7 +608,7 @@ const RegisterProperty = () => {
           }}
         />
         <div className="grid md:grid-cols-4 md:gap-y-10 md:pt-5">
-          <div className="pb-1 font ">
+        {!showPropertyStatus &&   <div className="pb-1 font ">
             Property Status
             <select
               id="propertyStatus"
@@ -630,7 +638,7 @@ const RegisterProperty = () => {
                 {validation.errors.propertyStatus}
               </span>
             ) : null}
-          </div>
+          </div>}
 
           <div>
             <Input

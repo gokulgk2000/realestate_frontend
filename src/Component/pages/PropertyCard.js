@@ -1,55 +1,15 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { array } from "yup";
-import { getinterestbyId, getUnInterest } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
-import { useUser } from "./contextProvider/UserProvider";
 
 const PropertyCard = ({ pro, handleBook, setModalOpen }) => {
-  const { currentUser, setCurrentUser } = useUser();
 
-  const [interest,setInterest] = useState([])
-  const [Interest, setInterestSuccess] = useState();
-  const [interesterror,setInterestError] = useState([]);
-  const [interestProperty, setInterestProperty] = useState([]);
-  const [uninterestProperty, setUnInterestProperty] = useState([]);
   const handleContactClick = (e) => {
     e.stopPropagation();
     handleBook(pro?._id);
     setModalOpen(true);
   };
-//   useEffect(() => {
-//   const handleFetchInterested = async() =>{
-//     const payload = {
-//       userID:currentUser?.userID,
-//     }
-//     const res = await getinterestbyId(payload);
-//     if (res.success) {
-//       setInterest(res?.Intrested)
-//       setInterestSuccess(res.msg);
-//     }else{
-//       setInterestError(res.msg);
 
-//     }
-//   console.log(res)
-//   } 
-//   handleFetchInterested()
-// },[])
-// const getunInterest = async() =>{
-//   const payload = {
-//    userID:interest?._id
-//   }
-//   const res = await getUnInterest(payload);
-//   if (res.success) {
-//     setUnInterestProperty(res.msg);
-//   }else{
-  
-
-//   }
-//   console.log(res)
-// }
   return (
     <Link to={`/Detailspage?uid=${pro?._id}`} className="grid py-2 px-2  ">
       <div className=" w-full capitalize grid shadow-2xl rounded-lg">

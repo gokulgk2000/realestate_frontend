@@ -9,7 +9,7 @@ import PropertyCard from './PropertyCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
-const TopProperties = () => {
+const TopProperties = ({found}) => {
 const[property,setProperty]=useState()
 const [modalOpen, setModalOpen] = useModal();
 const [propertyId, setPropertyId] = useState([]);
@@ -94,7 +94,7 @@ const [propertyId, setPropertyId] = useState([]);
     
 
 {map(property, (pro, i) => (
-          <PropertyCard pro={pro} setModalOpen={setModalOpen} handleBook={handleBook} key={i}/>
+          <PropertyCard pro={pro} setModalOpen={setModalOpen} showHeart={found(pro?._id)} handleBook={handleBook} key={i}/>
         ))}
 
 

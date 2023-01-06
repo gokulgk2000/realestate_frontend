@@ -14,8 +14,7 @@ const BuyerPage = () => {
   const { currentUser, setCurrentUser } = useUser();
   const [isLoading, setLoading] = useState(true);
   const [interest,setInterest] = useState([])
-  const [Interest, setInterestSuccess] = useState();
-  const [interesterror,setInterestError] = useState([]);
+  const [showHeart,setShowHeart]=useState(false)
   const [searchText, setSearchText] = useState("");
 console.log("interest",interest)
   const propertySearch = (searched) => {
@@ -32,11 +31,9 @@ console.log("interest",interest)
     setLoading(true)
     if (res.success) {
       setInterest(res?.Intrested)
-      setInterestSuccess(res.msg);
-    }else{
-      setInterestError(res.msg);
-
+   
     }
+    
  setLoading(false)
   } 
   handleFetchInterested()
@@ -44,7 +41,7 @@ console.log("interest",interest)
 if(interest?.length===0){
   return(
     <div className="py-10">
-       <Breadcrumbs>
+       <Breadcrumbs className=''>
           <Link to="/">
             <button className="opacity-60 font">Home</button>
           </Link>
@@ -70,7 +67,7 @@ if(interest?.length===0){
     <div className='md:pl-32 md:pr-24 '>
        
     <div >
-    <Breadcrumbs>
+    <Breadcrumbs className='px-0'>
           <Link to="/">
             <button className="opacity-60 font p-1">Home</button>
           </Link>
@@ -97,7 +94,7 @@ if(interest?.length===0){
       </div>
     <div className="grid md:grid-cols-4 gap-x-2 font uppercase">
       
-        {interest
+        {interest 
          ?.filter(
           (item) =>
             item?.propertyId?.location?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
@@ -106,10 +103,10 @@ if(interest?.length===0){
               // .slice((currentPage - 1) * 10, currentPage * 10)
         .map((pro, i) => (
       
-      <PropertyCard pro={pro?.propertyId}  key={i}/>
-      
-    ))}
-    {/* {interest?.isInterest !== true &&(<div>okk</div>)} */}
+      // <PropertyCard pro={pro?.propertyId}   key={i}/>
+    
+<PropertyCard pro={pro?.propertyId}  showHeart={true} key={i} />
+    ) )}
     </div>
     </div>
   )}

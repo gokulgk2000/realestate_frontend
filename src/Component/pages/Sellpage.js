@@ -95,6 +95,7 @@ const RegisterProperty = () => {
       floorDetails: "",
       floor: "",
       propertyStatus: "",
+      transactionType:"",
       aboutProperty: "",
       nearFacilities: "",
       costSq: "",
@@ -120,6 +121,7 @@ const RegisterProperty = () => {
       // floorDetails: Yup.string().required("Please Enter Your floorDetails"),
       // floor: Yup.number().required("Please Enter Your floor"),
       // propertyStatus: Yup.string().required("Please Enter Property Status"),
+      // transactionType: Yup.string().required("Please Enter Property Status"),
       aboutProperty: Yup.string().required("Please Enter About Property"),
       //  nearFacilities: Yup.string().required("Please Enter Your nearFacilities"),
       costSq: Yup.string().required("Please Enter Your costSq"),
@@ -149,6 +151,7 @@ const RegisterProperty = () => {
         floorDetails: values.floorDetails,
         floor: values.floor,
         propertyStatus: values.propertyStatus,
+        transactionType: values.transactionType,
         aboutProperty: values.aboutProperty,
         nearFacilities: values.nearFacilities,
         costSq: values.costSq,
@@ -639,6 +642,27 @@ const RegisterProperty = () => {
               </span>
             ) : null}
           </div>}
+          <div>
+            <Input
+              label="transaction type"
+              type="text"
+              name="transactionType"
+              placeholder="Enter The transactiontype"
+              onChange={validation.handleChange}
+              onBlur={validation.handleBlur}
+              value={validation.values.transactionType || "" }
+              invalid={
+                validation.touched.transactionType && validation.errors.transactionType
+                  ? true
+                  : false
+              }
+            />
+            {validation.touched.transactionType && validation.errors.transactionType ? (
+              <span className="text-red-500" type="invalid">
+                {validation.errors.transactionType}
+              </span>
+            ) : null}
+          </div>
 
           <div>
             <Input

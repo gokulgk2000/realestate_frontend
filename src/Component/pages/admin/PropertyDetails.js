@@ -26,6 +26,7 @@ const PropertyDetails = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isloadingUpdate, setIsloadingUpdate] = useState(false);
   const [PropertyUpdatedSuccess, setPropertyUpdatedSuccess] = useState("");
   const [propertyUpdatedError, setpropertyUpdatedError] =useState("");
   const [removeImages, setRemoveImages] = useState([]);
@@ -100,6 +101,7 @@ const PropertyDetails = () => {
   };
 console.log("first",getProperty)
   const handleUpdatingProperty = async (e) => {
+    setIsloadingUpdate(true)
     e.preventDefault();
     const property = { ...getProperty, _id: query.get("id") };
 
@@ -141,6 +143,8 @@ console.log("first",getProperty)
     }else{
       setpropertyUpdatedError(res.msg)
     }
+    setIsloadingUpdate(false)
+
   };
   useEffect(() => {
     if (rerender) {
@@ -574,8 +578,22 @@ console.log("first",getProperty)
                     </>
                   ))}
               </div>
-            </div>
-            <div class="flex ml-5 mt-4 space-x-3 md:mt-6">
+            </div><div className="py-2 col-span-2">   
+            {" "}     <div className="flex justify-start pl-10">
+              {PropertyUpdatedSuccess && (
+                <alert className="text-bold text-green-600">
+                  {PropertyUpdatedSuccess}
+                </alert>
+              )}
+              {propertyUpdatedError && (
+                <alert className="text-bold text-red-600">
+                  {propertyUpdatedError}
+                </alert>
+              )}
+         </div> 
+         </div>
+            <div class="flex justify-start pl-5 pt-4 space-x-3 md:mt-6">
+              
               {!isEdit ? (
                 <button
                   type="button"
@@ -600,23 +618,20 @@ console.log("first",getProperty)
                   Edit
                 </button>
               ) : (
-              <div><div className="py-2">   
-            {" "}      
-              {PropertyUpdatedSuccess && (
-                <alert className="text-bold text-green-600">
-                  {PropertyUpdatedSuccess}
-                </alert>
-              )}
-              {propertyUpdatedError && (
-                <alert className="text-bold text-red-600">
-                  {propertyUpdatedError}
-                </alert>
-              )}
-         
-         </div>
+              <div>
+        
+         {isloadingUpdate ?(
+                 <button 
+                type="button"
+                className="border-2 rounded-md border-amber-800 hover:text-white  px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+               
+                  Updating Property ...          
+                   </button>
+                ):(
+
                 <button
                   type="button"
-                  class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  class="inline-flex items-center px-4 py-3 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   onClick={(e) => handleUpdatingProperty(e)}
                 >
                   <svg
@@ -632,7 +647,7 @@ console.log("first",getProperty)
                     />
                   </svg>
                   Update Property
-                </button></div>
+                </button>)}</div>
               )}
 
               {getProperty?.status !== "approved" ? (

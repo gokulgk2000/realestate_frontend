@@ -642,7 +642,7 @@ const RegisterProperty = () => {
               </span>
             ) : null}
           </div>}
-          <div>
+        {showPropertyStatus &&    <div>
             <Input
               label="transaction type"
               type="text"
@@ -662,7 +662,7 @@ const RegisterProperty = () => {
                 {validation.errors.transactionType}
               </span>
             ) : null}
-          </div>
+          </div>}
 
           <div>
             <Input

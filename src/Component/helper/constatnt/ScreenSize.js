@@ -1,7 +1,7 @@
 const screenSize =
 {
 pc:768,
-mobile:640,
+mobile:768,
 tab:1024,
 monitor:1536,
 

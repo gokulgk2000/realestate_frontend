@@ -227,14 +227,13 @@ const Detailspage = () => {
                 </button>
               </Link>
             </Breadcrumbs>
-            <div className="flex justify-end mr-52    pt-2 md:px-0 sm:px-0 lg:px-28">
-              <div className=" font-normal text-xs">
-                Posted on:{moment(property?.date).format("DD-MM-YYYY")}
-              </div>
-            </div>
+           
             <div className="px- pt- pb-10 s">
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
+                <div className="flex justify-end font-normal text-xs">
+                Posted on:{moment(property?.date).format("DD-MM-YYYY")}
+              </div>
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     {currentUser && (
                       <div className="flex justify-end">
@@ -434,7 +433,7 @@ const Detailspage = () => {
                           <div className="">
                             <div className="font text-gray-500 capitalize pb-1">
                               Transaction Type{" "}
-                              <div className="text-black font">
+                              <div className="text-black font capitalize" >
                                 {property?.transactionType}
                               </div>
                             </div>
@@ -445,7 +444,7 @@ const Detailspage = () => {
                             <div className="font text-gray-500 pb-1">
                               Area
                               <div className="text-black font">
-                                {property?.builtArea}sft{" "}
+                                {property?.builtArea}
                                 <div className="font text-gray-500 ">
                                   {" "}
                                   ₹.{property?.costSq}/sft
@@ -458,7 +457,7 @@ const Detailspage = () => {
                               {" "}
                               <div className="font text-gray-500 pb-1">
                                 Property Status
-                                <div className="text-black font">
+                                <div className="text-black font capitalize">
                                   {property?.propertyStatus}
                                 </div>
                               </div>
@@ -468,7 +467,7 @@ const Detailspage = () => {
                             <div className="">
                               <div className="font text-gray-500 pb-1">
                                 Floor Details
-                                <div className="text-black font">
+                                <div className="text-black font capitalize">
                                   {property?.floorDetails}
                                 </div>
                               </div>
@@ -521,86 +520,7 @@ const Detailspage = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="md:col-span-2 lg:    ">
-                  <div className="grid  border-gray-600 px-7 md:px-0 md:py-0 py-2 ">
-                    <div class="w-80 bg-white  shadow-2xl  rounded  animate- hover:animate-none  cursor-pointer hidden md:block">
-                      <p className="font flex justify-center pt-5 text-lg underline">
-                        {" "}
-                        Contact Owner
-                      </p>
-                      <div class="h-72 w-full checker-bg flex items-center justify-center p-4 text-blue-500">
-                        <form
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                          }}
-                        >
-                          {" "}
-                          <div class="relative z-0 mb-6 w-full group">
-                            <input
-                              type="name"
-                              name="name"
-                              id="floating_name"
-                              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
-                              placeholder=" "
-                            />
-                            <label
-                              for="floating_name"
-                              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                            >
-                              Name
-                            </label>{" "}
-                          </div>
-                          <div class="relative z-0 mb-6 w-full group ">
-                            <input
-                              type="email"
-                              name="email"
-                              id="floating_email"
-                              class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
-                              placeholder=" "
-                            />
-                            <label
-                              for="floating_email"
-                              class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                            >
-                              Email address
-                            </label>{" "}
-                          </div>
-                          <div class="relative z-0 mb-6 w-full group">
-                            <input
-                              type="phonenumber"
-                              name="phonenumber"
-                              id="floating_phonenumber"
-                              class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
-                              placeholder=" "
-                            />
-                            <label
-                              for="floating_phoneNumber"
-                              class=" peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                            >
-                              Phone Number
-                            </label>{" "}
-                          </div>
-                        </form>
-                        <div></div>
-                        <div></div>
-                      </div>
-
-                      <div class="p-4 border-t border-gray-200">
-                        <div class="flex items-center justify-center">
-                          <Link to="/buyerregister">
-                            <button
-                              type="submit"
-                              class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-                              // onClick={intrestedProperty}
-                            >
-                              Contact
-                            </button>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+               
               </div>
               <div className="grid  md:grid-cols-8 gap-2 pt-5">
                 <div className="md:col-span-6 border-3 border-black  ">
@@ -619,7 +539,7 @@ const Detailspage = () => {
                             Price
                           </td>
                           <td className=" text-black font-medium py-4">
-                            ₹.{property?.negotiablePrice}
+                            ₹.{property?.askPrice}
                           </td>
                         </tr>
                         <tr>
@@ -665,7 +585,7 @@ const Detailspage = () => {
                       </div>
                       <div className="col-span-9 md:hidden text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5">
                         {" "}
-                        ₹.{property?.negotiablePrice}
+                        ₹.{property?.askPrice}
                       </div>
                       <div className="md:col-span-2 text-gray-500 text-md md:hidden">
                         {" "}
@@ -712,84 +632,7 @@ const Detailspage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="px-7  md:hidden  ">
-                  <div class="w-80 bg-white  shadow-2xl px-5 rounded  animate-pulse hover:animate-none  cursor-pointer">
-                    <p className="font flex justify-center pt-5 text-lg underline">
-                      {" "}
-                      Contact Owner
-                    </p>
-                    <div class="h-72 w-full checker-bg flex items-center justify-center p-4 text-blue-500">
-                      <form
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        {" "}
-                        <div class="relative z-0 mb-6 w-full group">
-                          <input
-                            type="name"
-                            name="name"
-                            id="floating_name"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
-                            placeholder=" "
-                          />
-                          <label
-                            for="floating_name"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                          >
-                            Name
-                          </label>{" "}
-                        </div>
-                        <div class="relative z-0 mb-6 w-full group ">
-                          <input
-                            type="email"
-                            name="email"
-                            id="floating_email"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2  appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
-                            placeholder=" "
-                          />
-                          <label
-                            for="floating_email"
-                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0   peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                          >
-                            Email address
-                          </label>{" "}
-                        </div>
-                        <div class="relative z-0 mb-6 w-full group">
-                          <input
-                            type="phonenumber"
-                            name="phonenumber"
-                            id="floating_phonenumber"
-                            class="block py-2.5 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0  peer"
-                            placeholder=" "
-                          />
-                          <label
-                            for="floating_phoneNumber"
-                            class=" peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                          >
-                            Phone Number
-                          </label>{" "}
-                        </div>
-                        <div class="p-4 border-t border-gray-200">
-                          <div class="flex items-center justify-center">
-                            <Link to="/buyerregister">
-                              <button
-                                type="submit"
-                                class="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
-
-                                // onClick={intrestedProperty}
-                              >
-                                Contact
-                              </button>
-                            </Link>
-                          </div>
-                        </div>
-                      </form>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </div>
-                </div>
+               
                 <div></div>
               </div>
             </div>

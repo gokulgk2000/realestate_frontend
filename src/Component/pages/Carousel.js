@@ -7,7 +7,7 @@ import useMediaQuery from "../helper/hook/useMediaQuery";
 import { useModal } from "../helper/hook/useModal";
 import RequestedModel from "../models/RequestedModel";
 import Search from "./Search";
-import Do from "../assets/images/d3.jpeg"
+import Do from "../assets/images/d3.jpg"
 
 export const Carousel = () => {
   const [isBiggerthanTab] = useMediaQuery(tab);

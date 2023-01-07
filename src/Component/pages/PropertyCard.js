@@ -1,47 +1,10 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+
 import { Link } from "react-router-dom";
-import { getinterestbyId, getPropertyById } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
-import { useQuery } from "../helper/hook/useQuery";
-import { useUser } from "./contextProvider/UserProvider";
 
 const PropertyCard = ({ pro, handleBook, setModalOpen ,showHeart=false}) => {
 
-  const { currentUser } = useUser();
-  const query = useQuery();
-  const [interest,setInterest] = useState([])
-  const [property, setproperty] = useState({});
-  const handleContactClick = (e) => {
-    e.stopPropagation();
-    handleBook(pro?._id);
-    setModalOpen(true);
-  
-  };
-  const propertyDetails = async () => {
-    const res = await getPropertyById({ propertyId: query.get("uid") });
-
-    if (res.success) {
-      setproperty(res?.property);
-      // console.log("data", res);
-    } else {
-      console.log("Error while fetching property");
-    }
-  };
-  useEffect(() => {
-    const handleFetchInterested = async () => {
-      const payload = {
-        userID: currentUser?.userID,
-      };
-      const res = await getinterestbyId(payload);
-
-      if (res.success) {
-        setInterest(res?.Intrested);
-      }
-    };
-    handleFetchInterested();
-  }, []);
-  const found = interest?.find((i) => i?.propertyId?._id === property?._id);
+ 
   return (
     <Link to={`/Detailspage?uid=${pro?._id}`} className="grid py-2 px-2  ">
       <div className=" w-full capitalize grid shadow-2xl rounded-lg">
@@ -49,26 +12,10 @@ const PropertyCard = ({ pro, handleBook, setModalOpen ,showHeart=false}) => {
           <div className="grid shadow p-4 rounded-lg bg-white  card-h">
             <div className="flex justify-center relative rounded-lg overflow-hidden h-52">
               <div className="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full">
-                <div className="absolute inset-0 bg-black">
-                  {/* <div className="relative group">
-                    <button>
-                <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="2"
-                            stroke="currentColor"
-                            className="w-6 h-6 absolute right-0 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
-                            onClick={() => getUnInterest()}
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg></button></div> */}{" "}
+                <div className="absolute bg-black">
+              
                   <img
-                    className=" object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
+                    className=" object-cover md:h-52  md:w-96 rounded-md aspect-[1]"
                     alt="coimbatore realestate"
                     src={`${SERVER_URL}/file/${pro?.propertyPic[0]?.id}`}
                   />

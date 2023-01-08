@@ -26,6 +26,7 @@ const Detailspage = () => {
   const { currentUser } = useUser();
   const query = useQuery();
   const [loading, setLoading] = useState(true);
+  const [IsLoading, setIsLoading] = useState(false);
   const [property, setproperty] = useState({});
   const [curentImage, setcurentImage] = useState(0);
   const [propertyId, setPropertyId] = useState([]);
@@ -41,60 +42,7 @@ const Detailspage = () => {
   e.preventDefault();
   navigate(`/login`);
  }
-  // const validation = useFormik({
-  //   enableReinitialize: true,
-  //   initialValues: {
-  //     name: "",
-  //     email: "",
-  //     phonenumber: "",
-  //     propertyId: "",
-  //   },
-  //   validationSchema: Yup.object({
-  //     name: Yup.string().required(" Enter Your Name"),
-  //     email: Yup.string().required(" Enter Your Email"),
-  //     phonenumber: Yup.string().required(" Enter Your phonenumber"),
-  //   }),
-  //   onSubmit: (values, onSubmitProps) => {
-  //   console.log("buyer",values)
-
-  //     handlebuyerReg({
-  //       name: values.name,
-  //       email: values.email,
-  //       phonenumber: values.phonenumber,
-  //       propertyId: property?._id,
-  //     });
-  //     onSubmitProps.resetForm();
-  //   },
-  // });
-
-  // const handlebuyerReg = async () => {
-  //   const payload = {
-
-  //   }
-  //   const res = await buyerReg (payload);
-
-  //   if (res.success) {
-  //     setBuyerRegistrationSuccess(res.msg);
-  //     console.log("buyer",res)
-  //     toastr.success(`Buyer has been Registration successfully`, "Success");
-  //   } else {
-  //     setBuyerRegistrationError(res.msg);
-  //   }
-  // };
-  // const intrestedProperty =async()=>{
-  //   const res = await IntrestedByPropertyId({
-  //     regUser: currentUser?.userID,
-  //     propertyId: query.get("uid") });
-
-  //     if (res.success) {
-  //       setproperty(res?.Intrested);
-
-  //       console.log("data", res);
-  //     } else {
-  //       console.log("Error while fetching property");
-  //     }
-  //   };
-
+ 
   const propertyPicLength = property?.propertyPic?.length;
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
@@ -155,7 +103,7 @@ const Detailspage = () => {
   };
   console.log(interest,"interest")
   const interested = async () => {
-    setLoading(true);
+    setIsLoading(true);
     const payload = {
       propertyId: property?._id,
       regUser: currentUser?.userID,
@@ -170,11 +118,11 @@ const Detailspage = () => {
     } else {
       setInterestError(res.msg);
     }
-    setLoading(false);
+    setIsLoading(false);
   };
   const getunInterest = async () => {
 
-    setLoading(true);
+    setIsLoading(true);
     const payload = {
       interestPropertyID: found?._id,
     };
@@ -190,7 +138,7 @@ const Detailspage = () => {
     } else {
     }
   
-    setLoading(false);
+    setIsLoading(false);
   };
   
   useEffect(() => {
@@ -200,7 +148,11 @@ const Detailspage = () => {
   return (
     <>
       {loading ? (
-        <div className="flex justify-center py-5  "> Loading...</div>
+          <div className="text-center p-5  flex justify-center ">
+          <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">
+            <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
+          </svg>
+        </div>
       ) : (
         <div>
           {modalOpen && (
@@ -217,7 +169,7 @@ const Detailspage = () => {
             />
           )}
           <div className="bg-slate-100 md:pl-32 md:pr-24">
-            <Breadcrumbs className="px-0">
+            <Breadcrumbs className="md:px-0 px-2">
               <Link to="/">
                 <button className="opacity-60 font underline">Home</button>
               </Link>
@@ -242,14 +194,22 @@ const Detailspage = () => {
                             onClick={interested}
                             className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                           >
-                            Interested
+                       {IsLoading?(  <div className="text-center   animate-spin">
+            <svg viewBox="0 0 119.4 122.88 " className="w-3 h-3" fill="#deb11f">
+              <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
+            </svg>
+          </div>):(<div>Interested</div>)}     
                           </button>
                         ) : (
                           <button
                             onClick={()=>getunInterest(property?._id) }
                             className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                           >
-                            UnInterested
+                             {IsLoading?(  <div className="text-center   animate-spin">
+            <svg viewBox="0 0 119.4 122.88 " className="w-3 h-3" fill="#deb11f">
+              <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
+            </svg>
+          </div>):(<div>Uninterested</div>)}   
                           </button>
                         )}
                       </div>
@@ -362,7 +322,7 @@ const Detailspage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="md:col-span-3 grid md:pl-5">
+                      <div className="md:col-span-3 grid md:pl-5 pt-5 md:pt-0">
                         {(property?.category?.name === "residential" ||
                           property?.category?.name === "villa" ||
                           property?.category?.name === "appartment") && (
@@ -478,7 +438,7 @@ const Detailspage = () => {
                         <div className="pt-5">
                           <hr />
                         </div>
-                        <div className="grid capitalize pl-3 py-2 ">
+                        <div className="grid capitalize md:pl-3 py-2 ">
                           <div className="font text-gray-500 py-3 flex ">
                             <span className="pr-1">
                               <svg
@@ -525,7 +485,7 @@ const Detailspage = () => {
               <div className="grid  md:grid-cols-8 gap-2 pt-5">
                 <div className="md:col-span-6 border-3 border-black  ">
                   {" "}
-                  <p className=" text-2xl font-bold  md:py-4 md:hidden ">
+                  <p className=" text-2xl font-bold  md:py-4 md:hidden flex justify-center">
                     More Details
                   </p>
                   <div className="grid md:grid-cols-9 grid-cols-5 shadow-2xl rounded-md bg-white md:p-7 p-3">

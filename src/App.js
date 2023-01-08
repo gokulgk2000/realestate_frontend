@@ -58,8 +58,9 @@ const App = () => {
   // console.log("window location : ",window.location)
   return (
     <> 
-    {window.location.pathname==="/admin-page" ||window.location.pathname==="/admin" ?(<AdminNav/>):( <div className="sticky top-0 z-50"><Header/><Navbar/></div>)} 
-     
+    {window.location.pathname==="/admin-page" ||window.location.pathname==="/admin" ||  window.location.pathname==="/admin/userlist" || window.location.pathname==="/admin/buyerlist" || window.location.pathname==="/admin/requestedlist"|| window.location.pathname==="/admin/PropertyList"  ?(<AdminNav/>):( <div className="sticky top-0 z-50"><Header/><Navbar/></div>)} 
+   {/* {!isAuthAdmin || isAuthenticated && <div className="sticky top-0 z-50"><Header/><Navbar/></div>} 
+     {isAuthAdmin || !isAuthenticated && (<div><AdminNav/></div>)} */}
       <Routes >
       <Route path="/"  element={<Landingpage />} />
       <Route path="/ProfileUpdate" element={<ProfileUpdate />} />

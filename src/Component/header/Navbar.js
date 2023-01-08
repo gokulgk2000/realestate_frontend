@@ -230,16 +230,16 @@ function Navbar() {
               ) : (
                 <div className="flex">
                   {" "}
-                  <div className="pt-4">
+                  <div className="pt-">
                     <Mobilenav />
                   </div>
-                  <div>
+                  {/* <div>
                     {" "}
                     <Link to="/">
                       {" "}
                       <img className="h-16 w-16" src={Logo}></img>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               )}
               {/* <Search/> */}

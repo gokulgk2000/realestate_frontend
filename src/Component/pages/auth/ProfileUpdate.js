@@ -84,7 +84,7 @@ const ProfileUpdate = () => {
   return (
     <div>
      
-      <div className="md:py-20 md:px-24 bg-slate-100">
+      <div className="md:py-20 md:pr-28 pl-32 bg-slate-100">
         <div className="py-8 px-8 bg-white shadow mt-24">
           {" "}
           <div className="grid grid-cols-1 md:grid-cols-2">

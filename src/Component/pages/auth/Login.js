@@ -82,7 +82,7 @@ const Login = () => {
                           </alert>
                         )}
             <div className="flex flex-row items-center justify-center lg:justify-center">
-              <p className=" text-3xl text-teal-500 font-bold mb-0 mr-8">Sign in </p>
+              <p className=" text-3xl text-red-500 font-bold mb-0 mr-8">Sign in </p>
               <button
                 type="button"
                 data-mdb-ripple="true"
@@ -184,18 +184,19 @@ const Login = () => {
             </div>
   
             <div className="text-center lg:text-left">
+            
               {loading ?(
                  <button 
                 type="button"
-                className="border-2 rounded-md border-amber-800 hover:text-white uppercase px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                className="border-2 rounded-md border-black hover:text-white uppercase px-6 py-2 font text-black  shadow-xl   hover:bg-black hover:shadow-md">
                
                   Login...          
                    </button>
                 ):(
-
+                 
                 <button
                   type="submit"
-                  className="border-2 rounded-md border-amber-800 hover:text-white uppercase px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                  className="border-2 rounded-md border-black hover:text-white uppercase px-6 py-2 font text-black  shadow-xl   hover:bg-black hover:shadow-md">
               
                   Login
                 </button>

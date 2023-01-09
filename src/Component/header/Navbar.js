@@ -133,10 +133,10 @@ function Navbar() {
         />
       )}
 
-      <div className="Navbar  uppercase  sticky top-0 z-100 ">
+      <div className="Navbar  uppercase  sticky top-0 z-100 mb-4">
         <nav className="nav-color">
-          <div className=" md:pl-4  mx-auto  ">
-            <div className="flex justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
+          <div className=" md:pl-4  mx-auto ">
+            <div className="flex justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between pt-4 pb-4">
               {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
 
               {isMobileview ? (
@@ -418,7 +418,8 @@ function Navbar() {
                 ) : (
                   <button
                     type="button"
-                    className="inline-block px-1 py-2 bg-amber-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-amber-500 hover:shadow-lg focus:bg-amber-800 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block px-6 py-2 bg-black text-white font-semibold text-md leading-snug uppercase rounded-lg shadow-md tracking-wide hover:bg-white  hover:text-black hover:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
+
                   >
                     <Link to="/login">Login</Link>
                   </button>

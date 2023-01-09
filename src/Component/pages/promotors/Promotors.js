@@ -71,7 +71,7 @@ const Promotors = () => {
           />
           <button
             type="submit"
-            className=" nav-color px-6 py-2 -ml-1.5 font-semibold hover:text-white text-black rounded-tr-full rounded-br-full"
+            className=" nav-color px-6 py-2 -ml-1.5 font-semibold text-white rounded-tr-full rounded-br-full"
           >
             Search
           </button>

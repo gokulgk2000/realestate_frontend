@@ -69,7 +69,7 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.code}
                   placeholder="Enter  otp"
-                  className="mb-5 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-5 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
                 <label>Email</label>
                 <input
@@ -78,7 +78,7 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.email}
                   placeholder="Enter  Email"
-                  className="mb-5 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-5 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
                 <label>Password</label>
@@ -88,7 +88,7 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.password || ""}
                   placeholder="Enter  Password"
-                  className="mb-5 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-5 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
                 <label>ConfirmPassword</label>
@@ -98,14 +98,14 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.confirmPassword || ""}
                   placeholder="Enter  ConfirmPassword"
-                  className="mb-8 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-8 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
                 <div className="mt-4 flex justify-between">
                   <div></div>
                   <button
                     type="submit"
-                    className="border-2 rounded-md border-black hover:text-white  px-6 font text-black py-2 shadow-xl   hover:bg-black hover:shadow-md"
+                    className="border-2 rounded-md border-[#a48641] hover:text-white  px-6 font text-black py-2 shadow-xl   hover:bg-[#a48641] hover:shadow-md"
                     >
                     Submit
                   </button>

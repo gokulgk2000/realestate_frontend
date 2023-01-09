@@ -186,7 +186,7 @@ const BuyerRegister = () => {
                 {loading ?(
                 <button
                   type="submit"
-                  className="border-2 rounded-md border-black hover:text-white uppercase px-7 py-3 font text-black  shadow-xl   hover:bg-black hover:shadow-md">
+                  className="border-2 rounded-md border-[#a48641] hover:text-white uppercase px-7 py-3 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
            
                   Register
                 </button>
@@ -194,7 +194,7 @@ const BuyerRegister = () => {
 
                 <button 
                 type="button"
-                className="border-2 rounded-md border-black hover:text-white  px-7 py-3 font text-black  shadow-xl   hover:bg-black hover:shadow-md">
+                className="border-2 rounded-md border-[#a48641] hover:text-white  px-7 py-3 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
               
                    Registering...
           

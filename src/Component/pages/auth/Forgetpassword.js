@@ -76,7 +76,7 @@ const Forgetpassword = () => {
               </div>
               <button
                 onClick={sendotp}
-                className="border-2 rounded-md border-black hover:bg-black hover:text-white  px-4 font text-black py-2 shadow-xl  hover:shadow-md"
+                className="border-2 rounded-md border-[#a48641] hover:bg-[#a48641] hover:text-white  px-4 font text-black py-2 shadow-xl  hover:shadow-md"
                 >
                 Send OTP
               </button>

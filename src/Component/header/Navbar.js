@@ -418,7 +418,7 @@ function Navbar() {
                 ) : (
                   <button
                     type="button"
-                    className="inline-block px-6 py-2 bg-black text-white font-semibold text-md leading-snug uppercase rounded-lg shadow-md tracking-wide hover:bg-white  hover:text-black hover:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block px-6 py-2 bg-white text-[#a48641] font-semibold text-md leading-snug uppercase rounded-lg shadow-md tracking-wide hover:bg-black  hover:text-white hover:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
 
                   >
                     <Link to="/login">Login</Link>

@@ -153,7 +153,7 @@
 }
 
 .nav-color {
-  background-color: #a48641;
+  background-color: #b78d65;
 }
 .nav-txt {
   color: #0b0b0a;
@@ -170,3 +170,24 @@
   }
 
  }
+ /* .yo {
+  background-image: linear-gradient(
+    to left,
+    white, white,rgb(255 255 255),rgb(255 255 255),#ffc894
+  );
+  width: 533px;
+} */
+.nav-colo{
+  background-image: linear-gradient(
+    to right,
+    white, white,rgb(255 255 237),#b78d65 
+  );
+}
+.oy {
+
+  background-image: linear-gradient(
+    to right,
+    white, white,rgb(255 255 255),#ffc894
+  );
+ width: 200px;
+}

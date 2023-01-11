@@ -146,7 +146,7 @@ const Detailspage = () => {
   }, []);
 
   return (
-    <>
+    <div className="text-base">
       {loading ? (
           <div className="text-center p-5  flex justify-center ">
           <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">
@@ -188,7 +188,12 @@ const Detailspage = () => {
               </div>
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     {currentUser && (
-                      <div className="flex justify-end">
+                      <div className="flex justify-between">
+                          <div className="flex font font-semibold pl-  text-xl">
+                      ₹. {property?.askPrice}
+                      
+                    </div>
+                    
                         {!found ? (
                           <button
                             onClick={interested}
@@ -213,7 +218,14 @@ const Detailspage = () => {
                           </button>
                         )}
                       </div>
-                    )}
+                    )}    <div className="md:flex grid rounded-xl yo  py-3 pl-3 ">
+                    <span className="font text-xl capitalize md:pl- underline ">
+                      {property?.location},{property?.streetName}
+                    </span>{" "}
+                    <span className="text-xl pl-5 font text-gray-600 capitalize ">
+                      {property?.title} {property?.bedRoom}BHK For sale{" "}
+                    </span>
+                  </div>
                     {/* :
                     {!currentUser && (
                       <div className="flex justify-end">
@@ -222,17 +234,8 @@ const Detailspage = () => {
                         </button>
                       </div>
                     )} */}
-                    <div className="flex font font-semibold pl-  text-xl">
-                      ₹. {property?.askPrice}
-                    </div>
-                    <div className="md:flex grid  pl- ">
-                      <span className="font text-lg capitalize md:pl- underline">
-                        {property?.location},{property?.streetName},
-                      </span>{" "}
-                      <span className="text-md pt-1 font text-gray-600 capitalize ">
-                        {property?.title} {property?.bedRoom}BHK For sale{" "}
-                      </span>
-                    </div>
+                  
+                
                     <div className="grid md:grid-cols-5 gap-x- pt-3 ">
                       <div className="col-span-2 ">
                         <div className="grid gap-y-1 p-">
@@ -438,9 +441,9 @@ const Detailspage = () => {
                         <div className="pt-5">
                           <hr />
                         </div>
-                        <div className="grid capitalize md:pl-3 py-2 ">
-                          <div className="font text-gray-500 py-3 flex ">
-                            <span className="pr-1">
+                        <div className="grid capitalize md:pl-3 py-2  ">
+                          <div className="font  text-black py-3 flex yo px-2 rounded-lg">
+                            <span className="pr-1 ">
                               <svg
                                 viewBox="0 0 122.88 88.271"
                                 className="h-5 w-5 "
@@ -453,12 +456,12 @@ const Detailspage = () => {
                               </svg>
                             </span>
                             {property?.Seller}-
-                            <span className="text-black font">
+                            <span className=" font text-gray-500">
                               {property?.yourName}
                             </span>
                           </div>
 
-                          <div className="font text-gray-500 py-3 flex ">
+                          <button className="font text-red-500 py-3 flex oy rounded-lg w-52">
                             <span className="pr-1">
                               <svg
                                 viewBox="0 0 512 498.69"
@@ -471,10 +474,10 @@ const Detailspage = () => {
                               </svg>
                             </span>
                             Contact-
-                            <span className="text-black font">
+                            <span className="text-black font ">
                               {property?.phone}
                             </span>
-                          </div>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -599,7 +602,7 @@ const Detailspage = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

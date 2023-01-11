@@ -134,9 +134,9 @@ function Navbar() {
       )}
 
       <div className="Navbar  uppercase  sticky top-0 z-100 ">
-        <nav className="nav-color">
+        <nav className="">
           <div className=" md:pl-4  mx-auto  ">
-            <div className="flex justify-between items-center  shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
+            <div className="flex justify-between items-center nav-colo shadow-md  py-2 px-2 md:px-0 lg:px-28 lg:justify-between ">
               {/* <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5"><Link to='/'> <img className="h-16 w-24" src={Yo}></img></Link></span> */}
 
               {isMobileview ? (
@@ -162,16 +162,7 @@ function Navbar() {
                     {" "}
                     <div className="hover:text-white">SELL </div>
                   </NavLink>
-                  <NavLink
-                    to="/buyer"
-                    className={({ isActive }) =>
-                      isActive
-                        ? activeClass
-                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
-                    }
-                  >
-                    <div className="hover:text-white">BUY</div>
-                  </NavLink>{" "}
+                
                   <NavLink
                     to="/promotors"
                     className={({ isActive }) =>
@@ -190,7 +181,17 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-white">Facilitators</div>
+                    <div className="hover:text-white">MEDIATORS</div>
+                  </NavLink>{" "}
+                  <NavLink
+                    to="/buyer"
+                    className={({ isActive }) =>
+                      isActive
+                        ? activeClass
+                        : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
+                    }
+                  >
+                    <div className="hover:text-white">BUYER INTEREST</div>
                   </NavLink>{" "}
                   <div className="pl-2 rounded-lg px-2 ">
                     {userFromStorage ? (
@@ -244,7 +245,7 @@ function Navbar() {
               )}
               {/* <Search/> */}
 
-              <div className=" md:-mr-3">
+              <div className=" md:-mr-3 ">
                 {isAuthenticated() ? (
                   <div>
                     <div className=" relative  group">

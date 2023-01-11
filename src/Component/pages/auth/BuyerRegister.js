@@ -73,7 +73,7 @@ const BuyerRegister = () => {
                 </span>
               )}
               <div className="flex flex-row items-center justify-center lg:justify-center">
-                <p className=" text-3xl text-teal-500 font-bold mb-0 mr-8">
+                <p className=" text-3xl text-black font-bold mb-0 mr-8">
                 Sign Up
                 </p>
                 <button
@@ -186,7 +186,7 @@ const BuyerRegister = () => {
                 {loading ?(
                 <button
                   type="submit"
-                  className="border-2 rounded-md border-amber-800 hover:text-white uppercase px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                  className="border-2 rounded-md border-[#a48641] hover:text-white uppercase px-7 py-3 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
            
                   Register
                 </button>
@@ -194,7 +194,7 @@ const BuyerRegister = () => {
 
                 <button 
                 type="button"
-                className="border-2 rounded-md border-amber-800 hover:text-white  px-7 py-3 font text-amber-800  shadow-xl   hover:bg-yellow-900 hover:shadow-md">
+                className="border-2 rounded-md border-[#a48641] hover:text-white  px-7 py-3 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
               
                    Registering...
           

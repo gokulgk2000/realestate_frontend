@@ -4,18 +4,19 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <div className="w-full m-0 font-serif">
+      <div className="w-[100%] m-0 font-sans">
         <footer className="text-center lg:text-left nav-color text-gray-900">
           <div className="flex justify-center items-center lg:justify-between px-5 border-b text-gray-900 border-gray-300 ">
             <div className="flex justify-center"></div>
           </div>
-          <div className="mx-6 py-10 text-left md:text-left">
+          <div className="mx-6 py-10 text-left md:text-left pr-5 pl-20">
             <div className="grid grid-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-">
               <div className="">
                 <h6
                   className="
               uppercase
-              font-semibold
+              font-bold
+              text-lg
               mb-4
               flex
               items-center        
@@ -37,75 +38,78 @@ const Footer = () => {
                       d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"
                     ></path>
                   </svg>
-                  RealEstate
+                  Real Estate
                 </h6>
-                <p>
+                <p className="text-white font-normal text-base">
                   Real estate is property in the form of land, houses or other
                   buildings. Title insurance guarantees the purchaser of real
                   estate against loss from undiscovered defects in the title to
                   property that has been purchased.
                 </p>
               </div>
-              <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex text-gray-900 md:text-left">
+              <div className="pl-20">
+                <h6 className="uppercase font-bold text-lg mb-4 flex text-gray-900 md:text-left">
                   Categories
                 </h6>
+                
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-900">
+
+                  <Link to={"/"} className=" text-white font-medium hover:text-black">
                     Residential
                   </Link>
                 </p>
-                <p className="mb-4">
-                  <Link to={"/"} className="text-gray-900">
+               
+                <p className="mb-4">  
+                  <Link to={"/"} className="text-white font-medium hover:text-black">
                     Appartment
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-900">
+                  <Link to={"/"} className="text-white font-medium hover:text-black">
                     Villa
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-900">
+                  <Link to={"/"} className="text-white font-medium hover:text-black">
                     Land
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-900">
+                  <Link to={"/"} className="text-white font-medium hover:text-black">
                     Commercial
                   </Link>
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex text-gray-900 md:text-left">
+                <h6 className="uppercase font-bold text-lg mb-4 flex text-gray-900 md:text-left">
                   Quick links
                 </h6>
                 <p className="mb-4">
-                  <Link to={"/"} className="text-gray-900">
+                  <Link to={"/"} className="text-white font-medium hover:text-black">
                     Home
                   </Link>
                 </p>
                 <p className="mb-4">
-                  <Link to={"/about"} className="text-gray-900">
+                  <Link to={"/about"} className="text-white font-medium hover:text-black">
                     About Us
                   </Link>
                 </p>
-                <p className="mb-4">
-                  <Link to={"/contact"} className="text-gray-900">
+                <p className="mb-4 font-bold text-lg">
+                  <Link to={"/contact"} className="text-white font-medium hover:text-black">
                     Contact
                   </Link>
                 </p>
                 <p>
-                  <Link to={"/"} className="text-gray-900">
+                  <Link to={"/"} className="text-white font-medium hover:text-black">
                     Help
                   </Link>
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-semibold mb-4 flex  md:text-left">
+                <h6 className="uppercase  mb-4 flex  md:text-left font-bold text-lg">
                   Contact
                 </h6>
-                <p className="flex items-center md:text-left mb-4">
+                <p className="flex items-center md:text-left mb-4 text-white">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -123,7 +127,7 @@ const Footer = () => {
                   </svg>
                   Coimbatore
                 </p>
-                <p className="flex items-center  md:text-left mb-4">
+                <p className="flex items-center  md:text-left mb-4 text-white">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -141,7 +145,7 @@ const Footer = () => {
                   </svg>
                   info@CoimbatoreRealEstate.com
                 </p>
-                <p className="flex items-center md:text-left mb-4">
+                <p className="flex items-center md:text-left mb-4 text-white">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -159,23 +163,23 @@ const Footer = () => {
                   </svg>
                   8653467789
                 </p>
-                <div className="flex gap-3">
+                <div className="flex gap-6 mt-10">
                  <a href="https://www.facebook.com/"><svg
-                    className="w-6 h-6 text-gray-600 fill-current"
+                    className="w-6 h-6 text-black fill-current hover:text-white transition ease-in-out duration-100"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg></a> 
                  <a href="https://twitter.com/"> <svg
-                    className="w-6 h-6 text-gray-600 fill-current"
+                    className="w-6 h-6 text-black fill-current hover:text-white transition ease-in-out duration-100"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                   >
                     <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                   </svg></a>
                   <a href="https://in.linkedin.com/"><svg
-                    className="w-6 h-6 text-gray-600 fill-current"
+                    className="w-6 h-6 text-black fill-current hover:text-white transition ease-in-out duration-100"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"
                   >
@@ -184,16 +188,18 @@ const Footer = () => {
                 </div>
               </div>
             </div>
+            
           </div>
-          <div className="text-center p-6 bg-gray-200">
+          <div className="w-full font-medium text-center pt-3 pb-3 border-t border-t-white">
             <span>© 2022 Copyright.</span>
             <Link
-              className="text-gray-600 font-semibold"
+              className="text-white font-semibold ml-1"
               to="https://tailwind-elements.com/"
             >
               RealEstate
             </Link>
           </div>
+         
         </footer>
       </div>
     </div>

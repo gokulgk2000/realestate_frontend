@@ -112,15 +112,15 @@ const Landingpage = () => {
   };
 
   return (
-    <div className=" md:pl-32 md:pr-24  ">
+    <div className=" md:pl-32 md:pr-24">
       <div className="font pt-">
         <Carousel />
         <div className="  items-center md:-mt-14  ">
-          <div className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-100  rounded-full ">
-            <div className="flex rounded-lg md:shadow-lg border-2 md:border-0">
+          <div className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-100">
+            <div className="flex rounded-full md:shadow-lg md:border-0 ">
               {" "}
               <svg
-                className="h-14 w-14 pt-3 pb-3  bg-white rounded-bl-2xl rounded-tl-2xl"
+                className="h-14 w-14 pt-3 pb-3  bg-white rounded-bl-lg rounded-tl-lg"
                 viewBox="0 0 122.88 115.52"
               >
                 <path d="M119.2,111.86V3.66H57.86V41l-3.65-2.9V2.68A2.89,2.89,0,0,1,55.05.87h0A2.92,2.92,0,0,1,57.13,0h62.8A2.92,2.92,0,0,1,122,.86l.13.14a2.9,2.9,0,0,1,.74,1.94V31.15h0v80.71H104V87.1a1.67,1.67,0,0,0-1.67-1.67H90.44v30.09h32.44v-3.66ZM7.74,115.51V79.74a6.18,6.18,0,0,1-4.27.2A5.08,5.08,0,0,1,1.12,78.3,5.2,5.2,0,0,1,0,75.64a6.72,6.72,0,0,1,1.61-5h0a1.67,1.67,0,0,1,.23-.23l38.38-30a1.38,1.38,0,0,1,1.81-.07l38.47,29.9h0l.17.15a6.34,6.34,0,0,1,1.79,5.84,5.39,5.39,0,0,1-3.4,3.82,5.9,5.9,0,0,1-4.57-.3v35.59H70.77V78.18c0-.68-26.39-21.54-29.3-23.81-3.09,2.35-30,23-30,23.91v37.24ZM41.33,79.2A14.75,14.75,0,0,1,56,93.89v15.65H26.64V93.89A14.73,14.73,0,0,1,41.33,79.2Zm1.27,2.62V93.93H53.46v0A12.17,12.17,0,0,0,42.6,81.82Zm0,14.66V107H53.46V96.48ZM40.05,107V96.48H29.2V107Zm0-13.06V81.82A12.18,12.18,0,0,0,29.2,93.89v0ZM23.94,112.32H58.71v2.55H23.94v-2.55ZM66.68,12.87h9.85a.29.29,0,0,1,.28.28v11.4a.28.28,0,0,1-.28.27H66.68a.27.27,0,0,1-.28-.27V13.15a.28.28,0,0,1,.28-.28Zm33.86,0h9.85a.29.29,0,0,1,.28.28v11.4a.28.28,0,0,1-.28.27h-9.85a.28.28,0,0,1-.28-.27V13.15a.29.29,0,0,1,.28-.28Zm-16.93,0h9.85a.29.29,0,0,1,.28.28v11.4a.28.28,0,0,1-.28.27H83.61a.27.27,0,0,1-.28-.27V13.15a.28.28,0,0,1,.28-.28ZM66.68,35.76h9.85a.28.28,0,0,1,.28.27v11.4a.29.29,0,0,1-.28.28H66.68a.28.28,0,0,1-.28-.28V36a.27.27,0,0,1,.28-.27Zm33.86,0h9.85a.28.28,0,0,1,.28.27v11.4a.29.29,0,0,1-.28.28h-9.85a.29.29,0,0,1-.28-.28V36a.28.28,0,0,1,.28-.27Zm-16.93,0h9.85a.28.28,0,0,1,.28.27v11.4a.29.29,0,0,1-.28.28H83.61a.28.28,0,0,1-.28-.28V36a.27.27,0,0,1,.28-.27Zm16.93,22.88h9.85a.29.29,0,0,1,.28.28V70.31a.29.29,0,0,1-.28.28h-9.85a.29.29,0,0,1-.28-.28V58.92a.29.29,0,0,1,.28-.28Zm-16.93,0h9.85a.29.29,0,0,1,.28.28V70.31a.29.29,0,0,1-.28.28h-3V66.82l-7.11-5.64V58.92a.28.28,0,0,1,.28-.28Z" />
@@ -129,10 +129,10 @@ const Landingpage = () => {
                 id="category"
                 name="category"
                 label="category"
-                className="px-4 border-l-0   text-black capitalize  md:-ml-1 w-52"
+                className="pl-4 text-gray-400 text-sm capitalize  md:-ml-1 w-60"
                 onChange={handleCategoryChange}
               >
-                <option value={""}>Property Type</option>
+                <option value={""}>Select Property</option>
                 {allcategory.map((option, id) => (
                   <option value={option?._id} key={id} className="">
                     <div> {option?.name}</div>
@@ -146,7 +146,7 @@ const Landingpage = () => {
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-14 w-14  pt-3 pb-3  bg-white"
+                  className="h-14 w-14 pt-3 pb-3 bg-white"
                   shapeRendering="geometricPrecision"
                   textRendering="geometricPrecision"
                   imageRendering="optimizeQuality"
@@ -163,10 +163,10 @@ const Landingpage = () => {
                   id="bedRoom"
                   name="bedRoom"
                   label="BHK"
-                  className="  px-4 border-l-0 border-r-0  text-black capitalize w-48 md:-ml-1"
+                  className=" px-4 border-l-0 border-r-0 text-sm  text-gray-400 capitalize w-48 md:-ml-1"
                   onChange={handleBedsChange}
                 >
-                  <option value="0">BHK</option>
+                  <option  value="0">BHK</option>
                   <option value="1">1BHK</option>
                   <option className="  " value="2">
                     2BHK
@@ -184,7 +184,7 @@ const Landingpage = () => {
             <div className="flex md:shadow-lg border-2 md:border-0 rounded-lg md:">
               {" "}
               <svg
-                className="h-14 w-14  pt-3 pb-3   bg-white"
+                className="h-14 w-14  pt-3 pb-3  bg-white"
                 viewBox="0 0 118.43 122.88"
               >
                 <path
@@ -198,9 +198,9 @@ const Landingpage = () => {
                   id="message"
                   value={searchText}
                   required
-                  name="search"
-                  placeholder="Search   Location"
-                  className=" px-3 md:w-96 py-1 h-14 bg-white "
+                  name="search" 
+                  placeholder="Search  Location"
+                  className=" px-3 md:w-72 py-1 h-14 bg-white text-sm"
                   onChange={(e) => requestSearch(e.target.value)}
                 />
               </div>{" "}
@@ -229,15 +229,15 @@ const Landingpage = () => {
             <div className="hidden md:flex">
               {searchText ? (
                 <div className="flex md:shadow-lg rounded-lg">
-                  <button className="rounded-br-2xl rounded-tr-2xl bg-white px-4">
-                    Search Properties
+                  <button className="rounded-br-lg rounded-tr-lg bg-black px-8 text-white">
+                    Search
                   </button>
                 </div>
               ) : (
-                <div className="flex md:shadow-lg rounded-2xl">
+                <div className="flex md:shadow-lg rounded-lg">
                   {" "}
-                  <button className="rounded-br-2xl rounded-tr-2xl bg-white px-4">
-                    Search Properties
+                  <button className="rounded-br-lg rounded-tr-lg bg-black px-8 text-white">
+                    Search
                   </button>
                 </div>
               )}

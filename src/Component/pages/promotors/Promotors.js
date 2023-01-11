@@ -66,12 +66,12 @@ const Promotors = () => {
             type="text"
             placeholder="Search Promotors..."
             name="search"
-            className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+            className="md:w-96 px-5 py-2 bg-slate-200 font-normal rounded-tl-full rounded-bl-full border-0 focus:outline-0"
             onChange={(e) => requestSearch(e.target.value)}
           />
           <button
             type="submit"
-            className=" nav-color px-3 py-2 -ml-1.5 font-semibold hover:text-white text-black rounded-tr-full rounded-br-full"
+            className=" nav-color px-6 py-2 -ml-1.5 font-semibold text-white rounded-tr-full rounded-br-full"
           >
             Search
           </button>

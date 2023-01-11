@@ -53,7 +53,7 @@ const Passwordpage = () => {
       <div className="px-6 h-full text-gray-800 py-5">
         <div className="flex xl:justify-center lg:justify-center justify-center items-center flex-wrap h-full g-6">
           <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <div className="mb-6 mt-5  text-teal-500">
+            <div className="mb-6 mt-5  text-black font-medium">
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -62,14 +62,14 @@ const Passwordpage = () => {
                   return false;
                 }}
               >
-                <label>Otp</label>
+                <label>OTP</label>
                 <input
                   type="text"
                   name="code"
                   onChange={validation.handleChange}
                   value={validation.values.code}
                   placeholder="Enter  otp"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-5 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
                 <label>Email</label>
                 <input
@@ -78,7 +78,7 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.email}
                   placeholder="Enter  Email"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-5 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
                 <label>Password</label>
@@ -88,7 +88,7 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.password || ""}
                   placeholder="Enter  Password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-5 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
                 <label>ConfirmPassword</label>
@@ -98,13 +98,14 @@ const Passwordpage = () => {
                   onChange={validation.handleChange}
                   value={validation.values.confirmPassword || ""}
                   placeholder="Enter  ConfirmPassword"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
+                  className="mb-8 mt-2 form-control block w-full px-4 py-2 text-xl font-normal text-amber-700 bg-white bg-clip-padding border border-solid border-gray-900 rounded transition ease-in-out m-0 focus:text-amber-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                 ></input>
 
-                <div className="mt-4">
+                <div className="mt-4 flex justify-between">
+                  <div></div>
                   <button
                     type="submit"
-                    className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
+                    className="border-2 rounded-md border-[#a48641] hover:text-white  px-6 font text-black py-2 shadow-xl   hover:bg-[#a48641] hover:shadow-md"
                     >
                     Submit
                   </button>

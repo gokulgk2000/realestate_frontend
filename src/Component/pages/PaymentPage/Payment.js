@@ -14,7 +14,7 @@ const stripePromise = loadStripe("pk_test_51MAWn8SIJemEdI6N3T3qJbqf0mzcuvEVVM2l2
 
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState("");
-  const currentUser = JSON.parse(localStorage.getItem("authUser"))
+
 
   const query = useQuery();
   const email =  query.get("email");
@@ -32,8 +32,10 @@ export default function Payment() {
         email: email,
     }),
     })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then(res =>{ 
+        return res.json()
+      })
+      .then(data => setClientSecret(data.clientSecret));
   }, []);
 
   const appearance = {

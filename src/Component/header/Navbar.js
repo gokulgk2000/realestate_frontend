@@ -48,7 +48,7 @@ function Navbar() {
     if (res.success) {
       setUser(res.User);
 
-      // console.log("res", res);
+      console.log(user,"user")
     }
   };
   useEffect(() => {
@@ -119,9 +119,10 @@ function Navbar() {
       console.log("errors", res);
     }
     navigate(`/payment?id=${user?._id}&email=${user?.email}`);
+  
   };
 
-  const activeClass = "border-b-2 border-black text-white";
+  const activeClass = "border-b-2 border-black text-orange-500";
 
   return (
     <div>
@@ -151,7 +152,7 @@ function Navbar() {
                         : "text-black flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
-                    <div className="hover:text-white">HOME</div>{" "}
+                    <div className="hover:text-black">HOME</div>{" "}
                   </NavLink>
                   <NavLink
                     to="/sellproperty"
@@ -162,7 +163,7 @@ function Navbar() {
                     }
                   >
                     {" "}
-                    <div className="hover:text-white">SELL </div>
+                    <div className="hover:text-black">SELL </div>
                   </NavLink>
                 
                   <NavLink
@@ -173,7 +174,7 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-white">PROMOTORS</div>
+                    <div className="hover:text-black">PROMOTORS</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/mediators"
@@ -183,7 +184,7 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-white">MEDIATORS</div>
+                    <div className="hover:text-black">MEDIATORS</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/buyer"
@@ -193,18 +194,18 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-white">BUYER INTEREST</div>
+                    <div className="hover:text-black">BUYER INTEREST</div>
                   </NavLink>{" "}
                   <div className="pl-2 rounded-lg px-2 ">
                     {userFromStorage ? (
                       <button
                         onClick={() => setModalOpen(true)}
-                        className=" uppercase text-md hover:text-white flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
+                        className=" uppercase text-md hover:text-black flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                       >
                         Buyer Request
                       </button>
                     ) : (
-                      <button onClick={naviagteToLogin} className=" uppercase text-md hover:text-white flex items-center gap-4 justify-center hover:border-b-2 hover:border-black">
+                      <button onClick={naviagteToLogin} className=" uppercase text-md hover:text-black flex items-center gap-4 justify-center hover:border-b-2 hover:border-black">
                         Buyer Request
                       </button>
                     )}
@@ -217,7 +218,7 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black"
                     }
                   >
-                    <div className="hover:text-white">CONTACT US</div>
+                    <div className="hover:text-black">CONTACT US</div>
                   </NavLink>{" "}
                   <NavLink
                     to="/about"
@@ -227,7 +228,7 @@ function Navbar() {
                         : "text-black   flex items-center gap-4 justify-center hover:border-b-2 hover:border-black "
                     }
                   >
-                    <div className="hover:text-white">ABOUT US</div>
+                    <div className="hover:text-black">ABOUT US</div>
                   </NavLink>
                 </div>
               ) : (

@@ -6,11 +6,11 @@ import { userRegisteration } from "../../helper/backend_helpers";
 
 const SellerRegister = () => {
   const facilities = [
-    { value: "promotors,", text: "Promotors " },
-    { value: "facilator,", text: "Facilator " },
+    { value: "promotors", text: "Promotors " },
+    { value: "facilator", text: "Facilator " },
   ]
   const navigate = useNavigate();
-  const [ ,setList]  = useState([]);
+
   const [registrationError, setRegistrationError] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState("");
   const [loading, setLoading] = useState(true)

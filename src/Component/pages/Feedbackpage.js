@@ -3,19 +3,16 @@ import { FeedbackRegistration } from "../helper/backend_helpers";
 import { useQuery } from "../helper/hook/useQuery";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-
+import { useUser } from "./contextProvider/UserProvider";
 
 const Feedbackpage = () => {
+  const { currentUser: userFromStorage } = useUser();
   const initialFormValues = {
-    category: "",
-    from: "",
-    to: "",
-    area: "",
-    propertytype: "",
     comment: "",
-    phonenumber:""
+    userID: userFromStorage?.userID,
   };
   const { query } = useQuery;
+
   const [feedback, setFeedback] = useState(initialFormValues);
   const [feedbackSuccess, setFeedbackSuccess] = useState(initialFormValues);
   const [feedbackError, setFeedbackError] = useState(initialFormValues);
@@ -27,14 +24,14 @@ const Feedbackpage = () => {
   };
   console.log("payload", feedback);
   const handleSubmit = async () => {
-    const payload=feedback
-    const res = await FeedbackRegistration(payload );
+    const payload = feedback;
+    const res = await FeedbackRegistration(payload);
 
     if (res.success) {
       setFeedback(res.initialFormValues);
       toastr.success(`Feedback Sent Sucessfully`, "Success");
 
-      setFeedbackSuccess(res.msg)
+      setFeedbackSuccess(res.msg);
     } else {
       setFeedbackError(res.msg);
     }
@@ -45,11 +42,10 @@ const Feedbackpage = () => {
       <form
         className="w-full max-w-lg mt-5 "
         onSubmit={() => {
-      
           handleSubmit();
         }}
       >
-        <div className="flex flex-wrap -mx-3 mb-2">
+        {/* <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2">
               Category
@@ -77,11 +73,11 @@ const Feedbackpage = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mt-4">
+        </div> */}
+        {/* <div className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mt-4">
           BUDGET
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        </div> */}
+        {/* <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2"
@@ -116,8 +112,8 @@ const Feedbackpage = () => {
               onChange={handleChange}
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        </div> */}
+        {/* <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2">
               Area
@@ -132,8 +128,8 @@ const Feedbackpage = () => {
               onChange={handleChange}
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
+        </div> */}
+        {/* <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2">
               Phone Number
@@ -149,8 +145,8 @@ const Feedbackpage = () => {
               onChange={handleChange}
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
+        </div> */}
+        {/* <div className="flex flex-wrap -mx-3 mb-2">
           <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2">
               Property Type
@@ -178,7 +174,7 @@ const Feedbackpage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex flex-wrap -mx-3 mb-2"></div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
@@ -197,8 +193,8 @@ const Feedbackpage = () => {
         <div className="md:flex md:items-center">
           <div className="md:w-1/3">
             <button
-                  className="w-32 h-10  font border-2 border-[#a48641] hover:bg-[#a48641] text-black hover:text-white font-light py-1 px-1 rounded mb-20"
-                  type="submit"
+              className="w-32 h-10  font border-2 border-[#a48641] hover:bg-[#a48641] text-black hover:text-white font-light py-1 px-1 rounded mb-20"
+              type="submit"
             >
               Send
             </button>

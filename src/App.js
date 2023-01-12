@@ -50,6 +50,7 @@ import Passwordpage from "./Component/pages/auth/Passwordpage";
 import SelectedUser from "./Component/pages/auth/SelectedUser";
 import SellerRegister from "./Component/pages/auth/SellerRegister";
 import BuyerRegister from "./Component/pages/auth/BuyerRegister";
+import MediatorsDetails from "./Component/pages/mediators/MediatorsDetails";
 
 
 
@@ -69,6 +70,7 @@ const App = () => {
       <Route path="/promotors" element={<Promotors />} />
       <Route path="/promotorsDetails" element={<PromotersDetails />} />
       <Route path="/mediators" element={<Mediators />} />
+      <Route path="/mediatorsDetails" element={<MediatorsDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/sellerregister" element={<SellerRegister />} />
         <Route path="/buyerregister" element={<BuyerRegister />} />

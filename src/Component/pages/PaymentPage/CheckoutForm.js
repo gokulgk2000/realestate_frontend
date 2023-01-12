@@ -1,10 +1,9 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import {
   PaymentElement,
   useStripe,
-  useElements
+  useElements,
 } from "@stripe/react-stripe-js";
-
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -46,7 +45,7 @@ export default function CheckoutForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
       // Make sure to disable form submission until Stripe.js has loaded.
@@ -59,7 +58,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/thankyou",
+        return_url: "http://localhost:3000/pswrapper",
       },
     });
 
@@ -79,17 +78,23 @@ export default function CheckoutForm() {
 
   return (
     <div>
-    <form className="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement className="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} className="paymentbutton">
-        <span id="button-text">
-          {isLoading ?
-           <div className="paymentspinner" id="paymentspinner"></div> : "Pay now 100"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div className="payment-message">{message}</div>}
-    </form>
+      <form className="payment-form" onSubmit={handleSubmit}>
+        <PaymentElement className="payment-element" />
+        <button
+          disabled={isLoading || !stripe || !elements}
+          className="paymentbutton"
+        >
+          <span id="button-text">
+            {isLoading ? (
+              <div className="paymentspinner" id="paymentspinner"></div>
+            ) : (
+              "Pay now 100"
+            )}
+          </span>
+        </button>
+        {/* Show any error or success messages */}
+        {message && <div className="payment-message">{message}</div>}
+      </form>
     </div>
   );
-};
+}

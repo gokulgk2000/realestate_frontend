@@ -26,6 +26,7 @@ const Landingpage = () => {
   const [betRoomCount, setBetRoomCount] = useState(0);
   const [allcategory, setAllCategory] = useState([]);
   const [properties, setProperties] = useState([]);
+  const [Property, setproperty] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [showBedRoom, setShowBedRoom] = useState(true);
   const [interestProperties, setInterestProperties] = useState([]);

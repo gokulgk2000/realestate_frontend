@@ -40,7 +40,7 @@ const Login = () => {
 
       }
       setLoading(false)
-     
+     console.log(res,":gokul")
     },
   })
 

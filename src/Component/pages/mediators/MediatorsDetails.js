@@ -7,7 +7,7 @@ import { useQuery } from "../../helper/hook/useQuery";
 import PropertyCard from "../PropertyCard";
 import { Breadcrumbs } from "@material-tailwind/react";
 import Pagination from "../../pagination/Pagination";
-const PromotersDetails = () => {
+const MediatorsDetails = () => {
   const query = useQuery();
 
   const [property, setProperty] = useState();
@@ -92,13 +92,13 @@ const PromotersDetails = () => {
           <Link to="/">
             <button className="opacity-60 font p-1">Home</button>
           </Link>
-          <Link to="/promotors">
-            <button className="opacity-60 font p-1"> Promotors List</button>
+          <Link to="/mediators">
+            <button className="opacity-60 font p-1"> Mediators List</button>
           </Link>
-          <Link to="/promotors">
+          <Link to="/mediatorsDetails">
             <button className="text-amber-700 font underline p-1">
               {" "}
-              Promotors Details
+              Mediators Details
             </button>
           </Link>
         </Breadcrumbs>
@@ -346,4 +346,4 @@ const PromotersDetails = () => {
   );
 };
 
-export default PromotersDetails;
+export default MediatorsDetails;

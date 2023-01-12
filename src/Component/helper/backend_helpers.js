@@ -6,6 +6,7 @@ const userRegisteration = (payload) =>
 
 
 const Login = (payload) => post(`${BASE_URL}/user/login`, payload);
+const allFacilatorsList = (payload) => get(`${BASE_URL}/user/getfacilator`, payload);
 
 const PropertyRegistration = (payload) =>
   post(`${BASE_URL}/property/Sellproperty`, payload);
@@ -27,6 +28,8 @@ const getSearchAllProperty = (payload) =>
   get(`${BASE_URL}/property/searchProperties`, payload);
 const getProById = (payload) =>
   post(`${BASE_URL}/property/getproById`, payload);
+const allPromotorsList = (payload) =>
+  get(`${BASE_URL}/property/allPromotorsList`, payload);
 const getPropertyById = (payload) =>
   post(`${BASE_URL}/property/getpropertyById`, payload);
 const getPropertiescategoryId = (payload) =>
@@ -62,6 +65,8 @@ const removeProperty = (payload) =>
   put(`${BASE_URL}/admin/removeProperty`, payload);
 const updateTopProperty = (payload) =>
   put(`${BASE_URL}/admin/updateTopProperty`, payload);
+const orderlist = (payload) =>
+  put(`${BASE_URL}/admin/listProperty`, payload);
 const GETALLUSERSBYLIMIT = (payload) =>
   post(`${BASE_URL}/admin/getAllUsersPage`, payload);
 const getuserdetails = (payload) =>
@@ -98,7 +103,9 @@ const getUnInterest = (payload) => put(`${BASE_URL}/intrested/removeInterest`, p
 export {
   userRegisteration,
   getinterestbyId,
+  allFacilatorsList,
   getUnInterest,
+  allPromotorsList,
   getInterest,
   IntrestedByPropertyId,
   buyerRegister,
@@ -126,6 +133,7 @@ export {
   allPropertiesList,
   removeUser,
   updateTopProperty,
+  orderlist,
   removeBuyer,
   removeProperty,
   getPropertybyUserId,

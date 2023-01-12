@@ -89,10 +89,10 @@ const RequestedModel = ({ show, onCloseClick }) => {
       role="dialog"
       aria-modal="true"
     >
-      <div className="fixed inset-0  bg-gray-500 bg-opacity-75 transition-opacity ">
+      <div className="fixed inset-0  bg-gray-500 bg-opacity-75 transition-opacity  ">
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex mt-32 items-end justify-center p-4 text-center sm:items-center sm:p-0 ">
-            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-md">
+          <div className="flex mt-5 items-end justify-center p-4 text-center sm:items-center sm:p-0 ">
+            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-lg">
               <div className="bg-white px-4  p-6 pb-4 md:w-full ">
                 <div className="flex justify-between ">
                   <div>
@@ -141,7 +141,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
                       validation.handleSubmit();
                     }}
                   >
-                    <div>
+                    <div className="grid gap-4">
                       <div>
                         <label
                           name="location"
@@ -152,7 +152,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
                         <input
                           type="text"
                           name="location"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="Enter Location"
                           onChange={validation.handleChange}
                         />
@@ -161,7 +161,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
                       <div>
                         <label
                           name="propertyType"
-                          className=" flex justify-start  mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          className=" flex justify-start  mb-2 text-sm font-medium dark:text-white"
                         >
                           PropertyType
                         </label>
@@ -169,7 +169,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
                           id="propertyType"
                           name="propertyType"
                           label="propertyType"
-                          className="bg-gray-50 border border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          className="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           value={validation.values.propertyType}
                           onChange={validation.handleChange || ""}
                           invalid={

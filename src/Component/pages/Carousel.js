@@ -51,14 +51,14 @@ export const Carousel = () => {
 
       <div className="flex  justify-end ">
         <div className="absolute">
-          <div className="flex  justify-end pr-24 "></div>
+          
 
-          <div className=" flex justify-center  hover:free  pt-3 leading-relaxed pr-20">
+          <div className=" flex md:ustify-center  hover:free  pt-3 leading-relaxed md:pr-20 animate-pulse md:animate-none">
           {currentUser? ( <button
-              className="bg-white rounded-lg px-4 py-2"
+              className="md:bg-white rounded-lg px-4 py-2 bg-transparent"
               onClick={() => setModalOpen(true)}
             >
-              <div className="flex items-center text-center text-orange-500">
+              <div className="flex md:items-center md:text-center text-orange-500">
                 <svg
                   className=" h-8 w-8 "
                   fill="#383838"

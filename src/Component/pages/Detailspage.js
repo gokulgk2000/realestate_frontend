@@ -171,10 +171,10 @@ const Detailspage = () => {
           )}
           <div className="bg-slate-100 md:pl-32 md:pr-24">
             <Breadcrumbs className="md:px-0 px-2">
-              <Link to="/">
+              <Link to="/" className="pr-1">
                 <button className="opacity-60 font underline">Home</button>
               </Link>
-              <Link to="/Detailspage">
+              <Link to="/Detailspage "className="pl-1">
                 <button className="text-orange-500 font underline">
                   Property Details
                 </button>

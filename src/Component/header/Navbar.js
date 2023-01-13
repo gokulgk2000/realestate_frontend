@@ -56,6 +56,7 @@ function Navbar() {
   useEffect(() => {
     getUserName();
   }, [userFromStorage]);
+  
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
   //     id,
@@ -80,33 +81,13 @@ function Navbar() {
     navigate("/");
   };
 
-  const navigateToProfile = (e) => {
-    e.preventDefault();
-    navigate(`/ProfileUpdate`);
-  };
-  const naviagteToLogin = (e) => {
-    e.preventDefault();
-    navigate(`/login`);
-  };
+  
+  
 
-  // const navigateToProperty = (e) => {
-  //   e.preventDefault();
-  //   navigate(`/property?search=${searchText}`);
-  // };
 
-  const navigateToUserActivities = (e) => {
-    // e.preventDefault();
-    navigate(`/UserActivties?`);
-  };
 
-  const navigateToInterested = (e) => {
-    e.preventDefault();
-    navigate(`/request`);
-  };
-  const navigateToYourActivities = (e) => {
-    // e.preventDefault();
-    navigate(`/yourProperties?`);
-  };
+ 
+ 
 
   const handlepay = async () => {
     console.log(user, "user");
@@ -122,6 +103,7 @@ function Navbar() {
     }
     navigate(`/payment?id=${user?._id}&email=${user?.email}`);
   };
+  
 
   const activeClass =
     "border-b-2  text-white border-orange-500 hover:text-white font";
@@ -241,13 +223,13 @@ function Navbar() {
                   <div className="pt-">
                     <Mobilenav />
                   </div>
-                  {/* <div>
+                  <div className="pl-3">
                     {" "}
                     <Link to="/">
                       {" "}
-                      <img className="h-16 w-16" src={Logo}></img>
+                      <img className="h-8" src={Yo}></img>
                     </Link>
-                  </div> */}
+                  </div>
                 </div>
               )}
               {/* <Search/> */}
@@ -283,18 +265,18 @@ function Navbar() {
                             rule="true"
                           />
                         </div>
-                        <ul className="absolute   bg-white rounded-tr-3xl  rounded-bl-3xl pl-2  opcity-80 hidden  group-hover:block group-hover:right-2 group-hover:shadow-md ">
-                          <div>
-                            <div className="flex   ">
+                        <ul className="absolute w-52  bg-white rounded-tl-3xl  rounded-br-3xl pl-2  opcity-80 hidden  group-hover:block group-hover:right-0.5 group-hover:shadow-md ">
+                          <Link  to="/ProfileUpdate">
+                            <div className="flex "  >
                               {" "}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                strokeWidth="1.5"
+                                strokeWidth="2"
                                 stroke="currentColor"
-                                className="w-6 h-6 pt-2 text-teal-700"
-                                onClick={navigateToProfile}
+                                className="w-6 h-6 pt-2 text-[#082266]"
+                           
                               >
                                 <path
                                   strokeLinecap="round"
@@ -303,14 +285,14 @@ function Navbar() {
                                 />
                               </svg>
                               <button
-                                className="  text-start font nav-txt p-1  hover:shadow-none rounded shadow-sm"
-                                onClick={navigateToProfile}
+                                className="  text-start font hover:text-orange-500 p-1  hover:shadow-none rounded shadow-sm"
+                              
                               >
                                 Profile
                               </button>
                             </div>
-                          </div>
-                          <div className="flex  border-t-0 border-black  ">
+                          </Link>
+                          <Link className="flex  border-t-0 border-black  " to="/yourProperties?">
                             {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -318,8 +300,8 @@ function Navbar() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              onClick={(e) => navigateToYourActivities(e)}
-                              className="w-6 h-6 pt-2  text-teal-700 "
+                           
+                              className="w-6 h-6 pt-2  text-[#082266] "
                             >
                               <path
                                 strokeLinecap="round"
@@ -328,14 +310,14 @@ function Navbar() {
                               />
                             </svg>
                             <button
-                              className=" text-start  p-1 font  nav-txt  hover:shadow-none rounded shadow-sm"
-                              onClick={(e) => navigateToYourActivities(e)}
+                              className=" text-start  p-1 font  hover:text-orange-500   hover:shadow-none rounded shadow-sm"
+                           
                             >
                               Manage properties
                             </button>
-                          </div>{" "}
-                          <div></div>
-                          <div>
+                          </Link>{" "}
+                          
+                          {/* <div>
                             <div className="flex  border-t-0 border-black  ">
                               {" "}
                               <svg
@@ -366,8 +348,8 @@ function Navbar() {
                                 Payment
                               </button>
                             </div>{" "}
-                          </div>
-                          <div className="flex  border-t-0 border-black  ">
+                          </div> */}
+                          <button className="flex  border-t-0 border-black  "   onClick={AuthLogout}>
                             {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -375,7 +357,7 @@ function Navbar() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="w-6 h-6 pt-2 text-teal-700"
+                              className="w-6 h-6 pt-2 text-[#082266]"
                               onClick={AuthLogout}
                             >
                               <path
@@ -385,12 +367,12 @@ function Navbar() {
                               />
                             </svg>
                             <button
-                              className=" text-start  p-1  font nav-txt  hover:shadow-none rounded shadow-sm"
+                              className=" text-start  p-1  font hover:text-orange-500  hover:shadow-none rounded shadow-sm"
                               onClick={AuthLogout}
                             >
                               Logout
                             </button>
-                          </div>
+                          </button>
                         </ul>
                       </div>
                     </div>
@@ -398,7 +380,7 @@ function Navbar() {
                 ) : (
                   <button
                     type="button"
-                    className="inline-block px-6 py-2 bg-white text-[#a48641] font-semibold text-md leading-snug uppercase rounded-lg shadow-md tracking-wide hover:bg-black  hover:text-white hover:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block px-6 py-2 hover:bg-white hover:text-orange-500 font-semibold text-md leading-snug uppercase rounded-lg shadow-md tracking-wide border-2 border-orange-500  hover:border-white text-white hover:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
                   >
                     <Link to="/login">Login</Link>
                   </button>

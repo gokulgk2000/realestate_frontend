@@ -51,16 +51,16 @@ const GalleryModel = ({ onCloseClick }) => {
     role="dialog"
     aria-modal="true"'
     >
-      <div className=" inset-0 bg-slate-100 bg-opacity-100 transition-opacity md:pl-32  md:pr-24 md:py-32 md:fixed md:z-10 sm:static px-5 ">
+      <div className=" inset-0 bg-slate-100 bg-opacity-100 transition-opacity md:pl-32  md:pr-24 md:py-28 md:fixed md:z-10 sm:static px-5 ">
         <div className=" flex justify-between pr-3 ">
           {" "}
-          <div className="flex justify-between  pl- ">
-          <svg viewBox="0 0 312 511.42 " className="h-6 w-6 hidden md:block cursor-pointer" onClick={onCloseClick}>
+          <div className="flex justify-between  pb-3">
+          <svg viewBox="0 0 312 511.42 " className="h-5 w-5 hidden md:block cursor-pointer" onClick={onCloseClick}>
                 <path
                   fill-rule="nonzero"
                   d="M306.3 32.62 65.46 252.86 312 478.8l-29.84 32.62L0 252.83 276.46 0z"
                 />
-              </svg>{" "}  <span className="text-md pt-0 font text-gray-600 capitalize">
+              </svg>{" "}  <span className="text-md  font text-gray-600 capitalize pl-3">
              
               {property?.bedRoom}BHK {property?.title} For sale{" "}
             </span>{" "}

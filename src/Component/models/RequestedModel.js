@@ -92,7 +92,7 @@ const RequestedModel = ({ show, onCloseClick }) => {
       <div className="fixed inset-0  bg-gray-500 bg-opacity-75 transition-opacity  ">
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex mt-5 items-end justify-center p-4 text-center sm:items-center sm:p-0 ">
-            <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-lg">
+            <div className="relative transform overflow-hidden rounded-lg mt-20 bg-white text-left shadow-xl transition-all w-full max-w-lg">
               <div className="bg-white px-4  p-6 pb-4 md:w-full ">
                 <div className="flex justify-between ">
                   <div>
@@ -266,14 +266,14 @@ const RequestedModel = ({ show, onCloseClick }) => {
                       <div className=" flex justify-between mt-4">
                         <button
                           type="button"
-                          className=" px-6 py-2.5  text-red-400 border border-red-600  font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-600 hover:text-white hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className=" px-6 py-2.5  border border-red-600  font-medium text-xs leading-tight uppercase rounded shadow-md bg-red-600 text-white hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                           onClick={onCloseClick}
                         >
                           Close
                         </button>
                         <button
                           type="submit"
-                          className=" inline-block px-6 py-2.5 text-blue-800   border border-blue-600 hover:bg-blue-600 hover:text-white font-medium text-xs leading-tight uppercase rounded shadow-md  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className=" inline-block px-6 py-2.5   border border-blue-600 bg-[#082266] text-white font-medium text-xs leading-tight uppercase rounded shadow-md  hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                           onClick={requested}
                         >
                           Submit

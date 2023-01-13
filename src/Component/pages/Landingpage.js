@@ -113,10 +113,10 @@ const Landingpage = () => {
   };
 
   return (
-    <div className=" md:pl-32 md:pr-24">
-      <div className="font pt-3">
+    <div className="">
+      <div className="font ">
         <Carousel />
-        <div className="  items-center md:-mt-14  ">
+        <div className="  items-center md:-mt-14   ">
           <div className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-100">
             <div className="flex rounded-full md:shadow-lg md:border-0 ">
               {" "}
@@ -244,7 +244,7 @@ const Landingpage = () => {
               )}
             </div>
           </div>
-        </div>
+        </div><div className="md:pl-32 md:pr-24">
         {isLoading ? (
           <div className="text-center p-5  flex justify-center ">
             <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">
@@ -264,7 +264,7 @@ const Landingpage = () => {
           <TopProperties found={found} />
           <div className="flex justify-center py-2"></div>
         </div>
-
+        </div>
         {/* <Category /> */}
       </div>
     </div>

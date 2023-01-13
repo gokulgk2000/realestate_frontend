@@ -126,7 +126,7 @@ export const Carousel = () => {
         //   className="w-full aspect-[2/1] h-96 object-cover" 
         //   src={image[selectImage]}
         // />
-        <div><img src={Do} className="aspect-[] h-96 w-screen object-cover " /></div>
+        <div><img src={Do} className="aspect-[] h-96 w-screen object-cover img-size" /></div>
       ) : (
         // <img
         //   className="w-full  "

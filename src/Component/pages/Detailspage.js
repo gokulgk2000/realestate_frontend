@@ -478,7 +478,7 @@ const Detailspage = () => {
                             </span>
                           </div>
 
-                          <button className="font hover:text-white py-1   rounded-lg hover:bg-red-700 w-52 border-2 hover:border-gray-400 border-gray-600">
+                          <button className="font hover:text-white py-1   rounded-lg hover:bg-red-700 w-56 border-2 hover:border-gray-400 border-gray-600">
                             <div className="flex">
                               <span className="pr-2 pl-1">
                                 <svg id="Layer_1" className="h-5 w-5" viewBox="0 0 122.88 118.72">

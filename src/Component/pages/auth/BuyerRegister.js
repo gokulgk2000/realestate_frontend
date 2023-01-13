@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { buyerReg, buyerRegister, userRegisteration } from "../../helper/backend_helpers";
 import toastr from "toastr";
@@ -186,7 +186,7 @@ const BuyerRegister = () => {
                 {loading ?(
                 <button
                   type="submit"
-                  className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-7 py-3 font text-black  shadow-xl    hover:shadow-md">
+                  className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-7 py-3 font text-[#f2a32b] shadow-xl    hover:shadow-md">
            
                   Register
                 </button>
@@ -194,7 +194,7 @@ const BuyerRegister = () => {
 
                 <button 
                 type="button"
-                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  px-7 py-3 font text-black  shadow-xl    hover:shadow-md">
+                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  px-7 py-3 font text-[#f2a32b] shadow-xl    hover:shadow-md">
               
                    Registering...
           
@@ -202,12 +202,12 @@ const BuyerRegister = () => {
                 )}
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0 ">
                   You have an account?
-                  <a
-                    href="/login"
+                  <Link
+                    to="/login"
                     className="border-[#f2a32b] hover:text-[#f2a32b]  text-blue-900  transition duration-200 ease-in-out ml-2"
                   >
                     Login Here
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>

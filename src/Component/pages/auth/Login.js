@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from "yup"
 
 import { userLogin } from '../../helper/backend_helpers'
@@ -188,7 +188,7 @@ const Login = () => {
               {loading ?(
                  <button 
                 type="button"
-                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white uppercase px-6 py-2 font text-black  shadow-xl    hover:shadow-md">
+                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white uppercase px-6 py-2 font text-[#f2a32b]  shadow-xl    hover:shadow-md">
                
                   Login...          
                    </button>
@@ -196,7 +196,7 @@ const Login = () => {
                  
                 <button
                   type="submit"
-                  className="border-2 rounded-md  border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white uppercase px-6 py-2 font text-black  shadow-xl hover:shadow-md">
+                  className="border-2 rounded-md  border-[#f2a32b] hover:bg-[#f2a32b] text-[#f2a32b] hover:text-white uppercase px-6 py-2 font   shadow-xl hover:shadow-md">
               
                   Login
                 </button>
@@ -204,10 +204,10 @@ const Login = () => {
                 )}
               <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                 Don't have an account?
-                <a
-                  href="/selecteduser"
-                  className="border-[#f2a32b] hover:text-[#f2a32b] text-blue-900 transition duration-200 ease-in-out ml-2"
-                  >Sign Up</a>
+                <Link
+                  to="/selecteduser"
+                  className="border-[#f2a32b] hover:text-[#f2a32b]  text-blue-900 transition duration-200 ease-in-out ml-2"
+                  >Sign Up</Link>
                
               </p>
             </div>

@@ -14,12 +14,12 @@ const SelectedUser = () => {
             </div>
             <div className="flex justify-center mt-10 pr-16 gap-6">
               <Link to={"/buyerregister"}>
-                <button className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-5 py-2 font text-black  shadow-xl   hover:shadow-md">
+                <button className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-5 py-2 font text-[#f2a32b]  shadow-xl   hover:shadow-md">
                   Buyer
                 </button>
               </Link>
               <Link to={"/sellerregister"}>
-                <button className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-5 py-2 font text-black  shadow-xl  hover:shadow-md">
+                <button className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-5 py-2 font text-[#f2a32b] shadow-xl  hover:shadow-md">
                   Seller
                 </button>
               </Link>

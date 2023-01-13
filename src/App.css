@@ -17,6 +17,7 @@
 .font1 {
   font-family: "Rubik", serif;
   font-size: medium;
+
 }
 .grad1 {
   background-image: linear-gradient(
@@ -202,3 +203,7 @@
 .overflow-css{
 
   overflow-wrap: anywhere;}
+.primary{
+   background-color: #082266;
+}
+

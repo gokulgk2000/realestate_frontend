@@ -34,7 +34,7 @@ const RegisterProperty = () => {
     { value: "southWest", text: "South West " },
     { value: "northEast", text: "NorthEast " },
     { value: "northWest", text: "NorthWest " },
-    { value: "allfacing", text: "Allfacing" },
+    { value: "allfacing", text: "All Facing" },
   ];
   const floorDetails = [
     { value: "", text: "Select Your Floor Details  " },
@@ -64,8 +64,8 @@ const RegisterProperty = () => {
     { value: "gatedCommunity,", text: "Gated Community " },
     { value: "security,", text: "Security " },
     { value: "swimmingfool,", text: "Swimming Fool " },
-    { value: "indoorgames,", text: " indoorgames " },
-    { value: "outdoorgames,", text: "outdoorgames " },
+    { value: "indoorgames,", text: " Indoor Games " },
+    { value: "outdoorgames,", text: "Outdoor Games " },
     { value: "walkingTrack,", text: "Walking Track " },
     { value: "park,", text: "Park " },
     { value: "cctv,", text: "CCTV Monitoring 24*7 " },
@@ -817,7 +817,7 @@ const RegisterProperty = () => {
                   id="floorDetails"
                   name="floorDetails"
                   label="Floor Details"
-                  className="block py-2 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2  hover:shadow-2xl
+                  className="block py-2 px-1 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2  hover:shadow-2xl
                   hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
                   value={validation.values.floorDetails}
                   onChange={validation.handleChange || ""}

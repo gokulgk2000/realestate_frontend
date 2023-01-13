@@ -26,14 +26,15 @@ const RegisterProperty = () => {
   ];
   const facing = [
     { value: "", text: "Select Facing " },
-    { value: "east", text: "east " },
-    { value: "west", text: "west " },
-    { value: "south", text: "south " },
-    { value: "north", text: "north " },
-    { value: "southEast", text: "southEast " },
-    { value: "southWest", text: "southWest " },
-    { value: "northEast", text: "northEast " },
-    { value: "northWest", text: "northWest " },
+    { value: "east", text: "East " },
+    { value: "west", text: "West " },
+    { value: "south", text: "South " },
+    { value: "north", text: "North " },
+    { value: "southEast", text: "South East " },
+    { value: "southWest", text: "South West " },
+    { value: "northEast", text: "NorthEast " },
+    { value: "northWest", text: "NorthWest " },
+    { value: "allfacing", text: "Allfacing" },
   ];
   const floorDetails = [
     { value: "", text: "Select Your Floor Details  " },
@@ -63,9 +64,12 @@ const RegisterProperty = () => {
     { value: "gatedCommunity,", text: "Gated Community " },
     { value: "security,", text: "Security " },
     { value: "swimmingfool,", text: "Swimming Fool " },
+    { value: "indoorgames,", text: " indoorgames " },
+    { value: "outdoorgames,", text: "outdoorgames " },
     { value: "walkingTrack,", text: "Walking Track " },
     { value: "park,", text: "Park " },
     { value: "cctv,", text: "CCTV Monitoring 24*7 " },
+   
   ];
   const [allcategory, setAllCategory] = useState([]);
   const [propertyPic, setPropertyPic] = useState([]);
@@ -205,7 +209,6 @@ const RegisterProperty = () => {
   }, []);
   const handleImageUpload = async (e) => {
     const target = e.target;
-    // console.log("images length : ",)
     if ([...target.files]?.length > 5)  {
       alert("'Property Images Limit is 5 ' ");
     } else if ([...target.files]?.length < 2)  {
@@ -256,13 +259,11 @@ const RegisterProperty = () => {
   };
   // const handleFacilitiesChange = (event) => {
   //   const {checked,value,name} = event.target
-  //   console.log("cb", checked,value,name);
   //   setAllFacilities(event.target.value);
   // };
   const handleFacilitiesChange = (event) => {
     const value = event.target.value;
     const isChecked = event.target.checked;
-    // console.log("value",isChecked,)
 
     if (isChecked) {
       //Add checked item into checkList
@@ -328,7 +329,7 @@ const RegisterProperty = () => {
               id="aboutProperty"
               name="aboutProperty"
               label="aboutProperty"
-              className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              className="block py-1 px-1 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
               hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.aboutProperty || ""}
               onChange={validation.handleChange}
@@ -358,7 +359,7 @@ const RegisterProperty = () => {
               id="category"
               name="category"
               label="category"
-              className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              className="block capitalize py-1 px-1 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
               hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.category || ""}
               onChange={validation.handleChange}
@@ -516,7 +517,7 @@ const RegisterProperty = () => {
           <div>
             <Input
               label="Market Price"
-               type="number"
+               type="text"
                min="0"
               name="negotiablePrice"
               placeholder="₹. Enter The Price"
@@ -544,7 +545,7 @@ const RegisterProperty = () => {
               id="Seller"
               name="Seller"
               label="Owner"
-              className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+              className="block py-1 px-1 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
               hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
               value={validation.values.Seller}
               onChange={validation.handleChange || ""}
@@ -588,10 +589,8 @@ const RegisterProperty = () => {
               </span>
             ) : null}
           </div>
-          <div           
->
+          <div>
           <p className="text-red-500 text-sm pb-5">(limit 5 pictures only)</p>
-
             <FileInput
               label=" *Property Images"
               multiple={true}
@@ -687,12 +686,12 @@ const RegisterProperty = () => {
           </div>
           {showFacing && (
             <div className="  grid-rows- font gap-2 mb-">
-              <div className="pb-1">Facing</div>
+              <div className="pb-1 ">Facing</div>
               <select
                 id="facing"
                 name="facing"
                 label="facing"
-                className="block py-2 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+                className="block py-2 px-1 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
                 hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
                 value={validation.values.facing}
                 onChange={validation.handleChange || ""}
@@ -789,7 +788,7 @@ const RegisterProperty = () => {
             <div>
               <Input
                 label="floor "
-                type="number"
+                type="text"
                 min="0"
                 name="floor"
                 placeholder="Enter The floor"
@@ -815,7 +814,7 @@ const RegisterProperty = () => {
                 <div className="pb-1">Floor Details</div>
 
                 <select
-                  id="facing"
+                  id="floorDetails"
                   name="floorDetails"
                   label="Floor Details"
                   className="block py-2 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2  hover:shadow-2xl

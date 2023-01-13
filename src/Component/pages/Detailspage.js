@@ -38,11 +38,11 @@ const Detailspage = () => {
   const [unInterest, setUnInterest] = useState([]);
   const [InterestSuccess, setInterestSuccess] = useState();
   const navigate = useNavigate();
- const navigateTologin = (e) =>{
-  e.preventDefault();
-  navigate(`/login`);
- }
- 
+  const navigateTologin = (e) => {
+    e.preventDefault();
+    navigate(`/login`);
+  };
+
   const propertyPicLength = property?.propertyPic?.length;
   const propertyDetails = async () => {
     const res = await getPropertyById({ propertyId: query.get("uid") });
@@ -66,7 +66,6 @@ const Detailspage = () => {
     } else setcurentImage(propertyPicLength - 1);
   };
   const found = interest?.find((i) => i?.propertyId?._id === property?._id);
-
 
   useEffect(() => {
     const handleProperty = async () => {
@@ -101,7 +100,7 @@ const Detailspage = () => {
       setInterestError(res.msg);
     }
   };
-  console.log(interest,"interest")
+  console.log(interest, "interest");
   const interested = async () => {
     setIsLoading(true);
     const payload = {
@@ -112,8 +111,7 @@ const Detailspage = () => {
     if (res) {
       await handleFetchInterested();
       setIsInterest(res?.intrested);
-      
-  
+
       toastr.success(`Your Interest Property Added  successfully`, "Success");
     } else {
       setInterestError(res.msg);
@@ -121,7 +119,6 @@ const Detailspage = () => {
     setIsLoading(false);
   };
   const getunInterest = async () => {
-
     setIsLoading(true);
     const payload = {
       interestPropertyID: found?._id,
@@ -137,10 +134,10 @@ const Detailspage = () => {
       );
     } else {
     }
-  
+
     setIsLoading(false);
   };
-  
+
   useEffect(() => {
     handleFetchInterested();
   }, []);
@@ -148,8 +145,12 @@ const Detailspage = () => {
   return (
     <div className="text-base">
       {loading ? (
-          <div className="text-center p-5  flex justify-center ">
-          <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">
+        <div className="text-center p-5  flex justify-center ">
+          <svg
+            viewBox="0 0 119.4 122.88 "
+            className="w-7 h-7 animate-spin"
+            fill="#deb11f"
+          >
             <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
           </svg>
         </div>
@@ -179,53 +180,72 @@ const Detailspage = () => {
                 </button>
               </Link>
             </Breadcrumbs>
-           
+
             <div className="px- pt- pb-10 s">
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
-                <div className="flex justify-end font-normal text-xs">
-                Posted on:{moment(property?.date).format("DD-MM-YYYY")}
-              </div>
+                  <div className="flex justify-end font-normal text-base pb-3">
+                    Posted on:{moment(property?.date).format("DD-MM-YYYY")}
+                  </div>
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     {currentUser && (
                       <div className="flex justify-between">
-                          <div className="flex font font-semibold pl-  text-xl">
-                      ₹. {property?.askPrice}
-                      
-                    </div>
-                    
+                        <div className="flex font font-semibold   text-xl">
+                          ₹. {property?.askPrice}
+                        </div>
+
                         {!found ? (
                           <button
                             onClick={interested}
                             className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                           >
-                       {IsLoading?(  <div className="text-center   animate-spin">
-            <svg viewBox="0 0 119.4 122.88 " className="w-3 h-3" fill="#deb11f">
-              <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
-            </svg>
-          </div>):(<div>Interested</div>)}     
+                            {IsLoading ? (
+                              <div className="text-center   animate-spin">
+                                <svg
+                                  viewBox="0 0 119.4 122.88 "
+                                  className="w-3 h-3"
+                                  fill="#deb11f"
+                                >
+                                  <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
+                                </svg>
+                              </div>
+                            ) : (
+                              <div>Interested</div>
+                            )}
                           </button>
                         ) : (
                           <button
-                            onClick={()=>getunInterest(property?._id) }
+                            onClick={() => getunInterest(property?._id)}
                             className="border-2 rounded-md border-amber-800 hover:text-white  px-2 font text-amber-800 py-2 shadow-xl   hover:bg-yellow-900 hover:shadow-md"
                           >
-                             {IsLoading?(  <div className="text-center   animate-spin">
-            <svg viewBox="0 0 119.4 122.88 " className="w-3 h-3" fill="#deb11f">
-              <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
-            </svg>
-          </div>):(<div>Uninterested</div>)}   
+                            {IsLoading ? (
+                              <div className="text-center   animate-spin">
+                                <svg
+                                  viewBox="0 0 119.4 122.88 "
+                                  className="w-3 h-3"
+                                  fill="#deb11f"
+                                >
+                                  <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
+                                </svg>
+                              </div>
+                            ) : (
+                              <div>Uninterested</div>
+                            )}
                           </button>
                         )}
                       </div>
-                    )}    <div className="md:flex grid rounded-xl yo  py-3 pl-3 ">
-                    <span className="font text-xl capitalize md:pl- underline ">
-                      {property?.location},{property?.streetName}
-                    </span>{" "}
-                    <span className="text-xl pl-5 font text-gray-600 capitalize ">
-                      {property?.title} {property?.bedRoom}BHK For sale{" "}
-                    </span>
-                  </div>
+                    )}{" "}
+                    <div className="md:flex grid rounded-xl yo  py-3 ">
+                      <span className="text-2xl pr-2 capitalize  font underline">
+                        {" "}
+                        {property?.location},{" "}
+                        <span className="text-xl">{property?.streetName}</span>
+                      </span>
+
+                      <span className="text-xl md:pl-5 font text-gray-600 capitalize pt-1">
+                        {property?.title} {property?.bedRoom}BHK For sale{" "}
+                      </span>
+                    </div>
                     {/* :
                     {!currentUser && (
                       <div className="flex justify-end">
@@ -234,10 +254,8 @@ const Detailspage = () => {
                         </button>
                       </div>
                     )} */}
-                  
-                
-                    <div className="grid md:grid-cols-5 gap-x- pt-3 ">
-                      <div className="col-span-2 ">
+                    <div className="grid md:grid-cols-5  gap-x- pt-3 ">
+                      <div className="md:col-span-2 col-span-5">
                         <div className="grid gap-y-1 p-">
                           <div className="grid">
                             <div className="absolute">
@@ -253,7 +271,7 @@ const Detailspage = () => {
                             </div>
 
                             <img
-                              className=" aspect-[3/2]  md:h-72 rounded-tr-md rounded-tl-md"
+                              className=" aspect-[3/2]  md:h-72 rounded-md"
                               src={`${SERVER_URL}/file/${property?.propertyPic[curentImage]?.id}`}
                             />
                           </div>
@@ -316,7 +334,7 @@ const Detailspage = () => {
                                     + {property?.propertyPic?.length}Photos{" "}
                                   </div>
                                   <img
-                                    className=" aspect-[3/2] h-20 rounded-bl-md  rounded-br-md"
+                                    className=" aspect-[3/2] h-20 rounded-md"
                                     src={`${SERVER_URL}/file/${property?.propertyPic[3]?.id}`}
                                   />
                                 </div>
@@ -325,7 +343,7 @@ const Detailspage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="md:col-span-3 grid md:pl-5 pt-5 md:pt-0">
+                      <div className="md:col-span-3 col-span-5 grid md:pl-5 pt-5 md:pt-0">
                         {(property?.category?.name === "residential" ||
                           property?.category?.name === "villa" ||
                           property?.category?.name === "appartment") && (
@@ -393,45 +411,44 @@ const Detailspage = () => {
                               </div>
                             </div>
                           )}
-                          <div className="">
-                            <div className="font text-gray-500 capitalize pb-1">
-                              Transaction Type{" "}
-                              <div className="text-black font capitalize" >
-                                {property?.transactionType}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="">
-                            {" "}
-                            <div className="font text-gray-500 pb-1">
-                              Area
-                              <div className="text-black font">
-                                {property?.builtArea}
-                                <div className="font text-gray-500 ">
-                                  {" "}
-                                  ₹.{property?.costSq}/sft
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                           {property?.category?.name !== "land" && (
                             <div className="">
                               {" "}
                               <div className="font text-gray-500 pb-1">
                                 Property Status
                                 <div className="text-black font capitalize">
+                                  {property?.transactionType}{" "}
                                   {property?.propertyStatus}
                                 </div>
                               </div>
                             </div>
                           )}
+
+                          <div className="">
+                            {" "}
+                            <div className="font text-gray-500 pb-1">
+                              cost/sq.ft
+                              <div className="text-black font">
+                                {" "}
+                                ₹.{property?.costSq}/sft
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="">
+                            <div className="font text-gray-500 pb-1">
+                              Land Area
+                              <div className="text-black font capitalize">
+                                {property?.landArea}
+                              </div>
+                            </div>
+                          </div>
                           {property?.category?.name !== "land" && (
                             <div className="">
                               <div className="font text-gray-500 pb-1">
-                                Floor Details
+                                Built Area
                                 <div className="text-black font capitalize">
-                                  {property?.floorDetails}
+                                  {property?.builtArea}
                                 </div>
                               </div>
                             </div>
@@ -442,8 +459,8 @@ const Detailspage = () => {
                           <hr />
                         </div>
                         <div className="grid capitalize md:pl-3 py-2  ">
-                          <div className="font  text-black py-3 flex yo px-2 rounded-lg">
-                            <span className="pr-1 ">
+                          <div className="font  text-black py-3 flex  px-2 rounded-lg">
+                            <span className="pr-2 ">
                               <svg
                                 viewBox="0 0 122.88 88.271"
                                 className="h-5 w-5 "
@@ -461,29 +478,22 @@ const Detailspage = () => {
                             </span>
                           </div>
 
-                          <button className="font text-red-500 py-3 flex oy rounded-lg w-52">
-                            <span className="pr-1">
-                              <svg
-                                viewBox="0 0 512 498.69"
-                                className="h-5 w-5 "
-                              >
-                                <path
-                                  fill-rule="nonzero"
-                                  d="M36.73 167.38c-.16-2.77.23-5.62 1.26-8.39 17.9-47.75 49.7-87.54 89.82-115.34C167.89 15.87 216.21 0 267.22 0c67.59 0 128.79 27.41 173.08 71.7 44.29 44.29 71.7 105.49 71.7 173.08 0 59.87-21.61 114.81-57.47 157.43-36.4 43.27-87.48 73.76-145.52 83.76-5.45.93-10.77-.37-15.02-3.25 6-11.45 9.57-24.65 9.41-37.66 47.75-8.56 89.72-33.74 119.66-69.33 29.7-35.32 47.61-81 47.61-130.95 0-56.18-22.78-107.05-59.59-143.86-36.81-36.81-87.68-59.59-143.86-59.59-42.53 0-82.74 13.17-116 36.22-31.13 21.57-56.22 51.79-71.51 87.93-14.23-2.28-29.04-1.95-42.98 1.9zm172.96 63.33v81.06h12.66c4.51 0 7.6-.55 9.26-1.64 1.67-1.1 2.5-3.6 2.5-7.52v-71.9h35.64v60.67c0 9.79-.65 17.68-1.96 23.67-1.31 5.99-3.74 11.06-7.31 15.21-3.56 4.15-8.43 7.03-14.61 8.64-6.18 1.61-14.2 2.42-24.06 2.42s-17.85-.81-23.97-2.42c-6.11-1.61-10.96-4.49-14.52-8.64-3.56-4.15-6-9.22-7.31-15.21-1.3-5.99-1.96-13.88-1.96-23.67v-60.67h35.64zm77.44 106.12 4.99-28.52c10.92 2.65 20.76 3.98 29.49 3.98 8.73 0 15.77-.35 21.12-1.04v-8.64l-16.04-1.38c-14.5-1.27-24.45-4.64-29.85-10.11-5.41-5.48-8.11-13.57-8.11-24.29 0-14.74 3.3-24.88 9.89-30.41 6.59-5.53 17.79-8.3 33.59-8.3 15.8 0 30.06 1.44 42.77 4.32l-4.45 27.65c-11.05-1.72-19.9-2.59-26.56-2.59-6.65 0-12.29.29-16.93.87v8.46l12.84 1.21c15.56 1.5 26.31 5.1 32.25 10.8 5.94 5.71 8.91 13.63 8.91 23.77 0 7.26-1.01 13.39-3.03 18.4-2.02 5.02-4.42 8.82-7.22 11.41-2.79 2.59-6.74 4.58-11.85 5.96-5.11 1.39-9.59 2.22-13.45 2.51-3.86.29-9 .43-15.42.43-15.44 0-29.76-1.5-42.94-4.49zm-69.39-157.22 1.5 16.79c-4.2 1.74-9.46 2.61-15.8 2.61-6.33 0-11.41-.67-15.25-2.01-3.83-1.33-6.85-3.42-9.05-6.29-2.19-2.87-3.73-6.24-4.6-10.1-.86-3.87-1.3-8.64-1.3-14.3 0-5.67.44-10.45 1.3-14.35.87-3.9 2.41-7.28 4.6-10.15 4.27-5.53 12.1-8.3 23.5-8.3 2.53 0 5.52.25 8.95.75 3.44.5 5.98 1.12 7.65 1.85l-3 15.3c-4.33-.93-8.3-1.4-11.9-1.4-3.6 0-6.1.33-7.5 1-1.4.67-2.1 2-2.1 4v26.2c2.6.53 5.24.8 7.9.8 5.67 0 10.7-.8 15.1-2.4zm26.4 17.9h-21.1l16.2-62.5h30.9l16.19 62.5h-21.09l-2.3-9.9h-16.5l-2.3 9.9zm8.02-43.3-3.7 17.5h12.36l-3.61-17.5h-5.05zm80.97 43.3h-39.99v-62.5h19.99v46.5h20v16zm48.5 0h-40v-62.5h20v46.5h20v16zM75.95 321.96c7.32 16.75 16.05 33.02 27.72 48.37 12.68 16.73 29 32.47 50.82 46.77 4.13 2.62 8.68-.75 11.91-3.35 1.89-1.53 4.31-4.02 6.88-6.77 10.14-10.72 22.7-24.01 37.43-15.08.32.19.57.41.89.6l48.52 35.39c.15.1.31.3.46.4 6.32 5.43 8.34 12.99 7.52 21.18-2.24 20.63-18.43 37.82-37.64 44.14-10.12 3.38-21.11 4.61-31.59 5-16.45.63-31.46-2.54-46.45-9-14.66-6.35-29.09-15.75-44.66-27.88l-1.15-.92c-7.15-5.61-14.86-11.63-22.31-18.54-27.3-25.68-54.03-61.36-69.87-99.14-13.29-31.71-18.8-65-10.52-95.25 4.57-16.58 13.48-31.15 27.2-39.91 11.97-7.68 27.32-10.92 46.32-7.13 2.19.4 4.02 1.9 4.84 3.9l27.07 59.7c4.17 6.82 4.1 13.11.77 19.07-2.76 4.88-7.71 9.09-14.25 12.84-1.95 1.33-4.25 2.64-6.65 4.03-5.93 3.39-12.47 7.17-14.61 12.02-1.72 3.89-.2 6.01 1.35 9.56z"
-                                />
-                              </svg>
-                            </span>
-                            Contact-
-                            <span className="text-black font ">
-                              {property?.phone}
-                            </span>
+                          <button className="font hover:text-white py-1   rounded-lg hover:bg-red-700 w-52 border-2 hover:border-gray-400 border-gray-600">
+                            <div className="flex">
+                              <span className="pr-2 pl-1">
+                                <svg id="Layer_1" className="h-5 w-5" viewBox="0 0 122.88 118.72">
+                                  <path d="M29.22,56.54c3.57,6.43,7.67,12.6,13.02,18.24C47.58,80.45,54.24,85.6,62.86,90c0.64,0.31,1.25,0.31,1.78,0.1 c0.82-0.31,1.66-0.99,2.48-1.81c0.64-0.64,1.43-1.66,2.26-2.77c3.31-4.36,7.42-9.77,13.21-7.07c0.13,0.06,0.23,0.13,0.35,0.19 l19.33,11.11c0.06,0.03,0.13,0.1,0.19,0.13c2.55,1.75,3.6,4.46,3.63,7.52c0,3.12-1.15,6.63-2.83,9.58 c-2.22,3.91-5.51,6.5-9.29,8.21c-3.6,1.66-7.61,2.55-11.46,3.12c-6.05,0.89-11.71,0.32-17.5-1.46c-5.67-1.75-11.37-4.65-17.6-8.5 l-0.46-0.29c-2.86-1.78-5.95-3.7-8.98-5.95c-11.1-8.38-22.4-20.47-29.76-33.78C2.03,57.15-1.34,45.09,0.5,33.59 c1.02-6.3,3.72-12.03,8.44-15.82c4.11-3.31,9.64-5.13,16.81-4.49c0.82,0.06,1.56,0.54,1.94,1.24l12.39,20.94 c1.81,2.35,2.04,4.68,1.05,7.01c-0.82,1.91-2.48,3.67-4.74,5.31c-0.67,0.57-1.46,1.15-2.29,1.75c-2.77,2.01-5.92,4.33-4.84,7.07 L29.22,56.54L29.22,56.54L29.22,56.54z M73.35,7.55c-0.51-0.04-0.99-0.18-1.42-0.4c-0.45-0.23-0.84-0.54-1.16-0.91 c-0.32-0.38-0.57-0.81-0.73-1.29C69.9,4.49,69.84,4,69.88,3.49l0.01-0.07c0.04-0.49,0.18-0.95,0.39-1.36l0.04-0.07 c0.22-0.42,0.52-0.79,0.87-1.08c0.37-0.32,0.81-0.57,1.29-0.73c0.45-0.15,0.93-0.21,1.42-0.18l0.1,0.01 c3.43,0.27,6.74,0.79,9.92,1.55c3.21,0.77,6.27,1.8,9.16,3.05c2.91,1.27,5.65,2.78,8.2,4.52c2.54,1.74,4.91,3.71,7.06,5.9 c2.13,2.17,4.06,4.56,5.77,7.15c1.69,2.57,3.16,5.34,4.4,8.28c1.2,2.88,2.18,5.94,2.92,9.18c0.72,3.17,1.21,6.5,1.45,9.98 l0.01,0.17l0,0.18c0,0.46-0.08,0.91-0.23,1.33c-0.16,0.45-0.4,0.85-0.71,1.2c-0.31,0.35-0.68,0.64-1.1,0.86 c-0.39,0.21-0.84,0.34-1.31,0.4l-0.2,0.02l-0.19,0c-0.47,0.01-0.92-0.07-1.34-0.23c-0.44-0.16-0.85-0.4-1.2-0.71 c-0.37-0.32-0.68-0.72-0.9-1.17c-0.21-0.43-0.35-0.92-0.38-1.42c-0.21-3.09-0.63-6.03-1.26-8.8c-0.63-2.83-1.48-5.5-2.52-8.01 c-1.04-2.52-2.29-4.88-3.72-7.06c-1.45-2.21-3.08-4.23-4.88-6.07c-1.82-1.85-3.81-3.51-5.97-4.98c-2.17-1.48-4.51-2.76-7.01-3.84 l-0.04-0.02c-2.48-1.07-5.11-1.95-7.88-2.61C79.29,8.23,76.39,7.78,73.35,7.55L73.35,7.55z M65.03,43.21 c-0.51-0.05-0.99-0.21-1.41-0.43c-0.44-0.24-0.83-0.56-1.13-0.94c-0.29-0.36-0.52-0.78-0.67-1.23c-0.14-0.42-0.2-0.87-0.18-1.33 c0.01-0.13,0.01-0.23,0.03-0.35c0.07-0.48,0.23-0.93,0.45-1.32c0.23-0.41,0.54-0.77,0.9-1.06c0.36-0.29,0.78-0.52,1.23-0.67 c0.42-0.13,0.87-0.2,1.34-0.18l0.35,0.03c1.49,0.16,2.92,0.42,4.3,0.77c1.4,0.36,2.73,0.82,3.98,1.36l0.04,0.02 c1.27,0.56,2.46,1.21,3.57,1.96c1.12,0.76,2.16,1.61,3.12,2.57c0.95,0.95,1.81,1.98,2.57,3.1c0.76,1.11,1.42,2.3,1.99,3.58 c0.55,1.25,1.01,2.58,1.37,3.98c0.35,1.37,0.6,2.83,0.76,4.37c0.05,0.51,0,1.01-0.13,1.47l-0.01,0.04 c-0.14,0.46-0.38,0.89-0.67,1.26l-0.01,0.02c-0.31,0.38-0.69,0.69-1.13,0.93c-0.42,0.23-0.9,0.38-1.41,0.43l-0.05,0 c-0.49,0.04-0.97-0.01-1.42-0.14c-0.48-0.14-0.92-0.38-1.3-0.69l-0.01,0c-0.38-0.31-0.7-0.69-0.94-1.14 c-0.23-0.42-0.38-0.9-0.43-1.4l0-0.04c-0.11-1.09-0.29-2.13-0.54-3.12c-0.25-1.01-0.57-1.95-0.95-2.82 c-0.38-0.87-0.82-1.68-1.32-2.42c-0.51-0.75-1.07-1.43-1.69-2.05c-0.62-0.62-1.31-1.18-2.06-1.68c-0.75-0.5-1.57-0.94-2.46-1.33 l-0.05-0.02c-0.87-0.38-1.81-0.69-2.8-0.94C67.22,43.51,66.15,43.33,65.03,43.21L65.03,43.21z M69.03,25.99l-0.1,0l-0.13-0.02 c-0.47-0.05-0.91-0.19-1.3-0.39c-0.42-0.22-0.79-0.51-1.1-0.85l0,0c-0.32-0.36-0.57-0.77-0.73-1.23c-0.15-0.43-0.23-0.89-0.22-1.38 l0-0.17l0.02-0.16c0.05-0.46,0.19-0.9,0.39-1.29c0.22-0.42,0.51-0.8,0.85-1.1c0.37-0.33,0.8-0.58,1.28-0.75 c0.46-0.16,0.95-0.23,1.46-0.2c2.66,0.16,5.19,0.5,7.58,1.01c2.4,0.51,4.67,1.2,6.78,2.06c2.13,0.87,4.12,1.92,5.96,3.14 c1.82,1.21,3.5,2.6,5.01,4.17c1.5,1.55,2.84,3.27,4,5.15c1.15,1.86,2.14,3.88,2.94,6.05c0.78,2.12,1.4,4.4,1.84,6.84 c0.43,2.4,0.69,4.93,0.77,7.62l0.01,0.14c0,0.48-0.09,0.95-0.27,1.38c-0.18,0.45-0.44,0.85-0.76,1.2c-0.33,0.36-0.74,0.65-1.2,0.85 c-0.43,0.2-0.92,0.31-1.43,0.33l-0.17,0c-0.48-0.01-0.93-0.1-1.35-0.27c-0.45-0.18-0.85-0.44-1.19-0.76 c-0.36-0.34-0.65-0.74-0.86-1.2c-0.2-0.44-0.31-0.92-0.33-1.44c-0.06-2.24-0.28-4.35-0.63-6.34c-0.35-2.01-0.85-3.88-1.47-5.6 c-0.62-1.72-1.38-3.3-2.26-4.75c-0.89-1.46-1.91-2.77-3.05-3.96c-1.16-1.19-2.44-2.26-3.85-3.19c-1.42-0.94-2.99-1.75-4.67-2.43 l-0.04-0.02c-1.7-0.67-3.52-1.22-5.47-1.63c-1.96-0.41-4.05-0.69-6.25-0.82L69.03,25.99L69.03,25.99z" />
+                                </svg>
+                              </span>
+                              Contact-
+                              <span className=" ">{property?.phone}</span>
+                            </div>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-               
               </div>
               <div className="grid  md:grid-cols-8 gap-2 pt-5">
                 <div className="md:col-span-6 border-3 border-black  ">
@@ -509,7 +519,7 @@ const Detailspage = () => {
                           <td className="  text-gray-500 text-md py-4">
                             Address
                           </td>
-                          <td className=" text-black py-2 capitalize font-medium flex">
+                          <td className=" text-black py-2 capitalize font-medium flex overflow-css">
                             {property?.layoutName},{property?.streetName},
                             {property?.location}
                           </td>
@@ -518,7 +528,7 @@ const Detailspage = () => {
                           <td className="  text-gray-500 text-md py-4">
                             Land Mark
                           </td>
-                          <td className=" text-black py-4 font-medium capitalize">
+                          <td className=" text-black py-4 font-medium capitalize overflow-css">
                             {property.nearFacilities}
                           </td>
                         </tr>
@@ -526,7 +536,7 @@ const Detailspage = () => {
                           <td className="  text-gray-500 text-md py-4">
                             Approach Road
                           </td>
-                          <td className=" text-black py-4 font-medium capitalize">
+                          <td className=" text-black py-4 font-medium capitalize overflow-css">
                             {property.approachRoad}
                           </td>
                         </tr>
@@ -534,12 +544,13 @@ const Detailspage = () => {
                           <td className="  text-gray-500 text-md py-4">
                             Facilities
                           </td>
-                          <td className=" text-black py-4 font-medium capitalize font">
+                          <td className=" text-black py-4 font-medium capitalize font overflow-css">
                             {property.facilities}
                           </td>
                         </tr>
                       </tbody>
                     </table>
+                    {/* mobile view                    */}
                     <div className="invisible">1</div>
                     <div className="col-span-11 grid md:grid-cols-11 font1 ">
                       <div className="md:col-span-2 text-gray-500 text-md md:hidden">
@@ -550,11 +561,11 @@ const Detailspage = () => {
                         {" "}
                         ₹.{property?.askPrice}
                       </div>
-                      <div className="md:col-span-2 text-gray-500 text-md md:hidden">
+                      <div className="md:col-span-2 text-gray-500 text-md md:hidden overflow-css">
                         {" "}
                         Address
                       </div>
-                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  md:pr-5 md:hidden">
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  md:pr-5 md:hidden overflow-css">
                         {" "}
                         {property?.layoutName},{property?.streetName},
                         {property?.location}
@@ -563,15 +574,15 @@ const Detailspage = () => {
                         {" "}
                         Land Mark
                       </div>
-                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden">
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden overflow-css">
                         {" "}
                         {property.nearFacilities}
                       </div>
-                      <div className="md:col-span-2 col-span-5 text-gray-500 text-md md:hidden ">
+                      <div className="md:col-span-2 col-span-5 text-gray-500 text-md md:hidden overflow-css">
                         {" "}
                         Approach Road
                       </div>
-                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden">
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden overflow-css">
                         {" "}
                         {property.approachRoad}
                       </div>
@@ -579,7 +590,7 @@ const Detailspage = () => {
                         {" "}
                         Facilities
                       </div>
-                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden">
+                      <div className="col-span-9 text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5 md:hidden overflow-css">
                         {" "}
                         {property.facilities}
                       </div>
@@ -588,14 +599,14 @@ const Detailspage = () => {
                         {" "}
                         Description
                       </div>
-                      <div className="col-span-9 text-black  md:pl-3 font-light text-sm capitalize md:py-3 pr-5  ">
+                      <div className="col-span-9 text-black  md:pl-3 font-light text-sm capitalize md:py-3 pr-5  overflow-css">
                         {" "}
                         {property.Description}
                       </div>
                     </div>
                   </div>
                 </div>
-               
+
                 <div></div>
               </div>
             </div>

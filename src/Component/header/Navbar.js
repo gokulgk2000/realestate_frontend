@@ -14,6 +14,8 @@ import Login from "../pages/auth/Login";
 import { Carousel } from "../pages/Carousel";
 import Yo from "../assets/images/re.png";
 import Logo from "../assets/logo/re.png";
+// import Logo from "../assets/logo/logo.png";
+
 import { useUser } from "../pages/contextProvider/UserProvider";
 const NavItem = [
   { name: "HOME", link: "/" },

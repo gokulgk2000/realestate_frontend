@@ -114,7 +114,7 @@ const Landingpage = () => {
 
   return (
     <div className=" md:pl-32 md:pr-24">
-      <div className="font pt-">
+      <div className="font pt-3">
         <Carousel />
         <div className="  items-center md:-mt-14  ">
           <div className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-100">

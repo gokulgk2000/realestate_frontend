@@ -76,8 +76,9 @@ const Mediators = () => {
               className=" nav-color px-6 py-2 -ml-1.5 font-semibold text-white rounded-tr-full rounded-br-full"
             >
               Search
-            </button>
-          </div>{facilatorsData?.length}
+            </button>          <div className="h-7 w-7 bg-amber-800 text-white rounded-full pl-2">{facilatorsData?.length}</div>
+
+          </div>
           <div className="grid md:grid-cols-4 gap-x-4 gap-y-3  ">
             {facilatorsData
               ?.filter(

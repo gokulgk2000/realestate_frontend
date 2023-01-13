@@ -54,7 +54,7 @@ const TopProperties = ({ found }) => {
 
   return (
     <div>
-      <div className="flex justify-center text-2xl py-8 uppercase">
+      <div className="flex justify-center text-2xl  uppercase">
         <svg className="h-6 w-6 pt-" viewBox="0 0 512 512">
           <polygon
             fill="#ffd759"

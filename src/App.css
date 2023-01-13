@@ -195,3 +195,10 @@
 
   box-shadow: 2px 2px 2px 5px  #b78d65 ;
 }
+.img-size{
+
+  height: 500px;
+}
+.overflow-css{
+
+  overflow-wrap: anywhere;}

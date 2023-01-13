@@ -5,11 +5,11 @@ const Footer = () => {
   return (
     <div>
       <div className="w-[100%] m-0 font-sans">
-        <footer className="text-center lg:text-left nav-color text-gray-900">
+        <footer className="text-center lg:text-left primary text-gray-900">
           <div className="flex justify-center items-center lg:justify-between px-5 border-b text-gray-900 border-gray-300 ">
             <div className="flex justify-center"></div>
           </div>
-          <div className="mx-6 py-10 text-left md:text-left pr-5 pl-20">
+          <div className="mx-6 py-10 text-left md:text-left pr-5 md:pl-28">
             <div className="grid grid-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-">
               <div className="">
                 <h6
@@ -21,6 +21,7 @@ const Footer = () => {
               flex
               items-center        
               md:text-left
+              primary-text
             "
                 >
                   <svg
@@ -47,8 +48,8 @@ const Footer = () => {
                   property that has been purchased.
                 </p>
               </div>
-              <div className="pl-20">
-                <h6 className="uppercase font-bold text-lg mb-4 flex text-gray-900 md:text-left">
+              <div className="md:pl-20">
+                <h6 className="uppercase font-bold text-lg mb-4 flex primary-text md:text-left">
                   Categories
                 </h6>
                 
@@ -81,7 +82,7 @@ const Footer = () => {
                 </p>
               </div>
               <div className="">
-                <h6 className="uppercase font-bold text-lg mb-4 flex text-gray-900 md:text-left">
+                <h6 className="uppercase font-bold text-lg mb-4 flex primary-text md:text-left">
                   Quick links
                 </h6>
                 <p className="mb-4">
@@ -105,8 +106,8 @@ const Footer = () => {
                   </Link>
                 </p>
               </div>
-              <div className="">
-                <h6 className="uppercase  mb-4 flex  md:text-left font-bold text-lg">
+              <div className="md:pr-24">
+                <h6 className="uppercase  mb-4 flex   primary-text md:text-left font-bold text-lg">
                   Contact
                 </h6>
                 <p className="flex items-center md:text-left mb-4 text-white">
@@ -191,9 +192,9 @@ const Footer = () => {
             
           </div>
           <div className="w-full font-medium text-center pt-3 pb-3 border-t border-t-white">
-            <span>© 2022 Copyright.</span>
+            <span className=" primary-text">© 2022 Copyright.</span>
             <Link
-              className="text-white font-semibold ml-1"
+              className=" primary-text font-semibold ml-1"
               to="https://tailwind-elements.com/"
             >
               RealEstate

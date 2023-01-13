@@ -96,7 +96,7 @@ const MediatorsDetails = () => {
             <button className="opacity-60 font p-1"> Mediators List</button>
           </Link>
           <Link to="/mediatorsDetails">
-            <button className="text-amber-700 font underline p-1">
+            <button className="primary-text font underline p-1">
               {" "}
               Mediators Details
             </button>

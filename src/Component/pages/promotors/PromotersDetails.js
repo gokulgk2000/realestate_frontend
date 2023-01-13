@@ -96,7 +96,7 @@ const PromotersDetails = () => {
             <button className="opacity-60 font p-1"> Promotors List</button>
           </Link>
           <Link to="/promotors">
-            <button className="text-amber-700 font underline p-1">
+            <button className="primary-text font underline p-1">
               {" "}
               Promotors Details
             </button>

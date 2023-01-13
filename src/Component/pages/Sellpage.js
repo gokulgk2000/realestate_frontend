@@ -285,7 +285,7 @@ const RegisterProperty = () => {
           return false;
         }}
       >
-        <h4 className="flex item-center justify-center font-semibold text-2xl pb-8 text-amber-700">
+        <h4 className="flex item-center justify-center font-semibold text-2xl pb-8 primary-text">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -905,7 +905,7 @@ const RegisterProperty = () => {
               ) : (
                 <button
                   type="submit"
-                  className="w-44 my-3 font bg-amber-700 hover:bg-amber-900 text-white font-light py-1 px-1 rounded mb-20"
+                  className="w-44 my-3 primary-text border border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white font-light py-1 px-1 rounded mb-20"
                 >
                   Submit
                 </button>

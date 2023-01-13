@@ -37,8 +37,9 @@ const Feedbackpage = () => {
     }
   };
   return (
-    <div className="grid justify-items-center py-5  px-2 font-serif">
+    <div className="grid font justify-items-center py-5  px-2 font-serif">
       <div className=" text-2xl">Your Feedback</div>
+      <div className=" text-xs text-blue-900 py-3">"Are you Intrested to about feedback"</div>
       <form
         className="w-full max-w-lg mt-5 "
         onSubmit={() => {
@@ -178,7 +179,7 @@ const Feedbackpage = () => {
         <div className="flex flex-wrap -mx-3 mb-2"></div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-semibold mb-2">
+            <label className=" font uppercase  text-lg  mb-2">
               Comment
             </label>
             <textarea
@@ -193,7 +194,7 @@ const Feedbackpage = () => {
         <div className="md:flex md:items-center">
           <div className="md:w-1/3">
             <button
-              className="w-32 h-10  font border-2 border-[#a48641] hover:bg-[#a48641] text-black hover:text-white font-light py-1 px-1 rounded mb-20"
+              className="w-32 h-10 font border-2 primary-text border-[#f2a32b] hover:bg-[#f2a32b]  text-black hover:text-white font-light py-1 px-1 rounded mb-20"
               type="submit"
             >
               Send

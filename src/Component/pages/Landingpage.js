@@ -116,7 +116,7 @@ const Landingpage = () => {
     <div className="">
       <div className="font ">
         <Carousel />
-        <div className="  items-center md:-mt-14   ">
+        <div className="  items-center md:-mt-14  ">
           <div className="md:flex justify-center grid grid-flow-row gap-y-1 py-2 opacity-100">
             <div className="flex rounded-full md:shadow-lg md:border-0 ">
               {" "}
@@ -230,21 +230,21 @@ const Landingpage = () => {
             <div className="hidden md:flex">
               {searchText ? (
                 <div className="flex md:shadow-lg rounded-lg">
-                  <button className="rounded-br-lg rounded-tr-lg bg-black px-8 text-white">
+                  <button className="rounded-br-lg rounded-tr-lg bg-orange-500 px-8 text-white">
                     Search
                   </button>
                 </div>
               ) : (
                 <div className="flex md:shadow-lg rounded-lg">
                   {" "}
-                  <button className="rounded-br-lg rounded-tr-lg bg-black px-8 text-white">
+                  <button className="rounded-br-lg rounded-tr-lg bg-orange-500 px-8 text-white">
                     Search
                   </button>
                 </div>
               )}
             </div>
           </div>
-        </div><div className="md:pl-32 md:pr-24">
+        </div><div className=" md:pl-32 md:pr-24">
         {isLoading ? (
           <div className="text-center p-5  flex justify-center ">
             <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">

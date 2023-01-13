@@ -206,4 +206,14 @@
 .primary{
    background-color: #082266;
 }
+.primary-text{
+ color:#f2a32b
+}
+.primary-button{
+  background-color:#f2a32b ;
+}
+.primary-boder{
+ border-color:#f2a32b ;
+ border-radius: 2px;
+}
 

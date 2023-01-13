@@ -73,7 +73,7 @@ const BuyerRegister = () => {
                 </span>
               )}
               <div className="flex flex-row items-center justify-center lg:justify-center">
-                <p className=" text-3xl text-black font-bold mb-0 mr-8">
+                <p className=" text-3xl text-[#f2a32b] font-bold mb-0 mr-8">
                 Sign Up
                 </p>
                 <button
@@ -186,7 +186,7 @@ const BuyerRegister = () => {
                 {loading ?(
                 <button
                   type="submit"
-                  className="border-2 rounded-md border-[#a48641] hover:text-white uppercase px-7 py-3 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
+                  className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  uppercase px-7 py-3 font text-black  shadow-xl    hover:shadow-md">
            
                   Register
                 </button>
@@ -194,7 +194,7 @@ const BuyerRegister = () => {
 
                 <button 
                 type="button"
-                className="border-2 rounded-md border-[#a48641] hover:text-white  px-7 py-3 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
+                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white  px-7 py-3 font text-black  shadow-xl    hover:shadow-md">
               
                    Registering...
           
@@ -204,7 +204,7 @@ const BuyerRegister = () => {
                   You have an account?
                   <a
                     href="/login"
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-2"
+                    className="border-[#f2a32b] hover:text-[#f2a32b]  text-blue-900  transition duration-200 ease-in-out ml-2"
                   >
                     Login Here
                   </a>

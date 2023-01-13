@@ -82,7 +82,7 @@ const Login = () => {
                           </alert>
                         )}
             <div className="flex flex-row items-center justify-center lg:justify-center">
-              <p className=" text-3xl text-red-500 font-bold mb-0 mr-8">Sign in </p>
+              <p className=" text-3xl text-[#f2a32b] font-bold mb-0 mr-8">Sign in </p>
               <button
                 type="button"
                 data-mdb-ripple="true"
@@ -188,7 +188,7 @@ const Login = () => {
               {loading ?(
                  <button 
                 type="button"
-                className="border-2 rounded-md border-[#a48641] hover:text-white uppercase px-6 py-2 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
+                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white uppercase px-6 py-2 font text-black  shadow-xl    hover:shadow-md">
                
                   Login...          
                    </button>
@@ -196,7 +196,7 @@ const Login = () => {
                  
                 <button
                   type="submit"
-                  className="border-2 rounded-md border-[#a48641] hover:text-white uppercase px-6 py-2 font text-black  shadow-xl   hover:bg-[#a48641] hover:shadow-md">
+                  className="border-2 rounded-md  border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white uppercase px-6 py-2 font text-black  shadow-xl hover:shadow-md">
               
                   Login
                 </button>
@@ -206,7 +206,7 @@ const Login = () => {
                 Don't have an account?
                 <a
                   href="/selecteduser"
-                  className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-2"
+                  className="border-[#f2a32b] hover:text-[#f2a32b] text-blue-900 transition duration-200 ease-in-out ml-2"
                   >Sign Up</a>
                
               </p>

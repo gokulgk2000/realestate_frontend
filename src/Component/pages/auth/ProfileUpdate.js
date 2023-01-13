@@ -82,10 +82,10 @@ const ProfileUpdate = () => {
   };
 
   return (
-    <div>
+    <div className="px-2">
      
-      <div className="md:py-20 md:pr-28 pl-32 bg-slate-100">
-        <div className="py-8 px-8 bg-white shadow mt-24">
+      <div className="md:py-20 md:pr-28 md:pl-32 bg-slate-100">
+        <div className="py-8 md:px-8 bg-white shadow mt-24">
           {" "}
           <div className="grid grid-cols-1 md:grid-cols-2">
             {" "}
@@ -164,7 +164,7 @@ const ProfileUpdate = () => {
           <div className="mt-12 flex  justify-center ">
             <button
               onClick={(e) => updateProfile(e)}
-              className="w-36 h-10 font uppercase text-amber-800   border border-amber-800 hover:bg-amber-800  hover:text-white font-light py-1 px-1 rounded mb-20"
+              className="w-36 h-10 font uppercase text-orange-500   border border-orange-500  hover:bg-orange-500  hover:text-white font-light py-1 px-1 rounded mb-20"
               >
               Update
             </button>

@@ -68,7 +68,7 @@ const Promotors = () => {
             </Link>
           </Breadcrumbs>
           <div className="flex justify-end pl-20 "> 
-              <p className="primary-text">Total Mediators :</p>
+              <p className="primary-text">Total Promotors :</p>
               <p  className="h-7 w-7 text-black rounded- pl-2">{promoterData?.length}</p> 
               </div>
           <div className="w-full flex justify-center items-center mt-2 pb-4 ">

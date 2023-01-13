@@ -7,7 +7,7 @@ import { userRegisteration } from "../../helper/backend_helpers";
 const SellerRegister = () => {
   const facilities = [
     { value: "promotors", text: "Promotors " },
-    { value: "facilator", text: "Facilator " },
+    { value: "facilator", text: "Mediators " },
   ]
   const navigate = useNavigate();
 

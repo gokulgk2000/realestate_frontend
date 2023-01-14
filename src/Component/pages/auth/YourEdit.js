@@ -167,7 +167,7 @@ const YourEdit = () => {
     setGetProperty({ ...getProperty, propertyPic: filteredImages });
   };
   return (
-    <div>
+    <div className="md:pl-32 md:pr-24">
       {modalOpen1 && (
         <UpdateModel
           show={modalOpen1}
@@ -181,7 +181,7 @@ const YourEdit = () => {
         <NavLink
           to="/yourProperties"
           className={({ isActive }) =>
-            isActive ? "opacity-75 " : "text-black underline hover:text-amber-700"
+            isActive ? "opacity-75 " : "text-black underline hover:text-orange-500"
           }
         >
           Back to Properties
@@ -190,7 +190,7 @@ const YourEdit = () => {
       <div className="">
         <div class="md:grid  md:grid-cols-2 gap-x-3 min-w-full max-w-sm bg-white border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
           <div class="md:flex pl-5  md:flex-col items-left md:pb-10 py-2">
-            <p className=" text-amber-700"> Title :</p>
+            <p className=" text-orange-500"> Title :</p>
             <Input
               type="text"
               name="title"
@@ -202,7 +202,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, title: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Seller :</p>
+            <p className=" text-orange-500"> Seller :</p>
             <Input
               type="text"
               name="Seller"
@@ -214,7 +214,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, Seller: e.target.value })
               }
             />
-            <p className=" text-amber-700"> CostSq :</p>
+            <p className=" text-orange-500"> CostSq :</p>
 
             <Input
               type="text"
@@ -226,7 +226,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, costSq: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Location :</p>
+            <p className=" text-orange-500"> Location :</p>
             <Input
               type="text"
               name="Location"
@@ -237,7 +237,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, location: e.target.value })
               }
             />
-            <p className=" text-amber-700"> LayoutName :</p>
+            <p className=" text-orange-500"> LayoutName :</p>
             <Input
               type="text"
               name="LayoutName"
@@ -248,7 +248,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, layoutName: e.target.value })
               }
             />
-            <p className=" text-amber-700"> LandArea :</p>
+            <p className=" text-orange-500"> LandArea :</p>
             <Input
               type="text"
               name="LandArea"
@@ -259,7 +259,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, landArea: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Facing :</p>
+            <p className=" text-orange-500"> Facing :</p>
 
             <Input
               type="text"
@@ -271,7 +271,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, facing: e.target.value })
               }
             />
-            <p className=" text-amber-700"> ApproachRoad :</p>
+            <p className=" text-orange-500"> ApproachRoad :</p>
 
             <Input
               type="text"
@@ -286,7 +286,7 @@ const YourEdit = () => {
                 })
               }
             />
-            <p className=" text-amber-700">BuiltArea :</p>
+            <p className=" text-orange-500">BuiltArea :</p>
 
             <Input
               type="text"
@@ -298,7 +298,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, builtArea: e.target.value })
               }
             />
-            <p className=" text-amber-700"> BedRoom :</p>
+            <p className=" text-orange-500"> BedRoom :</p>
 
             <Input
               type="text"
@@ -310,7 +310,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, bedRoom: e.target.value })
               }
             />
-            <p className=" text-amber-700"> FloorDetails :</p>
+            <p className=" text-orange-500"> FloorDetails :</p>
 
             <Input
               type="text"
@@ -325,7 +325,7 @@ const YourEdit = () => {
                 })
               }
             />
-            <p className=" text-amber-700"> NearTown :</p>
+            <p className=" text-orange-500"> NearTown :</p>
 
             <Input
               type="text"
@@ -337,7 +337,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, nearTown: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Facilities :</p>
+            <p className=" text-orange-500"> Facilities :</p>
 
             <Input
               type="text"
@@ -349,7 +349,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, facilities: e.target.value })
               }
             />
-            <p className=" text-amber-700">AskPrice :</p>
+            <p className=" text-orange-500">AskPrice :</p>
 
             <Input
               type="text"
@@ -361,7 +361,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, askPrice: e.target.value })
               }
             />
-            <p className=" text-amber-700">Description :</p>
+            <p className=" text-orange-500">Description :</p>
 
             <Input
               type="text"
@@ -376,7 +376,7 @@ const YourEdit = () => {
                 })
               }
             />
-            <p className=" text-amber-700">Property Picture :</p>
+            <p className=" text-orange-500">Property Picture :</p>
 
             <input
               type="file"
@@ -393,15 +393,15 @@ const YourEdit = () => {
           </div>
           
           <div className="grid md:grid-cols-1 md:h-52 px-3`">
-      
+      <div className="pr-2 pt-4">
               <img
-                className=" aspect-[2] md:h-96 w-full"
+                className=" aspect-[2] md:h-96 w-full rounded-lg "
                 src={`${SERVER_URL}/file/${
                   getProperty?.propertyPic
                     ? getProperty?.propertyPic[currentImage]?.id
                     : null
                 }`}
-              />
+              /></div>
    
             <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
               {getProperty?.propertyPic?.length > 0 &&
@@ -425,12 +425,12 @@ const YourEdit = () => {
                           />
                         </svg>
                       )}
-
+<div className="pl-1 ">
                       <img
                         src={`${SERVER_URL}/file/${image.id}`}
-                        className="aspect-[2] h-28 "
+                        className="aspect-[2] h-28 rounded-lg"
                         onClick={() => setCurrentImage(j)}
-                      />
+                      /></div>
                     </div>
                   </button>
                 ))}
@@ -453,7 +453,7 @@ const YourEdit = () => {
             {!isEdit ? (
               <button
                 type="button"
-                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center rounded-lg text-orange-500   border border-orange-500  hover:bg-orange-500  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => setIsEdit(true)}
               >
                 {" "}
@@ -490,7 +490,7 @@ const YourEdit = () => {
          </div>
               <button
                 type="button"
-                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center rounded-lg text-orange-500   border border-orange-500  hover:bg-orange-500  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => toggleModal1()}
               >
                 <svg

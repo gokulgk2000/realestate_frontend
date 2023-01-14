@@ -39,11 +39,15 @@ const Activities = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="md:pl-32 md:pr-24">
+    <div className="md:pl-32 md:pr-24 px-1">
       <Breadcrumbs className="px-0">
-      <Link to="/">
+      <Link to="/" className="pr-1">
           <button  className="opacity-60 font underline">
            Home
+          </button></Link>
+          <Link to="/yourProperties" className="pl-1">
+          <button  className="opacity-60 font underline text-orange-500">
+          Manage Properties
           </button></Link>
          
       </Breadcrumbs>
@@ -134,7 +138,7 @@ const Activities = () => {
                     <Link to={`/yourEdit?id=${Data?._id}`}>{i + 1}</Link>  
                     </th>
                     <td className="py-4 px-6 " ><Link to={`/yourEdit?id=${Data?._id}`}>{Data?.title}</Link></td>
-                                        <td className="py-4 px-6 capitalize hidden md:block"> ₹.{Data?.askPrice}</td>
+                                        <td className="py-4 px-6 capitalize hidden md:block"> ₹.{Data?.negotiablePrice}</td>
 
                     <td className="py-4 px-6"><Link to={`/yourEdit?id=${Data?._id}`}>{Data?.location}</Link></td>
                     <td className="py-4 px-6 items-center hidden md:block">

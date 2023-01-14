@@ -181,17 +181,17 @@ const Detailspage = () => {
               </Link>
             </Breadcrumbs>
 
-            <div className="px- pt- pb-10 s">
+            <div className="px-1 pb-10 ">
               <div className="md:grid md:grid-cols-8 gap-2 gap-y-2">
                 <div className="md:col-span-6 border-3 border-black">
-                  <div className="flex justify-end font-normal text-base pb-3">
+                  <div className="flex justify-end font-normal text-base pb-3 " >
                     Posted on:{moment(property?.date).format("DD-MM-YYYY")}
                   </div>
                   <div className="md:grid shadow-2xl rounded-md bg-white p-7">
                     {currentUser && (
                       <div className="flex justify-between">
                         <div className="flex font font-semibold   text-xl">
-                          ₹. {property?.askPrice}
+                          ₹. {property?.negotiablePrice}
                         </div>
 
                         {!found ? (
@@ -512,7 +512,7 @@ const Detailspage = () => {
                             Price
                           </td>
                           <td className=" text-black font-medium py-4">
-                            ₹.{property?.askPrice}
+                            ₹.{property?.negotiablePrice}
                           </td>
                         </tr>
                         <tr>
@@ -559,7 +559,7 @@ const Detailspage = () => {
                       </div>
                       <div className="col-span-9 md:hidden text-black py-1 md:pl-4 font-light text-sm capitalize  pr-5">
                         {" "}
-                        ₹.{property?.askPrice}
+                        ₹.{property?.negotiablePrice}
                       </div>
                       <div className="md:col-span-2 text-gray-500 text-md md:hidden overflow-css">
                         {" "}

@@ -40,7 +40,7 @@ console.log("interest",interest)
 },[])
 if(interest?.length===0){
   return(
-    <div className="py-10">
+    <div className="py-10 md:pl-32 md:pr-24 ">
        <Breadcrumbs className=''>
           <Link to="/">
             <button className="opacity-60 font">Home</button>

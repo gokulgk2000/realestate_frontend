@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { getUserById, getuserdetails } from "../helper/backend_helpers";
+import { getinterestbyId, getUserById, getuserdetails } from "../helper/backend_helpers";
 import { mobile } from "../helper/constatnt/ScreenSize";
 import useMediaQuery from "../helper/hook/useMediaQuery";
 import RequestedModel from "../models/RequestedModel";
@@ -34,6 +34,7 @@ function Navbar() {
   const [isMobileview] = useMediaQuery(mobile);
   const [user, setUser] = useState({});
   const [modalOpen, setModalOpen] = useModal(false);
+  const [interest,setInterest] = useState([])
 
   // const [property, setproperty] = useState("");
   // const [currentUser, setCurrentUser] = useState();
@@ -56,7 +57,7 @@ function Navbar() {
   useEffect(() => {
     getUserName();
   }, [userFromStorage]);
-  
+
   // const categories = async () => {
   //   const res = await getPropertiescategoryId({
   //     id,
@@ -81,14 +82,6 @@ function Navbar() {
     navigate("/");
   };
 
-  
-  
-
-
-
- 
- 
-
   const handlepay = async () => {
     console.log(user, "user");
     const payload = {
@@ -104,6 +97,23 @@ function Navbar() {
     navigate(`/payment?id=${user?._id}&email=${user?.email}`);
   };
   
+  useEffect(() => {
+    const handleFetchInterested = async() =>{
+      const payload = {
+        userID:userFromStorage?.userID,
+      }
+      const res = await getinterestbyId(payload);
+
+      if (res.success) {
+        setInterest(res?.Intrested)
+     
+      }
+      
+
+    } 
+
+    handleFetchInterested()
+  },[interest])
 
   const activeClass =
     "border-b-2  text-white border-orange-500 hover:text-white font";
@@ -236,16 +246,15 @@ function Navbar() {
               <div className=" md:-mr-3 ">
                 {isAuthenticated() ? (
                   <div className=" flex justify-start gap-5">
-                    <Link   to="/buyer" title="interested">
+                    <Link to="/buyer" title="interested">{interest?.length >= 1 &&   <p className="absolute pl-3 text-sm pt-1.5 font text-stone-200">{interest?.length}</p>}
+                    
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="#f5190a"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="white"
-                        className="w-7 h-7 text-red-600 "
-                        
-                       
+                        className="w-8 h-8 text-red-600 "
                       >
                         <path
                           stroke-linecap="round"
@@ -266,8 +275,8 @@ function Navbar() {
                           />
                         </div>
                         <ul className="absolute w-52  bg-white rounded-tl-3xl  rounded-br-3xl pl-2  opcity-80 hidden  group-hover:block group-hover:right-0.5 group-hover:shadow-md ">
-                          <Link  to="/ProfileUpdate">
-                            <div className="flex "  >
+                          <Link to="/ProfileUpdate">
+                            <div className="flex ">
                               {" "}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -276,7 +285,6 @@ function Navbar() {
                                 strokeWidth="2"
                                 stroke="currentColor"
                                 className="w-6 h-6 pt-2 text-[#082266]"
-                           
                               >
                                 <path
                                   strokeLinecap="round"
@@ -284,15 +292,15 @@ function Navbar() {
                                   d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
                                 />
                               </svg>
-                              <button
-                                className="  text-start font hover:text-orange-500 p-1  hover:shadow-none rounded shadow-sm"
-                              
-                              >
+                              <button className="  text-start font hover:text-orange-500 p-1  hover:shadow-none rounded shadow-sm">
                                 Profile
                               </button>
                             </div>
                           </Link>
-                          <Link className="flex  border-t-0 border-black  " to="/yourProperties?">
+                          <Link
+                            className="flex  border-t-0 border-black  "
+                            to="/yourProperties?"
+                          >
                             {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -300,7 +308,6 @@ function Navbar() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                           
                               className="w-6 h-6 pt-2  text-[#082266] "
                             >
                               <path
@@ -309,14 +316,10 @@ function Navbar() {
                                 d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
                               />
                             </svg>
-                            <button
-                              className=" text-start  p-1 font  hover:text-orange-500   hover:shadow-none rounded shadow-sm"
-                           
-                            >
+                            <button className=" text-start  p-1 font  hover:text-orange-500   hover:shadow-none rounded shadow-sm">
                               Manage properties
                             </button>
                           </Link>{" "}
-                          
                           {/* <div>
                             <div className="flex  border-t-0 border-black  ">
                               {" "}
@@ -349,7 +352,10 @@ function Navbar() {
                               </button>
                             </div>{" "}
                           </div> */}
-                          <button className="flex  border-t-0 border-black  "   onClick={AuthLogout}>
+                          <button
+                            className="flex  border-t-0 border-black  "
+                            onClick={AuthLogout}
+                          >
                             {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

@@ -51,6 +51,7 @@ import SelectedUser from "./Component/pages/auth/SelectedUser";
 import SellerRegister from "./Component/pages/auth/SellerRegister";
 import BuyerRegister from "./Component/pages/auth/BuyerRegister";
 import MediatorsDetails from "./Component/pages/mediators/MediatorsDetails";
+import Adproperty from "./Component/pages/admin/Adproperty";
 
 
 
@@ -59,7 +60,7 @@ const App = () => {
   // console.log("window location : ",window.location)
   return (
     <> 
-    {window.location.pathname==="/admin-page" ||window.location.pathname==="/admin" ||  window.location.pathname==="/admin/userlist" || window.location.pathname==="/admin/buyerlist" || window.location.pathname==="/admin/requestedlist"|| window.location.pathname==="/admin/PropertyList"  ?(<AdminNav/>):( <div className="sticky top-0 z-50"><Header/><Navbar/></div>)} 
+    {window.location.pathname==="/admin-page" ||window.location.pathname==="/admin" ||  window.location.pathname==="/admin/userlist" || window.location.pathname==="/admin/buyerlist" || window.location.pathname==="/admin/requestedlist"|| window.location.pathname==="/admin/PropertyList" || window.location.pathname==="/admin/adproperty"  ?(<AdminNav/>):( <div className="sticky top-0 z-50"><Header/><Navbar/></div>)} 
    {/* {!isAuthAdmin || isAuthenticated && <div className="sticky top-0 z-50"><Header/><Navbar/></div>} 
      {isAuthAdmin || !isAuthenticated && (<div><AdminNav/></div>)} */}
       <Routes >
@@ -109,7 +110,8 @@ const App = () => {
         <Route  path="requestedlist" element={<RequestedList />} />
         <Route  path="intrestedlist" element={<Intrested />} />
         <Route path="propertylist" element={<PropertyList />} />
-        <Route path="propertydetails" element={<PropertyDetails />} />
+        <Route path="propertylist" element={<PropertyList />} />
+        <Route path="adproperty" element={<Adproperty />} />
         <Route path="userdetails" element={<UserDetails />} />
         <Route path="buyerdetails" element={<BuyerDetails />} />
 </Route>

@@ -113,7 +113,7 @@ function Navbar() {
     } 
 
     handleFetchInterested()
-  },[interest])
+  },[])
 
   const activeClass =
     "border-b-2  text-white border-orange-500 hover:text-white font";

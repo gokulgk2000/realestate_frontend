@@ -15,6 +15,10 @@ const userLogin = (payload) =>
   post(`${BASE_URL}/user/login`, payload);
 const logoutUser = (payload) =>
   get(`${BASE_URL}/user/logout`, payload);
+const getAdminById = (payload) =>
+  get(`${BASE_URL}/admin/getAdminById`, payload);
+const getAdproperties = (payload) =>
+  post(`${BASE_URL}/admin/getAdproperty`, payload);
 
 
 
@@ -36,6 +40,8 @@ const getPropertiescategoryId = (payload) =>
   post(`${BASE_URL}/category/getPropertiescategoryId `, payload);
 const getCategory = (payload) =>
   post(`${BASE_URL}/category/getcategory`, payload);
+const AdUpload = (payload) =>
+  post(`${BASE_URL}/admin/adproperty`, payload);
 const findCategory = (payload) =>
   get(`${BASE_URL}/category/findCategory`, payload);
 //admin
@@ -102,6 +108,9 @@ const getUnInterest = (payload) => put(`${BASE_URL}/intrested/removeInterest`, p
 
 export {
   userRegisteration,
+  getAdminById,
+  getAdproperties,
+  AdUpload,
   getinterestbyId,
   allFacilatorsList,
   getUnInterest,

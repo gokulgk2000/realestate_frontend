@@ -1,12 +1,16 @@
 import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {  allUsersList } from "../../helper/backend_helpers";
+import {  allUsersList, getAdminById } from "../../helper/backend_helpers";
 
 const Dashborad = () => {
-  const [ setLoading] = useState(false);
-  const [ setUserData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState([]);
 
+  const [admin,setAdmin] = useState();
+  const user = JSON.parse(localStorage?.getItem("authAdmin"));
+
+ 
   const getAllUsers = async () => {
     setLoading(true);
     const res = await allUsersList({});
@@ -166,6 +170,33 @@ const Dashborad = () => {
           <p>All Registered Properties</p>
           {/* {userData.map((lenght,i)=>())} */}
           <Link to="/admin/propertylist">
+            <button className=" grad1 w-14 rounded-md text-white  bg-amber-700 hover:bg-amber-900">
+              View
+            </button>
+          </Link>
+        </div>
+      
+      </div>
+      <div className="max-w-sm rounded overflow-hidden shadow-lg text-center p-3 hover:bg-stone-100 bg-stone-200">
+        <div className="flex justify-center">
+          <svg
+            className="w-6 h-6 flex justify-center  text-teal-700"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+            <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+          </svg>
+        </div>
+
+        <div className="px-6 py-4">
+          <div className="  font-light text-amber-700  text-xl mb-2 ">
+            Ad Properties
+          </div>
+          <p>Advertisement Properties</p>
+          {/* {userData.map((lenght,i)=>())} */}
+          <Link to="/admin/adproperty">
             <button className=" grad1 w-14 rounded-md text-white  bg-amber-700 hover:bg-amber-900">
               View
             </button>

@@ -9,6 +9,7 @@ import "react-multi-carousel/lib/styles.css";
 
 import PromotorsCard from "./UsersCard";
 import UsersCard from "./UsersCard";
+import { Link } from "react-router-dom";
 
 const TopMediators = ({ found }) => {
   const [mediators, setMediators] = useState();
@@ -60,19 +61,7 @@ const TopMediators = ({ found }) => {
         <h1 className="pl-2 -mt-0.5 ml-3 text-black font-extrabold mr-5  ">
           Top Mediators
         </h1>
-        <svg className="h-6 w-6 pt-" viewBox="0 0 512 512">
-          <polygon
-            fill="#ffd759"
-            points="102.6 494.1 137 320.1 6 200.5 182.1 179.5 255.3 17.9 329.7 178.9 506 198.6 375.9 319.2 411.6 492.9 256.8 406.4"
-          />
-          <polygon fill="#fabd3b" points="256 256 6 200.5 137 320.1" />
-          <polygon
-            fill="#fabd3b"
-            points="256 256 102.6 494.1 256.8 406.4 411.6 492.9"
-          />
-          <polygon fill="#fabd3b" points="256 256 506 198.6 375.9 319.2" />
-          <polygon fill="#fabd3b" points="255.3 17.9 256 256 329.7 178.9" />
-        </svg>
+      
       </div><div className="">
       <Carousel responsive={responsive}>
         {map(mediators?.sort((a,b)=>{
@@ -87,13 +76,13 @@ const TopMediators = ({ found }) => {
           }
           return a?.order -b?.order
         }), (pro, i) => ( 
-          <UsersCard
+          <Link   to={`/mediatorsDetails?id=${pro?._id}`}>  <UsersCard
             pro={pro}
            
             
            
             key={i}
-          />
+          /></Link>
         ))}
       </Carousel></div>
     </div>

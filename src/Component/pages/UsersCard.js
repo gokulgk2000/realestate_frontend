@@ -4,10 +4,10 @@ import image from "../assets/images/avadar1.jpg";
 
 const UsersCard = ({ pro }) => {
   return (
-    <div className="px-2" >
-    <Link
-      to={`/promotorsDetails?id=${pro?._id}`}
-      className=" px-8 py-6 rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-gray-50 shadow-xl h-96 grid  gap-x-4 "
+    <div className="px-2  py-2 " >
+    <div
+     
+      className=" px-8 py-6 rounded-xl dark:bg-gray-900 dark:text-gray-100 bg-gray-50 shadow-xl h-96 grid  gap-x-4  "
     >
       {pro?.profilePic ? (
         <img
@@ -38,9 +38,9 @@ const UsersCard = ({ pro }) => {
                 d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            Promotor's Name
+           Name
           </h2>
-          <p className=" text-xl font-semibold dark:text-gray-400">
+          <p className=" text-xl font-semibold dark:text-gray-400 overflow-css">
             {" "}
             {pro?.firstname}
             {pro?.lastname}
@@ -87,12 +87,12 @@ const UsersCard = ({ pro }) => {
             </svg>
             Email{" "}
           </h2>
-          <p className=" text-xs font-semibold dark:text-gray-400">
+          <p className=" text-xs font-semibold dark:text-gray-400 overflow-css">
             {pro?.email}
           </p>
         </div>
       </div>
-    </Link>
+    </div>
     </div>
   );
 };

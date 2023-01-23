@@ -9,11 +9,13 @@ import RequestedModel from "../models/RequestedModel";
 import Search from "./Search";
 import Do from "../assets/images/d3.jpg";
 import { Link } from "react-router-dom";
+import { getAdproperties } from "../helper/backend_helpers";
 
 export const Carousel = () => {
   const [isBiggerthanTab] = useMediaQuery(tab);
   const [modalOpen, setModalOpen] = useModal(false);
 
+  const[adproperty,setAdProperty] = useState("");
   const [selectImage, setSelectImage] = useState(0);
   const carouselLength = image.length;
   // console.log(carouselLength);
@@ -23,7 +25,20 @@ export const Carousel = () => {
       setSelectImage(selectImage + 1);
     } else setSelectImage(0);
   };
-
+  const getAdProperty = async () =>{
+    const payload = {
+      adminID:"639a70332f4955d07a4a7cb3"
+    }
+   
+    const res = await getAdproperties(payload);
+    if(res.success){
+      setAdProperty(res?.banner)
+    }
+    console.log(adproperty,":payload")
+  }
+  useEffect(()=>{
+    getAdProperty();
+  },[])
   const prevImageOnClick = () => {
     if (selectImage > 0) {
       setSelectImage((prev) => prev - 1);

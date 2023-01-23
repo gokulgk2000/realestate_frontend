@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { allUsersList, GETALLUSERSBYLIMIT } from "../../helper/backend_helpers";
+import { allFacilatorsList, allPromotorsList, allUsersList, GETALLUSERSBYLIMIT, orderFacilators, updateTopFacilators } from "../../helper/backend_helpers";
 import Pagination from "../../pagination/Pagination";
 import { useQuery } from "../../helper/hook/useQuery";
 import { Breadcrumbs } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-const UserList = () => {
+const MediatorsList = () => {
   const query = useQuery();
   const [isLoading, setLoading] = useState(false);
   const [setPosts] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [facilatorsData, setFacilatorsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
@@ -23,20 +23,20 @@ const UserList = () => {
     setSearchText(searched);
   };
 
-  const getAllUsers = async () => {
+
+
+  const getAllfacilators = async () => {
     setLoading(true);
-    const res = await allUsersList({});
-    // console.log("dsp:",res);
+    const res = await allFacilatorsList({});
     if (res.success) {
-      setUserData(res.users);
+      setFacilatorsData(res?.facilatorslist);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    getAllUsers();
+    getAllfacilators();
   }, []);
-
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
@@ -48,7 +48,20 @@ const UserList = () => {
     };
     fetchPosts();
   }, []);
-
+  const updatePremiumFacilators = async (checked, facilatorID) => {
+    console.log("checked : ", checked);
+    const res = await updateTopFacilators({ facilatorID, isPremium: checked });
+    if (res.success) {
+      await getAllfacilators();
+    }
+  };
+  const updateorderlistFacilators = async (value,facilatorId) =>{
+    const res = await orderFacilators({facilatorId, order:value})
+    if(res.success){
+      await  getAllfacilators();
+    }
+   
+  }
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -68,7 +81,7 @@ Loading...
         </button></Link>
       <Link to="/admin/userlist"disabled>
         <button  className="text-amber-700 font">
-          Users List
+          Mediators List
         </button></Link>
        
       </Breadcrumbs>
@@ -107,15 +120,21 @@ Loading...
                   <div className="flex items-center">Email</div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-amber-700  ">
+                  <div className="flex items-center">Upgrade</div>
+                </th>
+                <th scope="col" className="py-3 px-6  text-amber-700  ">
+                  <div className="flex items-center">Order</div>
+                </th>
+                <th scope="col" className="py-3 px-6  text-amber-700  ">
                   <div className="flex items-center">Status</div>
                 </th>
                 <th scope="col" className="py-3 px-6  text-amber-700">
-                  <span className="">User Details</span>
+                  <span className="">Promotors Details</span>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {userData
+              {facilatorsData
                 ?.filter(
                   (item =>
                     item?.firstname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
@@ -139,6 +158,61 @@ Loading...
                     </td>
                     <td className="py-4 px-6 hidden md:block">{Data?.email}</td>
                     <td
+                        className="py-4 px-6 capitalize"
+                        style={{ color: statusColor[Data?.status] }}
+                      >
+                        <ul className=" text-sm font-medium text-gray-900 rounded-lg  dark:text-white">
+                          <li className="w-full ">
+                            <div className="flex items-center pl-3">
+                              {Data?.status === "approved" && (
+                                <input
+                                  type="checkbox"
+                                  //  name="facilities"
+                                  checked={Data?.isPremium}
+                                  className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                  onChange={(e) =>
+                                    updatePremiumFacilators(
+                                      e.target.checked,
+                                      Data?._id
+                                    )
+                                  }
+                                />
+                              )}
+
+                              <label
+                                for="vue-checkbox"
+                                className="py-3 ml-2 w-full text-sm font-medium dark:text-gray-300 hidden md:block"
+                              >
+                                premium
+                              </label>
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                      <td
+                        className="py-4 px-6 capitalize"
+                        style={{ color: statusColor[Data?.status] }}
+                      >
+                        <ul className=" text-sm font-medium text-gray-900 rounded-lg  dark:text-white">
+                          <li className="w-full ">
+                            <div className="flex items-center pl-3">
+                           { Data?.isPremium === true &&  <input
+                                type="number"
+                                value={Data?.order}
+                                //  name="facilities"
+                                className="w-14 h-8 text-blue-600 bg-gray-400 rounded border-black-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2"
+                                onChange={(e)=>updateorderlistFacilators(e.target.value, Data?._id)}
+                              />
+}   
+                              <label
+                                for="vue-checkbox"
+                                className="py-3 ml-2 w-full text-sm font-medium dark:text-gray-300 hidden md:block"
+                              ></label>
+                            </div>
+                          </li>
+                        </ul>
+                      </td>
+                    <td
                       className="py-4 px-6 pr- capitalize  "
                       style={{ color: statusColor[Data?.status] }}
                     >
@@ -161,7 +235,7 @@ Loading...
           <nav aria-label="text-center ">
             <Pagination
               postsPerPage={postsPerPage}
-              totalPosts={userData?.length}
+              totalPosts={facilatorsData?.length}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -206,4 +280,4 @@ Loading...
   );
 };
 
-export default UserList;
+export default MediatorsList;

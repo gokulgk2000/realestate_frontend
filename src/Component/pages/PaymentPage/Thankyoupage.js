@@ -1,59 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { getPaymentId } from "../../helper/backend_helpers";
 import { useQuery } from "../../helper/hook/useQuery";
-import toastr from "toastr";
-import "toastr/build/toastr.min.css";
-import { useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
 const Thankyoupage = () => {
   const query = useQuery();
-  const stripe = useStripe()
-  const [message, setMessage] = useState(null)
+  const dataFetchedRef = useRef(false);
+  const getUserPaymentData = async () => {
+    getPaymentId({ pi: query.get("payment_intent") });
+  };
   useEffect(() => {
-    if (!stripe) {
-      return
-    }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    )
-
-    if (!clientSecret) {
-      return
-    }
-
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      // console.log("paymentIntent : ",paymentIntent)
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!")
-          break
-        case "processing":
-          setMessage("Your payment is processing.")
-          break
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.")
-          break
-        default:
-          setMessage("Something went wrong.")
-          break
-      }
-    })
-  }, [stripe])
-
-  useEffect(() => {
-    console.log("Getting payment");
-    const getUserPaymentData = async () => {
-      const res = await getPaymentId({ pi: query.get("payment_intent") });
-      if(res.success){
-      toastr.success(`Your Property Details Display "Soon"`, "Success");
-    }
-      // console.log("Got payment",res)
-    };
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getUserPaymentData();
   }, []);
-
   return (
     <div class="bg-gray-100 h-screen">
       <div class="bg-white p-6  md:mx-auto">
@@ -85,5 +44,4 @@ const Thankyoupage = () => {
     </div>
   );
 };
-
 export default Thankyoupage;

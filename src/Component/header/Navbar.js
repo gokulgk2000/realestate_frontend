@@ -292,7 +292,7 @@ function Navbar() {
                         </div>
                         <ul className="absolute w-52  bg-white rounded-tl-3xl  rounded-br-3xl pl-2  opcity-80 hidden  group-hover:block group-hover:right-0.5 group-hover:shadow-md ">
                           <Link to="/ProfileUpdate">
-                            <div className="flex hover:text-orange-500">
+                            <div className="flex ">
                               {" "}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -308,13 +308,13 @@ function Navbar() {
                                   d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
                                 />
                               </svg>
-                              <button className="  text-start font  p-1  hover:shadow-none rounded shadow-sm">
+                              <button className="  text-start font hover:text-orange-500 p-1  hover:shadow-none rounded shadow-sm">
                                 Profile
                               </button>
                             </div>
                           </Link>
                           <Link
-                            className="flex  border-t-0 border-black  hover:text-orange-500"
+                            className="flex  border-t-0 border-black  "
                             to="/yourProperties?"
                           >
                             {" "}
@@ -332,8 +332,34 @@ function Navbar() {
                                 d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
                               />
                             </svg>
-                            <button className=" text-start  p-1 font     hover:shadow-none rounded shadow-sm">
+                            <button className=" text-start  p-1 font  hover:text-orange-500   hover:shadow-none rounded shadow-sm">
                               Manage properties
+                            </button>
+                          </Link>{" "}
+                          <Link
+                            className="flex  border-t-0 border-black  "
+                            to="/yourProperties?"
+                          >
+                            {" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                              class="w-6 h-6 pt-2  text-[#082266] "
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <button
+                              onClick={handlepay}
+                              className=" text-start  p-1 font  hover:text-orange-500   hover:shadow-none rounded shadow-sm"
+                            >
+                              Payment
                             </button>
                           </Link>{" "}
                           {/* <div>
@@ -368,7 +394,10 @@ function Navbar() {
                               </button>
                             </div>{" "}
                           </div> */}
-                         <span className="flex hover:text-orange-500  border-t-0 border-black cursor-pointer" onClick={AuthLogout} >
+                          <button
+                            className="flex  border-t-0 border-black  "
+                            onClick={AuthLogout}
+                          >
                             {" "}
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -386,12 +415,12 @@ function Navbar() {
                               />
                             </svg>
                             <button
-                              className=" text-start  p-1  font   hover:shadow-none rounded shadow-sm"
+                              className=" text-start  p-1  font hover:text-orange-500  hover:shadow-none rounded shadow-sm"
                               onClick={AuthLogout}
                             >
                               Logout
                             </button>
-                       </span>
+                          </button>
                         </ul>
                       </div>
                     </div>

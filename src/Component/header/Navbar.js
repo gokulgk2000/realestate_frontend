@@ -182,6 +182,16 @@ function Navbar() {
                   >
                     <div className="hover:border-0 ">MEDIATORS</div>
                   </NavLink>{" "}
+                  <NavLink
+                    to="/projects"
+                    className={({ isActive }) =>
+                      isActive
+                        ? activeClass
+                        : "text-white   hover:text-orange-500"
+                    }
+                  >
+                    <div className="hover:border-0 ">PROJECTS</div>
+                  </NavLink>{" "}
                   {/* <NavLink
                     to="/mediators"
                     className={({ isActive }) =>

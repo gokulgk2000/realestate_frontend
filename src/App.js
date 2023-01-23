@@ -13,7 +13,7 @@ import Landingpage from "./Component/pages/Landingpage";
 import ProtectedRoutes from "./routers/ProtectedRoutes";
 import Sell from "./Component/pages/Sellpage";
 import Admin from "./Component/pages/admin/Admin";
-import UserList from "./Component/pages/admin/UserList";
+import UserList from "./Component/pages/admin/PromotorsList";
 import PropertyList from "./Component/pages/admin/PropertyList";
 import PropertyDetails from "./Component/pages/admin/PropertyDetails";
 import UserDetails from "./Component/pages/admin/UserDetails";
@@ -52,6 +52,9 @@ import SellerRegister from "./Component/pages/auth/SellerRegister";
 import BuyerRegister from "./Component/pages/auth/BuyerRegister";
 import MediatorsDetails from "./Component/pages/mediators/MediatorsDetails";
 import Adproperty from "./Component/pages/admin/Adproperty";
+import ProjectsPage from "./Component/pages/ProjectsPage";
+import PromotorsList from "./Component/pages/admin/PromotorsList";
+import MediatorsList from "./Component/pages/admin/MediatorsList";
 
 
 
@@ -76,6 +79,7 @@ const App = () => {
         <Route path="/sellerregister" element={<SellerRegister />} />
         <Route path="/buyerregister" element={<BuyerRegister />} />
         <Route path="/selecteduser" element={<SelectedUser/>} />
+        <Route path="/projects" element={<ProjectsPage/>} />
 
   <Route path="/forget" element={<Forgetpassword/>} />
         <Route path="/password" element={<Passwordpage/>} />
@@ -105,7 +109,8 @@ const App = () => {
         <Route element={<AdminProtected />} >
         <Route   path="admin"  element={<Admin />} >
         <Route  index  element={<Dashboard />} />
-        <Route  path="userlist" element={<UserList />} />
+        <Route  path="userlist" element={<PromotorsList/>} />
+        <Route  path="promotorsList" element={<MediatorsList/>} />
         <Route  path="buyerlist" element={<BuyerList />} />
         <Route  path="requestedlist" element={<RequestedList />} />
         <Route  path="intrestedlist" element={<Intrested />} />

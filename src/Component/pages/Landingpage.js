@@ -16,6 +16,8 @@ import PropertyCard from "./PropertyCard";
 import { debounce } from "lodash";
 import { useUser } from "./contextProvider/UserProvider";
 import { useQuery } from "../helper/hook/useQuery";
+import Aboutus from "./About";
+import TopPromotors from "./TopPromotors";
 const Landingpage = () => {
   const query = useQuery();
   const navigate = useNavigate();
@@ -263,6 +265,14 @@ const Landingpage = () => {
         <div className="shadow-2xl py-2 ">
           <TopProperties found={found} />
           <div className="flex justify-center py-2"></div>
+        </div>
+        {/* <div className="shadow-2xl py-2 ">
+          <TopPromotors/>
+          <div className="flex justify-center py-2"></div>
+        </div> */}
+        <div className="shadow-2xl py-2">
+        <Aboutus/>
+        
         </div>
         </div>
         {/* <Category /> */}

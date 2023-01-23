@@ -28,6 +28,8 @@ const getPremiumProperty = (payload) =>
   post(`${BASE_URL}/admin/topProperty`, payload);
 const getPremiumPromotors = (payload) =>
   post(`${BASE_URL}/admin/topPromotors`, payload);
+const getPremiumMediators = (payload) =>
+  post(`${BASE_URL}/admin/topFacilators`, payload);
 const getPropertyCount = (payload) =>
   post(`${BASE_URL}/property/propertyCount`, payload);
 const getSearchAllProperty = (payload) =>
@@ -147,6 +149,7 @@ export {
   userLogin,
   getPremiumProperty,
   getPremiumPromotors,
+  getPremiumMediators,
   getSearchAllProperty,
   getPropertyCount,
   getProById,

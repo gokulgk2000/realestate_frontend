@@ -2,7 +2,7 @@ import { map } from "lodash";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getPremiumPromotors} from "../helper/backend_helpers";
+import { getPremiumMediators, getPremiumPromotors} from "../helper/backend_helpers";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -10,19 +10,19 @@ import "react-multi-carousel/lib/styles.css";
 import PromotorsCard from "./UsersCard";
 import UsersCard from "./UsersCard";
 
-const TopPromotors = ({ found }) => {
-  const [promotors, setPromotors] = useState();
+const TopMediators = ({ found }) => {
+  const [mediators, setMediators] = useState();
 
 
-  const PremiumPromotors = async () => {
-    const res = await getPremiumPromotors({});
+  const PremiumMediators = async () => {
+    const res = await getPremiumMediators({});
     if (res) {
-        setPromotors(res?.pro);
+        setMediators(res?.pro);
     }
   };
 
   useEffect(() => {
-    PremiumPromotors();
+    PremiumMediators();
   }, []);
 
   const responsive = {
@@ -58,7 +58,7 @@ const TopPromotors = ({ found }) => {
         </svg>
 
         <h1 className="pl-2 -mt-0.5 ml-3 text-black font-extrabold mr-5  ">
-          Top Promotors
+          Top Mediators
         </h1>
         <svg className="h-6 w-6 pt-" viewBox="0 0 512 512">
           <polygon
@@ -75,7 +75,7 @@ const TopPromotors = ({ found }) => {
         </svg>
       </div><div className="">
       <Carousel responsive={responsive}>
-        {map(promotors?.sort((a,b)=>{
+        {map(mediators?.sort((a,b)=>{
           if(!a?.order && !b?.order){
             return -1;
           }
@@ -100,4 +100,4 @@ const TopPromotors = ({ found }) => {
   );
 };
 
-export default TopPromotors;
+export default TopMediators;

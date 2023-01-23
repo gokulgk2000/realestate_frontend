@@ -247,7 +247,8 @@ const Landingpage = () => {
               )}
             </div>
           </div>
-        </div><div className=" md:pl-32 md:pr-24">
+        </div>
+        <div className=" md:pl-32 md:pr-24">
         {isLoading ? (
           <div className="text-center p-5  flex justify-center ">
             <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">
@@ -256,26 +257,23 @@ const Landingpage = () => {
           </div>
         ) : (
           isValid && (
-            <div className="md:grid  gap-  grid-cols-4  font uppercase  g gap-y-5 pb-3">
+            <div className="md:grid  gap-  grid-cols-4  font uppercase  gap-y-5 pb-3">
               {properties.map((pro, i) => (
                 <PropertyCard pro={pro} showHeart={found(pro?._id)} key={i} />
               ))}
             </div>
           )
         )}
-        <div className="shadow-2xl py-2 ">
+        <div className="">
           <TopProperties found={found} />
-          <div className="flex justify-center py-2"></div>
         </div>
-        <div className="shadow-2xl py-2 ">
+        <div className="  ">
           <TopPromotors/>
-          <div className="flex justify-center py-2"></div>
         </div>
-        <div className="shadow-2xl py-2 ">
+        <div className="  ">
           <TopMediators/>
-          <div className="flex justify-center py-2"></div>
         </div>
-        <div className="shadow-2xl py-2">
+        <div className=" ">
         <Aboutus/>
         
         </div>

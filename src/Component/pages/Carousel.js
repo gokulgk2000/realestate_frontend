@@ -10,15 +10,17 @@ import Search from "./Search";
 import Do from "../assets/images/d3.jpg";
 import { Link } from "react-router-dom";
 import { getAdproperties } from "../helper/backend_helpers";
+import { SERVER_URL } from "../helper/configuration";
 
 export const Carousel = () => {
   const [isBiggerthanTab] = useMediaQuery(tab);
   const [modalOpen, setModalOpen] = useModal(false);
+  const [loading, setLoading] = useState(false);
 
-  const [adproperty, setAdProperty] = useState("");
+  const [adproperty, setAdProperty] = useState('');
   const [selectImage, setSelectImage] = useState(0);
-  const carouselLength = image.length;
-  // console.log(carouselLength);
+  const carouselLength = adproperty?.adpic?.length;
+  console.log("dey",carouselLength);
   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
   const nextImageOnClick = () => {
     if (selectImage < carouselLength - 1) {
@@ -33,8 +35,9 @@ export const Carousel = () => {
     const res = await getAdproperties(payload);
     if (res.success) {
       setAdProperty(res?.banner);
+      setLoading(res?.banner)
     }
-    console.log(adproperty, ":payload");
+    console.log( "payload",adproperty);
   };
   useEffect(() => {
     getAdProperty();
@@ -48,11 +51,11 @@ export const Carousel = () => {
   useEffect(() => {
     const autoPlayFunction = setTimeout(() => {
       nextImageOnClick();
-    }, 5000);
+    }, 4000);
     return () => {
       clearTimeout(autoPlayFunction);
     };
-  }, [selectImage]);
+  }, [selectImage,loading]);
 
   return (
     <div className="">
@@ -66,19 +69,26 @@ export const Carousel = () => {
 
       <div className="flex  justify-end ">
         <div className="absolute">
-          <div className=" flex md:ustify-center  hover:free  pt-3 leading-relaxed md:pr-20 animate-pulse md:animate-none">
+          <div className=" flex md:ustify-center  hover:free  pt-3 leading-relaxed   animate-pulse md:animate-none fixed">
             {currentUser ? (
               <button
-                className="md:bg-white rounded-lg px-4 py-2 bg-transparent"
+                className="md:bg-white   rounded-lg px-2 py-2 bg-transparent"
                 onClick={() => setModalOpen(true)}
               >
-                <div className="flex md:items-center md:text-center text-orange-500">
+                <div className="flex md:items-center md:text-center        text-orange-500">
                   <svg
-                    className=" h-8 w-8 "
-                    fill="#383838"
-                    viewBox="0 0 122.88 106.91"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-10 h-10"
                   >
-                    <path d="M56,92.15a38.3,38.3,0,0,0,11.23,5.78c8.41,2.66,17.75,2.25,27.12-1.74a2.72,2.72,0,0,1,2-.08l12,4L107,90.36a2.78,2.78,0,0,1,1-2.53,28.41,28.41,0,0,0,6.31-6.8,17.53,17.53,0,0,0,2.73-12.47,27,27,0,0,0-6-12.5c-.6-.76-1.25-1.5-1.92-2.23h0a42.62,42.62,0,0,0,1.27-6.59,50,50,0,0,1,5,5.34,32.71,32.71,0,0,1,7.14,15.14A23,23,0,0,1,119.05,84a32.7,32.7,0,0,1-6.29,7.12l1.61,12.4a2.79,2.79,0,0,1-3.6,3.21l-15.24-5a43.85,43.85,0,0,1-30,1.53A45,45,0,0,1,47.47,92.16c.65,0,1.33.06,2.06.09,2.18.06,4.34,0,6.46-.1ZM72.11,35.22a6.39,6.39,0,1,1-6.38,6.39,6.39,6.39,0,0,1,6.38-6.39Zm-42.18,0a6.39,6.39,0,1,1-6.38,6.39,6.39,6.39,0,0,1,6.38-6.39Zm21.09,0a6.39,6.39,0,1,1-6.38,6.39A6.38,6.38,0,0,1,51,35.22ZM52.3,0h.05C66.29.46,78.79,5.42,87.74,13.09,96.89,20.93,102.37,31.6,102,43.26v0c-.36,11.66-6.48,22-16.1,29.3-9.41,7.14-22.22,11.36-36.16,11A62.05,62.05,0,0,1,38.5,82.2a58.64,58.64,0,0,1-9.43-2.87l-22.83,9,7.65-18.19a42.35,42.35,0,0,1-10-12.73A35.22,35.22,0,0,1,0,40.3C.37,28.63,6.49,18.28,16.11,11,25.53,3.83,38.33-.38,52.28,0Zm-.17,6.35h-.05C39.62,6,28.25,9.74,19.94,16,11.83,22.2,6.66,30.83,6.37,40.47A29.15,29.15,0,0,0,9.56,54.53,36.92,36.92,0,0,0,19.7,66.69l1.89,1.51-3.65,8.67,11.21-4.41,1.2.51a52.07,52.07,0,0,0,9.47,3A57,57,0,0,0,49.94,77.2c12.47.36,23.85-3.36,32.16-9.66,8.11-6.16,13.28-14.79,13.57-24.43v0C96,33.44,91.32,24.54,83.6,17.92c-7.91-6.78-19-11.16-31.45-11.54Z" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+                    />
                   </svg>
                   Buyer Request
                 </div>
@@ -87,18 +97,25 @@ export const Carousel = () => {
               <Link to="/login" className="bg-white rounded-lg px-4 py-2">
                 <div className="flex items-center text-center text-orange-500">
                   <svg
-                    className=" h-8 w-8 "
-                    fill="#383838"
-                    viewBox="0 0 122.88 106.91"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
                   >
-                    <path d="M56,92.15a38.3,38.3,0,0,0,11.23,5.78c8.41,2.66,17.75,2.25,27.12-1.74a2.72,2.72,0,0,1,2-.08l12,4L107,90.36a2.78,2.78,0,0,1,1-2.53,28.41,28.41,0,0,0,6.31-6.8,17.53,17.53,0,0,0,2.73-12.47,27,27,0,0,0-6-12.5c-.6-.76-1.25-1.5-1.92-2.23h0a42.62,42.62,0,0,0,1.27-6.59,50,50,0,0,1,5,5.34,32.71,32.71,0,0,1,7.14,15.14A23,23,0,0,1,119.05,84a32.7,32.7,0,0,1-6.29,7.12l1.61,12.4a2.79,2.79,0,0,1-3.6,3.21l-15.24-5a43.85,43.85,0,0,1-30,1.53A45,45,0,0,1,47.47,92.16c.65,0,1.33.06,2.06.09,2.18.06,4.34,0,6.46-.1ZM72.11,35.22a6.39,6.39,0,1,1-6.38,6.39,6.39,6.39,0,0,1,6.38-6.39Zm-42.18,0a6.39,6.39,0,1,1-6.38,6.39,6.39,6.39,0,0,1,6.38-6.39Zm21.09,0a6.39,6.39,0,1,1-6.38,6.39A6.38,6.38,0,0,1,51,35.22ZM52.3,0h.05C66.29.46,78.79,5.42,87.74,13.09,96.89,20.93,102.37,31.6,102,43.26v0c-.36,11.66-6.48,22-16.1,29.3-9.41,7.14-22.22,11.36-36.16,11A62.05,62.05,0,0,1,38.5,82.2a58.64,58.64,0,0,1-9.43-2.87l-22.83,9,7.65-18.19a42.35,42.35,0,0,1-10-12.73A35.22,35.22,0,0,1,0,40.3C.37,28.63,6.49,18.28,16.11,11,25.53,3.83,38.33-.38,52.28,0Zm-.17,6.35h-.05C39.62,6,28.25,9.74,19.94,16,11.83,22.2,6.66,30.83,6.37,40.47A29.15,29.15,0,0,0,9.56,54.53,36.92,36.92,0,0,0,19.7,66.69l1.89,1.51-3.65,8.67,11.21-4.41,1.2.51a52.07,52.07,0,0,0,9.47,3A57,57,0,0,0,49.94,77.2c12.47.36,23.85-3.36,32.16-9.66,8.11-6.16,13.28-14.79,13.57-24.43v0C96,33.44,91.32,24.54,83.6,17.92c-7.91-6.78-19-11.16-31.45-11.54Z" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+                    />
                   </svg>
                   Buyer Request
                 </div>
               </Link>
             )}
           </div>
-
+{/* prev ,next button */}
           {/* {isBiggerthanTab && 
   
   <div className="md:flex justify-between btn-width mt-44 px-32">
@@ -152,30 +169,32 @@ export const Carousel = () => {
        </div> </div>} */}
         </div>
       </div>
-
-      {isBiggerthanTab ? (
-        <img
-          className="w-full aspect-[2/1] img-size object-cover"
-          src={image[selectImage]}
-        />
+      {/* {adproperty?.adpic.map((i,j)=>{
+        <img src={`${SERVER_URL}/file/${i?.id}`}/>
+      })} */}
+      {isBiggerthanTab ? (  
+                   <img  src={`${SERVER_URL}/file/${adproperty?.adpic?.[selectImage]?.id}`} className="w-screen banner " />
+             
+                                             
+                                           
+    
       ) : (
-        // <div><img src={Do} className="aspect-[] h-96 w-screen object-cover img-size" /></div>
-        <img className="w-full  h-56 object-cover" src={image[selectImage]} />
-        // <div className=""><img src={Do} className="aspect-[]  w-screen object-cover " /></div>
+        <img  src={`${SERVER_URL}/file/${adproperty?.adpic?.[selectImage]?.id}`} />
+
+      
       )}
 
-      <div className="text-center">
-        {image.map((i, j) => (
+       {loading && <div className="text-center">
+        {adproperty?.adpic?.map((i, j) => ( 
           <span
             key={j}
             className={`${
-              selectImage === j ? "text-red-500" : "text-gray-300"
+              selectImage?.id === j ? "text-red-500" : "text-gray-300"
             } cursor-pointer px-0.5`}
             onClick={() => setSelectImage(j)}
           ></span>
         ))}
-        {/* <div className="md:-mt-24 -mt-12 animate-bounce "> <Search/></div> */}
-      </div>
+      </div> }
     </div>
   );
 };

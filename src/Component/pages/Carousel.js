@@ -11,6 +11,7 @@ import Do from "../assets/images/d3.jpg";
 import { Link } from "react-router-dom";
 import { getAdproperties } from "../helper/backend_helpers";
 import { SERVER_URL } from "../helper/configuration";
+import { isAuthAdmin } from "./admin/AuthAdmin";
 
 export const Carousel = () => {
   const [isBiggerthanTab] = useMediaQuery(tab);
@@ -69,7 +70,8 @@ export const Carousel = () => {
 
       <div className="flex  justify-end ">
         <div className="absolute">
-          <div className=" flex md:ustify-center  hover:free  pt-3 leading-relaxed   animate-pulse md:animate-none fixed">
+        {!isAuthAdmin() &&
+        <div className=" flex md:ustify-center  hover:free  pt-3 leading-relaxed   animate-pulse md:animate-none fixed">
             {currentUser ? (
               <button
                 className="md:bg-white   rounded-lg px-2 py-2 bg-transparent"
@@ -114,7 +116,7 @@ export const Carousel = () => {
                 </div>
               </Link>
             )}
-          </div>
+          </div>} 
 {/* prev ,next button */}
           {/* {isBiggerthanTab && 
   

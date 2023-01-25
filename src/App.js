@@ -115,7 +115,7 @@ const App = () => {
         <Route  path="requestedlist" element={<RequestedList />} />
         <Route  path="intrestedlist" element={<Intrested />} />
         <Route path="propertylist" element={<PropertyList />} />
-        <Route path="propertylist" element={<PropertyList />} />
+        <Route path="propertydetails" element={<PropertyDetails/>} />
         <Route path="adproperty" element={<Adproperty />} />
         <Route path="userdetails" element={<UserDetails />} />
         <Route path="buyerdetails" element={<BuyerDetails />} />

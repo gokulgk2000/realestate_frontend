@@ -4,15 +4,17 @@ const Input = ({ label, type = "text", name, value,placeholder, onChange,...prop
 
  {
   return (
-    <div className="m-2 grid grid-rows-2 gap-2">
+    <div className=" grid grid-rows-2 gap-2">
       <label className=" text-gray-700 capitalize">{label}</label>
       <input
         type={type}
         name={name}
+        min="0"
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e)}
-        className="border-2 px-2 py-1 text-gray-700  border-gray-300 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        className="block py-1 px-0 w-60 text-sm text-gray-900 bg-transparent border-0 border-b-2 hover:shadow-2xl
+        hover:bg-white appearance-none dark:text-white border-black focus:outline-none focus:ring-0  peer"
       props
       />
     </div>

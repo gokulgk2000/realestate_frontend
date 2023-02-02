@@ -18,7 +18,7 @@ const RequestedList = () => {
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
 
-  console.log("requestData", requestData);
+  // console.log("requestData", requestData);
 
   const requestSearch = (searched) => {
     setSearchText(searched);
@@ -27,9 +27,10 @@ const RequestedList = () => {
   const getAllRequested = async () => {
     setLoading(true);
     const res = await getAllrequested({});
-    console.log("dsp:", res);
     if (res.success) {
       setRequestData(res.requested);
+    console.log("dsp:", res);
+
     }
     setLoading(false);
   };
@@ -55,13 +56,25 @@ const RequestedList = () => {
 
   return (
     <div> 
-      <Breadcrumbs>
-        <a href="/admin/Dashboard" className="opacity-60 font">
+      {isLoading ? (
+          <div className="text-center py-20   ">
+            <button type="button" className=" text-amber-700 border border-amber-700 py-2 px-3 rounded-lg">
+            
+              Loading...
+            </button>
+          </div>
+        ) : (
+          <>
+        <Breadcrumbs>
+      <Link to="/admin">
+        <button  className="opacity-60 font">
           Dashboard
-        </a>
-        <a href="/admin/userlist" className=" text-amber-700 font">
-          Requested
-        </a>
+        </button></Link>
+      <Link to="/admin/requestedlist" disabled>
+        <button  className="text-amber-700 font">
+          Requested List
+        </button></Link>
+       
       </Breadcrumbs>
       <div className=" overflow-x-auto  shadow-md sm:rounded-lg">
         <div className="w-full flex justify-center items-center mt-2 pb-4 ">
@@ -85,26 +98,11 @@ const RequestedList = () => {
           {requestData
             ?.filter(
               (item) =>
-                item?.regUser?.firstname
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.regUser?.lastname
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.location
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.askPrice
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase()) ||
-                item?.nearTown
-                  .toString()
-                  .toLowerCase()
-                  .includes(searchText.toString().toLowerCase())
+                item?.regUser?.firstname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.regUser?.lastname?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.location?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.expectedPrice?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                item?.landArea?.toString().toLowerCase().includes(searchText.toString().toLowerCase())
             )
             .slice((currentPage - 1) * 10, currentPage * 10)
             .map((Data, i) => (
@@ -122,7 +120,7 @@ const RequestedList = () => {
                   </summary>
                   <li className="pl-5 py-4 grid  gap-3 ">
                     <li>Location: {Data?.location}</li>
-                    <li>Price:{Data?.askPrice}</li>
+                    <li>Price:{Data?.expectedPrice}</li>
                     <li>Neartown : {Data?.nearTown}</li>
 
                     <li>Facing: {Data?.facing}</li>
@@ -152,7 +150,7 @@ const RequestedList = () => {
                   <div className="flex items-center">Price</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                  <div className="flex items-center">Near town</div>
+                  <div className="flex items-center">Land Area</div>
                 </th>
               </tr>
             </thead>
@@ -160,23 +158,10 @@ const RequestedList = () => {
               {requestData
                 ?.filter(
                   (item) =>
-                    item?.facing
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.location
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.askPrice
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                      
-                    item?.nearTown
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase())
+                    item?.facing?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.location?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.expectedPrice?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.landArea?.toString().toLowerCase().includes(searchText.toString().toLowerCase())
                 )
                 .slice((currentPage - 1) * 10, currentPage * 10)
                 .map((Data, i) => (
@@ -195,8 +180,8 @@ const RequestedList = () => {
                     </td>
                     <td className="py-4 px-6 capitalize">{Data?.facing}</td>
                     <td className="py-4 px-6 ">{Data?.location}</td>
-                    <td className="py-4 px-6 capitalize">{Data?.askPrice}</td>
-                    <td className="py-4 px-6 capitalize">{Data?.nearTown}</td>
+                    <td className="py-4 px-6 capitalize">{Data?.expectedPrice}</td>
+                    <td className="py-4 px-6 capitalize">{Data?.landArea}</td>
                   </tr>
                 ))}
             </tbody>
@@ -213,9 +198,9 @@ const RequestedList = () => {
           </nav>
         </div>
       </div>
+      </>
 
-
-
+        )}
     </div>
   );
 };

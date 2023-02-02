@@ -1,230 +1,206 @@
-import { map } from "lodash";
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import {
-  categoryId,
-  getAllProperty,
-  getPropertiescategoryId,
-  getProById,
-  getPropertybyUserId,
-  getPropertyCount,
-  getuserdetails,
-} from "../helper/backend_helpers";
-import { useQuery } from "../helper/hook/useQuery";
-import { useModal } from "../helper/hook/useModal";
-import BuyerModal from "../models/BuyerModal";
+// import { map, max, min } from "lodash";
+// import React, { useEffect, useState } from "react";
+// import { Link, useLocation } from "react-router-dom";
+// import {
+//   categoryId,
+//   getAllProperty,
+//   getPropertiescategoryId,
+//   getProById,
+//   getPropertybyUserId,
+//   getPropertyCount,
+//   getuserdetails,
+//   GETALLUSERSBYLIMIT,
+// } from "../helper/backend_helpers";
+// import { useQuery } from "../helper/hook/useQuery";
+// import { useModal } from "../helper/hook/useModal";
+// import BuyerModal from "../models/BuyerModal";
+// import { SERVER_URL } from "../helper/configuration";
+// import PropertyCard from "./PropertyCard";
+// import { Breadcrumbs } from "@material-tailwind/react";
+// import Pagination from "../pagination/Pagination";
 
-const Property = () => {
-  const query = useQuery();
-  let location = useLocation();
-  const id = query.get("category");
-  const searchKey = query.get("search");
-  const bed = query.get("beds");
+// const Property = () => {
+//   const query = useQuery();
+//   const id = query.get("category");
+//   const searchKey = query.get("search") || " ";
+//   const bed = query.get("beds");
 
-  const [searchText, setSearchText] = useState(searchKey);
-  const [property, setproperty] = useState("");
-  const [bedRoom, setBedRoom] = useState(bed);
+//   const [searchText, setSearchText] = useState(searchKey);
+//   const [property, setproperty] = useState([]);
+//   const [bedRoom, setBedRoom] = useState(bed);
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [setPosts] = useState([]);
+//   const [error, setError] = useState("");
+//   const [propertyId, setPropertyId] = useState([]);
+//   const currentUser = JSON.parse(localStorage?.getItem("authUser"));
+//   const [isLoading, setLoading] = useState(false);
 
-  const [propertyId, setPropertyId] = useState([]);
-  const currentUser = JSON.parse(localStorage?.getItem("authUser"));
-  const [user, setUser] = useState("");
 
-  const [modalOpen, setModalOpen] = useModal();
+//   const [modalOpen, setModalOpen] = useModal();
+// console.log("property",property)
 
-  // console.log(id);
+// const requestSearch = (searched) => {
+//   setSearchText(searched);
 
-  const getuser = async () => {
-    const payload = {
-      userId: currentUser?.userID,
-    };
-    const res = await getuserdetails(payload);
-    if (res.success) {
-      setUser(res?.User);
-    } else {
-      console.log("errors", res);
-    }
-  };
+// };
+//   // console.log(id);
+//   // const rangechange = () => {
+//   //   const product = [...property];
+//   //   const result = product.sort((a, b) => b.askPrice - a.askPrice);
+//   //   setproperty(result);
+//   // };
 
-  useEffect(() => {
-    getuser();
-  }, []);
+//   const getuser = async () => {
+//     const payload = {
+//       userID: currentUser?.userID,
+//     };
+//     const res = await getuserdetails(payload);
+//     if (res.success) {
+//       // console.log(res?.User);
+//     } else {
+//       console.log("errors", res);
+//     }
+//   };
 
-  const searchPropertyByCategory = async () => {
-    const res = await getPropertiescategoryId({
-      id,
-      searchText,bedRoom
-    });
+//   useEffect(() => {
+//     getuser();
+//   }, []);
 
-    if (res.success) {
-      setproperty(res.category);
+//   const searchPropertyByCategory = async () => {
+//     const res = await getPropertiescategoryId({
+//       id,
+//       searchText,
+//       bedRoom,
+//     });
+//       setLoading(true)
 
-      console.log("show", res);
-    } else {
-    }
-  };
+//     if (res.success) {
+//       setproperty(res.category);
+     
+//       // console.log("show", res);
+//     } else {
+//       console.log("errors", res.msg);
+//       setError(res.msg);
+//     }
+//     setLoading(false);
 
-  useEffect(() => {
-    
-    searchPropertyByCategory(); 
+//   };
 
-    
-  }, [searchText]);
+//   useEffect(() => {
+//     searchPropertyByCategory();
+//   }, [searchText]);
 
-  const handleBook = async (proId) => {
-    const payload = {
-      propertyId: proId,
-    };
-    const res = await getProById(payload);
-    if (res.success) {
-      setPropertyId(res.Property);
-      console.log("fmsg", res);
-    } else {
-      console.log("Failed to fetch message", res);
-    }
-  };
+//   const handleBook = async (proId) => {
+//     const payload = {
+//       propertyId: proId,
+//     };
+//     const res = await getProById(payload);
+//     if (res.success) {
+//       setPropertyId(res.Property);
+//       // console.log("fmsg", res);
+//     } else {
+//       console.log("Failed to fetch message", res);
+//     }
+//   };
+//   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  //   const loadPropertyCount = async () => {
-  //     const res = await getPropertyCount({ searchText });
-  //     if (res.success) {
-  //       setpropertyCount(res.count);
-  //     } else {
-  //      // console.log("getPropertyCount  ", res);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     const handleLoad = async () => {
-  //       setLoading(true);
-  //       await loadProperty();
-  //       setLoading(false);
-  //     };
-  //     handleLoad();
-  //   }, [page, limit]);
+  
+//   if(property?.length===0){
+//     return(
+//       <div className="py-10">
+//          <Breadcrumbs className="">
+//             <Link to="/">
+//               <button className="opacity-60 font">Home</button>
+//             </Link>
+//           </Breadcrumbs>
+//           <div className="w-full flex justify-center items-center mt-2 pb-4 ">
+//           <input
+//             type="text"
+//             placeholder="Search Property"
+//             name="search"
+//             className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+//             onChange={(e) => requestSearch(e.target.value)}
+//           />
+//           <button
+//             type="submit"
+//             className="nav-color  px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
+//           >
+//             Search
+//           </button>
+//         </div>
+//     <p className=" flex justify-center py-10 font-semibold">
+      
+//       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+//   <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+// </svg>
+//       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+//   <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+// </svg>
 
-  //   useEffect(() => {
-  //     setPage(1);
-  //   }, [searchText]);
+//       No Results Found...</p>
+//     </div>
+//     )
+//   }
+//   return (
+//     <div> 
+//       {isLoading ? (
+//       <div className="flex justify-center py-5  "> Loading...</div>
+//       ) : (
+//         <div>
+//       {modalOpen && (
+//         <BuyerModal
+//           show={modalOpen}
+//           onCloseClick={() => setModalOpen(false)}
+//           currentProperty={propertyId?._id}
+//         />
+//       )}
+//       <Breadcrumbs className="flex justify-start md:pl-32   ">
+//             <Link to="/">
+//               <button className="opacity-60 font">Home</button>
+//             </Link>
+//           </Breadcrumbs>
 
-  return (
-    <div>
-      {modalOpen && (
-        <BuyerModal
-          show={modalOpen}
-          onCloseClick={() => setModalOpen(false)}
-          currentProperty={propertyId?._id}
-        />
-      )}
+//       <div className="w-full flex justify-center items-center mt-2  ">
+//       <div className="w-full flex justify-center items-center mt-2 pb-4 ">
+//           <input
+//             type="text"
+//             placeholder="Search Property"
+//             name="search"
+//             className="md:w-96 px-3 py-2 bg-slate-200 font-light rounded-tl-full rounded-bl-full border-0 focus:outline-0"
+//             onChange={(e) => requestSearch(e.target.value)}
+//           />
+//           <button
+//             type="submit"
+//             className="nav-color  px-3 py-2 -ml-1.5 bg-amber-700 hover:bg-amber-900 text-white rounded-tr-full rounded-br-full"
+//           >
+//             Search
+//           </button>
+//         </div>
+//       </div>
+//      <div className="md:grid  gap-  grid-cols-4  font uppercase md:pl-32 md:pr-24 gap-x-5 gap-y-5 pb-3">
+//             {property
+//               .filter(item => item?.title?.toString().toLowerCase().includes(searchText?.toString().toLowerCase()) ||
+//               item?.location?.toString().toLowerCase().includes(searchText?.toString().toLowerCase()) )
+//               .slice((currentPage - 1) * 10, currentPage * 10)
+//               .map((pro, i) => (
+//           <PropertyCard pro={pro} setModalOpen={setModalOpen} handleBook={handleBook} key={i}/>
+//           ))}
+        
+//       </div>
+//       <div className="text-center">
+//           <nav aria-label="text-center ">
+//             <Pagination
+//               postsPerPage={10}
+//               totalPosts={property?.length}
+//               paginate={paginate}
+//               currentPage={currentPage}
+//             />
+//           </nav>
+//         </div>
+//         </div>)}
+//       {/* <input type="range" label={true} onChange={rangechange} /> */}
+//     </div>
+//   );
+// };
 
-      <div className="w-full flex justify-center items-center mt-2  scale-100  hover:scale-95 ease-in duration-500 grad1">
-        {/* <input
-          type="text"
-          placeholder="Search Your Dream House"
-          name="search"
-          className="look px-3 py-2 bg-gray-100 rounded-tl-full rounded-bl-full border-0  focus:outline-0"
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-
-        <button
-          type="submit"
-          className="px-3 py-2 -ml-1.5 bg-blue-500 hover:bg-teal-700 text-white rounded-tr-full rounded-br-full"
-        >
-          Search
-        </button> */}
-      </div>
-      <div className="md:grid  gap-  grid-cols-2  md:px-5  font uppercase ">
-        {map(property, (pro, i) => (
-          <div user={pro} key={"pro" + i}>
-            <div className=" grad-card shadow-sm hover:bg-amber-100 shadow-gray-200 hover:shadow-md hover:shadow-gray-400 rounded-md scale-90 hover:scale-95 ease-in duration-300">
-              <div className="grid grid-cols-3   my-3 ">
-                <div className="flex  justify-start items-center">
-                  <Link to={`/Detailspage?uid=${pro?._id}`}>
-                    <img
-                      className=" object-cover md:h-52  md:w-72 rounded-md aspect-[1]"
-                      alt="coimbatore realestate"
-                      src={pro?.propertyPic[0]}
-                    />
-                  </Link>
-                </div>
-                <div className="col-span-2 pl-2 leading-10">
-                  <Link
-                    to={`/Detailspage?uid=${pro?._id}`}
-                    className="sm:flex justify-between  md:text-xl  py-5 pr-"
-                  >
-                    <div className="flex">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        className="w-4 :h-4 text-red-500 pb-5 "
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                        />
-                      </svg>{" "}
-                      <h3 className="  text-amber-700  text-shadow drop-shadow-2xl" >
-                        {pro?.location},
-                        <div className="text-sm bt-2 text-amber-600  " >{pro?.streetName}</div>
-                      </h3>{" "}
-                    </div>
-                    <h6 className="pr-4 text-amber-700 shadow-black text-shadow drop-shadow-2xl">₹.{pro?.askPrice}<span className=" md:hidden pl-14">{pro?.bedRoom}BHK</span></h6>   
-                  </Link>
-                  <Link
-                    to={`/Detailspage?uid=${pro?._id}`}
-                    className="md:flex  mr-3 justify-between shadow-sm  hidden  shadow-blue-100 px-2 bg-white hover:shadow-md  hover:shadow-blue-200 rounded-md"
-                  >
-                    <p>
-                      <div className="underline  text-sm ">plot Area</div>
-                      <div className="font-semibold">₹.{pro?.costSq}.sq.ft</div>
-                    </p>
-                   
-                    <p className="  ">
-                      <div className="underline text-sm ">BHK</div>
-                      <div className="font-semibold">{pro?.bedRoom}BHK</div>
-                    </p>
-
-                    <p>
-                      <div className="underline text-sm">Facing</div>
-                      <div className="font-semibold">{pro?.facing}</div>
-                    </p>
-                  </Link>
-
-                  <p className="lg:grid grid-cols-7 flex  justify-between mr-3 mx-1 ">
-                    <Link
-                      to={`/Detailspage?uid=${pro?._id}`}
-                      className="col-span-6"
-                    >
-                      {" "}
-                      <p className=" text-sm  md:py-2">Agent:{pro?.Seller}</p>
-                    </Link>
-                    <div className=" pr-5 md:pt-2">
-                      <button
-                        className="grad-btn hover:grad1 hover:text-white rounded-sm px-1"
-                        onClick={() =>
-                          handleBook(pro?._id) && setModalOpen(true)
-                        }
-                      >
-                        Contact
-                      </button>
-                    </div>{" "}
-                  </p>
-
-                  {/*  <h5>Seller :{pro?.Seller}</h5>
- <p>Description :{pro?.Description}</p> */}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-export default Property;
+// export default Property;

@@ -1,26 +1,40 @@
-import React from "react";
-import { Input } from "@material-tailwind/react";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  addProperty,
   getPropertyDetailsById,
+  PropertyRegistration,
+  removeProperty,
   updateProperty,
 } from "../../helper/backend_helpers";
 import { useQuery } from "../../helper/hook/useQuery";
-import { Breadcrumbs } from "@material-tailwind/react";
+
+import { useModal } from "../../helper/hook/useModal";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-import { NavLink } from "react-router-dom";
+import RemoveModel from "../../models/RemoveModel";
+import { Breadcrumbs, Input } from "@material-tailwind/react";
+import AddModel from "../../models/AddModel";
+import FileInput from "../../reusable/FileInput";
+import { Link, NavLink } from "react-router-dom";
+import { SERVER_URL } from "../../helper/configuration";
+import axios from "axios";
+import UpdateModel from "../../models/UpdateModel";
+
 const YourEdit = () => {
   const query = useQuery();
-
+  const [modalOpen, setModalOpen, toggleModal] = useModal(false);
+  const [modalOpen1, setModalOpen1, toggleModal1] = useModal(false);
   const [isEdit, setIsEdit] = useState(false);
-
   const [currentImage, setCurrentImage] = useState(0);
-
+  const [loading, setLoading] = useState(false);
+  const [PropertyUpdatedSuccess, setPropertyUpdatedSuccess] = useState("");
+  const [propertyUpdatedError, setpropertyUpdatedError] =useState("");
+  const [removeImages, setRemoveImages] = useState([]);
+  const [addImages, setAddImages] = useState([]);
   const [getProperty, setGetProperty] = useState({
     _id: "",
     category: "",
+    title: "",
     Seller: "",
     location: "",
     layoutName: "",
@@ -40,6 +54,7 @@ const YourEdit = () => {
     status: "",
   });
   const [rerender, setRerender] = useState(true);
+
   const getPropertyId = async () => {
     const res = await getPropertyDetailsById({
       propertyId: query.get("id"),
@@ -49,6 +64,7 @@ const YourEdit = () => {
       setGetProperty({
         id: Property?._id,
         category: Property?.category,
+        title: Property?.title,
         Seller: Property?.Seller,
         location: Property?.location,
         layoutName: Property?.layoutName,
@@ -69,26 +85,49 @@ const YourEdit = () => {
       });
     }
   };
-  useEffect(() => {
-    if (rerender) {
-      getPropertyId();
-      setRerender(false);
-    }
-  }, [rerender]);
 
   const handleUpdatingProperty = async (e) => {
     e.preventDefault();
-    toastr.success(`Property has been updated successfully`, "Success");
-
     const property = { ...getProperty, _id: query.get("id") };
 
-    const res = await updateProperty(property);
+    let picIds = [];
+    let payloadData = property;
+    if (addImages?.length > 0) {
+      let formData = new FormData();
+      for (var i = 0; i < addImages?.length; i++) {
+        formData.append("file", addImages[i]);
+      }
+      const fileUploadRes = await axios.post(`${SERVER_URL}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const { data } = fileUploadRes;
+      if (data?.success) {
+        data.files?.map((file) =>
+          picIds.push({
+            type: file?.contentType,
+            size: file?.size,
+            id: file?.id,
+            name: file?.originalname,
+            dbName: file?.filename,
+            aflag: true,
+          })
+        );
+      }
+    }
+    payloadData.propertyPic = [...property.propertyPic, ...picIds];
+
+    const res = await updateProperty(payloadData);
     if (res.success) {
       setGetProperty(res.propertyPic);
-      console.log(res.propertyPic);
-    } else {
+      setPropertyUpdatedSuccess(res.msg)
+      toastr.success(`Property has been updated successfully`, "Success");
+    setModalOpen1(false);
+
+    }else{
+      setpropertyUpdatedError(res.msg)
     }
-    window.location.reload();
   };
   useEffect(() => {
     if (rerender) {
@@ -96,35 +135,31 @@ const YourEdit = () => {
       setRerender(false);
     }
   }, [rerender]);
-  const convertBase64 = async (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
+
+  const handleAddProperty = async () => {
+    const payload = {
+      PropertyID: query.get("id"),
+    };
+    const res = await addProperty(payload);
+
+    if (res.success) {
+      toastr.success(`Property has been activated successfully`, "Success");
+      setRerender(true);
+    } else {
+      console.log("Error : ", res?.msg || "error");
+    }
+    setModalOpen1(false);
   };
 
   const propertyImageUpload = async (e) => {
     const target = e.target;
     const allImages = await Promise?.all(
       [...target.files].map(async (files) => {
-        return await convertBase64(files);
+        return await files;
       })
     );
-
-    setGetProperty({
-      ...getProperty,
-      propertyPic: [...getProperty?.propertyPic, ...allImages],
-    });
+    setAddImages([...addImages, ...allImages]);
   };
-
-  console.log("getProperty", getProperty);
-
   const propertyImageRemove = (image) => {
     const filteredImages = getProperty?.propertyPic.filter(
       (img) => img !== image
@@ -132,31 +167,54 @@ const YourEdit = () => {
     setGetProperty({ ...getProperty, propertyPic: filteredImages });
   };
   return (
-    <div>
+    <div className="md:pl-32 md:pr-24">
+      {modalOpen1 && (
+        <UpdateModel
+          show={modalOpen1}
+          onUpdateClick={handleUpdatingProperty}
+          confirmText="Yes,Active"
+          cancelText="Cancel"
+          onCloseClick={() => setModalOpen1(false)}
+        />
+      )}
       <Breadcrumbs>
-        <NavLink to="/yourProperties"    className={({ isActive }) =>
-                    isActive
-                      ? "opacity-75"
-                      : "text-black underline"
-                  }>
-          Properties
+        <NavLink
+          to="/yourProperties"
+          className={({ isActive }) =>
+            isActive ? "opacity-75 " : "text-black underline hover:text-orange-500"
+          }
+        >
+          Back to Properties
         </NavLink>
       </Breadcrumbs>
       <div className="">
-        <div class="md:grid  md:grid-cols-2 min-w-full max-w-sm bg-white border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="md:grid  md:grid-cols-2 gap-x-3 min-w-full max-w-sm bg-white border  border-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
           <div class="md:flex pl-5  md:flex-col items-left md:pb-10 py-2">
-            <p className=" text-amber-700"> Seller :</p>
+            <p className=" text-orange-500"> Title :</p>
+            <Input
+              type="text"
+              name="title"
+              placeholder="Enter the Title "
+              value={getProperty?.title}
+              sdsd
+              disabled={!isEdit}
+              onChange={(e) =>
+                setGetProperty({ ...getProperty, title: e.target.value })
+              }
+            />
+            <p className=" text-orange-500"> Seller :</p>
             <Input
               type="text"
               name="Seller"
               placeholder="Enter the Seller "
-              value={getProperty?.Seller}sdsd
+              value={getProperty?.Seller}
+              sdsd
               disabled={!isEdit}
               onChange={(e) =>
                 setGetProperty({ ...getProperty, Seller: e.target.value })
               }
             />
-            <p className=" text-amber-700"> CostSq :</p>
+            <p className=" text-orange-500"> CostSq :</p>
 
             <Input
               type="text"
@@ -168,7 +226,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, costSq: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Location :</p>
+            <p className=" text-orange-500"> Location :</p>
             <Input
               type="text"
               name="Location"
@@ -179,7 +237,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, location: e.target.value })
               }
             />
-            <p className=" text-amber-700"> LayoutName :</p>
+            <p className=" text-orange-500"> LayoutName :</p>
             <Input
               type="text"
               name="LayoutName"
@@ -190,7 +248,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, layoutName: e.target.value })
               }
             />
-            <p className=" text-amber-700"> LandArea :</p>
+            <p className=" text-orange-500"> LandArea :</p>
             <Input
               type="text"
               name="LandArea"
@@ -201,7 +259,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, landArea: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Facing :</p>
+            <p className=" text-orange-500"> Facing :</p>
 
             <Input
               type="text"
@@ -213,7 +271,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, facing: e.target.value })
               }
             />
-            <p className=" text-amber-700"> ApproachRoad :</p>
+            <p className=" text-orange-500"> ApproachRoad :</p>
 
             <Input
               type="text"
@@ -228,7 +286,7 @@ const YourEdit = () => {
                 })
               }
             />
-            <p className=" text-amber-700">BuiltArea :</p>
+            <p className=" text-orange-500">BuiltArea :</p>
 
             <Input
               type="text"
@@ -240,7 +298,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, builtArea: e.target.value })
               }
             />
-            <p className=" text-amber-700"> BedRoom :</p>
+            <p className=" text-orange-500"> BedRoom :</p>
 
             <Input
               type="text"
@@ -252,7 +310,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, bedRoom: e.target.value })
               }
             />
-            <p className=" text-amber-700"> FloorDetails :</p>
+            <p className=" text-orange-500"> FloorDetails :</p>
 
             <Input
               type="text"
@@ -267,7 +325,7 @@ const YourEdit = () => {
                 })
               }
             />
-            <p className=" text-amber-700"> NearTown :</p>
+            <p className=" text-orange-500"> NearTown :</p>
 
             <Input
               type="text"
@@ -279,7 +337,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, nearTown: e.target.value })
               }
             />
-            <p className=" text-amber-700"> Facilities :</p>
+            <p className=" text-orange-500"> Facilities :</p>
 
             <Input
               type="text"
@@ -291,7 +349,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, facilities: e.target.value })
               }
             />
-            <p className=" text-amber-700">AskPrice :</p>
+            <p className=" text-orange-500">AskPrice :</p>
 
             <Input
               type="text"
@@ -303,7 +361,7 @@ const YourEdit = () => {
                 setGetProperty({ ...getProperty, askPrice: e.target.value })
               }
             />
-            <p className=" text-amber-700">Description :</p>
+            <p className=" text-orange-500">Description :</p>
 
             <Input
               type="text"
@@ -318,7 +376,7 @@ const YourEdit = () => {
                 })
               }
             />
-            <p className=" text-amber-700">Property Picture :</p>
+            <p className=" text-orange-500">Property Picture :</p>
 
             <input
               type="file"
@@ -330,21 +388,26 @@ const YourEdit = () => {
               className="border-2 px-2 py-1  border-gray-300 rounded-md  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               onChange={(e) => propertyImageUpload(e)}
             />
+          <p className="text-red-500 pt-3 text-sm">*Once update your Property,Admin will Approved!!!</p>
+
           </div>
-          <div className="grid md:grid-cols-1 md:h-52 px-3">
-            <img
-              className=" aspect-[2] md:h-96 w-full"
-              src={
-                getProperty?.propertyPic
-                  ? getProperty?.propertyPic[currentImage]
-                  : null
-              }
-            />
+          
+          <div className="grid md:grid-cols-1 md:h-52 px-3`">
+      <div className="pr-2 pt-4">
+              <img
+                className=" aspect-[2] md:h-96 w-full rounded-lg "
+                src={`${SERVER_URL}/file/${
+                  getProperty?.propertyPic
+                    ? getProperty?.propertyPic[currentImage]?.id
+                    : null
+                }`}
+              /></div>
+   
             <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
               {getProperty?.propertyPic?.length > 0 &&
                 getProperty?.propertyPic?.map((image, j) => (
                   <button key={j}>
-                    <div className="relative group">
+                    <div className="relative group ">
                       {isEdit && (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -352,7 +415,7 @@ const YourEdit = () => {
                           viewBox="0 0 24 24"
                           stroke-width="2"
                           stroke="currentColor"
-                          className="w-6 h-5 absolute right-4 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500"
+                          className="w-6 h-6 absolute right-12 hover:scale-110 hidden group-hover:block text-white hover:bg-amber-500 "
                           onClick={() => propertyImageRemove(image)}
                         >
                           <path
@@ -362,22 +425,35 @@ const YourEdit = () => {
                           />
                         </svg>
                       )}
-
+<div className="pl-1 ">
                       <img
-                        src={image}
-                        className="aspect-[2] h-28"
+                        src={`${SERVER_URL}/file/${image.id}`}
+                        className="aspect-[2] h-28 rounded-lg"
                         onClick={() => setCurrentImage(j)}
-                      />
+                      /></div>
                     </div>
                   </button>
                 ))}
-            </div>
+             
+            </div> <div className="grid grid-cols-3 py-3 gap-x-2 gap-y-3">
+                {addImages?.length > 0 &&
+                  addImages?.map((joke, i) => (
+                    <>
+                      <img
+                        src={URL.createObjectURL(joke)}
+                        className="aspect-[2] h-28"
+                      />
+                    </>
+                  ))}
+              </div>
           </div>{" "}
-          <div class="flex  md:pl-5 justify-center pb-5">
+          
+          <div class="flex justify-center  md:pl-5  pb-5">
+
             {!isEdit ? (
               <button
                 type="button"
-                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center rounded-lg text-orange-500   border border-orange-500  hover:bg-orange-500  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => setIsEdit(true)}
               >
                 {" "}
@@ -398,10 +474,24 @@ const YourEdit = () => {
                 Edit
               </button>
             ) : (
+            <div><div className="py-2">   
+            {" "}      
+              {PropertyUpdatedSuccess && (
+                <alert className="text-bold text-green-600">
+                  {PropertyUpdatedSuccess}
+                </alert>
+              )}
+              {propertyUpdatedError && (
+                <alert className="text-bold text-red-600">
+                  {propertyUpdatedError}
+                </alert>
+              )}
+         
+         </div>
               <button
                 type="button"
-                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-amber-700 rounded-lg hover:bg-amber-900 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={(e) => handleUpdatingProperty(e)}
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-center rounded-lg text-orange-500   border border-orange-500  hover:bg-orange-500  hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => toggleModal1()}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -417,6 +507,7 @@ const YourEdit = () => {
                 </svg>
                 Update Property
               </button>
+              </div>
             )}
           </div>
         </div>

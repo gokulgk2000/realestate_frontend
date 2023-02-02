@@ -3,6 +3,7 @@ import Pagination from "../pagination/Pagination";
 import { useQuery } from "../helper/hook/useQuery";
 import { getuserProperty } from "../helper/backend_helpers";
 import { Link } from 'react-router-dom';
+import { Breadcrumbs } from "@material-tailwind/react";
 const Activities = () => {
   const query = useQuery();
 
@@ -29,7 +30,6 @@ const Activities = () => {
       } else {
         console.log("Error in fetching IntrestedData: ", res);
       }
-      console.log("res", res);
     };
     handleFetchUserProperty();
     // return () => {}
@@ -39,8 +39,19 @@ const Activities = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
-      <div className=" overflow-x-auto  shadow-md sm:rounded-lg">
+    <div className="md:pl-32 md:pr-24 px-1">
+      <Breadcrumbs className="px-0">
+      <Link to="/" className="pr-1">
+          <button  className="opacity-60 font underline">
+           Home
+          </button></Link>
+          <Link to="/yourProperties" className="pl-1">
+          <button  className="opacity-60 font underline text-orange-500">
+          Manage Properties
+          </button></Link>
+         
+      </Breadcrumbs>
+      <div className=" overflow-x-auto  shadow-md sm:rounded-lg ">
         <div className="w- flex justify-center items-center mt-2 pb-4  ">
           <input
             type="text"
@@ -65,9 +76,15 @@ const Activities = () => {
                 <th scope="col" className="py-3 px-3  text-rose-700">
                   S.No
                 </th>
-                <th scope="col" className="py-3 px-6  text-rose-700 hidden md:block">
+                <th scope="col" className="py-3 px-6  text-rose-700">
                   <div className="flex items-center">
-                    Facing
+                    Title
+                    <a href="#"></a>
+                  </div>
+                </th>     
+                     <th scope="col" className="py-3 px-6  text-rose-700 hidden md:block">
+                  <div className="flex items-center">
+                    askPrice
                     <a href="#"></a>
                   </div>
                 </th>
@@ -77,19 +94,9 @@ const Activities = () => {
                     <a href="#"></a>
                   </div>
                 </th>
+      
+               
                 <th scope="col" className="py-3 px-6  text-rose-700 hidden md:block">
-                  <div className="flex items-center">
-                    askPrice
-                    <a href="#"></a>
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
-                  <div className="flex items-center">
-                    nearTown
-                    <a href="#"></a>
-                  </div>
-                </th>
-                <th scope="col" className="py-3 px-6  text-rose-700">
                   <div className="flex items-center">
                     Property Details
                     <a href="#"></a>
@@ -128,14 +135,14 @@ const Activities = () => {
                       scope="row"
                       className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      {i + 1}
+                    <Link to={`/yourEdit?id=${Data?._id}`}>{i + 1}</Link>  
                     </th>
-                    <td className="py-4 px-6 capitalize hidden md:block">{Data?.facing}</td>
-                    <td className="py-4 px-6">{Data?.location}</td>
-                    <td className="py-4 px-6 capitalize hidden md:block">{Data?.askPrice}</td>
-                    <td className="py-4 px-6">{Data?.nearTown}</td>
-                    <td className="py-4 px-6 items-center">
-                    <Link to={`/yourEdit?id=${Data?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline">View</Link>
+                    <td className="py-4 px-6 " ><Link to={`/yourEdit?id=${Data?._id}`}>{Data?.title}</Link></td>
+                                        <td className="py-4 px-6 capitalize hidden md:block"> ₹.{Data?.negotiablePrice}</td>
+
+                    <td className="py-4 px-6"><Link to={`/yourEdit?id=${Data?._id}`}>{Data?.location}</Link></td>
+                    <td className="py-4 px-6 items-center hidden md:block">
+                    <Link to={`/yourEdit?id=${Data?._id}`} className="font-medium   text-amber-700  dark:text-blue-500 hover:underline ">View</Link>
                 </td>
                   </tr>
                 ))}

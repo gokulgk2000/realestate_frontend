@@ -1,2 +1,6 @@
-export const SERVER_URL = "https://covairealestate-d1f7f.web.app"
+
+
+export const SERVER_URL = "https://realestate-backend.vercel.app"
+
+
 

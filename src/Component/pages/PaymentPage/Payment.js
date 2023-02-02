@@ -14,9 +14,10 @@ const stripePromise = loadStripe("pk_test_51MAWn8SIJemEdI6N3T3qJbqf0mzcuvEVVM2l2
 
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState("");
-  const currentUser = JSON.parse(localStorage.getItem("authUser"))
+
 
   const query = useQuery();
+  const email =  query.get("email");
   const id = query.get("id");
 //   console.log("gokuyl:",query.get("id"))
 //   console.log("gokul2:",id)
@@ -27,11 +28,14 @@ export default function Payment() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
         items: [{ id: "Coimbatore Real Estate" }],
-        user:id
+        user:id,
+        email: email,
     }),
     })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then(res =>{ 
+        return res.json()
+      })
+      .then(data => setClientSecret(data.clientSecret));
   }, []);
 
   const appearance = {

@@ -14,7 +14,7 @@ const BuyerList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [searchText, setSearchText] = useState("");
-
+console.log("buyerData",buyerData)
   const statusColor = {
     approved: "green",
     pending: "#e8bf09",
@@ -28,7 +28,6 @@ const BuyerList = () => {
   const getAllBuyers = async () => {
     setLoading(true);
     const res = await allBuyerList({});
-    console.log("dsp:", res);
     if (res.success) {
       setBuyerData(res.users);
     }
@@ -58,23 +57,21 @@ const BuyerList = () => {
 
   return (
     <div> {isLoading ?(
-      <div className="text-center p-5  "> 
-     <button type="button" class="grad1 ">
-<svg class="animate-spin h-5 w-5 mr-3 rounded-bl-full text-gray-700 bg-slate-200 " viewBox="0 0 24 24">
-</svg>
+      <div className="text-center py-20  "> 
+     <button type="button" className=" text-amber-700 border border-amber-700 py-2 px-3 rounded-lg">
 Loading...
 </button>
       </div>
       ):(
       <>
       <Breadcrumbs>
-      <Link to="/admin/Dashboard">
+      <Link to="/admin">
           <button  className="opacity-60 font">
             Dashboard
           </button></Link>
-          <Link to="/admin/buyerlist">
-          <button  className="opacity-60 font">
-            Buyers
+          <Link to="/admin/buyerlist"disabled >
+          <button  className="text-amber-700 font ">
+            Buyers List
           </button></Link>
       </Breadcrumbs>
       <div className=" md:overflow-x-auto  shadow-md sm:rounded-lg">
@@ -115,7 +112,7 @@ Loading...
                   <div className="flex items-center">Status</div>
                 </th>
                 <th scope="col" className="py-3 px-6   text-amber-700">
-                  <span className="">User Details</span>
+                  <span className="">Buyer Details</span>
                 </th>
               </tr>
             </thead>
@@ -123,18 +120,8 @@ Loading...
               {buyerData
                 ?.filter(
                   (item) =>
-                    item?.firstname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.lastname
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase()) ||
-                    item?.email
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchText.toString().toLowerCase())
+                    item?.name?.toString().toLowerCase().includes(searchText.toString().toLowerCase()) ||
+                    item?.email?.toString().toLowerCase().includes(searchText.toString().toLowerCase())
                 )
                 .slice((currentPage - 1) * 10, currentPage * 10)
                 .map((Data, i) => (
@@ -149,9 +136,10 @@ Loading...
                       {i + 1}
                     </th>
                     <td className="py-4 px-6 capitalize">
-                      {Data?.firstname} {Data?.lastname}
+                      {Data?.name}
                     </td>
-                    <td className="py-4 px-6 hidden md:block">{Data?.email}</td>
+                    <td className="py-4 px-6 hidden md:block">
+                      {Data?.email}</td>
                     <td
                       className="py-4 px-6 capitalize"
                       style={{ color: statusColor[Data?.status] }}

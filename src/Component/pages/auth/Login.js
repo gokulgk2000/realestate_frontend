@@ -1,10 +1,12 @@
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from "yup"
 
 import { userLogin } from '../../helper/backend_helpers'
+import { useUser } from '../contextProvider/UserProvider'
 const Login = () => {
+ const {setCurrentUser}= useUser()
   const navigate = useNavigate()
   const [loginSuccess, setLoginSuccess] = useState("")
   const [loginError, setLoginError] = useState("")
@@ -27,6 +29,7 @@ const Login = () => {
    
       if (res.success) {
         localStorage.setItem("authUser", JSON.stringify(res))
+        setCurrentUser(res)
         setLoginSuccess(res?.msg)
         setLoginError("")
         navigate("/")
@@ -37,9 +40,16 @@ const Login = () => {
 
       }
       setLoading(false)
-     
+     console.log(res,":gokul")
     },
   })
+
+  
+  const navigatepassword = (e) => {
+    e.preventDefault();
+    navigate("/forget")
+    }
+ 
 
   return (
     <section className="h-100">
@@ -72,7 +82,7 @@ const Login = () => {
                           </alert>
                         )}
             <div className="flex flex-row items-center justify-center lg:justify-center">
-              <p className=" text-3xl text-teal-500 font-bold mb-0 mr-8">Sign in </p>
+              <p className=" text-3xl text-[#f2a32b] font-bold mb-0 mr-8">Sign in </p>
               <button
                 type="button"
                 data-mdb-ripple="true"
@@ -166,26 +176,38 @@ const Login = () => {
               ) : null}
             </div>
   
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6"  >
               <div className="form-group form-check">
                
               </div>
-              <a href="/forgotpassword" className="text-blue-800">Forgot password?</a>
+              <label onClick={navigatepassword}  className="text-blue-800">Forgot password?</label>
             </div>
   
             <div className="text-center lg:text-left">
-              <button
-                type="submit"
-                className="inline-block px-7 py-3 grad-btn text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-              >
-                Login
-              </button>
+            
+              {loading ?(
+                 <button 
+                type="button"
+                className="border-2 rounded-md border-[#f2a32b] hover:bg-[#f2a32b] hover:text-white uppercase px-6 py-2 font text-[#f2a32b]  shadow-xl    hover:shadow-md">
+               
+                  Login...          
+                   </button>
+                ):(
+                 
+                <button
+                  type="submit"
+                  className="border-2 rounded-md  border-[#f2a32b] hover:bg-[#f2a32b] text-[#f2a32b] hover:text-white uppercase px-6 py-2 font   shadow-xl hover:shadow-md">
+              
+                  Login
+                </button>
+               
+                )}
               <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                 Don't have an account?
-                <a
-                  href="/register"
-                  className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-2"
-                  >Register</a>
+                <Link
+                  to="/selecteduser"
+                  className="border-[#f2a32b] hover:text-[#f2a32b]  text-blue-900 transition duration-200 ease-in-out ml-2"
+                  >Sign Up</Link>
                
               </p>
             </div>

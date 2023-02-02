@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { getPaymentId } from "../../helper/backend_helpers";
 import { useQuery } from "../../helper/hook/useQuery";
-
 const Thankyoupage = () => {
   const query = useQuery();
-
+  const dataFetchedRef = useRef(false);
+  const getUserPaymentData = async () => {
+    getPaymentId({ pi: query.get("payment_intent") });
+  };
   useEffect(() => {
-    console.log("Getting payment");
-    const getUserPaymentData = async () => {
-      const res = await getPaymentId({ pi: query.get("payment_intent") });
-      // console.log("Got payment",res)
-    };
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getUserPaymentData();
   }, []);
-
   return (
     <div class="bg-gray-100 h-screen">
       <div class="bg-white p-6  md:mx-auto">
@@ -46,5 +44,4 @@ const Thankyoupage = () => {
     </div>
   );
 };
-
 export default Thankyoupage;

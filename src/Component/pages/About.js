@@ -8,7 +8,7 @@ const Aboutus = () => {
     <div className=' flex items-center justify-center flex-wrap font-bold text-2xl py-5 px-5 font-sans uppercase'>
       About Us
       </div>
-      <div className='px-20 py-5 leading-loose '>
+      <div className='px-10 py-2 '>
     <div className="flex justify-end gap-6">
       <div className=" ">
         <p className="text-4xl font-bold ">14</p>
@@ -20,7 +20,8 @@ const Aboutus = () => {
         </div>
  
     </div>
-        <div className="grid grid-cols-2">
+    
+        <div className="md:grid grid-cols-2">
         <div className="">
         <p className="text-4xl font-bold py-5">Business Background </p>
        

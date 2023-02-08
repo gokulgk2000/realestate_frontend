@@ -16,7 +16,7 @@ import Image from "../assets/images/avadar3.webp";
 import Search from "../pages/Search";
 import Login from "../pages/auth/Login";
 import { Carousel } from "../pages/Carousel";
-import Yo from "../assets/logo/dvav.png";
+import Yo from "../assets/images/101.svg";
 import Logo from "../assets/logo/re.png";
 // import Logo from "../assets/logo/logo.png";
 

@@ -14,7 +14,7 @@ const ProfileUpdate = () => {
     firstname: "",
     lastname: "",
     email: "",
-    phoneno: "",
+    phonenumber: "",
     profilePic: "",
   });
   const profileID = JSON.parse(localStorage.getItem("authUser"));
@@ -30,7 +30,7 @@ const ProfileUpdate = () => {
         firstname: User?.firstname,
         lastname: User?.lastname,
         email: User?.email,
-        phoneno: User?.phoneno,
+        phonenumber: User?.phonenumber,
         profilePic: User?.profilePic,
       });
       console.log("show", res);
@@ -126,11 +126,11 @@ const ProfileUpdate = () => {
                   label="PhoneNumber"
                   type="number"
                   min="0"
-                  name="phoneno"
+                  name="phonenumber"
                   placeholder="Enter the phonenumber "
-                  value={user?.phoneno}
+                  value={user?.phonenumber}
                   onChange={(e) =>
-                    setUser({ ...user, phoneno: e.target.value })
+                    setUser({ ...user, phonenumber: e.target.value })
                   }
                 />
                 <FileInput
@@ -156,7 +156,7 @@ const ProfileUpdate = () => {
                 </h1>{" "}
                 <p className="font-light text-gray-600 mt-3"> {user?.email}</p>{" "}
                 <p className="mt-8 text-gray-500 capitalize">
-                  PhoneNumber -{user?.phoneno}
+                  PhoneNumber -{user?.phonenumber}
                 </p>{" "}
               </div>{" "}
             </div>{" "}

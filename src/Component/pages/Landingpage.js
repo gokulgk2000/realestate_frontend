@@ -1,27 +1,26 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import {
   findCategory,
   getinterestbyId,
   getPropertiescategoryId,
-  getPropertyById,
 } from "../helper/backend_helpers";
-import Property from "./Property";
+//import Property from "./Property";
 import { Carousel } from "./Carousel";
 import TopProperties from "./TopProperties";
-import background from "../assets/images/eva.jpg";
+//import background from "../assets/images/eva.jpg";
 import PropertyCard from "./PropertyCard";
 import { debounce } from "lodash";
 import { useUser } from "./contextProvider/UserProvider";
-import { useQuery } from "../helper/hook/useQuery";
+//import { useQuery } from "../helper/hook/useQuery";
 import Aboutus from "./About";
 import TopPromotors from "./TopPromotors";
 import TopMediators from "./TopMediators";
 const Landingpage = () => {
-  const query = useQuery();
-  const navigate = useNavigate();
+  //const query = useQuery();
+  //const navigate = useNavigate();
   const { currentUser } = useUser();
 
   const [searchText, setSearchText] = useState("");
@@ -29,7 +28,7 @@ const Landingpage = () => {
   const [betRoomCount, setBetRoomCount] = useState(0);
   const [allcategory, setAllCategory] = useState([]);
   const [properties, setProperties] = useState([]);
-  const [Property, setproperty] = useState([]);
+  //const [Property, setproperty] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [showBedRoom, setShowBedRoom] = useState(true);
   const [interestProperties, setInterestProperties] = useState([]);
@@ -170,7 +169,7 @@ const Landingpage = () => {
                   className=" px-4 border-l-0 border-r-0 text-sm  text-gray-400 capitalize w-48 md:-ml-1"
                   onChange={handleBedsChange}
                 >
-                  <option  value="0">BHK</option>
+                  <option value="0">BHK</option>
                   <option value="1">1BHK</option>
                   <option className="  " value="2">
                     2BHK
@@ -202,7 +201,7 @@ const Landingpage = () => {
                   id="message"
                   value={searchText}
                   required
-                  name="search" 
+                  name="search"
                   placeholder="Search  Location"
                   className=" px-3 md:w-72 py-1 h-14 bg-white text-sm"
                   onChange={(e) => requestSearch(e.target.value)}
@@ -249,34 +248,37 @@ const Landingpage = () => {
           </div>
         </div>
         <div className=" md:pl-32 md:pr-24">
-        {isLoading ? (
-          <div className="text-center p-5  flex justify-center ">
-            <svg viewBox="0 0 119.4 122.88 " className="w-7 h-7 animate-spin" fill="#deb11f">
-              <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
-            </svg>
-          </div>
-        ) : (
-          isValid && (
-            <div className="md:grid  gap-  grid-cols-4  font uppercase  gap-y-5 pb-3">
-              {properties.map((pro, i) => (
-                <PropertyCard pro={pro} showHeart={found(pro?._id)} key={i} />
-              ))}
+          {isLoading ? (
+            <div className="text-center p-5  flex justify-center ">
+              <svg
+                viewBox="0 0 119.4 122.88 "
+                className="w-7 h-7 animate-spin"
+                fill="#deb11f"
+              >
+                <path d="M83.91,26.34a43.78,43.78,0,0,0-22.68-7,42,42,0,0,0-24.42,7,49.94,49.94,0,0,0-7.46,6.09,42.07,42.07,0,0,0-5.47,54.1A49,49,0,0,0,30,94a41.83,41.83,0,0,0,18.6,10.9,42.77,42.77,0,0,0,21.77.13,47.18,47.18,0,0,0,19.2-9.62,38,38,0,0,0,11.14-16,36.8,36.8,0,0,0,1.64-6.18,38.36,38.36,0,0,0,.61-6.69,8.24,8.24,0,1,1,16.47,0,55.24,55.24,0,0,1-.8,9.53A54.77,54.77,0,0,1,100.26,108a63.62,63.62,0,0,1-25.92,13.1,59.09,59.09,0,0,1-30.1-.25,58.45,58.45,0,0,1-26-15.17,65.94,65.94,0,0,1-8.1-9.86,58.56,58.56,0,0,1,7.54-75,65.68,65.68,0,0,1,9.92-8.09A58.38,58.38,0,0,1,61.55,2.88,60.51,60.51,0,0,1,94.05,13.3l-.47-4.11A8.25,8.25,0,1,1,110,7.32l2.64,22.77h0a8.24,8.24,0,0,1-6.73,9L82.53,43.31a8.23,8.23,0,1,1-2.9-16.21l4.28-.76Z" />
+              </svg>
             </div>
-          )
-        )}
-        <div className="">
-          <TopProperties found={found} />
-        </div>
-        <div className="  ">
-          <TopPromotors/>
-        </div>
-        <div className="  ">
-          <TopMediators/>
-        </div>
-        <div className=" ">
-        <Aboutus/>
-        
-        </div>
+          ) : (
+            isValid && (
+              <div className="md:grid  gap-  grid-cols-4  font uppercase  gap-y-5 pb-3">
+                {properties.map((pro, i) => (
+                  <PropertyCard pro={pro} showHeart={found(pro?._id)} key={i} />
+                ))}
+              </div>
+            )
+          )}
+          <div className="">
+            <TopProperties found={found} />
+          </div>
+          <div className="  ">
+            <TopPromotors />
+          </div>
+          <div className="  ">
+            <TopMediators />
+          </div>
+          <div className=" ">
+            <Aboutus />
+          </div>
         </div>
         {/* <Category /> */}
       </div>

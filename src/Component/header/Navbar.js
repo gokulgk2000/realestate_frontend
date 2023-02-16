@@ -136,7 +136,7 @@ function Navbar() {
               <span className=" text-3xl font-semibold whitespace-nowrap text-teal-500 hidden md:block pl-5">
                 <Link to="/">
                   {" "}
-                  <img className="h-12" src={Yo}></img>
+                  <img className="h-12  bg-none" src={Yo}></img>
                 </Link>
               </span>
 

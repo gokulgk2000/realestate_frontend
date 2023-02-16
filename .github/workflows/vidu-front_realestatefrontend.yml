@@ -27,11 +27,13 @@ jobs:
           npm run build --if-present
         
       
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,6 +47,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      - name: unzip artifact for deployment
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -53,4 +57,7 @@ jobs:
           app-name: 'realestateFrontEnd'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_517B8F9F2F5D4EB3A50AFD679621594D }}
-          package: .
+          package: release.zip
+          
+      - name: Delete zip file
+        run: rm release.zip

@@ -3,5 +3,3 @@
 // export const SERVER_URL = "https://realestate-backend.vercel.app"
 // export const SERVER_URL = "https://realestate-backend.vercel.app"
 export const SERVER_URL = "https://realestatebackend.azurewebsites.net/";
-
-// export const SERVER_URL = "https://realestatecbebackend.azurewebsites.net"
